@@ -5,9 +5,13 @@
         <title>{% block title %}{% endblock title %}</title>
         {% block css %}{% endblock css %}
     </head>
-    <body>
-        {% block content %}
-        {% endblock content %}
+    <body class="hold-transition skin-blue sidebar-mini">
+        <div class="wrapper">
+            {% block content %}
+            {% endblock content %}
+            {% block sidebarconf %}
+            {% endblock sidebarconf %}
+        </div>
         {% block js %}{% endblock js %}
     </body>
 </html>
