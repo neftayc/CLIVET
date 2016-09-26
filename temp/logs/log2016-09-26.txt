@@ -1,0 +1,22 @@
+[2016-09-26 03:22:21] [WARNING] [apps.accounts.views:124] [/accounts/add_enterprise/] [127.0.0.1] [admin] Se añadió con éxito el Enterprise "CLIVET".
+[2016-09-26 03:25:05] [WARNING] [apps.sad.views:708] [/sad/menu/state/rea/19.dd34901466bdd65fbe6e4e5b0c40ed9e/] [127.0.0.1] [admin] The Menu "Logs (Backend Manager)" was reactivated successfully.
+[2016-09-26 03:25:14] [WARNING] [apps.sad.views:708] [/sad/menu/state/ina/12.ccb72cd139314129e3f3dbfa85d2795f/] [127.0.0.1] [admin] The Menu "Dashboard (Backend Manager)" was inactivated successfully.
+[2016-09-26 03:25:15] [WARNING] [apps.sad.views:708] [/sad/menu/state/rea/12.52e57087c24403747b11c18e856c9adc/] [127.0.0.1] [admin] The Menu "Dashboard (Backend Manager)" was reactivated successfully.
+[2016-09-26 03:25:16] [WARNING] [apps.sad.views:708] [/sad/menu/state/ina/12.ccb72cd139314129e3f3dbfa85d2795f/] [127.0.0.1] [admin] The Menu "Dashboard (Backend Manager)" was inactivated successfully.
+[2016-09-26 03:25:18] [WARNING] [apps.sad.views:708] [/sad/menu/state/rea/12.52e57087c24403747b11c18e856c9adc/] [127.0.0.1] [admin] The Menu "Dashboard (Backend Manager)" was reactivated successfully.
+[2016-09-26 03:25:19] [WARNING] [apps.sad.views:708] [/sad/menu/state/ina/13.29c1e197f6c6ed5d57b3564cc569fa45/] [127.0.0.1] [admin] The Menu "account (Backend Manager)" was inactivated successfully.
+[2016-09-26 03:25:20] [WARNING] [apps.sad.views:708] [/sad/menu/state/rea/13.be7419892594334c6602982f39ebc4ae/] [127.0.0.1] [admin] The Menu "account (Backend Manager)" was reactivated successfully.
+[2016-09-26 03:25:22] [WARNING] [apps.sad.views:708] [/sad/menu/state/ina/11.7ef4efa6c2c0a0baa17d9ffec60629d6/] [127.0.0.1] [admin] The Menu "Dashboard (Backend Manager)" was inactivated successfully.
+[2016-09-26 03:25:24] [WARNING] [apps.sad.views:708] [/sad/menu/state/rea/11.9e35027e0a728658e9a674888ac3e0b7/] [127.0.0.1] [admin] The Menu "Dashboard (Backend Manager)" was reactivated successfully.
+[2016-09-26 03:25:44] [WARNING] [apps.sad.views:708] [/sad/menu/state/ina/19.2e48567881a961d310d764abfad710b3/] [127.0.0.1] [admin] The Menu "Logs (Backend Manager)" was inactivated successfully.
+[2016-09-26 03:25:46] [WARNING] [apps.sad.views:708] [/sad/menu/state/ina/11.7ef4efa6c2c0a0baa17d9ffec60629d6/] [127.0.0.1] [admin] The Menu "Dashboard (Backend Manager)" was inactivated successfully.
+[2016-09-26 03:25:48] [WARNING] [apps.sad.views:708] [/sad/menu/state/rea/11.9e35027e0a728658e9a674888ac3e0b7/] [127.0.0.1] [admin] The Menu "Dashboard (Backend Manager)" was reactivated successfully.
+[2016-09-26 03:25:51] [WARNING] [apps.sad.views:708] [/sad/menu/state/rea/19.dd34901466bdd65fbe6e4e5b0c40ed9e/] [127.0.0.1] [admin] The Menu "Logs (Backend Manager)" was reactivated successfully.
+[2016-09-26 03:26:01] [WARNING] [apps.sad.views:708] [/sad/menu/state/ina/19.2e48567881a961d310d764abfad710b3/] [127.0.0.1] [admin] The Menu "Logs (Backend Manager)" was inactivated successfully.
+[2016-09-26 03:26:04] [WARNING] [apps.sad.views:708] [/sad/menu/state/rea/19.dd34901466bdd65fbe6e4e5b0c40ed9e/] [127.0.0.1] [admin] The Menu "Logs (Backend Manager)" was reactivated successfully.
+[2016-09-26 03:26:11] [WARNING] [apps.sad.views:708] [/sad/menu/state/ina/11.7ef4efa6c2c0a0baa17d9ffec60629d6/] [127.0.0.1] [admin] The Menu "Dashboard (Backend Manager)" was inactivated successfully.
+[2016-09-26 03:26:12] [WARNING] [apps.sad.views:708] [/sad/menu/state/rea/11.9e35027e0a728658e9a674888ac3e0b7/] [127.0.0.1] [admin] The Menu "Dashboard (Backend Manager)" was reactivated successfully.
+[2016-09-26 03:26:38] [WARNING] [apps.sad.views:838] [/sad/menu/create/] [127.0.0.1] [admin] Se añadió con éxito el Menu "VENTAS (Ventas)".
+[2016-09-26 03:27:33] [WARNING] [apps.sad.views:807] [/sad/menu/update/101.dfbeea1120614a595a8221f8aa05fb50/] [127.0.0.1] [admin] Se modificó con éxito el Menu "VENTAS (Ventas)".
+[2016-09-26 03:27:40] [WARNING] [apps.sad.views:708] [/sad/menu/state/ina/101.70b57b82ef03fee28d1c32391c4e1502/] [127.0.0.1] [admin] The Menu "VENTAS (Ventas)" was inactivated successfully.
+[2016-09-26 03:27:43] [WARNING] [apps.sad.views:708] [/sad/menu/state/rea/101.ba16764573e2ecc0cb814198f802bd3a/] [127.0.0.1] [admin] The Menu "VENTAS (Ventas)" was reactivated successfully.

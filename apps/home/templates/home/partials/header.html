@@ -40,13 +40,14 @@
             {% endfor %}
           </select>
         </form>
+        
         <ul class="nav navbar-nav navbar-right">
           {% if not userx.is_authenticated %}
           <li {% ifequal request.path '/accounts/register/' %} class="active" {% endifequal %}><a href="/accounts/register/">{% trans 'Sign up' %}</a></li>
           <li {% ifequal request.path '/accounts/login/' %} class="active" {% endifequal %}><a href="/accounts/login/">{% trans 'Log in' %}</a></li>
           {% endif %}
         </ul>
-        
+
       </div><!--/.nav-collapse -->
     </div>
   </div>

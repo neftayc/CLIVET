@@ -38,9 +38,9 @@ $(function() {
             {% if user.is_superuser %}
             <a href="/mod_backend/dashboard/" class="btn btn-primary text-bold" title="{% trans 'Go' %} {% trans 'Admin' %}"><i class="fa fa-key"></i> <span class="hidden-xs"> {% trans 'Go'  %} {% trans 'Admin'  %}</span></a>
             {% endif %}
-            <a href="/accounts/add_enterprise/" class="btn btn-warning text-bold" title="{% trans 'Add' %} {% trans 'Solution' %}"><i class="fa fa-plus"></i> <span class="hidden-xs"> {% trans 'Add'  %} {% trans 'Enterprise'  %}</span></a> 
+            <a href="/accounts/add_enterprise/" class="btn btn-warning text-bold" title="{% trans 'Add' %} {% trans 'Solution' %}"><i class="fa fa-plus"></i> <span class="hidden-xs"> {% trans 'Add'  %} {% trans 'Enterprise'  %}</span></a>
 
-        </div>            
+        </div>
     </div>
 </div>
 <div class="container-overflow">
@@ -56,7 +56,7 @@ $(function() {
             </tr>
         </thead>
         <tbody>
-            {% for d in object_list %}       
+            {% for d in object_list %}
             <tr class="{{ d.headquar.is_active|yesno:',danger' }}">
                 <td>{% if is_paginated %}
                     {{ page_obj.start_index|add:forloop.counter0 }}
@@ -64,15 +64,15 @@ $(function() {
                     {{ forloop.counter }}
                     {% endif %}
                 </td>
-                <td>{{ d.association.name }} 
+                <td>{{ d.association.name }}
                     <span class="label label-success">{{ d.association.is_active|yesno:',off' }}</span>
                 </td>
                 <td>
-                	{{ d.enterprise.name }} 
+                	{{ d.enterprise.name }}
                     <span class="label label-success">{{ d.enterprise.is_active|yesno:',off' }}</span>
                 </td>
                 <td>
-                	{{ d.headquar.name }} 
+                	{{ d.headquar.name }}
                     <span class="label label-success">{{ d.headquar.is_active|yesno:',off' }}</span>
                 </td>
                 <td>{{ d.groups|join:', ' }} </td>
