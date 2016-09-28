@@ -5,12 +5,10 @@
         <title>{% block title %}{% endblock title %}</title>
         {% block css %}{% endblock css %}
     </head>
-    <body class="hold-transition skin-blue sidebar-mini">
-        <div class="wrapper">
+    <body>
+        <div id="wrapper">
             {% block content %}
             {% endblock content %}
-            {% block sidebarconf %}
-            {% endblock sidebarconf %}
         </div>
         {% block js %}{% endblock js %}
     </body>

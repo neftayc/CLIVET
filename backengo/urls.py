@@ -33,6 +33,7 @@ urlpatterns = [
     url(r'^mod_backend/',
         include('apps.mod_backend.urls', namespace='mod_backend')),
     url(r'^accounts/', include('apps.accounts.urls')),
+
     url(r'^clivet/', include('apps.clivet.urls')),
 
 
