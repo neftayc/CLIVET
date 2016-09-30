@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from django.views.generic.base import TemplateView
-from apps.clivet.views import clivet
+from apps.clivet.views.main import clivet
 
 urlpatterns = [
     # Examples

@@ -1,5 +1,6 @@
+db.sqlite
+*temp
 *.pyc
 *~
 ~*
 ve_*
-
