@@ -1,15 +1,22 @@
+{% load i18n staticfiles %}
 <!DOCTYPE html>
 <html lang="es">
     <head>
         <meta charset="utf-8">
         <title>{% block title %}{% endblock title %}</title>
-        {% block css %}{% endblock css %}
+        <link rel="stylesheet" href="{% static 'bootstrap-3.1.1-dist/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'bootstrap-3.1.1-dist/css/sb-admin.css' %}">
+        <link href="{% static 'font-awesome-4.2.0/css/font-awesome.min.css' %}" rel="stylesheet">
+        {% block extracss %}
+        {% endblock extracss %}
     </head>
     <body>
         <div id="wrapper">
-            {% block content %}
-            {% endblock content %}
+            {% block contentroot %}
+            {% endblock contentroot %}
         </div>
+        <script src="{% static 'jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'bootstrap-3.1.1-dist/js/bootstrap.min.js' %}"></script>
         {% block js %}{% endblock js %}
     </body>
 </html>

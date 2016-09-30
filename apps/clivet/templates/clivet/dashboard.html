@@ -1,0 +1,21 @@
+{%  extends "base.html" %}
+
+{% block title %}CLIVET{% endblock title %}
+
+{% block contentroot %}
+
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+{% include "clivet/partials/header.html" %}
+{% include "clivet/partials/aside.html" %}
+</nav>
+
+<div id="page-wrapper">
+{% block content %}
+
+
+
+{% endblock content %}
+</div>
+<!-- /#page-wrapper -->
+{% endblock contentroot %}

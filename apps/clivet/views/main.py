@@ -14,4 +14,4 @@ def clivet(request):
         'opts': _('Home'),
         'title': _('Backend Home Page.'),
     }
-    return render(request, 'clivet/clivet.html', c)
+    return render(request, 'clivet/dashboard.html', c)
