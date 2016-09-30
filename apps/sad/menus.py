@@ -80,7 +80,7 @@ class Menus:
                 print ("Sede no seleccionado")
                 # headquar=Headquar.objects.filter(userheadquar__user__id=request.user.id).distinct().first()
                 pass
-            
+
         if request.user.is_superuser:
             permission_list = []  # si es uperuser mostrarme todo los menús
         menu = Menu()
@@ -215,7 +215,7 @@ class Menus:
                 if main.title in Menus.menu_item_list:
                     html = html + '<ul class="dropdown-menu">\n'
                     for item in Menus.menu_item_list[main.title]:
-                    	
+
                         active = ('active' if item.url.strip("/") == route.strip("/") else '')
                         html = html + '<li class="%s">%s</li>\n' % (
                             active, Menus.link(item.url, item.title, item.icon))

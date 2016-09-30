@@ -12,6 +12,7 @@ from .views import ModuleListView, ModuleCreateView, \
     ModuleUpdateView, ModuleDeleteView, ModuleUpdateActiveView, \
     ModuleSolutionsUpdateView
 
+
 from .views import GroupListView, GroupCreateView, GroupUpdateView,\
     GroupDeleteView, GroupPermissionsUpdateView
 

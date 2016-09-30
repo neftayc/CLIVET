@@ -15,6 +15,7 @@ urlpatterns = [
     # url(r'^$', 'plateo.views.home', name='home'),
     url(r'^load_access/(?P<headquar_id>.*)/(?P<module_id>.*)/$',
         load_access, name='load_access'),
+
     url(r'^add_enterprise/$',
         EnterpriseAssociationCreateView.as_view(), name='add_enterprise'),
     url(r'^$', include(accounts_patterns, namespace='accounts')),

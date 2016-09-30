@@ -1,7 +1,8 @@
-from django.conf.urls import include, url
-from .views import index
+from django.conf.urls import url
+from django.views.generic.base import TemplateView
+from apps.clivet.views import clivet
 
 urlpatterns = [
     # Examples
-    url(r'^$', index, name='base'),
+    url(r'^clivet', clivet, name='clivet'),
 ]

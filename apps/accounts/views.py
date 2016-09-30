@@ -19,7 +19,7 @@ from apps.utils.decorators import permission_resource_required
 
 # models
 from apps.sad.models import User, Module, UserAssociation, UserEnterprise, \
-    UserHeadquar, BACKEND
+    UserHeadquar, BACKEND, VENTAS
 from apps.params.models import Person, NID, IDENTITY_TYPE_CHOICES
 from apps.space.models import Association, Enterprise, Headquar, Solution
 from django.contrib.auth.models import Group
@@ -199,14 +199,14 @@ def load_access(request, headquar_id, module_id):
             # messages.info(request, ("La sede %(name)s ha sido cargado correctamente.") % {"name":headquar_id} )
             if BACKEND == module.module:
                 return HttpResponseRedirect("/mod_backend/dashboard/")
-            # if VENTAS == module.module:
-            #    return HttpResponseRedirect( "/mod_ventas/dashboard/")
-            # if PRO == module.module:
-            #    return HttpResponseRedirect( "/mod_pro/dashboard/")
+            if VENTAS == module.module:
+                return HttpResponseRedirect( "/clivet/clivet/")
+            if PRO == module.module:
+                return HttpResponseRedirect( "/mod_pro/dashboard/")
             # TODO agregue aqui su nuevo modulo
             else:
                 messages.error(request, 'Not implemented %s') %_('Module')
-                #raise NotImplementedError('subclasses of AbstractBaseUser must provide a get_full_name() module')
+                raise NotImplementedError('subclasses of AbstractBaseUser must provide a get_full_name() module')
                 return HttpResponseRedirect("/accounts/")
         except Exception as e:
             messages.error(request, e)
@@ -215,6 +215,7 @@ def load_access(request, headquar_id, module_id):
 
 @login_required
 def index(request):
+    print(' Helllo')
     """
     """
     o = empty(request, 'o', 'enterprise__name')
@@ -238,7 +239,7 @@ def index(request):
         module_list = Module.objects.filter(groups__in=group_list).distinct()
         if request.user.is_superuser:
             """
-            permitir ingresar al módulo:Django Backend 
+            permitir ingresar al módulo:Django Backend
             """
             if len(module_list) == 0:
                 module_list = Module.objects.filter(
@@ -267,6 +268,10 @@ def index(request):
         'q': q.replace('/', '-'),
 
     }
+
+    print(" DDDDDDDDDDDDDDDDDDD ")
+    for i in headquar_list_by_user:
+        print(i)
     return render(request, 'accounts/index.html', c)
 
 
