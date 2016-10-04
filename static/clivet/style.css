@@ -1,0 +1,21 @@
+#global {
+	height: 300px;
+	overflow-y: scroll;
+}
+h1, .h1, h2, .h2, h3, .h3 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+hr{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.contenidos{
+    height: 92vh;
+    background: linear-gradient(
+        to top,
+        #ffffff 90%,
+        #ffffff 50%,
+        gray 10%
+        ) !important;
+}

@@ -1,0 +1,1598 @@
+[2016-10-04 12:43:24] DEBUG [django.db.backends:89] (0.001) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+[2016-10-04 12:43:24] DEBUG [django.db.backends:89] (0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+[2016-10-04 12:43:28] DEBUG [django.db.backends:89] (0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2016-10-04 12:43:28.846754' AND "django_session"."session_key" = '73tz8dalqomobmynelxwtkp1yjyaxv1o'); args=('2016-10-04 12:43:28.846754', '73tz8dalqomobmynelxwtkp1yjyaxv1o')
+[2016-10-04 12:43:29] DEBUG [django.db.backends:89] (0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2016-10-04 12:43:29.314406' AND "django_session"."session_key" = '73tz8dalqomobmynelxwtkp1yjyaxv1o'); args=('2016-10-04 12:43:29.314406', '73tz8dalqomobmynelxwtkp1yjyaxv1o')
+[2016-10-04 12:43:29] WARNING [django.request:182] Not Found: /bootstrap/images/kittens.jpg
+[2016-10-04 12:43:29] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'bootstrap/images/kittens.jpg', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in '<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>'
+[2016-10-04 12:43:29] DEBUG [django.db.backends:89] (0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2016-10-04 12:43:29.322331' AND "django_session"."session_key" = '73tz8dalqomobmynelxwtkp1yjyaxv1o'); args=('2016-10-04 12:43:29.322331', '73tz8dalqomobmynelxwtkp1yjyaxv1o')
+[2016-10-04 12:43:29] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'bootstrap/images/kittens.jpg', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>"
+[2016-10-04 12:43:29] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'bootstrap/images/kittens.jpg', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>"
+[2016-10-04 12:43:29] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'bootstrap/images/kittens.jpg', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>"
+[2016-10-04 12:43:29] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'bootstrap/images/kittens.jpg', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>"
+[2016-10-04 12:43:29] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'bootstrap/images/kittens.jpg', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>"
+[2016-10-04 12:43:29] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'bootstrap/images/kittens.jpg', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>"
+[2016-10-04 12:43:29] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'bootstrap/images/kittens.jpg', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>"
+[2016-10-04 12:43:29] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'bootstrap/images/kittens.jpg', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>"
+[2016-10-04 12:43:31] DEBUG [django.db.backends:89] (0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2016-10-04 12:43:31.822319' AND "django_session"."session_key" = '73tz8dalqomobmynelxwtkp1yjyaxv1o'); args=('2016-10-04 12:43:31.822319', '73tz8dalqomobmynelxwtkp1yjyaxv1o')
+[2016-10-04 12:43:31] WARNING [django.request:182] Not Found: /favicon.ico
+[2016-10-04 12:43:31] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'favicon.ico', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in '<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>'
+[2016-10-04 12:43:31] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'favicon.ico', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>"
+[2016-10-04 12:43:31] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'favicon.ico', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>"
+[2016-10-04 12:43:31] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'favicon.ico', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>"
+[2016-10-04 12:43:31] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'favicon.ico', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>"
+[2016-10-04 12:43:31] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'favicon.ico', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>"
+[2016-10-04 12:43:31] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'favicon.ico', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>"
+[2016-10-04 12:43:31] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'favicon.ico', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>"
+[2016-10-04 12:43:31] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'favicon.ico', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>"
+[2016-10-04 12:51:43] DEBUG [django.db.backends:89] (0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2016-10-04 12:51:43.733110' AND "django_session"."session_key" = '73tz8dalqomobmynelxwtkp1yjyaxv1o'); args=('2016-10-04 12:51:43.733110', '73tz8dalqomobmynelxwtkp1yjyaxv1o')
+[2016-10-04 12:51:43] DEBUG [django.db.backends:89] (0.002) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2016-10-04 12:51:43.865317' AND "django_session"."session_key" = '73tz8dalqomobmynelxwtkp1yjyaxv1o'); args=('2016-10-04 12:51:43.865317', '73tz8dalqomobmynelxwtkp1yjyaxv1o')
+[2016-10-04 12:51:43] WARNING [django.request:182] Not Found: /bootstrap/images/kittens.jpg
+[2016-10-04 12:51:43] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'bootstrap/images/kittens.jpg', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in '<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>'
+[2016-10-04 12:51:43] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'bootstrap/images/kittens.jpg', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>"
+[2016-10-04 12:51:43] DEBUG [django.db.backends:89] (0.003) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2016-10-04 12:51:43.867422' AND "django_session"."session_key" = '73tz8dalqomobmynelxwtkp1yjyaxv1o'); args=('2016-10-04 12:51:43.867422', '73tz8dalqomobmynelxwtkp1yjyaxv1o')
+[2016-10-04 12:51:43] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'bootstrap/images/kittens.jpg', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>"
+[2016-10-04 12:51:43] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'bootstrap/images/kittens.jpg', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>"
+[2016-10-04 12:51:43] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'bootstrap/images/kittens.jpg', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>"
+[2016-10-04 12:51:43] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'bootstrap/images/kittens.jpg', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>"
+[2016-10-04 12:51:43] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'bootstrap/images/kittens.jpg', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>"
+[2016-10-04 12:51:43] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'bootstrap/images/kittens.jpg', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>"
+[2016-10-04 12:51:43] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'bootstrap/images/kittens.jpg', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>"
+[2016-10-04 12:54:39] DEBUG [django.db.backends:89] (0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2016-10-04 12:54:39.178738' AND "django_session"."session_key" = '73tz8dalqomobmynelxwtkp1yjyaxv1o'); args=('2016-10-04 12:54:39.178738', '73tz8dalqomobmynelxwtkp1yjyaxv1o')
+[2016-10-04 12:54:39] DEBUG [django.db.backends:89] (0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2016-10-04 12:54:39.281482' AND "django_session"."session_key" = '73tz8dalqomobmynelxwtkp1yjyaxv1o'); args=('2016-10-04 12:54:39.281482', '73tz8dalqomobmynelxwtkp1yjyaxv1o')
+[2016-10-04 12:54:39] WARNING [django.request:182] Not Found: /bootstrap/images/kittens.jpg
+[2016-10-04 12:54:39] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'bootstrap/images/kittens.jpg', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in '<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>'
+[2016-10-04 12:54:39] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'bootstrap/images/kittens.jpg', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>"
+[2016-10-04 12:54:39] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'bootstrap/images/kittens.jpg', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>"
+[2016-10-04 12:54:39] DEBUG [django.db.backends:89] (0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2016-10-04 12:54:39.287063' AND "django_session"."session_key" = '73tz8dalqomobmynelxwtkp1yjyaxv1o'); args=('2016-10-04 12:54:39.287063', '73tz8dalqomobmynelxwtkp1yjyaxv1o')
+[2016-10-04 12:54:39] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'bootstrap/images/kittens.jpg', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>"
+[2016-10-04 12:54:39] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'bootstrap/images/kittens.jpg', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>"
+[2016-10-04 12:54:39] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'bootstrap/images/kittens.jpg', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>"
+[2016-10-04 12:54:39] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'bootstrap/images/kittens.jpg', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>"
+[2016-10-04 12:54:39] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'bootstrap/images/kittens.jpg', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>"
+[2016-10-04 12:54:39] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'bootstrap/images/kittens.jpg', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>"
+[2016-10-04 13:05:38] DEBUG [django.db.backends:89] (0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2016-10-04 13:05:38.069098' AND "django_session"."session_key" = '73tz8dalqomobmynelxwtkp1yjyaxv1o'); args=('2016-10-04 13:05:38.069098', '73tz8dalqomobmynelxwtkp1yjyaxv1o')
+[2016-10-04 13:05:38] DEBUG [django.db.backends:89] (0.003) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2016-10-04 13:05:38.162920' AND "django_session"."session_key" = '73tz8dalqomobmynelxwtkp1yjyaxv1o'); args=('2016-10-04 13:05:38.162920', '73tz8dalqomobmynelxwtkp1yjyaxv1o')
+[2016-10-04 13:05:38] WARNING [django.request:182] Not Found: /bootstrap/images/kittens.jpg
+[2016-10-04 13:05:38] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'bootstrap/images/kittens.jpg', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in '<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>'
+[2016-10-04 13:05:38] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'bootstrap/images/kittens.jpg', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>"
+[2016-10-04 13:05:38] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'bootstrap/images/kittens.jpg', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>"
+[2016-10-04 13:05:38] DEBUG [django.db.backends:89] (0.002) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2016-10-04 13:05:38.165771' AND "django_session"."session_key" = '73tz8dalqomobmynelxwtkp1yjyaxv1o'); args=('2016-10-04 13:05:38.165771', '73tz8dalqomobmynelxwtkp1yjyaxv1o')
+[2016-10-04 13:05:38] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'bootstrap/images/kittens.jpg', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>"
+[2016-10-04 13:05:38] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'bootstrap/images/kittens.jpg', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>"
+[2016-10-04 13:05:38] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'bootstrap/images/kittens.jpg', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>"
+[2016-10-04 13:05:38] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'bootstrap/images/kittens.jpg', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>"
+[2016-10-04 13:05:38] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'bootstrap/images/kittens.jpg', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>"
+[2016-10-04 13:05:38] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'path': 'bootstrap/images/kittens.jpg', 'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>"
