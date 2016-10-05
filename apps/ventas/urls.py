@@ -1,8 +1,7 @@
-from django.conf.urls import url
-from django.views.generic.base import TemplateView
+from django.conf.urls import patterns, url
 from apps.ventas.views.main import ventas
 
-urlpatterns = [
-    # Examples
-    url(r'ventas', ventas, name='ventas'),
-]
+urlpatterns = [url(r'^ventas', ventas.as_view()),
+               # Examples
+
+               ]
