@@ -59,8 +59,9 @@ INSTALLED_APPS = [
     'apps.home',
     'apps.mod_backend',
     'apps.accounts',
-    #proyecto
+    # proyecto
     'apps.clivet',
+    'apps.conf',
 
 
 ]
