@@ -1,1 +1,0 @@
-[2016-03-29 16:55:24] [WARNING] [apps.space.views:571] [/space/enterprise/edit_current/] [127.0.0.1] [admin] Se modificó con éxito el Enterprise "Empresa 1".
