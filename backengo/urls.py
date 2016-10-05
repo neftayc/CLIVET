@@ -36,6 +36,7 @@ urlpatterns = [
     url(r'^accounts/', include('apps.accounts.urls')),
 
     url(r'^clivet/', include('apps.clivet.urls', namespace='clivet')),
+    url(r'^clinica/', include('apps.clinica.urls', namespace='clinica')),
 
 
     # http://stackoverflow.com/questions/19625102/django-javascript-translation-not-working

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title>{% block title %}{% endblock title %}</title>
+        {% block css %}{% endblock css %}
+    </head>
+    <body>
+        <div id="wrapper">
+            {% block content %}
+            {% endblock content %}
+        </div>
+        {% block js %}{% endblock js %}
+    </body>
+</html>
