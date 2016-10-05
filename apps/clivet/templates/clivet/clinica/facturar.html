@@ -1,0 +1,68 @@
+
+    <div class="panel  panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">Registrar Nota</h4>
+        </div>
+        <div class="panel-body">
+            <form>
+                <div class="form-group">
+                    <label for="factura">Agregar Servicios Medicos:</label>
+                    <input type="search" class="form-control" id="factura" placeholder="Buscar...">
+                </div>
+            </form>
+            <table class="table table-bordered ">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Precio Venta</th>
+                        <th>Cantidad</th>
+                        <th>Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Consulta de especialidad</td>
+                        <td>40.00</td>
+                        <td>
+                            <form  name="caca">
+                                <button type="button" class="btn btn-danger" onClick="decrementar()" value="disminuir" name="button">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                                <input type="text" name="muchacaca" >
+                                <button type="button" class="btn btn-success" onClick="incrementar()" value="aumentar" name="button">
+                                    <i class=" fa fa-plus"></i>
+                                </button>
+                            </form>
+                        </td>
+                        <td><i class="fa fa-minus"></i></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="text-right">
+                <label >S/. 40.00</label>
+            </div>
+        </div>
+        <div class="text-right" style="padding:15px">
+            <button type="button" class="btn btn-primary">Guardar y Volver</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Guardar y Terminar Atencion</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        </div>
+    </div><!-- /.modal-content -->
+
+    <script language="JavaScript">
+            var contador=1;
+            function incrementar() {
+            if(contador==10)
+            alert('Maximo permitido alcanzado: 3');
+            else {
+            document.caca.muchacaca.value= contador++;
+            alert('El contador ahora vale :' + contador);}
+            }
+            function decrementar() {
+            if(contador==0)
+            alert('Minimo permitido alcanzado: 0');
+            else {
+            document.caca.muchacaca.value= contador--;
+            alert('El contador ahora vale :' + contador);}
+            }
+    </script>
