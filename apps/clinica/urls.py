@@ -1,8 +1,9 @@
 from django.conf.urls import url
-from .views import especieView, mascotaView
+from .views import EspecieListView
 
 urlpatterns = [
     # Examples
-    url(r'^clinica', especieView, name='especieView'),
-    url(r'^gg', mascotaView, name='mascotaView'),
+    url(r'^especie/listar/$', EspecieListView.as_view(),
+        name="EspecieListView"),
+    #url(r'^gg', mascotaView, name='mascotaView'),
 ]

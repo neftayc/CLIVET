@@ -1,26 +1,23 @@
-#encoding: utf-8
+"""Modulo Tipo Documento Form."""
+
 from django import forms
-from .models import Especie
+from ..models.TipoDocumentoIdentidad import TipoDocumentoIdentidad
 
 
-class EspecieForm(forms.Form):
+class TipoDocumentoIdentidadForm(forms.ModelForm):
     """Tipo Documeto Form."""
 
     class Meta:
         """Meta."""
 
-        model = Especie
+        model = TipoDocumentoIdentidad
         exclude = ()
         widgets = {
-         'especie': forms.TextInput(attrs={
+         'numero': forms.TextInput(attrs={
              'class': 'form-control', 'required': 'true',
              'placeholder': 'Ingrese Numero'
          }),
-         'raza': forms.TextInput(attrs={
-             'class': 'form-control', 'required': 'true',
-             'placeholder': 'Ingrese Descripcion'
-         }),
-         'color': forms.TextInput(attrs={
+         'descripcion': forms.TextInput(attrs={
              'class': 'form-control', 'required': 'true',
              'placeholder': 'Ingrese Descripcion'
          })
