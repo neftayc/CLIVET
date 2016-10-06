@@ -1,13 +1,13 @@
-from django.views.generic.base import TemplateView
+from django.views.generic import TemplateView
 from django.shortcuts import render
 
 # Create your views here.
 
 
-class ventas(TemplateView):
+class Ventas(TemplateView):
 
     def get(self, request, *args, **kwargs):
-        return render(request, "index.html")
+        return render(request, 'ventas/index.html')
 
     def post(self, request, *args, **kwargs):
-        return render(request, "index.html")
+        return render(request, 'ventas/index.html')
