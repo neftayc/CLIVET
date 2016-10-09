@@ -1,0 +1,880 @@
+[2016-10-09 15:07:43] DEBUG [django.db.backends:89] (0.001) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+[2016-10-09 15:07:43] DEBUG [django.db.backends:89] (0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+[2016-10-09 15:07:50] DEBUG [django.db.backends:89] (0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2016-10-09 15:07:50.374965' AND "django_session"."session_key" = 'u568isodhhr8rg7e61pz71nan2xpfypb'); args=('2016-10-09 15:07:50.374965', 'u568isodhhr8rg7e61pz71nan2xpfypb')
+[2016-10-09 15:07:50] WARNING [django.request:182] Not Found: /bootstrap/images/kittens.jpg
+[2016-10-09 15:07:50] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]], 'path': 'bootstrap/images/kittens.jpg'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in '<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>'
+[2016-10-09 15:07:50] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]], 'path': 'bootstrap/images/kittens.jpg'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>"
+[2016-10-09 15:07:50] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]], 'path': 'bootstrap/images/kittens.jpg'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>"
+[2016-10-09 15:07:50] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]], 'path': 'bootstrap/images/kittens.jpg'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>"
+[2016-10-09 15:07:50] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]], 'path': 'bootstrap/images/kittens.jpg'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>"
+[2016-10-09 15:07:50] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]], 'path': 'bootstrap/images/kittens.jpg'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>"
+[2016-10-09 15:07:50] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]], 'path': 'bootstrap/images/kittens.jpg'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>"
+[2016-10-09 15:07:50] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]], 'path': 'bootstrap/images/kittens.jpg'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>"
+[2016-10-09 15:07:50] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]], 'path': 'bootstrap/images/kittens.jpg'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>"
+[2016-10-09 15:07:51] WARNING [django.request:182] Not Found: /favicon.ico
+[2016-10-09 15:07:51] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in '<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>'
+[2016-10-09 15:07:51] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>"
+[2016-10-09 15:07:51] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>"
+[2016-10-09 15:07:51] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>"
+[2016-10-09 15:07:51] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>"
+[2016-10-09 15:07:51] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>"
+[2016-10-09 15:07:51] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>"
+[2016-10-09 15:07:51] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>"
+[2016-10-09 15:07:51] DEBUG [django.template:927] Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 404, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.core.urlresolvers.Resolver404: {'tried': [[<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>], [<RegexURLResolver <module 'django.contrib.admindocs.urls' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/contrib/admindocs/urls.py'> (None:None) ^admin/doc/>], [<RegexURLResolver <module 'apps.home.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/home/urls.py'> (None:home) ^home/>], [<RegexURLPattern index ^$>], [<RegexURLResolver <module 'apps.space.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/space/urls.py'> (None:space) ^space/>], [<RegexURLResolver <module 'apps.sad.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/sad/urls.py'> (None:sad) ^sad/>], [<RegexURLResolver <module 'apps.mod_backend.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/mod_backend/urls.py'> (None:mod_backend) ^mod_backend/>], [<RegexURLResolver <module 'apps.accounts.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/accounts/urls.py'> (None:None) ^accounts/>], [<RegexURLResolver <module 'apps.clivet.urls' from '/home/rusbel/Proyectos/Django/CLIVET/apps/clivet/urls.py'> (None:clivet) ^clivet/>], [<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>], [<RegexURLPattern None ^jsi18n/>], [<RegexURLPattern None ^media\/(?P<path>.*)$>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+TypeError: 'RegexURLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 891, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'RegexURLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in "<RegexURLResolver <module 'django.conf.urls.i18n' from '/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/conf/urls/i18n.py'> (None:None) ^i18n/>"
+[2016-10-09 15:13:37] DEBUG [django.db.backends:89] (0.001) SELECT "django_site"."id", "django_site"."domain", "django_site"."name" FROM "django_site" WHERE "django_site"."id" = 1; args=(1,)
+[2016-10-09 15:13:37] DEBUG [django.template:927] Exception while resolving variable 'is_popup' in template 'admin/login.html'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/context.py", line 77, in __getitem__
+    raise KeyError(key)
+KeyError: 'is_popup'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 889, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'is_popup'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'is_popup'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [is_popup] in "[{'None': None, 'False': False, 'True': True}, {'LANGUAGE_CODE': 'es', 'DEFAULT_MESSAGE_LEVELS': {'WARNING': 30, 'DEBUG': 10, 'ERROR': 40, 'SUCCESS': 25, 'INFO': 20}, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x7f52381299b0>, 'csrf_token': <SimpleLazyObject: <function csrf.<locals>._get_val at 0x7f52381b87b8>>, 'user': <SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x7f5238129908>>, 'STATIC_URL': '/static/', 'LANGUAGE_BIDI': False, 'request': <WSGIRequest: GET '/admin/login/?next=/admin/'>, 'MEDIA_URL': '/media/', 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x7f523813cb70>, 'LANGUAGES': (('ja', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bcf4198>), ('zh-tw', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bcf41d0>), ('fr', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bcf4208>), ('de', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bcf4240>), ('en', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd05588>), ('es', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd05518>), ('es-ar', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd05550>), ('es-pe', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd055c0>), ('pt', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd055f8>), ('pt-br', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd05668>)), 'TIME_ZONE': 'UTC'}, {}, {'site': <Site: localhost:8000>, 'app_path': '/admin/login/?next=/admin/', 'site_header': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523a8e87b8>, 'site_title': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523a8e8710>, 'site_url': '/', 'LANGUAGE_CODE': 'es', 'LANGUAGE_BIDI': False, 'has_permission': False, 'site_name': 'localhost:8000', 'title': 'Iniciar sesión', 'form': <AdminAuthenticationForm bound=False, valid=Unknown, fields=(username;password)>, 'available_apps': [], 'next': '/admin/', 'username': ''}]"
+[2016-10-09 15:13:38] DEBUG [django.template:927] Exception while resolving variable 'is_popup' in template 'admin/login.html'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/context.py", line 77, in __getitem__
+    raise KeyError(key)
+KeyError: 'is_popup'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 889, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'is_popup'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'is_popup'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [is_popup] in "[{'None': None, 'False': False, 'True': True}, {'LANGUAGE_CODE': 'es', 'DEFAULT_MESSAGE_LEVELS': {'WARNING': 30, 'DEBUG': 10, 'ERROR': 40, 'SUCCESS': 25, 'INFO': 20}, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x7f52381299b0>, 'csrf_token': <SimpleLazyObject: <function csrf.<locals>._get_val at 0x7f52381b87b8>>, 'user': <SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x7f5238129908>>, 'STATIC_URL': '/static/', 'LANGUAGE_BIDI': False, 'request': <WSGIRequest: GET '/admin/login/?next=/admin/'>, 'MEDIA_URL': '/media/', 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x7f523813cb70>, 'LANGUAGES': (('ja', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bcf4198>), ('zh-tw', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bcf41d0>), ('fr', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bcf4208>), ('de', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bcf4240>), ('en', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd05588>), ('es', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd05518>), ('es-ar', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd05550>), ('es-pe', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd055c0>), ('pt', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd055f8>), ('pt-br', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd05668>)), 'TIME_ZONE': 'UTC'}, {}, {'site': <Site: localhost:8000>, 'app_path': '/admin/login/?next=/admin/', 'site_header': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523a8e87b8>, 'site_title': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523a8e8710>, 'site_url': '/', 'LANGUAGE_CODE': 'es', 'LANGUAGE_BIDI': False, 'has_permission': False, 'site_name': 'localhost:8000', 'title': 'Iniciar sesión', 'form': <AdminAuthenticationForm bound=False, valid=Unknown, fields=(username;password)>, 'available_apps': [], 'next': '/admin/', 'username': ''}]"
+[2016-10-09 15:13:40] DEBUG [django.db.backends:89] (0.001) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined", "auth_user"."last_headquar_id", "auth_user"."last_module_id", "auth_user"."person_id" FROM "auth_user" WHERE "auth_user"."username" = 'rusbel'; args=('rusbel',)
+[2016-10-09 15:13:40] DEBUG [django.template:927] Exception while resolving variable 'is_popup' in template 'admin/login.html'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/context.py", line 77, in __getitem__
+    raise KeyError(key)
+KeyError: 'is_popup'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 889, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'is_popup'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'is_popup'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [is_popup] in "[{'None': None, 'False': False, 'True': True}, {'LANGUAGE_CODE': 'es', 'DEFAULT_MESSAGE_LEVELS': {'WARNING': 30, 'DEBUG': 10, 'ERROR': 40, 'SUCCESS': 25, 'INFO': 20}, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x7f523819ea58>, 'csrf_token': <SimpleLazyObject: <function csrf.<locals>._get_val at 0x7f5238c4b048>>, 'user': <SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x7f52381a5f98>>, 'STATIC_URL': '/static/', 'LANGUAGE_BIDI': False, 'request': <WSGIRequest: POST '/admin/login/?next=/admin/'>, 'MEDIA_URL': '/media/', 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x7f5238154828>, 'LANGUAGES': (('ja', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bcf4198>), ('zh-tw', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bcf41d0>), ('fr', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bcf4208>), ('de', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bcf4240>), ('en', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd05588>), ('es', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd05518>), ('es-ar', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd05550>), ('es-pe', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd055c0>), ('pt', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd055f8>), ('pt-br', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd05668>)), 'TIME_ZONE': 'UTC'}, {}, {'site': <Site: localhost:8000>, 'app_path': '/admin/login/?next=/admin/', 'site_header': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523a8e87b8>, 'site_title': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523a8e8710>, 'site_url': '/', 'LANGUAGE_CODE': 'es', 'LANGUAGE_BIDI': False, 'has_permission': False, 'site_name': 'localhost:8000', 'title': 'Iniciar sesión', 'form': <AdminAuthenticationForm bound=True, valid=False, fields=(username;password)>, 'available_apps': [], 'next': '/admin/', 'username': ''}]"
+[2016-10-09 15:13:40] DEBUG [django.template:927] Exception while resolving variable 'is_popup' in template 'admin/login.html'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/context.py", line 77, in __getitem__
+    raise KeyError(key)
+KeyError: 'is_popup'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 889, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'is_popup'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'is_popup'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [is_popup] in "[{'None': None, 'False': False, 'True': True}, {'LANGUAGE_CODE': 'es', 'DEFAULT_MESSAGE_LEVELS': {'WARNING': 30, 'DEBUG': 10, 'ERROR': 40, 'SUCCESS': 25, 'INFO': 20}, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x7f523819ea58>, 'csrf_token': <SimpleLazyObject: <function csrf.<locals>._get_val at 0x7f5238c4b048>>, 'user': <SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x7f52381a5f98>>, 'STATIC_URL': '/static/', 'LANGUAGE_BIDI': False, 'request': <WSGIRequest: POST '/admin/login/?next=/admin/'>, 'MEDIA_URL': '/media/', 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x7f5238154828>, 'LANGUAGES': (('ja', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bcf4198>), ('zh-tw', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bcf41d0>), ('fr', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bcf4208>), ('de', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bcf4240>), ('en', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd05588>), ('es', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd05518>), ('es-ar', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd05550>), ('es-pe', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd055c0>), ('pt', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd055f8>), ('pt-br', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd05668>)), 'TIME_ZONE': 'UTC'}, {}, {'site': <Site: localhost:8000>, 'app_path': '/admin/login/?next=/admin/', 'site_header': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523a8e87b8>, 'site_title': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523a8e8710>, 'site_url': '/', 'LANGUAGE_CODE': 'es', 'LANGUAGE_BIDI': False, 'has_permission': False, 'site_name': 'localhost:8000', 'title': 'Iniciar sesión', 'form': <AdminAuthenticationForm bound=True, valid=False, fields=(username;password)>, 'available_apps': [], 'next': '/admin/', 'username': ''}]"
+[2016-10-09 15:13:44] DEBUG [django.db.backends:89] (0.001) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined", "auth_user"."last_headquar_id", "auth_user"."last_module_id", "auth_user"."person_id" FROM "auth_user" WHERE "auth_user"."username" = 'rusbel'; args=('rusbel',)
+[2016-10-09 15:13:44] DEBUG [django.template:927] Exception while resolving variable 'is_popup' in template 'admin/login.html'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/context.py", line 77, in __getitem__
+    raise KeyError(key)
+KeyError: 'is_popup'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 889, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'is_popup'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'is_popup'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [is_popup] in "[{'None': None, 'False': False, 'True': True}, {'LANGUAGE_CODE': 'es', 'DEFAULT_MESSAGE_LEVELS': {'WARNING': 30, 'DEBUG': 10, 'ERROR': 40, 'SUCCESS': 25, 'INFO': 20}, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x7f5238129c88>, 'csrf_token': <SimpleLazyObject: <function csrf.<locals>._get_val at 0x7f5238105488>>, 'user': <SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x7f52381d4940>>, 'STATIC_URL': '/static/', 'LANGUAGE_BIDI': False, 'request': <WSGIRequest: POST '/admin/login/?next=/admin/'>, 'MEDIA_URL': '/media/', 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x7f52380fbba8>, 'LANGUAGES': (('ja', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bcf4198>), ('zh-tw', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bcf41d0>), ('fr', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bcf4208>), ('de', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bcf4240>), ('en', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd05588>), ('es', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd05518>), ('es-ar', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd05550>), ('es-pe', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd055c0>), ('pt', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd055f8>), ('pt-br', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd05668>)), 'TIME_ZONE': 'UTC'}, {}, {'site': <Site: localhost:8000>, 'app_path': '/admin/login/?next=/admin/', 'site_header': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523a8e87b8>, 'site_title': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523a8e8710>, 'site_url': '/', 'LANGUAGE_CODE': 'es', 'LANGUAGE_BIDI': False, 'has_permission': False, 'site_name': 'localhost:8000', 'title': 'Iniciar sesión', 'form': <AdminAuthenticationForm bound=True, valid=False, fields=(username;password)>, 'available_apps': [], 'next': '/admin/', 'username': ''}]"
+[2016-10-09 15:13:44] DEBUG [django.template:927] Exception while resolving variable 'is_popup' in template 'admin/login.html'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/context.py", line 77, in __getitem__
+    raise KeyError(key)
+KeyError: 'is_popup'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 889, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'is_popup'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'is_popup'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [is_popup] in "[{'None': None, 'False': False, 'True': True}, {'LANGUAGE_CODE': 'es', 'DEFAULT_MESSAGE_LEVELS': {'WARNING': 30, 'DEBUG': 10, 'ERROR': 40, 'SUCCESS': 25, 'INFO': 20}, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x7f5238129c88>, 'csrf_token': <SimpleLazyObject: <function csrf.<locals>._get_val at 0x7f5238105488>>, 'user': <SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x7f52381d4940>>, 'STATIC_URL': '/static/', 'LANGUAGE_BIDI': False, 'request': <WSGIRequest: POST '/admin/login/?next=/admin/'>, 'MEDIA_URL': '/media/', 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x7f52380fbba8>, 'LANGUAGES': (('ja', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bcf4198>), ('zh-tw', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bcf41d0>), ('fr', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bcf4208>), ('de', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bcf4240>), ('en', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd05588>), ('es', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd05518>), ('es-ar', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd05550>), ('es-pe', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd055c0>), ('pt', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd055f8>), ('pt-br', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd05668>)), 'TIME_ZONE': 'UTC'}, {}, {'site': <Site: localhost:8000>, 'app_path': '/admin/login/?next=/admin/', 'site_header': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523a8e87b8>, 'site_title': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523a8e8710>, 'site_url': '/', 'LANGUAGE_CODE': 'es', 'LANGUAGE_BIDI': False, 'has_permission': False, 'site_name': 'localhost:8000', 'title': 'Iniciar sesión', 'form': <AdminAuthenticationForm bound=True, valid=False, fields=(username;password)>, 'available_apps': [], 'next': '/admin/', 'username': ''}]"
+[2016-10-09 15:13:54] DEBUG [django.db.backends:89] (0.001) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined", "auth_user"."last_headquar_id", "auth_user"."last_module_id", "auth_user"."person_id" FROM "auth_user" WHERE "auth_user"."username" = 'admin'; args=('admin',)
+[2016-10-09 15:13:54] DEBUG [django.db.backends:89] (0.000) SELECT (1) AS "a" FROM "django_session" WHERE "django_session"."session_key" = 'oozprul9hvyel0qjgqrno3pnyx9nk3hr' LIMIT 1; args=('oozprul9hvyel0qjgqrno3pnyx9nk3hr',)
+[2016-10-09 15:13:54] DEBUG [django.db.backends:89] (0.000) BEGIN; args=None
+[2016-10-09 15:13:54] DEBUG [django.db.backends:89] (0.000) INSERT INTO "django_session" ("session_key", "session_data", "expire_date") SELECT 'oozprul9hvyel0qjgqrno3pnyx9nk3hr', 'YjRmMTM3Y2JmOTNmMjEyMDlhMjkxMTBhNDk1ZGQzNDFhZmZjNWVlNjp7fQ==', '2016-10-23 15:13:54.921627'; args=('oozprul9hvyel0qjgqrno3pnyx9nk3hr', 'YjRmMTM3Y2JmOTNmMjEyMDlhMjkxMTBhNDk1ZGQzNDFhZmZjNWVlNjp7fQ==', '2016-10-23 15:13:54.921627')
+[2016-10-09 15:13:55] DEBUG [django.db.backends:89] (0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE "django_session"."session_key" = 'oozprul9hvyel0qjgqrno3pnyx9nk3hr'; args=('oozprul9hvyel0qjgqrno3pnyx9nk3hr',)
+[2016-10-09 15:13:55] DEBUG [django.db.backends:89] (0.000) BEGIN; args=None
+[2016-10-09 15:13:55] DEBUG [django.db.backends:89] (0.002) DELETE FROM "django_session" WHERE "django_session"."session_key" IN ('oozprul9hvyel0qjgqrno3pnyx9nk3hr'); args=('oozprul9hvyel0qjgqrno3pnyx9nk3hr',)
+[2016-10-09 15:13:55] DEBUG [django.db.backends:89] (0.000) BEGIN; args=None
+[2016-10-09 15:13:55] DEBUG [django.db.backends:89] (0.000) UPDATE "auth_user" SET "last_login" = '2016-10-09 15:13:55.168823' WHERE "auth_user"."id" = 1; args=('2016-10-09 15:13:55.168823', 1)
+[2016-10-09 15:13:55] DEBUG [django.db.backends:89] (0.000) BEGIN; args=None
+[2016-10-09 15:13:55] DEBUG [django.db.backends:89] (0.000) UPDATE "django_session" SET "session_data" = 'NDE0ZjlhOTM2ZGYyZjAzM2I5MzUxMjg1NGIzMzM2MzA1YTQ1OGFiYjp7Il9hdXRoX3VzZXJfaGFzaCI6IjFkYTI0ZjVmNGU4ZGY4MTZjMzA1ZmJiNDYxMTdiMTIwMDRlMGRjN2IiLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=', "expire_date" = '2016-10-23 15:13:55.291086' WHERE "django_session"."session_key" = 'oozprul9hvyel0qjgqrno3pnyx9nk3hr'; args=('NDE0ZjlhOTM2ZGYyZjAzM2I5MzUxMjg1NGIzMzM2MzA1YTQ1OGFiYjp7Il9hdXRoX3VzZXJfaGFzaCI6IjFkYTI0ZjVmNGU4ZGY4MTZjMzA1ZmJiNDYxMTdiMTIwMDRlMGRjN2IiLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=', '2016-10-23 15:13:55.291086', 'oozprul9hvyel0qjgqrno3pnyx9nk3hr')
+[2016-10-09 15:13:55] DEBUG [django.db.backends:89] (0.000) INSERT INTO "django_session" ("session_key", "session_data", "expire_date") SELECT 'oozprul9hvyel0qjgqrno3pnyx9nk3hr', 'NDE0ZjlhOTM2ZGYyZjAzM2I5MzUxMjg1NGIzMzM2MzA1YTQ1OGFiYjp7Il9hdXRoX3VzZXJfaGFzaCI6IjFkYTI0ZjVmNGU4ZGY4MTZjMzA1ZmJiNDYxMTdiMTIwMDRlMGRjN2IiLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=', '2016-10-23 15:13:55.291086'; args=('oozprul9hvyel0qjgqrno3pnyx9nk3hr', 'NDE0ZjlhOTM2ZGYyZjAzM2I5MzUxMjg1NGIzMzM2MzA1YTQ1OGFiYjp7Il9hdXRoX3VzZXJfaGFzaCI6IjFkYTI0ZjVmNGU4ZGY4MTZjMzA1ZmJiNDYxMTdiMTIwMDRlMGRjN2IiLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=', '2016-10-23 15:13:55.291086')
+[2016-10-09 15:13:55] DEBUG [django.db.backends:89] (0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2016-10-09 15:13:55.409378' AND "django_session"."session_key" = 'oozprul9hvyel0qjgqrno3pnyx9nk3hr'); args=('2016-10-09 15:13:55.409378', 'oozprul9hvyel0qjgqrno3pnyx9nk3hr')
+[2016-10-09 15:13:55] DEBUG [django.db.backends:89] (0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined", "auth_user"."last_headquar_id", "auth_user"."last_module_id", "auth_user"."person_id" FROM "auth_user" WHERE "auth_user"."id" = 1; args=(1,)
+[2016-10-09 15:13:55] DEBUG [django.template:927] Exception while resolving variable 'is_popup' in template 'admin/index.html'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/context.py", line 77, in __getitem__
+    raise KeyError(key)
+KeyError: 'is_popup'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 889, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'is_popup'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'is_popup'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [is_popup] in "[{'None': None, 'False': False, 'True': True}, {'LANGUAGE_CODE': 'es', 'DEFAULT_MESSAGE_LEVELS': {'WARNING': 30, 'DEBUG': 10, 'ERROR': 40, 'SUCCESS': 25, 'INFO': 20}, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x7f5238138e80>, 'csrf_token': <SimpleLazyObject: <function csrf.<locals>._get_val at 0x7f52380b2ea0>>, 'user': <SimpleLazyObject: <User: admin>>, 'STATIC_URL': '/static/', 'LANGUAGE_BIDI': False, 'request': <WSGIRequest: GET '/admin/'>, 'MEDIA_URL': '/media/', 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x7f52380ff940>, 'LANGUAGES': (('ja', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bcf4198>), ('zh-tw', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bcf41d0>), ('fr', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bcf4208>), ('de', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bcf4240>), ('en', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd05588>), ('es', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd05518>), ('es-ar', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd05550>), ('es-pe', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd055c0>), ('pt', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd055f8>), ('pt-br', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd05668>)), 'TIME_ZONE': 'UTC'}, {}, {'LANGUAGE_BIDI': False, 'LANGUAGE_CODE': 'es', 'site_title': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523a8e8710>, 'has_permission': True, 'site_header': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523a8e87b8>, 'title': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523a8e8c18>, 'available_apps': [{'has_module_perms': True, 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523a8ef3c8>, 'app_url': '/admin/auth/', 'models': [{'add_url': '/admin/auth/group/add/', 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f5238158358>, 'object_name': 'Group', 'perms': {'delete': True, 'change': True, 'add': True}, 'admin_url': '/admin/auth/group/'}, {'add_url': '/admin/auth/permission/add/', 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f5238158ba8>, 'object_name': 'Permission', 'perms': {'delete': True, 'change': True, 'add': True}, 'admin_url': '/admin/auth/permission/'}], 'app_label': 'auth'}, {'has_module_perms': True, 'name': 'Params', 'app_url': '/admin/params/', 'models': [{'add_url': '/admin/params/person/add/', 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f5238158160>, 'object_name': 'Person', 'perms': {'delete': True, 'change': True, 'add': True}, 'admin_url': '/admin/params/person/'}], 'app_label': 'params'}, {'has_module_perms': True, 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523a8f9978>, 'app_url': '/admin/flatpages/', 'models': [{'add_url': '/admin/flatpages/flatpage/add/', 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f5238158390>, 'object_name': 'FlatPage', 'perms': {'delete': True, 'change': True, 'add': True}, 'admin_url': '/admin/flatpages/flatpage/'}], 'app_label': 'flatpages'}, {'has_module_perms': True, 'name': 'Sad', 'app_url': '/admin/sad/', 'models': [{'add_url': '/admin/sad/user/add/', 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f5238158550>, 'object_name': 'User', 'perms': {'delete': True, 'change': True, 'add': True}, 'admin_url': '/admin/sad/user/'}], 'app_label': 'sad'}, {'has_module_perms': True, 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523a8f9898>, 'app_url': '/admin/sites/', 'models': [{'add_url': '/admin/sites/site/add/', 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f5238138dd8>, 'object_name': 'Site', 'perms': {'delete': True, 'change': True, 'add': True}, 'admin_url': '/admin/sites/site/'}], 'app_label': 'sites'}, {'has_module_perms': True, 'name': 'Space', 'app_url': '/admin/space/', 'models': [{'add_url': '/admin/space/solution/add/', 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f5238158f98>, 'object_name': 'Solution', 'perms': {'delete': True, 'change': True, 'add': True}, 'admin_url': '/admin/space/solution/'}], 'app_label': 'space'}, {'has_module_perms': True, 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523a8efb38>, 'app_url': '/admin/contenttypes/', 'models': [{'add_url': '/admin/contenttypes/contenttype/add/', 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f5238158710>, 'object_name': 'ContentType', 'perms': {'delete': True, 'change': True, 'add': True}, 'admin_url': '/admin/contenttypes/contenttype/'}], 'app_label': 'contenttypes'}], 'site_url': '/', 'app_list': [{'has_module_perms': True, 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523a8ef3c8>, 'app_url': '/admin/auth/', 'models': [{'add_url': '/admin/auth/group/add/', 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f5238138ba8>, 'object_name': 'Group', 'perms': {'delete': True, 'change': True, 'add': True}, 'admin_url': '/admin/auth/group/'}, {'add_url': '/admin/auth/permission/add/', 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f5238138a20>, 'object_name': 'Permission', 'perms': {'delete': True, 'change': True, 'add': True}, 'admin_url': '/admin/auth/permission/'}], 'app_label': 'auth'}, {'has_module_perms': True, 'name': 'Params', 'app_url': '/admin/params/', 'models': [{'add_url': '/admin/params/person/add/', 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f52381b96d8>, 'object_name': 'Person', 'perms': {'delete': True, 'change': True, 'add': True}, 'admin_url': '/admin/params/person/'}], 'app_label': 'params'}, {'has_module_perms': True, 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523a8f9978>, 'app_url': '/admin/flatpages/', 'models': [{'add_url': '/admin/flatpages/flatpage/add/', 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f5238138208>, 'object_name': 'FlatPage', 'perms': {'delete': True, 'change': True, 'add': True}, 'admin_url': '/admin/flatpages/flatpage/'}], 'app_label': 'flatpages'}, {'has_module_perms': True, 'name': 'Sad', 'app_url': '/admin/sad/', 'models': [{'add_url': '/admin/sad/user/add/', 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f52381b9860>, 'object_name': 'User', 'perms': {'delete': True, 'change': True, 'add': True}, 'admin_url': '/admin/sad/user/'}], 'app_label': 'sad'}, {'has_module_perms': True, 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523a8f9898>, 'app_url': '/admin/sites/', 'models': [{'add_url': '/admin/sites/site/add/', 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f52381b9668>, 'object_name': 'Site', 'perms': {'delete': True, 'change': True, 'add': True}, 'admin_url': '/admin/sites/site/'}], 'app_label': 'sites'}, {'has_module_perms': True, 'name': 'Space', 'app_url': '/admin/space/', 'models': [{'add_url': '/admin/space/solution/add/', 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f5238138f28>, 'object_name': 'Solution', 'perms': {'delete': True, 'change': True, 'add': True}, 'admin_url': '/admin/space/solution/'}], 'app_label': 'space'}, {'has_module_perms': True, 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523a8efb38>, 'app_url': '/admin/contenttypes/', 'models': [{'add_url': '/admin/contenttypes/contenttype/add/', 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f5238138f98>, 'object_name': 'ContentType', 'perms': {'delete': True, 'change': True, 'add': True}, 'admin_url': '/admin/contenttypes/contenttype/'}], 'app_label': 'contenttypes'}]}]"
+[2016-10-09 15:13:55] DEBUG [django.template:927] Exception while resolving variable 'is_popup' in template 'admin/index.html'.
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 883, in _resolve_lookup
+    current = current[bit]
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/context.py", line 77, in __getitem__
+    raise KeyError(key)
+KeyError: 'is_popup'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 889, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'is_popup'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 898, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'is_popup'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [is_popup] in "[{'None': None, 'False': False, 'True': True}, {'LANGUAGE_CODE': 'es', 'DEFAULT_MESSAGE_LEVELS': {'WARNING': 30, 'DEBUG': 10, 'ERROR': 40, 'SUCCESS': 25, 'INFO': 20}, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x7f5238138e80>, 'csrf_token': <SimpleLazyObject: <function csrf.<locals>._get_val at 0x7f52380b2ea0>>, 'user': <SimpleLazyObject: <User: admin>>, 'STATIC_URL': '/static/', 'LANGUAGE_BIDI': False, 'request': <WSGIRequest: GET '/admin/'>, 'MEDIA_URL': '/media/', 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x7f52380ff940>, 'LANGUAGES': (('ja', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bcf4198>), ('zh-tw', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bcf41d0>), ('fr', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bcf4208>), ('de', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bcf4240>), ('en', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd05588>), ('es', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd05518>), ('es-ar', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd05550>), ('es-pe', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd055c0>), ('pt', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd055f8>), ('pt-br', <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523bd05668>)), 'TIME_ZONE': 'UTC'}, {}, {'LANGUAGE_BIDI': False, 'LANGUAGE_CODE': 'es', 'site_title': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523a8e8710>, 'has_permission': True, 'site_header': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523a8e87b8>, 'title': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523a8e8c18>, 'available_apps': [{'has_module_perms': True, 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523a8ef3c8>, 'app_url': '/admin/auth/', 'models': [{'add_url': '/admin/auth/group/add/', 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f5238158358>, 'object_name': 'Group', 'perms': {'delete': True, 'change': True, 'add': True}, 'admin_url': '/admin/auth/group/'}, {'add_url': '/admin/auth/permission/add/', 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f5238158ba8>, 'object_name': 'Permission', 'perms': {'delete': True, 'change': True, 'add': True}, 'admin_url': '/admin/auth/permission/'}], 'app_label': 'auth'}, {'has_module_perms': True, 'name': 'Params', 'app_url': '/admin/params/', 'models': [{'add_url': '/admin/params/person/add/', 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f5238158160>, 'object_name': 'Person', 'perms': {'delete': True, 'change': True, 'add': True}, 'admin_url': '/admin/params/person/'}], 'app_label': 'params'}, {'has_module_perms': True, 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523a8f9978>, 'app_url': '/admin/flatpages/', 'models': [{'add_url': '/admin/flatpages/flatpage/add/', 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f5238158390>, 'object_name': 'FlatPage', 'perms': {'delete': True, 'change': True, 'add': True}, 'admin_url': '/admin/flatpages/flatpage/'}], 'app_label': 'flatpages'}, {'has_module_perms': True, 'name': 'Sad', 'app_url': '/admin/sad/', 'models': [{'add_url': '/admin/sad/user/add/', 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f5238158550>, 'object_name': 'User', 'perms': {'delete': True, 'change': True, 'add': True}, 'admin_url': '/admin/sad/user/'}], 'app_label': 'sad'}, {'has_module_perms': True, 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523a8f9898>, 'app_url': '/admin/sites/', 'models': [{'add_url': '/admin/sites/site/add/', 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f5238138dd8>, 'object_name': 'Site', 'perms': {'delete': True, 'change': True, 'add': True}, 'admin_url': '/admin/sites/site/'}], 'app_label': 'sites'}, {'has_module_perms': True, 'name': 'Space', 'app_url': '/admin/space/', 'models': [{'add_url': '/admin/space/solution/add/', 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f5238158f98>, 'object_name': 'Solution', 'perms': {'delete': True, 'change': True, 'add': True}, 'admin_url': '/admin/space/solution/'}], 'app_label': 'space'}, {'has_module_perms': True, 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523a8efb38>, 'app_url': '/admin/contenttypes/', 'models': [{'add_url': '/admin/contenttypes/contenttype/add/', 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f5238158710>, 'object_name': 'ContentType', 'perms': {'delete': True, 'change': True, 'add': True}, 'admin_url': '/admin/contenttypes/contenttype/'}], 'app_label': 'contenttypes'}], 'site_url': '/', 'app_list': [{'has_module_perms': True, 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523a8ef3c8>, 'app_url': '/admin/auth/', 'models': [{'add_url': '/admin/auth/group/add/', 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f5238138ba8>, 'object_name': 'Group', 'perms': {'delete': True, 'change': True, 'add': True}, 'admin_url': '/admin/auth/group/'}, {'add_url': '/admin/auth/permission/add/', 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f5238138a20>, 'object_name': 'Permission', 'perms': {'delete': True, 'change': True, 'add': True}, 'admin_url': '/admin/auth/permission/'}], 'app_label': 'auth'}, {'has_module_perms': True, 'name': 'Params', 'app_url': '/admin/params/', 'models': [{'add_url': '/admin/params/person/add/', 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f52381b96d8>, 'object_name': 'Person', 'perms': {'delete': True, 'change': True, 'add': True}, 'admin_url': '/admin/params/person/'}], 'app_label': 'params'}, {'has_module_perms': True, 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523a8f9978>, 'app_url': '/admin/flatpages/', 'models': [{'add_url': '/admin/flatpages/flatpage/add/', 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f5238138208>, 'object_name': 'FlatPage', 'perms': {'delete': True, 'change': True, 'add': True}, 'admin_url': '/admin/flatpages/flatpage/'}], 'app_label': 'flatpages'}, {'has_module_perms': True, 'name': 'Sad', 'app_url': '/admin/sad/', 'models': [{'add_url': '/admin/sad/user/add/', 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f52381b9860>, 'object_name': 'User', 'perms': {'delete': True, 'change': True, 'add': True}, 'admin_url': '/admin/sad/user/'}], 'app_label': 'sad'}, {'has_module_perms': True, 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523a8f9898>, 'app_url': '/admin/sites/', 'models': [{'add_url': '/admin/sites/site/add/', 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f52381b9668>, 'object_name': 'Site', 'perms': {'delete': True, 'change': True, 'add': True}, 'admin_url': '/admin/sites/site/'}], 'app_label': 'sites'}, {'has_module_perms': True, 'name': 'Space', 'app_url': '/admin/space/', 'models': [{'add_url': '/admin/space/solution/add/', 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f5238138f28>, 'object_name': 'Solution', 'perms': {'delete': True, 'change': True, 'add': True}, 'admin_url': '/admin/space/solution/'}], 'app_label': 'space'}, {'has_module_perms': True, 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f523a8efb38>, 'app_url': '/admin/contenttypes/', 'models': [{'add_url': '/admin/contenttypes/contenttype/add/', 'name': <django.utils.functional.lazy.<locals>.__proxy__ object at 0x7f5238138f98>, 'object_name': 'ContentType', 'perms': {'delete': True, 'change': True, 'add': True}, 'admin_url': '/admin/contenttypes/contenttype/'}], 'app_label': 'contenttypes'}]}]"
+[2016-10-09 15:13:55] DEBUG [django.db.backends:89] (0.000) SELECT "django_admin_log"."id", "django_admin_log"."action_time", "django_admin_log"."user_id", "django_admin_log"."content_type_id", "django_admin_log"."object_id", "django_admin_log"."object_repr", "django_admin_log"."action_flag", "django_admin_log"."change_message", "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined", "auth_user"."last_headquar_id", "auth_user"."last_module_id", "auth_user"."person_id", "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_admin_log" INNER JOIN "auth_user" ON ("django_admin_log"."user_id" = "auth_user"."id") LEFT OUTER JOIN "django_content_type" ON ("django_admin_log"."content_type_id" = "django_content_type"."id") WHERE "django_admin_log"."user_id" = 1 ORDER BY "django_admin_log"."action_time" DESC LIMIT 10; args=(1,)
