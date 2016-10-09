@@ -3,7 +3,6 @@ from django.utils.translation import ugettext_lazy as _
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib import messages
-from apps.utils.decorators import permission_resource_required
 
 
 from django.shortcuts import get_object_or_404

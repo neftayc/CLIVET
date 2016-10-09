@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'apps.accounts',
     #proyecto
     'apps.clivet',
+    'apps.clinica',
 
 
 ]
