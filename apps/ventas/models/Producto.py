@@ -12,7 +12,7 @@ class Producto(TimeStampedModel):
     unidadMedidaV = models.ForeignKey(UnidadMedida)
     unidadMedidaC = models.ForeignKey(UnidadMedida)
     precioV = models.DecimalField(max_digits=10, decima_place=2)
-    precioC = models.DecimalField()
+    precioC = models.DecimalField(max_digits=10, decima_place=2)
     existencia = models.IntegerField()
     MontoReal = models.DecimalField(max_digits=10, decima_place=2)
     igv = models.DecimalField(max_digits=10, decima_place=2)
