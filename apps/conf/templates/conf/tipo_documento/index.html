@@ -8,7 +8,7 @@ Descripcion: Lista Tipo Documento
 {% load l10n humanize %}
 
 {% block content_title %}
-{{ opts.verbose_name_plural|capfirst }}<small>{{ title }}</small>
+{{ opts.verbose_name_plural|capfirst }}  <small>{{ title }}</small>
 {% endblock content_title %}
 
 {% block content %}
@@ -65,7 +65,6 @@ Descripcion: Lista Tipo Documento
                        title="Eliminar Tipo Documento" rel="tooltip">
                         <i class="btn-icon-only fa fa-trash-o"></i>
                     </a>
-
                 </td>
             </tr>
             {% endfor %}

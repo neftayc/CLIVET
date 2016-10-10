@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     # proyecto
     'apps.clivet',
     'apps.conf',
+    'apps.citas',
 
 
 ]

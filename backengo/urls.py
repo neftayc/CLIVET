@@ -42,6 +42,7 @@ urlpatterns = [
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^jsi18n/', django_views.i18n.javascript_catalog),
     url(r'^conf/', include('apps.conf.urls', namespace='conf')),
+    # url(r'^citas/', include('apps.citas.urls', namespace='citas')),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
