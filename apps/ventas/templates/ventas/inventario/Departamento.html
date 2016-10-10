@@ -5,18 +5,7 @@ Descripcion: Lista Tipo Documento
 -->
 {% load i18n app_security %} {% load l10n humanize %} {% block breadcrumbs %}
 <a href="{# url 'accounts:index' #}">{% trans 'Home' %}</a> &rsaquo; {{ title }} {% endblock breadcrumbs %} {% block content_title %} {{ opts.verbose_name_plural|capfirst }} | <small>{{ title }}</small> {% endblock content_title %} {% block content %}
-<script type="text/javascript">
-$(function() {
-    $('table').kgrid({
-        form_data: ['{{f}}', '{{q}}'],
-        form_to: '{% url '
-        ventas: departamento_list ' %}?f={{f}}&q={{q}}',
-        order_attr: 'class=""',
-        order_to: '{% url '
-        ventas: departamento_list ' %}?f={{f}}&q={{q}}',
-    });
-});
-</script>
+
 <div class="btn-toolbar btn-toolbar-top">
     <div class="row">
         <div class="btn-actions">
