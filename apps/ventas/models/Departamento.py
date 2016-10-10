@@ -1,8 +1,7 @@
 from django.db import models
-from TimeStampedModel import TimeStampedModel
 
 
-class Departamento(TimeStampedModel):
+class Departamento(models.Model):
     descripcion = models.CharField(max_length=100, unique=True)
 
     class Meta:

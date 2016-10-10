@@ -1,9 +1,8 @@
 from django.db import models
-from TimeStampedModel import TimeStampedModel
 from Departamento import Departamento
 
 
-class Categoria(TimeStampedModel):
+class Categoria(models.Model):
     descripcion = models.CharField(max_length=50, unique=True)
     departamento = models.ForeignKey(Departamento)
 
