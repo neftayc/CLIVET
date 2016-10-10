@@ -1,7 +1,8 @@
 {%  extends "base.html" %}
+{% load i18n app_security %}
+{% load l10n humanize %}
 
 {% block title %}CLIVET{% endblock title %}
-
 {% block contentroot %}
 
 <!-- Navigation -->
@@ -9,13 +10,18 @@
 {% include "clivet/partials/header.html" %}
 {% include "clivet/partials/aside.html" %}
 </nav>
+<div class="container">
+  <div class="page-header">
+    <h1>{% block content_title %}{% endblock content_title %}</h3>
+  </div>
+  {% block messages %}
+  {% load notify %}
+  {% get_notify request %}
+  {% endblock messages %}
 
-<div id="page-wrapper">
-{% block content %}
+  {% block content %}{% endblock content %}
+  {% block sidebar %}{% endblock sidebar %}
 
-
-
-{% endblock content %}
+  
 </div>
-<!-- /#page-wrapper -->
 {% endblock contentroot %}
