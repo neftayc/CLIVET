@@ -36,7 +36,7 @@ urlpatterns = [
     url(r'^accounts/', include('apps.accounts.urls')),
 
     url(r'^clivet/', include('apps.clivet.urls', namespace='clivet')),
-    url(r'^ventas/', include('apps.ventas.urls', namespace='Ventas')),
+    url(r'^', include('apps.ventas.urls', namespace='ventas')),
     url(r'^conf/', include('apps.conf.urls', namespace="conf")),
 
 

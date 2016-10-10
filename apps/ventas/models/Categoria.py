@@ -1,10 +1,10 @@
 from django.db import models
-from Departamento import Departamento
+from ..models.Departamento import Departamento
 
 
 class Categoria(models.Model):
     descripcion = models.CharField(max_length=50, unique=True)
-    departamento = models.ForeignKey(Departamento)
+    departamento = models.ForeignKey(Departamento, null=False, blank=False)
 
     class Meta:
         verbose_name = "Categoria"

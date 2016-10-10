@@ -1,8 +1,7 @@
 from django.db import models
-from TimeStampedModel import TimeStampedModel
 
 
-class UnidadMedida(TimeStampedModel):
+class UnidadMedida(models.Model):
     nombre = models.CharField(max_length=50, unique=True)
     simbolo = models.CharField(max_length=10, unique=True)
 
