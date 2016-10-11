@@ -11,9 +11,9 @@
 <div class="btn-toolbar btn-toolbar-top">
     <div class="row">
         <div class="btn-actions">
-            <a href="{% url 'clivet:cliente_add' %}"
+            <a href="{% url 'clivet:persona_add' %}"
                class="btn btn-primary text-bold"
-               title="Agregar Cliente">
+               title="Agregar Persona">
                 <i class="fa fa-plus"></i>
                 <span class="hidden-xs"> Agregar</span>
             </a>
@@ -40,25 +40,25 @@
                     {{ forloop.counter }}
                     {% endif %}
                 </td>
-                <td>{{ d.persona.first_name }} {{d.persona.last_name}}</td>
-                <td>{{ d.persona.identity_type }}</td>
-                <td>{{ d.persona.identity_num }}</td>
+                <td>{{ d.first_name }} {{d.last_name}}</td>
+                <td>{{ d.identity_type }}</td>
+                <td>{{ d.identity_num }}</td>
 
                 <td class="text-center">
 
-                    <a href="{% url 'clivet:cliente_upd' d.pk|key:'doc_upd' %}"
+                    <a href="{% url 'clivet:persona_upd' d.pk|key:'doc_upd' %}"
                        class="btn btn-info btn-sm text-bold"
-                       title="Cambiar Cliente"
+                       title="Cambiar Persona"
                        rel="tooltip">
                         <i class="btn-icon-only fa fa-edit"></i>
                     </a>
 
-                    <a href="{% url 'clivet:cliente_del' d.pk|key:'doc_del' %}"
+                    <a href="{% url 'clivet:persona_del' d.pk|key:'doc_del' %}"
                        class="btn btn-danger btn-sm js-confirm text-bold"
-                       msg-title="Eliminar Cliente?."
+                       msg-title="Eliminar Persona?."
                        msg="Esta Seguro
                        <br/>Recuerde esta operación no puede revertirse"
-                       title="Eliminar Cliente" rel="tooltip">
+                       title="Eliminar Persona" rel="tooltip">
                         <i class="btn-icon-only fa fa-trash-o"></i>
                     </a>
                 </td>

@@ -61,8 +61,8 @@ class TrabajadorListView(ListView):
                         self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
         # context['cmi'] = 'menu' #  Validacion de manual del menu
-        context['title'] = ('Seleccione %s para cambiar'
-                            ) % capfirst('trabajador')
+        context['title'] = ('Seleccione %s para editar'
+                            ) % capfirst('Trabajador')
 
         context['o'] = self.o
         context['f'] = self.f
@@ -95,7 +95,7 @@ class TrabajadorCreateView(CreateView):
                         self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
         # context['cmi'] = 'tipodoc'
-        context['title'] = ('Agregar %s') % ('trabajador')
+        context['title'] = ('Agregar %s') % ('Trabajador')
         return context
 
     def form_valid(self, form):
@@ -144,7 +144,7 @@ class TrabajadorUpdateView(UpdateView):
                         self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
         # context['cmi'] = 'empresa'
-        context['title'] = ('Actualizar %s') % ('trabajador')
+        context['title'] = ('Actualizar %s') % ('Trabajador')
         return context
 
     def form_valid(self, form):
@@ -210,7 +210,7 @@ class TrabajadorDeleteView(DeleteView):
 
             d.delete()
             msg = _(
-                ' %(name)s "%(obj)s" fuel eliminado satisfactorialmente.') % {
+                ' %(name)s "%(obj)s" fue eliminado satisfactorialmente.') % {
                 'name': capfirst(force_text(self.model._meta.verbose_name)),
                 'obj': force_text(d)
             }
@@ -224,3 +224,4 @@ class TrabajadorDeleteView(DeleteView):
 
     def get(self, request, *args, **kwargs):
         """Empresa Delete View get."""
+        return self.delete(request, *args, **kwargs)

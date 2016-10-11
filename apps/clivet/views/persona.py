@@ -1,4 +1,4 @@
-u"""Módulo View Cliente."""
+u"""Módulo View Persona."""
 
 from apps.utils.decorators import permission_resource_required
 from apps.utils.forms import empty
@@ -15,24 +15,24 @@ from django.utils.translation import ugettext as _
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 
-from ..models.cliente import Cliente
-from ..forms.cliente import ClienteForm
+from apps.params.models import Person
+from ..forms.persona import PersonaForm
 
 import logging
 log = logging.getLogger(__name__)
 
 
-class ClienteListView(ListView):
+class PersonaListView(ListView):
     u"""Tipo Documento Identidad."""
 
-    model = Cliente
+    model = Person
     paginate_by = settings.PER_PAGE
-    template_name = "clivet/cliente/index.html"
+    template_name = "clivet/persona/index.html"
 
     @method_decorator(permission_resource_required)
     def dispatch(self, request, *args, **kwargs):
         """dispatch."""
-        return super(ClienteListView,
+        return super(PersonaListView,
                      self).dispatch(request, *args, **kwargs)
 
     def get_paginate_by(self, queryset):
@@ -44,7 +44,7 @@ class ClienteListView(ListView):
     def get_queryset(self):
         """Tipo Doc List Queryset."""
         self.o = empty(self.request, 'o', '-id')
-        self.f = empty(self.request, 'f', 'persona__first_name')
+        self.f = empty(self.request, 'f', 'first_name')
         self.q = empty(self.request, 'q', '')
         column_contains = u'%s__%s' % (self.f, 'contains')
 
@@ -57,12 +57,12 @@ class ClienteListView(ListView):
 
         Funcion con los primeros datos iniciales para la carga del template.
         """
-        context = super(ClienteListView,
+        context = super(PersonaListView,
                         self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
         # context['cmi'] = 'menu' #  Validacion de manual del menu
         context['title'] = ('Seleccione %s para editar'
-                            ) % capfirst('Cliente')
+                            ) % capfirst('Persona')
 
         context['o'] = self.o
         context['f'] = self.f
@@ -71,18 +71,18 @@ class ClienteListView(ListView):
         return context
 
 
-class ClienteCreateView(CreateView):
+class PersonaCreateView(CreateView):
     u"""Tipo Documento Identidad."""
 
-    model = Cliente
-    form_class = ClienteForm
-    template_name = "clivet/cliente/form.html"
-    success_url = reverse_lazy("clivet:cliente_list")
+    model = Person
+    form_class = PersonaForm
+    template_name = "clivet/persona/form.html"
+    success_url = reverse_lazy("clivet:persona_list")
 
     @method_decorator(permission_resource_required)
     def dispatch(self, request, *args, **kwargs):
         """dispatch."""
-        return super(ClienteCreateView,
+        return super(PersonaCreateView,
                      self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
@@ -91,11 +91,11 @@ class ClienteCreateView(CreateView):
 
         Funcion con los primeros datos iniciales para la carga del template.
         """
-        context = super(ClienteCreateView,
+        context = super(PersonaCreateView,
                         self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
         # context['cmi'] = 'tipodoc'
-        context['title'] = ('Agregar %s') % ('Cliente')
+        context['title'] = ('Agregar %s') % ('Persona')
         return context
 
     def form_valid(self, form):
@@ -109,16 +109,16 @@ class ClienteCreateView(CreateView):
 
         messages.success(self.request, msg)
         log.warning(msg, extra=log_params(self.request))
-        return super(ClienteCreateView, self).form_valid(form)
+        return super(PersonaCreateView, self).form_valid(form)
 
 
-class ClienteUpdateView(UpdateView):
+class PersonaUpdateView(UpdateView):
     """Tipo Documento Update View."""
 
-    model = Cliente
-    form_class = ClienteForm
-    template_name = "clivet/cliente/form.html"
-    success_url = reverse_lazy("clivet:cliente_list")
+    model = Person
+    form_class = PersonaForm
+    template_name = "clivet/persona/form.html"
+    success_url = reverse_lazy("clivet:persona_list")
 
     @method_decorator(permission_resource_required)
     def dispatch(self, request, *args, **kwargs):
@@ -135,16 +135,16 @@ class ClienteUpdateView(UpdateView):
             log.warning(force_text(e), extra=log_params(self.request))
             return HttpResponseRedirect(self.success_url)
 
-        return super(ClienteUpdateView,
+        return super(PersonaUpdateView,
                      self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         """Tipo Documento Update View context data."""
-        context = super(ClienteUpdateView,
+        context = super(PersonaUpdateView,
                         self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
         # context['cmi'] = 'empresa'
-        context['title'] = ('Actualizar %s') % ('Cliente')
+        context['title'] = ('Actualizar %s') % ('Persona')
         return context
 
     def form_valid(self, form):
@@ -160,14 +160,14 @@ class ClienteUpdateView(UpdateView):
         if self.object.id:
             messages.success(self.request, msg)
             log.warning(msg, extra=log_params(self.request))
-        return super(ClienteUpdateView, self).form_valid(form)
+        return super(PersonaUpdateView, self).form_valid(form)
 
 
-class ClienteDeleteView(DeleteView):
+class PersonaDeleteView(DeleteView):
     """Empresa Delete View."""
 
-    model = Cliente
-    success_url = reverse_lazy('clivet:cliente_list')
+    model = Person
+    success_url = reverse_lazy('clivet:persona_list')
 
     @method_decorator(permission_resource_required)
     def dispatch(self, request, *args, **kwargs):
@@ -183,7 +183,7 @@ class ClienteDeleteView(DeleteView):
             messages.error(self.request, e)
             log.warning(force_text(e), extra=log_params(self.request))
             return HttpResponseRedirect(self.success_url)
-        return super(ClienteDeleteView,
+        return super(PersonaDeleteView,
                      self).dispatch(request, *args, **kwargs)
 
     def delete(self, request, *args, **kwargs):

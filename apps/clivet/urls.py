@@ -8,6 +8,10 @@ from .views.cliente import (
     ClienteListView, ClienteCreateView, ClienteUpdateView,
     ClienteDeleteView
 )
+from .views.persona import (
+    PersonaListView, PersonaCreateView, PersonaUpdateView,
+    PersonaDeleteView
+)
 
 urlpatterns = [
     url(r'^clivet', clivet, name='clivet'),
@@ -29,4 +33,13 @@ urlpatterns = [
         name="cliente_upd"),
     url(r'^cliente/eliminar/(?P<pk>.*)/$', ClienteDeleteView.as_view(),
         name="cliente_del"),
+    # ===================CLIENTE==========================
+    url(r'^persona/listar/$', PersonaListView.as_view(),
+        name="persona_list"),
+    url(r'^persona/crear/$', PersonaCreateView.as_view(),
+        name="persona_add"),
+    url(r'^persona/actualizar/(?P<pk>.*)/$', PersonaUpdateView.as_view(),
+        name="persona_upd"),
+    url(r'^persona/eliminar/(?P<pk>.*)/$', PersonaDeleteView.as_view(),
+        name="persona_del"),
 ]
