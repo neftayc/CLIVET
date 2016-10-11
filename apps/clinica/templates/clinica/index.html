@@ -1,4 +1,4 @@
-{% extends "clivet/clivet.html" %}
+{% extends "clivet/dashboard.html" %}
 <!--
 @package     conf
 Descripcion: Lista Tipo Documento
@@ -16,11 +16,22 @@ Descripcion: Lista Tipo Documento
 {% endblock content_title %}
 
 {% block content %}
+
+<script type="text/javascript">
+    $(function() {
+        $('table').kgrid({
+            form_data : ['{{f}}', '{{q}}'],
+            form_to   : '{% url 'clinica:listar_mascotas' %}?f={{f}}&q={{q}}',
+            order_attr: 'class=""',
+            order_to  : '{% url 'clinica:listar_mascotas' %}?f={{f}}&q={{q}}',
+        });
+    });
+</script>
+
 <div class="btn-toolbar btn-toolbar-top">
     <div class="row">
         <div class="btn-actions">
-            <a class="btn btn-primary text-bold"
-               title="Agregar Tipo Documento Identidad">
+            <a href="{% url 'clinica:crear_mascota' %}" class="btn btn-primary text-bold" title="Agregar Tipo Documento Identidad">
                 <i class="fa fa-plus"></i>
                 <span class="hidden-xs"> Agregar</span>
             </a>
@@ -61,22 +72,20 @@ Descripcion: Lista Tipo Documento
 
                 <td class="text-center">
 
-                    <a class="btn btn-warning btn-sm text-bold"
+                    <a href="http://127.0.0.1:8000/clinica/atencion/historial/" class="btn btn-warning btn-sm text-bold"
                        title="Ver el Perfil de Mascota"
                        rel="tooltip">
                         <i class="btn-icon-only fa fa-paw"></i>
                     </a>
-                    <a class="btn btn-success btn-sm text-bold"
+                    <a href="" class="btn btn-success btn-sm text-bold"
                        title="Ir al Historial"
                        rel="tooltip">
                         <i class="btn-icon-only fa fa-hospital-o"></i>
                     </a>
-                    <a class="btn btn-info btn-sm text-bold"
-                       title="Ediatar datos de la Mascota"
-                       rel="tooltip">
+                    <a href="{% url 'clinica:actualizar_mascota' d.pk|key:'doc_upd' %}" class="btn btn-info btn-sm text-bold" title="Ediatar datos de la Mascota" rel="tooltip">
                         <i class="btn-icon-only fa fa-edit"></i>
                     </a>
-                    <a class="btn btn-danger btn-sm js-confirm text-bold"
+                    <a href="{% url 'clinica:eliminar_mascota' d.pk|key:'doc_del' %}" class="btn btn-danger btn-sm js-confirm text-bold"
                        msg-title="Eliminar Documento Identidad?."
                        msg="Esta Seguro
                        <br/>Recuerde esta operación no puede revertirse"

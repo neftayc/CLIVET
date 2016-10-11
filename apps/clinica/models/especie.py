@@ -8,8 +8,12 @@ class Especie(models.Model):
 
     descripcion = models.CharField(max_length=100)
 
+    class Meta:
+        verbose_name = "Especie"
+        verbose_name_plural = "Especies"
+
     def __str__(self):
-        return self.descripcion
+        return "%s" % (self.descripcion)
 
 """
 class Autor(models.Model):

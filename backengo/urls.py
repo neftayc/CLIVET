@@ -36,14 +36,13 @@ urlpatterns = [
     url(r'^accounts/', include('apps.accounts.urls')),
 
     url(r'^clivet/', include('apps.clivet.urls', namespace='clivet')),
-    url(r'^clinica/', include('apps.clinica.urls', namespace='clinica')),
 
 
     # http://stackoverflow.com/questions/19625102/django-javascript-translation-not-working
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^jsi18n/', django_views.i18n.javascript_catalog),
 
-
+    url(r'^clinica/', include('apps.clinica.urls', namespace='clinica')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # https://docs.djangoproject.com/en/1.6/ref/views/

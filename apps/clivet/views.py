@@ -12,4 +12,4 @@ from .models import Vacuna
 # Create your views here.
 def clivet(request):
     vacuna = Vacuna.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-    return render(request, 'clivet/clivet.html', {'vacuna': vacuna})
+    return render(request, 'clivet/dashboard.html', {'vacuna': vacuna})
