@@ -10,6 +10,7 @@
   {% endblock extrahead %}
   <title>{% block title %}base{% endblock title %}</title>
 
+
   <link href="{% static 'bootstrap-3.1.1-dist/css/bootstrap.min.css' %}" rel="stylesheet">
   <link href="{% static 'bootstrap-3.1.1-dist/css/bootstrap-theme.min.css' %}" rel="stylesheet">
 
@@ -23,7 +24,7 @@
   {% endblock extrastyle %}
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-  <script src="{% static 'jquery/jquery.min.js' %}"></script> 
+  <script src="{% static 'jquery/jquery.min.js' %}"></script>
   {% block headjs %}
   {% endblock headjs %}
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -36,7 +37,7 @@
 <body>
   {% block header %}
   {% endblock header %}
-  
+
   {% block rootcontainer %}
   {% endblock rootcontainer %}
 
@@ -46,7 +47,7 @@
   <!-- Le javascript
   ================================================== -->
   <script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
-  
+
   <script src="{% static 'bootstrap-3.1.1-dist/js/bootstrap.min.js' %}"></script>
 
   <!-- http://www.jsdelivr.com/#!momentjs http://momentjs.com/timezone/-->

@@ -7,26 +7,15 @@ Descripcion: Lista Tipo Documento
 {% load l10n humanize %}
 
 {% block breadcrumbs %}
-<a href="{# url 'accounts:index' #}">{% trans 'Home' %}</a>
-&rsaquo; {{ title }}
+<a href="{# url 'accounts:index' #}"><i class="fa fa-home"></i> {% trans 'Home' %}</a>
+&rsaquo;&rsaquo; {{ opts.verbose_name_plural|capfirst }}
 {% endblock breadcrumbs %}
 
 {% block content_title %}
-{{ opts.verbose_name_plural|capfirst }} | <small>{{ title }}</small>
+<h3><i class="fa fa-paw"></i> Listado de {{ opts.verbose_name_plural|capfirst }} | <small>{{ title }}</small></h3>
 {% endblock content_title %}
 
 {% block content %}
-
-<script type="text/javascript">
-    $(function() {
-        $('table').kgrid({
-            form_data : ['{{f}}', '{{q}}'],
-            form_to   : '{% url 'clinica:listar_mascotas' %}?f={{f}}&q={{q}}',
-            order_attr: 'class=""',
-            order_to  : '{% url 'clinica:listar_mascotas' %}?f={{f}}&q={{q}}',
-        });
-    });
-</script>
 
 <div class="btn-toolbar btn-toolbar-top">
     <div class="row">
@@ -38,6 +27,7 @@ Descripcion: Lista Tipo Documento
         </div>
     </div>
 </div>
+
 <div class="container-overflow">
     <table class="table table-bordered table-hover table-striped table-condensed table-responsive">
         <thead>
@@ -85,7 +75,7 @@ Descripcion: Lista Tipo Documento
                     <a href="{% url 'clinica:actualizar_mascota' d.pk|key:'doc_upd' %}" class="btn btn-info btn-sm text-bold" title="Ediatar datos de la Mascota" rel="tooltip">
                         <i class="btn-icon-only fa fa-edit"></i>
                     </a>
-                    <a href="{% url 'clinica:eliminar_mascota' d.pk|key:'doc_del' %}" class="btn btn-danger btn-sm js-confirm text-bold"
+                    <a href="/clinica/{{ d.pk|key:'doc_del' }}" class="btn btn-danger btn-sm js-confirm text-bold"
                        msg-title="Eliminar Documento Identidad?."
                        msg="Esta Seguro
                        <br/>Recuerde esta operación no puede revertirse"

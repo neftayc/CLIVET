@@ -1,9 +1,18 @@
 {%  extends "base.html" %}
+{% load i18n app_security %}
+{% load l10n humanize %}
 
 {% block title %}CLIVET{% endblock title %}
 
-{% block contentroot %}
+  {% block extrastyle %}
+<link href="{% static 'jasny-bootstrap/css/jasny-bootstrap.css' %}" rel="stylesheet">
+<link href="{% static 'custom/css/base.css' %}" rel="stylesheet">
+<link href="{% static 'custom/css/style.css' %}" rel="stylesheet">
+<link href="{% static 'bootstrap-fileinput/css/fileinput.css' %}" rel="stylesheet">
+<link href="{% static 'custom/css/navbar-fixed-top.css' %}" rel="stylesheet">
+  {% endblock extrastyle %}
 
+{% block contentroot %}
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 {% include "clivet/partials/header.html" %}
@@ -12,9 +21,15 @@
 
 <div id="page-wrapper">
     <div class="container-fluid">
+        <div class="page-header">
+            <h2>{% block breadcrumbs %}{% endblock breadcrumbs %}</h2>
+        </div>
+        {% block content_title %}{% endblock content_title %}
+        {% block messages %}
+            {% load notify %}
+            {% get_notify request %}
+        {% endblock messages %}
     {% block content %}
-
-
 
     {% endblock content %}
     </div>
