@@ -185,7 +185,7 @@ class MascotaDeleteView(DeleteView):
                      self).dispatch(request, *args, **kwargs)
 
     def delete(self, request, *args, **kwargs):
-        u"""
+        """
         Empresa Delete View delte.
         Función para eliminar la empresa sobre un metodo que verifica las
         dependencias de que tiene la tabla mostrando un mensaje de validacion.

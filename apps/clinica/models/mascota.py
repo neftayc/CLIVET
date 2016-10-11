@@ -1,4 +1,4 @@
-# _*_ coding: utf-8 _*_
+# coding: utf-8 _*_
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils.text import capfirst

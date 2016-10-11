@@ -1,16 +1,17 @@
 {%  extends "base.html" %}
-{% load i18n app_security %}
-{% load l10n humanize %}
+{% load i18n staticfiles user_menu %}
 
-{% block title %}CLIVET{% endblock title %}
+{% block title %}{{ title }} | {{ site_title|default:_('Backend site admin') }} {% endblock title %}
 
-  {% block extrastyle %}
+{% block extrastyle %}
 <link href="{% static 'jasny-bootstrap/css/jasny-bootstrap.css' %}" rel="stylesheet">
+
 <link href="{% static 'custom/css/base.css' %}" rel="stylesheet">
 <link href="{% static 'custom/css/style.css' %}" rel="stylesheet">
 <link href="{% static 'bootstrap-fileinput/css/fileinput.css' %}" rel="stylesheet">
 <link href="{% static 'custom/css/navbar-fixed-top.css' %}" rel="stylesheet">
-  {% endblock extrastyle %}
+
+{% endblock extrastyle %}
 
 {% block contentroot %}
 <!-- Navigation -->
@@ -36,3 +37,22 @@
 </div>
 <!-- /#page-wrapper -->
 {% endblock contentroot %}
+<div id="loading-content" class="alpha60"></div>
+<div id="spinner" class="preview corner-all shadow-dark"></div>
+
+{% block extrajs %}
+<!--
+<script src="{% static 'jquery/jquery.spinx.js' %}"></script>
+-->
+<script src="{% static 'jasny-bootstrap/js/jasny-bootstrap.js' %}"></script>
+
+<script src="{% static 'custom/js/jquery.kumbiaphp.js' %}"></script>
+<script src="{% static 'custom/js/jquery.kgrid.js' %}"></script>
+<!--
+<script src="{% static 'custom/js/jquery.kloadx.js' %}"></script>
+-->
+<script src="{% static 'custom/js/backend.js' %}"></script>
+<script src="{% static 'custom/js/validador.js' %}"></script>
+<script src="{% static 'custom/js/jquery.keyfilter.js' %}"></script>
+<script src="{% static 'bootstrap-fileinput/js/fileinput.js' %}"></script>
+{% endblock extrajs %}

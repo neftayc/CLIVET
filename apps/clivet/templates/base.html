@@ -2,34 +2,40 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <meta charset="utf-8">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
         <title>{% block title %}{% endblock title %}</title>
-        <link rel="stylesheet" href="{% static 'bootstrap-3.1.1-dist/css/bootstrap.min.css' %}">
+        <link href="{% static 'bootstrap-3.1.1-dist/css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'bootstrap-3.1.1-dist/css/bootstrap-theme.min.css' %}" rel="stylesheet">
+
+        <link href="{% static 'datetimepicker/css/bootstrap-datetimepicker.min.css' %}" rel="stylesheet">
+        <link href="{% static 'typehead/typehead.css' %}" rel="stylesheet">
         <link rel="stylesheet" href="{% static 'bootstrap-3.1.1-dist/css/sb-admin.css' %}">
+
+        <!-- http://fortawesome.github.io/Font-Awesome/icons/-->
         <link href="{% static 'font-awesome-4.2.0/css/font-awesome.min.css' %}" rel="stylesheet">
+
         {% block extrastyle %}
         {% endblock extrastyle %}
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="{% static 'jquery/jquery.min.js' %}"></script>
     </head>
     <body>
         <div id="wrapper">
             {% block contentroot %}
             {% endblock contentroot %}
         </div>
-        <script src="{% static 'jquery/jquery.min.js' %}"></script>
-        <script src="{% static 'bootstrap-3.1.1-dist/js/bootstrap.min.js' %}"></script>
-        <!--
-        <script src="{% static 'jquery/jquery.spinx.js' %}"></script>
-        -->
-        <script src="{% static 'jasny-bootstrap/js/jasny-bootstrap.js' %}"></script>
+        <!-- Le javascript
+        ================================================== -->
+        <script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
 
-        <script src="{% static 'custom/js/jquery.kumbiaphp.js' %}"></script>
-        <script src="{% static 'custom/js/jquery.kgrid.js' %}"></script>
-        <!--
-        <script src="{% static 'custom/js/jquery.kloadx.js' %}"></script>
-        -->
-        <script src="{% static 'custom/js/backend.js' %}"></script>
-        <script src="{% static 'custom/js/validador.js' %}"></script>
-        <script src="{% static 'custom/js/jquery.keyfilter.js' %}"></script>
-        <script src="{% static 'bootstrap-fileinput/js/fileinput.js' %}"></script>
-        {% block js %}{% endblock js %}
+        <script src="{% static 'bootstrap-3.1.1-dist/js/bootstrap.min.js' %}"></script>
+
+        <!-- http://www.jsdelivr.com/#!momentjs http://momentjs.com/timezone/-->
+        <script src="{% static 'moment/moment-with-locales.min.js' %}"></script>
+        <script src="{% static 'datetimepicker/js/bootstrap-datetimepicker.min.js' %}"></script>
+        <script src="{% static 'typehead/bootstrap.typehead.min.js' %}"></script>
+        {% block extrajs %}{% endblock extrajs %}
     </body>
