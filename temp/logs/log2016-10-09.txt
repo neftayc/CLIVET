@@ -1,0 +1,9 @@
+[2016-10-09 19:20:08] [WARNING] [apps.clinica.mascotaviews:215] [/clinica/mascota/eliminar/1.35d774dbf9ee4f01a8217e3f593a0908/] [127.0.0.1] [admin]  Tipo Documenento Identidad "Roky" fuel eliminado satisfactorialmente.
+[2016-10-09 22:07:05] [WARNING] [apps.clinica.mascotaviews:160] [/clinica/mascota/actualizar/2.040f1c6ed3b7072aeb0fd29da10816bd/] [127.0.0.1] [admin] Mascota "0001" fue cambiado satisfacoriamente.
+[2016-10-09 22:07:41] [WARNING] [apps.clinica.mascotaviews:160] [/clinica/mascota/actualizar/2.040f1c6ed3b7072aeb0fd29da10816bd/] [127.0.0.1] [admin] Mascota "0001" fue cambiado satisfacoriamente.
+[2016-10-09 22:09:01] [WARNING] [apps.clinica.mascotaviews:160] [/clinica/mascota/actualizar/2.040f1c6ed3b7072aeb0fd29da10816bd/] [127.0.0.1] [admin] Mascota "0001" fue cambiado satisfacoriamente.
+[2016-10-09 22:09:20] [WARNING] [apps.clinica.mascotaviews:160] [/clinica/mascota/actualizar/2.040f1c6ed3b7072aeb0fd29da10816bd/] [127.0.0.1] [admin] Mascota "0001" fue cambiado satisfacoriamente.
+[2016-10-09 22:10:58] [WARNING] [apps.clinica.mascotaviews:109] [/clinica/mascota/crear/] [127.0.0.1] [admin]  Mascota "0002" fue creado satisfactoriamente.
+[2016-10-09 23:52:13] [WARNING] [apps.clinica.mascotaviews:160] [/clinica/mascota/actualizar/3.ae631687e7ae9c1e058f378023f82022/] [127.0.0.1] [admin] Mascota "0002" fue cambiado satisfacoriamente.
+[2016-10-09 23:52:32] [WARNING] [apps.clinica.mascotaviews:160] [/clinica/mascota/actualizar/3.ae631687e7ae9c1e058f378023f82022/] [127.0.0.1] [admin] Mascota "0002" fue cambiado satisfacoriamente.
+[2016-10-09 23:54:05] [WARNING] [apps.clinica.mascotaviews:109] [/clinica/mascota/crear/] [127.0.0.1] [admin]  Mascota "0003" fue creado satisfactoriamente.

@@ -43,7 +43,7 @@ urlpatterns = [
     url(r'^jsi18n/', django_views.i18n.javascript_catalog),
     url(r'^conf/', include('apps.conf.urls', namespace='conf')),
 
-
+    url(r'^clinica/', include('apps.clinica.urls', namespace='clinica')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # https://docs.djangoproject.com/en/1.6/ref/views/

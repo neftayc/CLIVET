@@ -1,0 +1,45 @@
+{% extends "clivet/dashboard.html" %}
+<!--
+@copyright   Copyright (c) 2014 Submit Consulting
+@author      Angel Sullon (@asullom)
+@package     sad
+Descripcion: Create/Update group
+-->
+{% load i18n crispy_forms_tags %}
+{% load l10n %}
+
+{% block breadcrumbs %}
+<a href="{% url 'accounts:index' %}">Home</a>
+&rsaquo;
+<a href="{% url 'clinica:listar_mascotas' %}">{{opts.verbose_name_plural|capfirst}}</a>
+&rsaquo; {{ title }}
+{% endblock breadcrumbs %}
+
+{% block content_title %}
+{{ opts.verbose_name|capfirst }} | <small>{{ title }}</small>
+{% endblock content_title %}
+
+{% block content %}
+
+    <form class="" action="" method="post">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Registrar los Tipos de Mascota</h4>
+      </div>
+      <div class="modal-body">
+          {% csrf_token %}
+        {{ form }}
+      </div>
+      <div class="modal-footer">
+      <button type="submit" class="btn btn-primary text-bold">
+          <i class="btn-icon-onlyx fa fa-save"></i>
+          <span> Grabar</span>
+      </button>
+      <a href="{% url 'clinica:listar_especie' %}" class="btn btn-danger btn-back text-bol">
+          <i class="btn-icon-onlyx fa fa-ban"></i>
+          <span class="hidden-xs"> Cancel</span>
+      </a>
+      </div>
+    </div><!-- /.modal-content -->
+  </form>
+{% endblock %}

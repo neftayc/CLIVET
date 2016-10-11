@@ -1,0 +1,6 @@
+[2016-10-02 15:59:21] [WARNING] [apps.sad.views:1145] [/sad/module/create/] [127.0.0.1] [admin] Se añadió con éxito el Module "veterinaria (Backend Manager)".
+[2016-10-02 16:00:02] [WARNING] [apps.sad.views:1061] [/sad/module/delete/11.99c978295de6ef5f2557424cd3d6d3f9/] [127.0.0.1] [admin] La eliminación de Module veterinaria (Backend Manager) requeriría eliminar los siguientes objetos relacionados protegidos: 
+[2016-10-02 16:00:10] [WARNING] [apps.sad.views:1012] [/sad/module/state/ina/11.f52a9185d127baf54818c0c3c56cd496/] [127.0.0.1] [admin] The Module "veterinaria (Backend Manager)" was inactivated successfully.
+[2016-10-02 16:00:13] [WARNING] [apps.sad.views:1061] [/sad/module/delete/11.99c978295de6ef5f2557424cd3d6d3f9/] [127.0.0.1] [admin] La eliminación de Module veterinaria (Backend Manager) requeriría eliminar los siguientes objetos relacionados protegidos: 
+[2016-10-02 16:00:27] [WARNING] [apps.sad.views:1114] [/sad/module/update/11.4806e9f73f394dff9ad646d07382da25/] [127.0.0.1] [admin] Se modificó con éxito el Module "veterinaria (Backend Manager)".
+[2016-10-02 16:00:30] [WARNING] [apps.sad.views:1058] [/sad/module/delete/11.99c978295de6ef5f2557424cd3d6d3f9/] [127.0.0.1] [admin] Se eliminó con éxito el Module "veterinaria (Backend Manager)".

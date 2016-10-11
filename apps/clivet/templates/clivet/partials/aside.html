@@ -18,7 +18,15 @@
                 <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Clientes</a>
             </li>
             <li>
-                <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Mascotas</a>
+                <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Mascotas <i class="fa fa-fw fa-caret-down"></i></a>
+                <ul id="demo" class="collapse">
+                    <li>
+                        <a href="{% url 'clinica:listar_mascotas' %}">Lista de Mascotas</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'clinica:crear_especie' %}">Agregar tipos de Mascotas</a>
+                    </li>
+                </ul>
             </li>
             <li>
                 <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Compras</a>
@@ -44,4 +52,4 @@
                 <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> Configuración</a>
             </li>
         </ul>
-    </div>
+</div>
