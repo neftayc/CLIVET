@@ -21,4 +21,4 @@ class TipoDocumentoIdentidadForm(forms.ModelForm):
              'class': 'form-control', 'required': 'true',
              'placeholder': 'Ingrese Descripcion'
          })
-        }
+}

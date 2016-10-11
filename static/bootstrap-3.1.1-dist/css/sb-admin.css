@@ -8,7 +8,10 @@
 
 body {
     margin-top: 100px;
+<<<<<<< HEAD
     /*background-color: #222;*/
+=======
+>>>>>>> cb945a47333e6f611d18d95d4761c966ca5b9584
 }
 
 @media(min-width:768px) {

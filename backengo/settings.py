@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'apps.clivet',
     'apps.conf',
     'apps.clinica',
+    'apps.citas',
 
 
 ]

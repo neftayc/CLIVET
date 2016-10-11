@@ -1,0 +1,28 @@
+{% extends "main/dashboard.html" %}
+{% load l10n %}
+{% load crispy_forms_tags %}
+{% block breadcrumbs %}
+<a href="{% url 'clivet:clivet' %}">Home</a>
+&rsaquo;
+<a href="{% url 'clivet:persona_list' %}">{{opts.verbose_name_plural|capfirst}}</a>
+&rsaquo; {{ title }}
+{% endblock breadcrumbs %}
+
+{% block content_title %}
+{{ opts.verbose_name|capfirst }} | <small>{{ title }}</small>
+{% endblock content_title %}
+
+{% block content %}
+
+ <form action="" method="post">
+    {{ form|crispy}}
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary">Agregar</button>
+    <a href="{% url 'clivet:persona_list' %}" class="btn btn-danger">Cancelar</a>
+    </form>
+
+{% endblock %}
+
+{% block extrajs %}
+{{ block.super }}
+{% endblock extrajs %}

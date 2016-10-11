@@ -51,7 +51,7 @@
             if(data_title==undefined) {
                 data_title = 'Mensaje de confirmación';
             }
-            if ($("#modal_confirmar").size() > 0 ){
+            if ($("#modal_confirmar").length > 0 ){
                 dialogo.empty();
             } else {                
                 dialogo = $('<div id="modal_confirmar" tabindex="-1" role="dialog" aria-labelledby="modal_confirmar" aria-hidden="true"></div>');
