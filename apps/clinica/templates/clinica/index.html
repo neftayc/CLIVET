@@ -7,8 +7,8 @@ Descripcion: Lista Tipo Documento
 {% load l10n humanize %}
 
 {% block breadcrumbs %}
-<a href="{# url 'accounts:index' #}"><i class="fa fa-home"></i> {% trans 'Home' %}</a>
-&rsaquo;&rsaquo; {{ opts.verbose_name_plural|capfirst }}
+<a href="{# url 'accounts:index' #}"><i class="fa fa-home"></i> {% trans 'Home' %} &rsaquo;&rsaquo;</a>
+ {{ opts.verbose_name_plural|capfirst }}
 {% endblock breadcrumbs %}
 
 {% block content_title %}

@@ -7,10 +7,18 @@ from django.db.models import signals
 from unicodedata import normalize
 from django.core.exceptions import ValidationError
 
+
+from apps.clivet.models.cliente import Cliente
+
 CONDICION =(
     ('Buena' , "Buena"),
     ('Regular' , "Regular"),
     ('Demacrada' , "Demacrada")
+)
+TIPO_MASCOTA =(
+    ('Perro' , "Perro"),
+    ('Gato' , "Gato"),
+    ('Roedor' , "Roedor")
 )
 
 BOOL_GENERO= (
@@ -29,10 +37,10 @@ class Mascota(models.Model):
 
     num_historia = models.CharField(capfirst(_('N° Historia')), max_length=10)
     nombre = models.CharField(max_length=100)
-    dueño = models.CharField(max_length=150)
+    dueño = models.ForeignKey(Cliente, default='1')
     fecha_nacimiento = models.DateField(capfirst(_('Fecha Nacimiento')))
     genero = models.CharField(max_length=10, choices=BOOL_GENERO, default='Macho')
-    especie = models.ForeignKey('Especie', default='1')
+    especie = models.CharField(max_length=10, choices=TIPO_MASCOTA, default='Perro')
     raza = models.CharField(max_length=20)
     color = models.CharField(max_length=20)
     cond_corporal = models.CharField(max_length=10, choices=CONDICION, default='Buena')

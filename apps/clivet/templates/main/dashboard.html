@@ -1,5 +1,5 @@
 {%  extends "base.html" %}
-{% load i18n staticfiles user_menu %}
+{% load i18n staticfiles %}
 
 {% block title %}{{ title }} | {{ site_title|default:_('Backend site admin') }} {% endblock title %}
 
@@ -9,7 +9,8 @@
 <link href="{% static 'custom/css/base.css' %}" rel="stylesheet">
 <link href="{% static 'custom/css/style.css' %}" rel="stylesheet">
 <link href="{% static 'bootstrap-fileinput/css/fileinput.css' %}" rel="stylesheet">
-<link href="{% static 'custom/css/navbar-fixed-top.css' %}" rel="stylesheet">
+<link href="{% static 'clivet/style.css' %}" rel="stylesheet">
+
 
 {% endblock extrastyle %}
 
@@ -22,17 +23,67 @@
 
 <div id="page-wrapper">
     <div class="container-fluid">
-        <div class="page-header">
-            <h2>{% block breadcrumbs %}{% endblock breadcrumbs %}</h2>
+        <div class="page-header page-clivet">
+            <p class="title">{% block breadcrumbs %}<a href="{# url 'accounts:index' #}"><i class="fa fa-home"></i> {% trans 'Home' %}&rsaquo;&rsaquo;</a>
+            {% endblock breadcrumbs %}</p>
         </div>
-        {% block content_title %}{% endblock content_title %}
+        {% block content_title %}<p class="escritorio btn-su">Escritorio</p> {% endblock content_title %}
         {% block messages %}
             {% load notify %}
             {% get_notify request %}
         {% endblock messages %}
-    {% block content %}
-
-    {% endblock content %}
+        {% block content %}
+        <div class="row">
+            <div class="col-xs-4 col-md-1 col-md-offset-2">
+                <a href="#" class="thumbnail text-center">
+                    <i class="fa fa-bar-chart fa-5x"></i>
+                    <div class="caption"><span>Recepcion</span></div>
+                </a>
+            </div>
+            <div class="col-xs-4 col-md-1">
+                <a href="#" class="thumbnail text-center btn-info">
+                    <i class="fa fa-stethoscope fa-5x"></i>
+                    <div class="caption"><span>Cola Medica</span></div>
+                </a>
+            </div>
+            <div class="col-xs-4 col-md-1">
+                <a href="{% url 'clinica:listar_mascotas' %}" class="thumbnail text-center btn-success">
+                    <i class="fa fa-github-alt fa-5x"></i>
+                    <div class="caption"><span>Mascotas</span></div>
+                </a>
+            </div>
+            <div class="col-xs-4 col-md-1">
+                <a href="{% url 'ventas:departamento_list' %}" class="thumbnail text-center">
+                    <i class="fa fa-flask fa-5x"></i>
+                    <div class="caption"><span>Inventario</span></div>
+                </a>
+            </div>
+            <div class="col-xs-4 col-md-1">
+                <a href="{% url 'compras:proveedor_list' %}" class="thumbnail text-center btn-info">
+                    <i class="fa fa-car fa-5x"></i>
+                    <div class="caption"><span>Proveedores</span></div>
+                </a>
+            </div>
+            <div class="col-xs-4 col-md-1">
+                <a href="{% url 'clivet:cliente_list' %}" class="thumbnail text-center btn-danger">
+                    <i class="fa fa-users fa-5x"></i>
+                    <div class="caption"><span>Clientes</span></div>
+                </a>
+            </div>
+            <div class="col-xs-4 col-md-1">
+                <a href="#" class="thumbnail text-center btn-warning">
+                    <i class="fa fa-file-text fa-5x"></i>
+                    <div class="caption"><span>Reportes</span></div>
+                </a>
+            </div>
+            <div class="col-xs-4 col-md-1">
+                <a href="#" class="thumbnail text-center btn-success">
+                    <i class="fa fa-calendar fa-5x"></i>
+                    <div class="caption"><span>Agenda</span></div>
+                </a>
+            </div>
+        </div>
+        {% endblock content %}
     </div>
 </div>
 <!-- /#page-wrapper -->

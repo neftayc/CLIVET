@@ -93,7 +93,7 @@ class MascotaCreateView(CreateView):
                         self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
         # context['cmi'] = 'tipodoc'
-        context['title'] = ('Agregar %s') % ('Tipo Documento')
+        context['title'] = ('Agregar %s') % ('Tipo Mascota')
         return context
 
     def form_valid(self, form):
@@ -142,7 +142,7 @@ class MascotaUpdateView(UpdateView):
                         self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
         # context['cmi'] = 'empresa'
-        context['title'] = ('Actualizar %s') % ('Tipo Documento')
+        context['title'] = ('Actualizar %s') % ('Tipo Mascota')
         return context
 
     def form_valid(self, form):

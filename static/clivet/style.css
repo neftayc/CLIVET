@@ -1,12 +1,22 @@
-#global {
-	height: 50vh;
-	overflow-y: scroll;
+ .page-clivet{
+	 margin-top: 8px;
+	 padding-bottom: 0;
+ }
+
+.page-clivet .title{
+	font-size: 20px;
 }
-h1, .h1, h2, .h2, h3, .h3 {
-    margin-top: 10px;
-    margin-bottom: 10px;
+.escritorio{
+	padding: 10px;
+	font-size: 40px;
+	margin-left: 2em;
+	color: #428bca;
+	font-weight: bold;
 }
-hr{
-    margin-top: 10px;
-    margin-bottom: 10px;
+
+.tipo-user{
+	color: #fff !important;
+	font-weight: bold;
+	font-size: 1.2em;
+	margin-left: 8em;
 }

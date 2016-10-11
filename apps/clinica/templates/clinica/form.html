@@ -9,22 +9,17 @@ Descripcion: Create/Update group
 {% load l10n %}
 
 {% block breadcrumbs %}
-<a href="{% url 'accounts:index' %}">Home</a>
-&rsaquo;
+<a href="{% url 'accounts:index' %}"><i class="fa fa-home"></i> {% trans 'Home' %} &rsaquo;&rsaquo;</a>
 <a href="{% url 'clinica:listar_mascotas' %}">{{opts.verbose_name_plural|capfirst}}</a>
 &rsaquo; {{ title }}
 {% endblock breadcrumbs %}
 
 {% block content_title %}
-{{ opts.verbose_name|capfirst }} | <small>{{ title }}</small>
+<h3><i class="fa fa-paw"></i>{{ opts.verbose_name|capfirst }} | <small>{{ title }}</small></h3>
 {% endblock content_title %}
 
 {% block content %}
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h4 class="panel-title">Nueva Mascota</h4>
-    </div>
-    <div class="panel-body">
+<hr>
         <form action="" method="post" class="form-horizontal"> {% csrf_token %}
             <div class="row">
                 <div class="col-xm-12 col-md-6">
@@ -118,8 +113,6 @@ Descripcion: Create/Update group
                 </div>
             </div>
         </form>
-    </div>
-</div>
 {% endblock %}
 
 {% block extrajs %}

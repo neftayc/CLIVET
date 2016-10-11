@@ -3,8 +3,8 @@ body {
   padding-top: 50px;
   padding-bottom: 30px;
 }
-.navbar, footer {    
-  font-family: Play,Lucila,Verdana,sans-serif; 
+.navbar, footer {
+  font-family: Play,Lucila,Verdana,sans-serif;
 }
 
 
@@ -42,7 +42,7 @@ body {
   position: absolute;
 
   padding: 8px 0;
-  
+
 }
 
 @media (max-width:767px) {
@@ -50,7 +50,7 @@ body {
     position: relative;
     float: right;
     padding: 8px 0;
-    
+
   }
 
 }
@@ -96,12 +96,12 @@ body {
 }
 
 @media (max-width:767px) {
-  .navbar-inverse li.divider { 
-    border-bottom: #101010 2px solid; box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1) inset, 0 1px 0 rgba(255, 255, 255, 0.1);  margin: 9px 0; overflow: hidden; 
+  .navbar-inverse li.divider {
+    border-bottom: #101010 2px solid; box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1) inset, 0 1px 0 rgba(255, 255, 255, 0.1);  margin: 9px 0; overflow: hidden;
   }
 
-  .navbar-inverse .dropdown li.divider { 
-    border-bottom: #101010 1px solid; box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1) inset, 0 1px 0 rgba(255, 255, 255, 0.1);  margin: 9px 0; overflow: hidden; 
+  .navbar-inverse .dropdown li.divider {
+    border-bottom: #101010 1px solid; box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1) inset, 0 1px 0 rgba(255, 255, 255, 0.1);  margin: 9px 0; overflow: hidden;
   }
 
   .fixed-bottom {
@@ -114,8 +114,8 @@ body {
 
   }
 
-  .btn-icon-only { 
-    padding-left: 12px; padding-right: 12px; font-size: 15px; 
+  .btn-icon-only {
+    padding-left: 12px; padding-right: 12px; font-size: 15px;
   }
 
 }
@@ -156,7 +156,7 @@ div.breadcrumbs {
     padding: 12px 0px 0px 0px;
 }
 
-.tablex td a i{ 
+.tablex td a i{
   width: 20px;
   height: auto;
   padding: 0;
@@ -176,5 +176,3 @@ div.breadcrumbs {
 .navbar-brand2 a {
 color: #fff;
 }
-
-

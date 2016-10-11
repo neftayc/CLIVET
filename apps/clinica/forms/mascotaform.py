@@ -18,9 +18,8 @@ class MascotaForm(forms.ModelForm):
              'class': 'form-control', 'required': 'true',
              'placeholder': 'Nombre del Paciente'
          }),
-         'dueño': forms.TextInput(attrs={
-             'class': 'form-control', 'required': 'true',
-             'placeholder': 'Ingrese al Dueño del Paciente'
+         'dueño': forms.Select(attrs={
+         'class':"form-control", 'required': 'true'
          }),
          'fecha_nacimiento': forms.DateInput(format='%d/%m/%Y', attrs={'class': 'form-control', 'required': 'False',
          'placeholder': 'formato: dd/mm/yy'
