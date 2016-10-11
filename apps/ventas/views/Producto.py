@@ -118,7 +118,7 @@ class ProductoUpdateView(UpdateView):
     model = Producto
     form_class = ProductoForm
     template_name = "ventas/inventario/formProducto.html"
-    success_url = reverse_lazy("ventas:productos_list")
+    success_url = reverse_lazy("ventas:producto_list")
 
     @method_decorator(permission_resource_required)
     def dispatch(self, request, *args, **kwargs):
