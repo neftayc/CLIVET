@@ -15,24 +15,24 @@ from django.utils.translation import ugettext as _
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 
-from ..models.Departamento import Departamento
-from ..forms.Departamento import DepartamentoForm
+from ..models.Producto import Producto
+from ..forms.Producto import ProductoForm
 
 import logging
 log = logging.getLogger(__name__)
 
 
-class DepartamentoListView(ListView):
+class ProductoListView(ListView):
     u"""Tipo Documento Identidad."""
 
-    model = Departamento
+    model = Producto
     paginate_by = settings.PER_PAGE
-    template_name = "ventas/inventario/Departamento.html"
+    template_name = "ventas/inventario/Producto.html"
 
     @method_decorator(permission_resource_required)
     def dispatch(self, request, *args, **kwargs):
         """dispatch."""
-        return super(DepartamentoListView,
+        return super(ProductoListView,
                      self).dispatch(request, *args, **kwargs)
 
     def get_paginate_by(self, queryset):
@@ -44,7 +44,7 @@ class DepartamentoListView(ListView):
     def get_queryset(self):
         """Tipo Doc List Queryset."""
         self.o = empty(self.request, 'o', '-id')
-        self.f = empty(self.request, 'f', 'descripcion')
+        self.f = empty(self.request, 'f', 'nombre')
         self.q = empty(self.request, 'q', '')
         column_contains = u'%s__%s' % (self.f, 'contains')
 
@@ -57,12 +57,12 @@ class DepartamentoListView(ListView):
 
         Funcion con los primeros datos iniciales para la carga del template.
         """
-        context = super(DepartamentoListView,
+        context = super(ProductoListView,
                         self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
         # context['cmi'] = 'menu' #  Validacion de manual del menu
         context['title'] = ('Seleccione %s para cambiar'
-                            ) % capfirst('Tipo Departamento')
+                            ) % capfirst('Producto')
 
         context['o'] = self.o
         context['f'] = self.f
@@ -71,18 +71,18 @@ class DepartamentoListView(ListView):
         return context
 
 
-class DepartamentoCreateView(CreateView):
+class ProductoCreateView(CreateView):
     u"""Tipo Documento Identidad."""
 
-    model = Departamento
-    form_class = DepartamentoForm
-    template_name = "ventas/inventario/formDepartamento.html"
-    success_url = reverse_lazy("ventas:departamento_list")
+    model = Producto
+    form_class = ProductoForm
+    template_name = "ventas/inventario/formProducto.html"
+    success_url = reverse_lazy("ventas:producto_list")
 
     @method_decorator(permission_resource_required)
     def dispatch(self, request, *args, **kwargs):
         """dispatch."""
-        return super(DepartamentoCreateView,
+        return super(ProductoCreateView,
                      self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
@@ -91,11 +91,11 @@ class DepartamentoCreateView(CreateView):
 
         Funcion con los primeros datos iniciales para la carga del template.
         """
-        context = super(DepartamentoCreateView,
+        context = super(ProductoCreateView,
                         self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
         # context['cmi'] = 'tipodoc'
-        context['title'] = ('Agregar %s') % ('Departamento')
+        context['title'] = ('Agregar %s') % ('Producto')
         return context
 
     def form_valid(self, form):
@@ -109,22 +109,22 @@ class DepartamentoCreateView(CreateView):
 
         messages.success(self.request, msg)
         log.warning(msg, extra=log_params(self.request))
-        return super(DepartamentoCreateView, self).form_valid(form)
+        return super(ProductoCreateView, self).form_valid(form)
 
 
-class DepartamentoUpdateView(UpdateView):
+class ProductoUpdateView(UpdateView):
     """Tipo Documento Update View."""
 
-    model = Departamento
-    form_class = DepartamentoForm
-    template_name = "ventas/inventario/formDepartamento.html"
-    success_url = reverse_lazy("ventas:departamento_list")
+    model = Producto
+    form_class = ProductoForm
+    template_name = "ventas/inventario/formProducto.html"
+    success_url = reverse_lazy("ventas:productos_list")
 
     @method_decorator(permission_resource_required)
     def dispatch(self, request, *args, **kwargs):
         """Tipo Documento Create View dispatch."""
         key = self.kwargs.get(self.pk_url_kwarg, None)
-        pk = SecurityKey.is_valid_key(request, key, 'dep_upd')
+        pk = SecurityKey.is_valid_key(request, key, 'pro_upd')
         if not pk:
             return HttpResponseRedirect(self.success_url)
         self.kwargs['pk'] = pk
@@ -135,16 +135,16 @@ class DepartamentoUpdateView(UpdateView):
             log.warning(force_text(e), extra=log_params(self.request))
             return HttpResponseRedirect(self.success_url)
 
-        return super(DepartamentoUpdateView,
+        return super(ProductoUpdateView,
                      self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         """Tipo Documento Update View context data."""
-        context = super(DepartamentoUpdateView,
+        context = super(ProductoUpdateView,
                         self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
         # context['cmi'] = 'empresa'
-        context['title'] = ('Actualizar %s') % ('Tipo Departamento')
+        context['title'] = ('Actualizar %s') % ('Producto')
         return context
 
     def form_valid(self, form):
@@ -160,20 +160,20 @@ class DepartamentoUpdateView(UpdateView):
         if self.object.id:
             messages.success(self.request, msg)
             log.warning(msg, extra=log_params(self.request))
-        return super(DepartamentoUpdateView, self).form_valid(form)
+        return super(ProductoUpdateView, self).form_valid(form)
 
 
-class DepartamentoDeleteView(DeleteView):
+class ProductoDeleteView(DeleteView):
     """Empresa Delete View."""
 
-    model = Departamento
-    success_url = reverse_lazy('ventas:departamento_list')
+    model = Producto
+    success_url = reverse_lazy('ventas:producto_list')
 
     @method_decorator(permission_resource_required)
     def dispatch(self, request, *args, **kwargs):
         """Empresa Delete View dispatch."""
         key = self.kwargs['pk']
-        pk = SecurityKey.is_valid_key(request, key, 'dep_del')
+        pk = SecurityKey.is_valid_key(request, key, 'pro_del')
         if not pk:
             return HttpResponseRedirect(self.success_url)
         self.kwargs['pk'] = pk
@@ -183,7 +183,7 @@ class DepartamentoDeleteView(DeleteView):
             messages.error(self.request, e)
             log.warning(force_text(e), extra=log_params(self.request))
             return HttpResponseRedirect(self.success_url)
-        return super(DepartamentoDeleteView,
+        return super(ProductoDeleteView,
                      self).dispatch(request, *args, **kwargs)
 
     def delete(self, request, *args, **kwargs):

@@ -1,4 +1,4 @@
-u"""Módulo View Tipo Documento."""
+u"""Módulo View Categoria"""
 
 from apps.utils.decorators import permission_resource_required
 from apps.utils.forms import empty
@@ -17,7 +17,7 @@ from django.views.generic.list import ListView
 
 
 from ..models.Categoria import Categoria
-from ..Forms.Categoria import CategoriaForm
+from ..forms.Categoria import CategoriaForm
 
 import logging
 log = logging.getLogger(__name__)
@@ -125,7 +125,7 @@ class CategoriaUpdateView(UpdateView):
     def dispatch(self, request, *args, **kwargs):
         """Tipo Documento Create View dispatch."""
         key = self.kwargs.get(self.pk_url_kwarg, None)
-        pk = SecurityKey.is_valid_key(request, key, 'dep_upd')
+        pk = SecurityKey.is_valid_key(request, key, 'cat_upd')
         if not pk:
             return HttpResponseRedirect(self.success_url)
         self.kwargs['pk'] = pk
@@ -167,14 +167,14 @@ class CategoriaUpdateView(UpdateView):
 class CategoriaDeleteView(DeleteView):
     """Empresa Delete View."""
 
-    model = Departamento
-    success_url = reverse_lazy('ventas:departamento_list')
+    model = Categoria
+    success_url = reverse_lazy('ventas:categoria_list')
 
     @method_decorator(permission_resource_required)
     def dispatch(self, request, *args, **kwargs):
         """Empresa Delete View dispatch."""
         key = self.kwargs['pk']
-        pk = SecurityKey.is_valid_key(request, key, 'dep_del')
+        pk = SecurityKey.is_valid_key(request, key, 'cat_del')
         if not pk:
             return HttpResponseRedirect(self.success_url)
         self.kwargs['pk'] = pk
