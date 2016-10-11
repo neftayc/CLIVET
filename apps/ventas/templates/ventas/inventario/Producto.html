@@ -1,0 +1,77 @@
+{% extends "main/dashboard.html" %}
+<!--
+@package     ventas
+producto: Lista Productos
+-->
+{% load i18n app_security %} {% load l10n humanize %} {% block breadcrumbs %}
+<a href="{# url 'accounts:index' #}">{% trans 'Home' %}</a> &rsaquo; {{ title }} {% endblock breadcrumbs %} {% block content_title %} {{ opts.verbose_name_plural|capfirst }} | <small>{{ title }}</small> {% endblock content_title %} {% block content %}
+<div class="btn-toolbar btn-toolbar-top">
+    <div class="row">
+        <div class="btn-actions">
+            <a href="{% url 'ventas:producto_add' %}" class="btn btn-primary text-bold" title="Agregar producto">
+                <i class="fa fa-plus"></i>
+                <span class="hidden-xs"> Agregar</span>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="container-overflow">
+    <table class="table table-bordered table-hover table-striped table-condensed table-responsive">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th class="col-hidden" data-search="nombre" data-order="nombre">Nombre</th>
+                <th class="col-hidden" data-search="codigo" data-order="codigo">Código</th>
+                <th class="col-hidden" data-search="fechaVencimiento" data-order="fechaVencimiento">Fecha de Vencimiento</th>
+                <th class="col-hidden" data-search="categoria" data-order="categoria">Categoria</th>
+                <th class="col-hidden" data-search="unidadMedidaC" data-order="unidadMedidaC">Unidad de medida de compras</th>
+                <th class="col-hidden" data-search="precioC" data-order="precioC">Precio de compras</th>
+                <th class="col-hidden" data-search="unidadMedidaV" data-order="unidadMedidaV">Unidad de medida de Ventas</th>
+                <th class="col-hidden" data-search="precioV" data-order="precioV">Precio de Venta</th>
+                <th class="col-hidden" data-search="existencia" data-order="existencia">Cantidad</th>
+                <th class="col-hidden" data-search="igv" data-order="igv">IGV</th>
+                <th class="col-hidden" data-search="MontoReal" data-order="MontoReal">Monto real</th>
+                <th class="btn-actions col-blocked text-center">Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for d in object_list %}
+            <tr>
+                <td>{% if is_paginated %} {{ page_obj.start_index|add:forloop.counter0 }} {% else %} {{ forloop.counter }} {% endif %}
+                </td>
+                <td>{{ d.nombre }}</td>
+                <td>{{ d.codigo }}</td>
+                <td>{{ d.fechaVencimiento }}</td>
+                <td>{{ d.categoria }}</td>
+                <td>{{ d.unidadMedidaC }}</td>
+                <td>{{ d.precioC }}</td>
+                <td>{{ d.unidadMedidaV }}</td>
+                <td>{{ d.precioV }}</td>
+                <td>{{ d.existencia }}</td>
+                <td>{{ d.igv }}</td>
+                <td>{{ d.MontoReal }}</td>
+                <td class="text-center">
+                    <a href="{% url 'ventas:producto_upd' d.pk|key:'pro_upd' %}" class="btn btn-info btn-sm text-bold" title="Cambiar Producto
+                            " rel="tooltip">
+                        <i class="btn-icon-only fa fa-edit"></i>
+                    </a>
+                    <a href="{% url 'ventas:producto_del' d.pk|key:'pro_del' %}" class="btn btn-danger btn-sm js-confirm text-bold" msg-title="Eliminar Producto?." msg="Esta Seguro
+                            <br/>Recuerde esta operación no puede revertirse" title="Eliminar Producto" rel="tooltip">
+                        <i class="btn-icon-only fa fa-trash-o"></i>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="row">
+    {% if is_paginated %} {% load paginator %} {% paginator %} {% else %}
+    <div class="col-md-12">
+        <ul class="breadcrumbpag">
+            {{ object_list.count }} {% ifequal object_list.count 1 %}{{ opts.verbose_name|capfirst }}{% else %}{{ opts.verbose_name_plural|capfirst }}{% endifequal %}
+        </ul>
+    </div>
+    {% endif %}
+</div>
+{% endblock content %}

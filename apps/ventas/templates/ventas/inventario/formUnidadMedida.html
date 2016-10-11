@@ -1,4 +1,4 @@
-	{% extends "main/dashboard.html" %}
+    {% extends "main/dashboard.html" %}
 <!--
 @copyright   Copyright (c) 2014 Submit Consulting
 @author      Angel Sullon (@asullom)
@@ -12,7 +12,7 @@ Descripcion: Create/Update group
 {% block breadcrumbs %}
 <a href="{% url 'accounts:index' %}">Home</a>
 &rsaquo;
-<a href="{% url 'ventas:categoria_list' %}">{{opts.verbose_name_plural|capfirst}}</a>
+<a href="{% url 'ventas:unidad_medida_list' %}">{{opts.verbose_name_plural|capfirst}}</a>
 &rsaquo; {{ title }}
 {% endblock breadcrumbs %}
 
@@ -26,7 +26,7 @@ Descripcion: Create/Update group
     {{ form }}
     {% csrf_token %}
     <button type="submit" class="btn  btn-primary">Agregar</button>
-    <a href="{% url 'ventas:categoria_list' %}" class="btn btn-danger">Cancelar</a>
+    <a href="{% url 'ventas:unidad_medida_list' %}" class="btn btn-danger">Cancelar</a>
     </form>
 
 {% endblock %}

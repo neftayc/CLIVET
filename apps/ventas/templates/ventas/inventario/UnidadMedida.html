@@ -9,7 +9,7 @@ Descripcion: Lista Tipo Documento
 <div class="btn-toolbar btn-toolbar-top">
     <div class="row">
         <div class="btn-actions">
-            <a href="{% url 'ventas:departamento_add' %}" class="btn btn-primary text-bold" title="Agregar Departamento">
+            <a href="{% url 'ventas:unidad_medida_add' %}" class="btn btn-primary text-bold" title="Agregar Uniada de Medida">
                 <i class="fa fa-plus"></i>
                 <span class="hidden-xs"> Agregar</span>
             </a>
@@ -22,6 +22,7 @@ Descripcion: Lista Tipo Documento
             <tr>
                 <th>#</th>
                 <th class="col-hidden" data-search="descripcion" data-order="descripcion">Descripción</th>
+                <th class="col-hidden" data-search="departamento" data-order="departamento">Departamento</th>
                 <th class="btn-actions col-blocked text-center">Acción</th>
             </tr>
         </thead>
@@ -30,12 +31,13 @@ Descripcion: Lista Tipo Documento
             <tr>
                 <td>{% if is_paginated %} {{ page_obj.start_index|add:forloop.counter0 }} {% else %} {{ forloop.counter }} {% endif %}
                 </td>
-                <td>{{ d.descripcion }}</td>
+                <td>{{ d.nombre }}</td>
+                <td>{{ d.simbolo }}</td>
                 <td class="text-center">
-                    <a href="{% url 'ventas:departamento_upd' d.pk|key:'dep_upd' %}" class="btn btn-info btn-sm text-bold" title="Cambiar Tipo Documento" rel="tooltip">
+                    <a href="{% url 'ventas:unidad_medida_upd' d.pk|key:'uni_upd' %}" class="btn btn-info btn-sm text-bold" title="Cambiar Unidad de Medida" rel="tooltip">
                         <i class="btn-icon-only fa fa-edit"></i>
                     </a>
-                    <a href="{% url 'ventas:departamento_del' d.pk|key:'dep_del' %}" class="btn btn-danger btn-sm js-confirm text-bold" msg-title="Eliminar Documento Identidad?." msg="Esta Seguro
+                    <a href="{% url 'ventas:unidad_medida_del' d.pk|key:'uni_del' %}" class="btn btn-danger btn-sm js-confirm text-bold" msg-title="Eliminar Documento Identidad?." msg="Esta Seguro
                             <br/>Recuerde esta operación no puede revertirse" title="Eliminar Tipo Documento" rel="tooltip">
                         <i class="btn-icon-only fa fa-trash-o"></i>
                     </a>

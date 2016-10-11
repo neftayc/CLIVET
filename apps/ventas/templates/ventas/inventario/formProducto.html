@@ -12,7 +12,7 @@ Descripcion: Create/Update group
 {% block breadcrumbs %}
 <a href="{% url 'accounts:index' %}">Home</a>
 &rsaquo;
-<a href="{% url 'ventas:categoria_list' %}">{{opts.verbose_name_plural|capfirst}}</a>
+<a href="{% url 'ventas:producto_list' %}">{{opts.verbose_name_plural|capfirst}}</a>
 &rsaquo; {{ title }}
 {% endblock breadcrumbs %}
 
@@ -26,7 +26,7 @@ Descripcion: Create/Update group
     {{ form }}
     {% csrf_token %}
     <button type="submit" class="btn  btn-primary">Agregar</button>
-    <a href="{% url 'ventas:categoria_list' %}" class="btn btn-danger">Cancelar</a>
+    <a href="{% url 'ventas:producto_list' %}" class="btn btn-danger">Cancelar</a>
     </form>
 
 {% endblock %}
