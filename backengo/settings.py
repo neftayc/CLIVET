@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     #'south', en la 1.7 ya no, ahora es django_migrations
     'crispy_forms',
 
+
     # mis tools
     'apps.utils',
 
@@ -61,6 +62,7 @@ INSTALLED_APPS = [
     'apps.accounts',
     # proyecto
     'apps.clivet',
+    'apps.compras',
 
     'apps.ventas',
 
@@ -281,6 +283,8 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
             'formatter': 'simple'
+
+
         },
 
     },
@@ -294,6 +298,7 @@ LOGGING = {
             'handlers': ['file_log'],
             'level': 'DEBUG',
         },
+
     },
     'root': {
         'handlers': ['console', ],
