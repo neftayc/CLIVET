@@ -1,4 +1,4 @@
-{% extends "clivet/dashboard.html" %}
+{% extends "main/dashboard.html" %}
 <!--
 @copyright   Copyright (c) 2014 Submit Consulting
 @author      Angel Sullon (@asullom)
@@ -24,7 +24,7 @@ Descripcion: Create/Update group
 
  <form action="" method="post">
  <h1>Nuevo Proveedor</h1>
-    {{ form }}
+    {{ form|crispy }}
     {% csrf_token %}
     <button type="submit" class="btn  btn-primary">Agregar</button>
     <a href="{% url 'compras:proveedor_list' %}" class="btn btn-danger">Cancelar</a>

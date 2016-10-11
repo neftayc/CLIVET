@@ -23,7 +23,7 @@ Descripcion: Create/Update group
 {% block content %}
 
  <form action="" method="post">
-    {{ form }}
+    {{ form|crispy }}
     {% csrf_token %}
     <button type="submit" class="btn  btn-primary">Agregar</button>
     <a href="{% url 'ventas:unidad_medida_list' %}" class="btn btn-danger">Cancelar</a>
