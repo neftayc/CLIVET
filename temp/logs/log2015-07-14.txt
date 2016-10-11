@@ -1,4 +1,0 @@
-[2015-07-14 15:15:36] [WARNING] [apps.space.views:612] [/space/association/edit_current/] [127.0.0.1] [admin] Se modificó con éxito el Association "UPAAAA".
-[2015-07-14 15:19:45] [WARNING] [apps.sad.views:1552] [/sad/permission/update/233.a0d47ee4157efe758a024af2427fa3ca/] [127.0.0.1] [admin] Se modificó con éxito el Permiso "/sad/user/index/".
-[2015-07-14 15:21:43] [WARNING] [apps.space.views:783] [/space/solution/update/2.6b4f3d1dadba70f4e74c6026e7d09630/] [127.0.0.1] [admin] Se modificó con éxito el Solution "Shomware Basic".
-[2015-07-14 15:23:12] [WARNING] [apps.sad.views:449] [/sad/user/update/2.5cfb7585092d3a84fd46bcb2c36903af/] [127.0.0.1] [admin] Se modificó con éxito el Usuario "checa".

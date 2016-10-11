@@ -1,12 +1,11 @@
 db.sqlite
-*temp
+*temp/
 *.pyc
 *~
 ~*
-<<<<<<< HEAD
 ve_*
-=======
 ve_*
 db.sqlite3
 temp
->>>>>>> clinica
+ve_*
+*.json
