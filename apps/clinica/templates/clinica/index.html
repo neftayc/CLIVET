@@ -54,7 +54,7 @@ Descripcion: Lista Tipo Documento
                 </td>
                 <td>{{ d.num_historia }}</td>
                 <td>{{ d.nombre }}</td>
-                <td>{{ d.duenho }}</td>
+                <td>{{ d.dueño }}</td>
                 <td>{{ d.especie }}</td>
                 <td>{{ d.raza }}</td>
                 <td>{{ d.cond_corporal }}</td>
@@ -75,9 +75,9 @@ Descripcion: Lista Tipo Documento
                     <a href="{% url 'clinica:actualizar_mascota' d.pk|key:'doc_upd' %}" class="btn btn-info btn-sm text-bold" title="Ediatar datos de la Mascota" rel="tooltip">
                         <i class="btn-icon-only fa fa-edit"></i>
                     </a>
-                    <a href="/clinica/{{ d.pk|key:'doc_del' }}" class="btn btn-danger btn-sm js-confirm text-bold"
-                       msg-title="Eliminar Documento Identidad?."
-                       msg="Esta Seguro
+                    <a href="{% url 'clinica:eliminar_mascota' d.pk|key:'doc_del' %}" class="btn btn-danger btn-sm js-confirm text-bold"
+                       msg-title="Eliminar Mascotas."
+                       msg="Esta Seguro que desea eliminar?
                        <br/>Recuerde esta operación no puede revertirse"
                        title="Cambiar estado de la Mascota" rel="tooltip">
                         <i class="btn-icon-only fa fa-minus"></i>
