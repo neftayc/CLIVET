@@ -1,7 +1,6 @@
 #encoding: utf-8
 from django import forms
 from ..models.mascota import Mascota
-from ..models.especie import Especie
 
 class MascotaForm(forms.ModelForm):
     """Tipo Documeto Form."""

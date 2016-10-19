@@ -16,7 +16,7 @@
 <div class="btn-toolbar btn-toolbar-top">
     <div class="row">
         <div class="btn-actions">
-            <a href="{% url 'clinica:crear_especie' %}" class="btn btn-primary text-bold" title="Agregar Tipo Documento Identidad">
+            <a href="{% url 'clinica:crear_medica' %}" class="btn btn-primary text-bold" title="Agregar Tipo Documento Identidad">
                 <i class="fa fa-plus"></i>
                 <span class="hidden-xs"> Agregar</span>
             </a>
@@ -43,7 +43,7 @@
                 </td>
                 <td>{{ d.descripcion }}</td>
                 <td class="text-center">
-                    <a href="{% url 'clinica:actualizar_especie' d.pk|key:'doc_upd' %}" class="btn btn-info btn-sm text-bold" title="Ediatar datos de tipo mascota" rel="tooltip">
+                    <a href="{% url 'clinica:actualizar_medica' d.pk|key:'doc_upd' %}" class="btn btn-info btn-sm text-bold" title="Ediatar datos de tipo mascota" rel="tooltip">
                         <i class="btn-icon-only fa fa-edit"></i>
                     </a>
                 </td>

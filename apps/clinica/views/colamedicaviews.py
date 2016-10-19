@@ -13,26 +13,25 @@ from django.utils.translation import ugettext as _
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 
-from ..forms.tipomascotaform import EspecieForm
+from ..forms.colamedicaform import ColaMedicaForm
 
-from ..models.especie import Especie
-
+from ..models.colamedica import ColaMedica
 
 import logging
 log = logging.getLogger(__name__)
 
 # Create your views here.
-class EspecieListView(ListView):
+class ColaMedicaListView(ListView):
     u"""Tipo Documento Identidad."""
 
-    model = Especie
+    model = ColaMedica
     paginate_by = settings.PER_PAGE
     template_name = "clinica/listipo.html"
 
     @method_decorator(permission_resource_required)
     def dispatch(self, request, *args, **kwargs):
         """dispatch."""
-        return super(EspecieListView,
+        return super(ColaMedicaListView,
                      self).dispatch(request, *args, **kwargs)
 
     def get_paginate_by(self, queryset):
@@ -44,7 +43,7 @@ class EspecieListView(ListView):
     def get_queryset(self):
         """Tipo Doc List Queryset."""
         self.o = empty(self.request, 'o', '-id')
-        self.f = empty(self.request, 'f', 'descripcion')
+        self.f = empty(self.request, 'f', 'mascota')
         self.q = empty(self.request, 'q', '')
         column_contains = u'%s__%s' % (self.f, 'contains')
 
@@ -56,7 +55,7 @@ class EspecieListView(ListView):
         Tipo Documento Identidad ListView List get context.
         Funcion con los primeros datos iniciales para la carga del template.
         """
-        context = super(EspecieListView,
+        context = super(ColaMedicaListView,
                         self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
         # context['cmi'] = 'menu' #  Validacion de manual del menu
@@ -70,18 +69,18 @@ class EspecieListView(ListView):
         return context
 
 
-class EspecieCreateView(CreateView):
+class ColaMedicaCreateView(CreateView):
     """Tipo Documento Identidad."""
 
-    model = Especie
-    form_class = EspecieForm
+    model = ColaMedica
+    form_class = ColaMedicaForm
     template_name = "clinica/model.html"
-    success_url = reverse_lazy("clinica:listar_especie")
+    success_url = reverse_lazy("clinica:listar_medica")
 
     @method_decorator(permission_resource_required)
     def dispatch(self, request, *args, **kwargs):
         """dispatch."""
-        return super(EspecieCreateView,
+        return super(ColaMedicaCreateView,
                      self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
@@ -89,7 +88,7 @@ class EspecieCreateView(CreateView):
         Tipo Documento Identidad ListView List get context.
         Funcion con los primeros datos iniciales para la carga del template.
         """
-        context = super(EspecieCreateView,
+        context = super(ColaMedicaCreateView,
                         self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
         # context['cmi'] = 'tipodoc'
@@ -107,16 +106,16 @@ class EspecieCreateView(CreateView):
 
         messages.success(self.request, msg)
         log.warning(msg, extra=log_params(self.request))
-        return super(EspecieCreateView, self).form_valid(form)
+        return super(ColaMedicaCreateView, self).form_valid(form)
 
 
-class EspecieUpdateView(UpdateView):
+class ColaMedicaUpdateView(UpdateView):
     """Tipo Documento Update View."""
 
-    model = Especie
-    form_class = EspecieForm
+    model = ColaMedica
+    form_class = ColaMedicaForm
     template_name = "clinica/model.html"
-    success_url = reverse_lazy("clinica:listar_especie")
+    success_url = reverse_lazy("clinica:listar_medica")
 
     @method_decorator(permission_resource_required)
     def dispatch(self, request, *args, **kwargs):
@@ -133,12 +132,12 @@ class EspecieUpdateView(UpdateView):
             log.warning(force_text(e), extra=log_params(self.request))
             return HttpResponseRedirect(self.success_url)
 
-        return super(EspecieUpdateView,
+        return super(ColaMedicaUpdateView,
                      self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         """Tipo Documento Update View context data."""
-        context = super(EspecieUpdateView,
+        context = super(ColaMedicaUpdateView,
                         self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
         # context['cmi'] = 'empresa'
@@ -158,4 +157,67 @@ class EspecieUpdateView(UpdateView):
         if self.object.id:
             messages.success(self.request, msg)
             log.warning(msg, extra=log_params(self.request))
-        return super(EspecieUpdateView, self).form_valid(form)
+        return super(ColaMedicaUpdateView, self).form_valid(form)
+
+
+class ColaMedicaDeleteView(DeleteView):
+    """Empresa Delete View."""
+
+    model = ColaMedica
+    success_url = reverse_lazy('clinica:listar_mascotas')
+
+    @method_decorator(permission_resource_required)
+    def dispatch(self, request, *args, **kwargs):
+        """Empresa Delete View dispatch."""
+        key = self.kwargs['pk']
+        pk = SecurityKey.is_valid_key(request, key, 'doc_del')
+        if not pk:
+            return HttpResponseRedirect(self.success_url)
+        self.kwargs['pk'] = pk
+        try:
+            self.get_object()
+        except Exception as e:
+            messages.error(self.request, e)
+            log.warning(force_text(e), extra=log_params(self.request))
+            return HttpResponseRedirect(self.success_url)
+        return super(ColaMedicaDeleteView,
+                     self).dispatch(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        """
+        Empresa Delete View delte.
+        Función para eliminar la empresa sobre un metodo que verifica las
+        dependencias de que tiene la tabla mostrando un mensaje de validacion.
+        """
+        try:
+            d = self.get_object()
+            deps, msg = get_dep_objects(d)
+            print(deps)
+            if deps:
+                messages.warning(
+                    self.request,
+                    ('No se puede Eliminar %(name)s') %
+                    {
+                        "name": capfirst(force_text(
+                            self.model._meta.verbose_name)
+                        ) + ' "' + force_text(d) + '"'
+                    })
+                raise Exception(msg)
+
+            d.delete()
+            msg = _(
+                ' %(name)s "%(obj)s" fuel eliminado satisfactorialmente.') % {
+                'name': capfirst(force_text(self.model._meta.verbose_name)),
+                'obj': force_text(d)
+            }
+            if not d.id:
+                messages.success(self.request, msg)
+                log.warning(msg, extra=log_params(self.request))
+        except Exception as e:
+            messages.error(request, e)
+            log.warning(force_text(e), extra=log_params(self.request))
+        return HttpResponseRedirect(self.success_url)
+
+    def get(self, request, *args, **kwargs):
+        """Empresa Delete View get."""
+        return self.delete(request, *args, **kwargs)
