@@ -7,10 +7,11 @@ from django.db.models import signals
 from unicodedata import normalize
 from django.core.exceptions import ValidationError
 
+from apps.clinica.models.mascota import Mascota
 # Create your models here.
 
 class Consulta(models.Model):
-
+    mascota = models.ForeignKey(Mascota, blank=True)
     anamnesis = models.CharField(max_length=200)
     diagnostico = models.CharField(max_length=300)
     dx = models.CharField(max_length=300)

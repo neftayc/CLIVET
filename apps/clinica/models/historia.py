@@ -7,15 +7,15 @@ from django.db.models import signals
 from unicodedata import normalize
 from django.core.exceptions import ValidationError
 
-from apps.clivet.models.cliente import Cliente
 from apps.clivet.models.trabajador import Trabajador
+from apps.clinica.models.mascota import Mascota
 
 # Create your models here.
 
 class Historial(models.Model):
     num_historia = models.CharField(max_length=40)
-    propietario = models.ForeignKey(Cliente, blank=True)
-    veterinario = models.OneToOneField(Trabajador, blank=True)
+    veterinario = models.ForeignKey(Trabajador, blank=True)
+    mascota = models.OneToOneField(Mascota, blank=True)
     created_ath = models.DateTimeField(_('Fecha Creada'), auto_now_add=True)
 
     class Meta:
@@ -23,4 +23,4 @@ class Historial(models.Model):
         verbose_name_plural = "Historias"
 
     def __str__(self):
-        return "%s" % (self.num_historia, self.trabajador.persona)
+        return "%s" % (self.num_historia)

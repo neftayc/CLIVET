@@ -35,7 +35,6 @@ BOOL_ESTADO= (
 )
 class Mascota(models.Model):
 
-    num_historia = models.CharField(capfirst(_('N° Historia')), max_length=10)
     nombre = models.CharField(max_length=100)
     dueño = models.ForeignKey(Cliente, default='1')
     fecha_nacimiento = models.DateField(capfirst(_('Fecha Nacimiento')))
@@ -53,4 +52,4 @@ class Mascota(models.Model):
         verbose_name_plural = "Mascotas"
 
     def __str__(self):
-        return "%s" % (self.num_historia)
+        return "%s" % (self.nombre)
