@@ -13,25 +13,25 @@ from django.utils.translation import ugettext as _
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 
-from ..forms.colamedicaform import ColaMedicaForm
+from ..forms.vacunacionform import VacunacionForm
 
-from ..models.colamedica import ColaMedica
+from ..models.vacunacion import Vacunacion
 
 import logging
 log = logging.getLogger(__name__)
 
 # Create your views here.
-class ColaMedicaListView(ListView):
+class VacunacionListView(ListView):
     u"""Tipo Documento Identidad."""
 
-    model = ColaMedica
+    model = Vacunacion
     paginate_by = settings.PER_PAGE
-    template_name = "clinica/colamedica.html"
+    template_name = "clinica/listipo.html"
 
     @method_decorator(permission_resource_required)
     def dispatch(self, request, *args, **kwargs):
         """dispatch."""
-        return super(ColaMedicaListView,
+        return super(VacunacionListView,
                      self).dispatch(request, *args, **kwargs)
 
     def get_paginate_by(self, queryset):
@@ -43,7 +43,7 @@ class ColaMedicaListView(ListView):
     def get_queryset(self):
         """Tipo Doc List Queryset."""
         self.o = empty(self.request, 'o', '-id')
-        self.f = empty(self.request, 'f', 'descripcion')
+        self.f = empty(self.request, 'f', 'vacuna')
         self.q = empty(self.request, 'q', '')
         column_contains = u'%s__%s' % (self.f, 'contains')
 
@@ -55,7 +55,7 @@ class ColaMedicaListView(ListView):
         Tipo Documento Identidad ListView List get context.
         Funcion con los primeros datos iniciales para la carga del template.
         """
-        context = super(ColaMedicaListView,
+        context = super(VacunacionListView,
                         self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
         # context['cmi'] = 'menu' #  Validacion de manual del menu
@@ -69,18 +69,18 @@ class ColaMedicaListView(ListView):
         return context
 
 
-class ColaMedicaCreateView(CreateView):
+class VacunacionCreateView(CreateView):
     """Tipo Documento Identidad."""
 
-    model = ColaMedica
-    form_class = ColaMedicaForm
-    template_name = "clinica/form/colamedica.html"
-    success_url = reverse_lazy("clinica:listar_medica")
+    model = Vacunacion
+    form_class = VacunacionForm
+    template_name = "clinica/model.html"
+    success_url = reverse_lazy("clinica:listar_vacunacion")
 
     @method_decorator(permission_resource_required)
     def dispatch(self, request, *args, **kwargs):
         """dispatch."""
-        return super(ColaMedicaCreateView,
+        return super(VacunacionCreateView,
                      self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
@@ -88,7 +88,7 @@ class ColaMedicaCreateView(CreateView):
         Tipo Documento Identidad ListView List get context.
         Funcion con los primeros datos iniciales para la carga del template.
         """
-        context = super(ColaMedicaCreateView,
+        context = super(VacunacionCreateView,
                         self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
         # context['cmi'] = 'tipodoc'
@@ -106,16 +106,16 @@ class ColaMedicaCreateView(CreateView):
 
         messages.success(self.request, msg)
         log.warning(msg, extra=log_params(self.request))
-        return super(ColaMedicaCreateView, self).form_valid(form)
+        return super(VacunacionCreateView, self).form_valid(form)
 
 
-class ColaMedicaUpdateView(UpdateView):
+class VacunacionUpdateView(UpdateView):
     """Tipo Documento Update View."""
 
-    model = ColaMedica
-    form_class = ColaMedicaForm
+    model = Vacunacion
+    form_class = VacunacionForm
     template_name = "clinica/model.html"
-    success_url = reverse_lazy("clinica:listar_medica")
+    success_url = reverse_lazy("clinica:listar_vacunacion")
 
     @method_decorator(permission_resource_required)
     def dispatch(self, request, *args, **kwargs):
@@ -132,12 +132,12 @@ class ColaMedicaUpdateView(UpdateView):
             log.warning(force_text(e), extra=log_params(self.request))
             return HttpResponseRedirect(self.success_url)
 
-        return super(ColaMedicaUpdateView,
+        return super(VacunacionUpdateView,
                      self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         """Tipo Documento Update View context data."""
-        context = super(ColaMedicaUpdateView,
+        context = super(VacunacionUpdateView,
                         self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
         # context['cmi'] = 'empresa'
@@ -157,14 +157,14 @@ class ColaMedicaUpdateView(UpdateView):
         if self.object.id:
             messages.success(self.request, msg)
             log.warning(msg, extra=log_params(self.request))
-        return super(ColaMedicaUpdateView, self).form_valid(form)
+        return super(VacunacionUpdateView, self).form_valid(form)
 
 
-class ColaMedicaDeleteView(DeleteView):
+class VacunacionDeleteView(DeleteView):
     """Empresa Delete View."""
 
-    model = ColaMedica
-    success_url = reverse_lazy('clinica:listar_mascotas')
+    model = Vacunacion
+    success_url = reverse_lazy('clinica:listar_vacunacion')
 
     @method_decorator(permission_resource_required)
     def dispatch(self, request, *args, **kwargs):
@@ -180,7 +180,7 @@ class ColaMedicaDeleteView(DeleteView):
             messages.error(self.request, e)
             log.warning(force_text(e), extra=log_params(self.request))
             return HttpResponseRedirect(self.success_url)
-        return super(ColaMedicaDeleteView,
+        return super(VacunacionDeleteView,
                      self).dispatch(request, *args, **kwargs)
 
     def delete(self, request, *args, **kwargs):

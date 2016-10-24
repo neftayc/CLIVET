@@ -15,7 +15,7 @@ from apps.clinica.models.mascota import Mascota
 class Historial(models.Model):
     num_historia = models.CharField(max_length=40)
     veterinario = models.ForeignKey(Trabajador, blank=True)
-    mascota = models.OneToOneField(Mascota, blank=True)
+    mascota = models.OneToOneField(Mascota, verbose_name=_('Mascota'), null=True, blank=True,)
     created_ath = models.DateTimeField(_('Fecha Creada'), auto_now_add=True)
 
     class Meta:

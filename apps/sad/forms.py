@@ -6,6 +6,7 @@
 
 Descripcion: Implementacion de los formularios de la app sad
 """
+
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 from django.utils.text import capfirst, get_text_list

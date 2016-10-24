@@ -10,11 +10,13 @@ from ..models.colamedica import ColaMedica
 from ..models.consulta import Consulta
 from ..models.notas import Notas
 from ..models.vacunacion import Vacunacion
+from ..models.mascota import Mascota
 
 # Create your models here.
 
 class Atencion(models.Model):
-    colamedica = models.ForeignKey(ColaMedica, blank=True, unique=True  )
+    mascota = models.ForeignKey(Mascota)
+    colamedica = models.OneToOneField(ColaMedica, blank=True, unique=True  )
     consulta = models.ForeignKey(Consulta, null=True, blank=True)
     notas = models.ForeignKey(Notas, null=True, blank=True)
     vacunacion = models.ForeignKey(Vacunacion, null=True, blank=True)

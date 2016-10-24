@@ -39,6 +39,7 @@ urlpatterns = [
     url(r'^user/index/$',
         UserListView.as_view(), name='user-list'),
 
+
     # menu x asullom
     url(r'^menu/state/(?P<state>[\w\d\-]+)/(?P<pk>.*)/$',
         MenuUpdateActiveView.as_view(), name='menu-state'),

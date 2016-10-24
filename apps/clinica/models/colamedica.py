@@ -17,10 +17,12 @@ ESTADOS = (
     ('reservado', "Reservado")
 )
 
+
+
 class ColaMedica(models.Model):
 
     historia = models.ForeignKey(Historial)
-    fecha = models.DateTimeField()
+    fecha = models.DateTimeField(_('Fecha Creada'), auto_now_add=True)
     descripcion = models.CharField(max_length=100)
     estado = models.CharField(max_length=100,choices=ESTADOS)
 

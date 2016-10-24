@@ -1,19 +1,21 @@
 {% load i18n staticfiles %}
 <!DOCTYPE html>
-<html lang="es">
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>{% block title %}{% endblock title %}</title>
-
+        {% block extrahead %}
+        {% endblock extrahead %}
+        <title>{% block title %}base{% endblock title %}</title>
         <link href="{% static 'bootstrap-3.1.1-dist/css/bootstrap.min.css' %}" rel="stylesheet">
         <link href="{% static 'bootstrap-3.1.1-dist/css/bootstrap-theme.min.css' %}" rel="stylesheet">
 
+        <link rel="stylesheet" href="{% static 'bootstrap-3.1.1-dist/css/sb-admin.css' %}">
+
         <link href="{% static 'datetimepicker/css/bootstrap-datetimepicker.min.css' %}" rel="stylesheet">
         <link href="{% static 'typehead/typehead.css' %}" rel="stylesheet">
-        <link rel="stylesheet" href="{% static 'bootstrap-3.1.1-dist/css/sb-admin.css' %}">
+
 
         <!-- http://fortawesome.github.io/Font-Awesome/icons/-->
         <link href="{% static 'font-awesome-4.2.0/css/font-awesome.min.css' %}" rel="stylesheet">
@@ -22,8 +24,10 @@
         {% endblock extrastyle %}
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="{% static 'jquery/jquery.min.js' %}"></script>
+
+        {% block headjs %}
+        {% endblock headjs %}
     </head>
-    <script src="{% static 'jquery/jquery-3.1.1.min.js' %}"></script>
     <body>
         <div id="wrapper">
             {% block contentroot %}
@@ -39,5 +43,8 @@
         <script src="{% static 'moment/moment-with-locales.min.js' %}"></script>
         <script src="{% static 'datetimepicker/js/bootstrap-datetimepicker.min.js' %}"></script>
         <script src="{% static 'typehead/bootstrap.typehead.min.js' %}"></script>
-        {% block extrajs %}{% endblock extrajs %}
+        {% block extrajs %}
+        {% endblock extrajs %}
     </body>
+
+    </html>

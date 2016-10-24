@@ -1,22 +1,33 @@
-{% extends "clivet/dashboard.html" %}
+{% extends "main/dashboard.html" %}
 {% load i18n app_security %}
 {% load l10n humanize %}
 
 {% block breadcrumbs %}
-<a href="{# url 'accounts:index' #}">{% trans 'Home' %}</a>
-&rsaquo; {{ title }}
+<a href="{# url 'accounts:index' #}"><i class="fa fa-home"></i> {% trans 'Home' %} &rsaquo;&rsaquo;</a>
+ {{ opts.verbose_name_plural|capfirst }}
 {% endblock breadcrumbs %}
 
 {% block content_title %}
-{{ opts.verbose_name_plural|capfirst }} | <small>{{ title }}</small>
+<h3><i class="fa fa-paw"></i> Listado de {{ opts.verbose_name_plural|capfirst }} Clinicas | <small>{{ title }}</small></h3>
 {% endblock content_title %}
 
 {% block content %}
 
+<script type="text/javascript">
+$(function() {
+    $('table').kgrid({
+        form_data : ['{{f}}', '{{q}}'],
+        form_to   : '/clinica/historia/listar/?f={{f}}&q={{q}}',
+        order_attr: 'class=""',
+        order_to  : '/clinica/historia/listar/?f={{f}}&q={{q}}',
+    });
+});
+</script>
+
 <div class="btn-toolbar btn-toolbar-top">
     <div class="row">
         <div class="btn-actions">
-            <a href="{% url 'clinica:crear_medica' %}" class="btn btn-primary text-bold" title="Agregar Tipo Documento Identidad">
+            <a href="{% url 'clinica:crear_historia' %}" class="btn btn-primary text-bold" title="Agregar Tipo Documento Identidad">
                 <i class="fa fa-plus"></i>
                 <span class="hidden-xs"> Agregar</span>
             </a>
@@ -28,7 +39,10 @@
         <thead>
             <tr>
                 <th>#</th>
-                <th class="col-hidden" data-search="descripcion" data-order="descripcion">Nombre</th>
+                <th class="col-hidden"  data-search="num_historia" data-order="num_historia">N° Historia</th>
+                <th class="col-hidden">Veterinario</th>
+                <th class="col-hidden">Mascota</th>
+                <th class="col-hidden">Fecha</th>
                 <th class="btn-actions col-blocked text-center">Acción</th>
             </tr>
         </thead>
@@ -41,16 +55,21 @@
                     {{ forloop.counter }}
                     {% endif %}
                 </td>
-                <td>{{ d.descripcion }}</td>
+                <td>{{ d.num_historia }}</td>
+                <td>{{ d.veterinario }}</td>
+                <td>{{ d.mascota }}</td>
+                <td>{{ d.created_ath }}</td>
                 <td class="text-center">
-                    <a href="{% url 'clinica:actualizar_medica' d.pk|key:'doc_upd' %}" class="btn btn-info btn-sm text-bold" title="Ediatar datos de tipo mascota" rel="tooltip">
+                    <a href="{% url 'clinica:historia_detail' d.pk|key:'historia_det' %}" class="btn btn-warning btn-sm text-bold" title="{% trans 'Detail' %} {% trans 'historia' %}" rel="tooltip">
+                        <i class="btn-icon-only fa fa-eye"></i>
+                    </a>
+                    <a href="{% url 'clinica:actualizar_historia' d.pk|key:'doc_upd' %}" class="btn btn-info btn-sm text-bold" title="Ediatar datos de tipo mascota" rel="tooltip">
                         <i class="btn-icon-only fa fa-edit"></i>
                     </a>
                 </td>
             </tr>
             {% endfor %}
         </tbody>
-
     </table>
 </div>
 <div  class="row" >

@@ -31,14 +31,14 @@
       <a href="/space/solution/create/" class="btn btn-info" title="{% trans "Add" %} {% trans "user" %}"><i class="fa fa-plus fa-lg"></i> <span>{% trans 'Sign up'|truncatechars:9 %}</span>
       </a>
     </div>
-    
+
     <form class="navbar-form navbar-left form-controlx" role="search">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Search">
         </div>
       </form>
-   
-    
+
+
     {% view_menu request %}
     <!--
     <ul class="nav navbar-nav">
@@ -66,7 +66,7 @@
           <li {% ifequal cmi 'group' %} class="active" {% endifequal %}>
             <a href="/sad/group/index/">group</a>
           </li>
-          
+
           <li class="divider visible-xs"></li>
           <li {% ifequal cmi 'grouppermissions' %} class="active" {% endifequal %}>
             <a href="/sad/grouppermissions/update/">group permissions</a>
@@ -86,15 +86,15 @@
           <li {% ifequal cmi 'menu' %} class="active" {% endifequal %}>
             <a href="/sad/menu/index/">menu</a>
           </li>
-          
+
         </ul>
       </li>
     </ul>
     -->
-    
-    
-    
-    
+
+
+
+
     <ul class="nav navbar-nav navbar-right hidden-xs">
       <li class="divider visible-xs"></li>
       <li class="dropdown">
@@ -158,4 +158,4 @@ $(document).ready(function() {
 });
 /** Tooltip **/
 $(function() { $("[rel=tooltip]").tooltip(); });
-</script>              
+</script>

@@ -1,5 +1,14 @@
 #encoding: utf-8
 from django import forms
+
+from django.utils.translation import ugettext_lazy as _
+from django.utils.text import capfirst, get_text_list
+from crispy_forms.helper import FormHelper, Layout
+from crispy_forms.layout import Field, Div, Row, HTML
+from crispy_forms.bootstrap import FormActions, TabHolder, Tab
+
+from apps.utils.forms import smtSave, btnCancel, btnReset
+
 from ..models.mascota import Mascota
 
 class MascotaForm(forms.ModelForm):
@@ -48,7 +57,3 @@ class MascotaForm(forms.ModelForm):
         'class':"form-control", 'required': 'false'
         })
         }
-
-    class Media:
-        js = ('/media/js/calendar.js',
-              '/media/js/DateTimeShortcuts.js',)

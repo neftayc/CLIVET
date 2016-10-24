@@ -1,11 +1,15 @@
-{% extends "clivet/dashboard.html" %}
-<!--
-@package     conf
-Descripcion: Lista Tipo Documento
--->
+{% extends "main/dashboard.html" %}
 {% load i18n app_security %}
 {% load l10n humanize %}
 
+{% block breadcrumbs %}
+<a href="{# url 'accounts:index' #}">{% trans 'Home' %}</a>
+&rsaquo; {{ title }}
+{% endblock breadcrumbs %}
+
+{% block content_title %}
+{{ opts.verbose_name_plural|capfirst }} | <small>{{ title }}</small>
+{% endblock content_title %}
 {% block content %}
 
 <div class="row">
@@ -28,24 +32,6 @@ Descripcion: Lista Tipo Documento
             </div>
             <div class="tab-pane fade" id="hclinica">
                 {% include "clinica/aclinica.html" %}
-            </div>
-            <div class="tab-pane fade" id="natencion">
-                {% include "clinica/form/consulta.html" %}
-            </div>
-            <div class="tab-pane fade" id="avacuna">
-                {% include "clinica/form/vacuna.html" %}
-            </div>
-            <div class="tab-pane fade" id="adisparasitar">
-                {% include "clinica/form/parasitario.html" %}
-            </div>
-            <div class="tab-pane fade" id="apulga">
-                {% include "clinica/form/antipulga.html" %}
-            </div>
-            <div class="tab-pane fade" id="internamiento">
-                {% include "clinica/form/otros.html" %}
-            </div>
-            <div class="tab-pane fade" id="facturar">
-                {% include "clinica/facturar.html" %}
             </div>
         </div>
     </div>

@@ -15,7 +15,6 @@ class Consulta(models.Model):
     anamnesis = models.CharField(max_length=200)
     diagnostico = models.CharField(max_length=300)
     dx = models.CharField(max_length=300)
-    fecha = models.DateTimeField()
     hallasgos_clinicos = models.CharField(max_length=100)
     motivo_atencion = models.CharField(max_length=300)
     observacion = models.CharField(max_length=300)
