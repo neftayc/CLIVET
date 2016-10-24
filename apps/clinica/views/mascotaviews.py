@@ -9,6 +9,13 @@ from django.contrib import messages
 from django.db import transaction
 from django.db.models import Q
 
+import datetime
+import json
+from django.contrib.sites.models import Site
+from django.core.mail import send_mail
+
+from django.template.loader import render_to_string
+
 from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.utils.decorators import method_decorator
@@ -59,16 +66,12 @@ class MascotaListView(generic.ListView):
         return self.model.objects.filter(**{column_contains: self.q}).order_by(self.o)
 
     def get_context_data(self, **kwargs):
-        """
-        Tipo Documento Identidad ListView List get context.
-        Funcion con los primeros datos iniciales para la carga del template.
-        """
         context = super(MascotaListView,
                         self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
-        context['cmi'] = 'mascota' #  Validacion de manual del menu
+        #context['cmi'] = 'mascota' #  Validacion de manual del menu
         context['title'] = ('Seleccione %s'
-                            ) % capfirst('una Mascota')
+                            ) % capfirst(' una mascota')
 
         context['o'] = self.o
         context['f'] = self.f
@@ -99,8 +102,9 @@ class MascotaCreateView(CreateView):
         context = super(MascotaCreateView,
                         self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
-        # context['cmi'] = 'tipodoc'
-        context['title'] = ('Agregar %s') % ('Tipo Mascota')
+        #context['cmi'] = 'mascota'
+        context['title'] = ('Agregar %s') % ('nueva mascota')
+        context['subtitle'] = ('Agregando %s') % ('nueva mascota')
         return context
 
     def form_valid(self, form):
@@ -111,9 +115,9 @@ class MascotaCreateView(CreateView):
             'name': capfirst(force_text(self.model._meta.verbose_name)),
             'obj': force_text(self.object)
         }
-
-        messages.success(self.request, msg)
-        log.warning(msg, extra=log_params(self.request))
+        if self.object.id:
+            messages.success(self.request, msg)
+            log.warning(msg, extra=log_params(self.request))
         return super(MascotaCreateView, self).form_valid(form)
 
 
@@ -149,7 +153,7 @@ class MascotaUpdateView(UpdateView):
                         self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
         # context['cmi'] = 'empresa'
-        context['title'] = ('Actualizar %s') % ('Tipo Mascota')
+        context['title'] = ('Actualizar %s') % ('Mascota')
         return context
 
     def form_valid(self, form):

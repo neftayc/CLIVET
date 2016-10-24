@@ -3,16 +3,25 @@
 {% load l10n humanize %}
 
 {% block breadcrumbs %}
-<a href="{# url 'accounts:index' #}">{% trans 'Home' %}</a>
-&rsaquo; {{ title }}
+<a href="{# url 'accounts:index' #}"><i class="fa fa-home"></i> {% trans 'Home' %} &rsaquo;&rsaquo;</a>
+ {{ opts.verbose_name_plural|capfirst }}
 {% endblock breadcrumbs %}
 
 {% block content_title %}
-{{ opts.verbose_name_plural|capfirst }} | <small>{{ title }}</small>
+<h3><i class="fa fa-paw"></i> Listado de {{ opts.verbose_name_plural|capfirst }} | <small>{{ title }}</small></h3>
 {% endblock content_title %}
 
 {% block content %}
-
+<script type="text/javascript">
+$(function() {
+    $('table').kgrid({
+        form_data : ['{{f}}', '{{q}}'],
+        form_to   : '/clinica/colamedica/listar/?f={{f}}&q={{q}}',
+        order_attr: 'class=""',
+        order_to  : '/clinica/colamedica/listar/?f={{f}}&q={{q}}',
+    });
+});
+</script>
 <div class="btn-toolbar btn-toolbar-top">
     <div class="row">
         <div class="btn-actions">

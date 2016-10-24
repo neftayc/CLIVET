@@ -270,6 +270,7 @@ class SolutionForm(forms.ModelForm):
                 u'Available formats are JPG, GIF, and PNG.'),
         )
         '''
+        
         self.fields['name'].help_text = u'<small class="help-error"></small> %s' % _(
             u' ')
         self.fields['description'].help_text = u'<small class="help-error"></small> %s' % _(

@@ -43,8 +43,8 @@ $(function() {
 <div class="btn-toolbar btn-toolbar-top">
     <div class="row">
         <div class="btn-actions">
-            <a href="/space/solution/create/" class="btn btn-primary text-bold" title="{% trans 'Add' %} {% trans 'Solution' %}"><i class="fa fa-plus"></i> <span class="hidden-xs"> {% trans 'Add'  %}</span></a> 
-        </div>            
+            <a href="/space/solution/create/" class="btn btn-primary text-bold" title="{% trans 'Add' %} {% trans 'Solution' %}"><i class="fa fa-plus"></i> <span class="hidden-xs"> {% trans 'Add'  %}</span></a>
+        </div>
     </div>
 </div>
 <div class="container-overflow">
@@ -61,7 +61,7 @@ $(function() {
             </tr>
         </thead>
         <tbody>
-            {% for d in object_list %}       
+            {% for d in object_list %}
             <tr class="{{ d.is_active|yesno:',danger' }}">
                 <td>{% if is_paginated %}
                     {{ page_obj.start_index|add:forloop.counter0 }}
@@ -91,10 +91,10 @@ $(function() {
 
                     {% endif %}
 
-                    
+
                     <a href="/space/solution/delete/{{d.pk|key:'solution_del'}}/" class="btn btn-danger btn-sm js-confirm text-bold" msg-title="{% trans 'Delete' %} {% trans 'Solution' %}?." msg="{% trans 'Are you sure?' %}<br/>{% trans 'Remember that this operation can not be reversed.' %}" title="{% trans 'Delete' %} {% trans 'Solution' %}" rel="tooltip"><i class="btn-icon-only fa fa-trash-o"></i></a>
 
-                    
+
 
                 </td>
             </tr>

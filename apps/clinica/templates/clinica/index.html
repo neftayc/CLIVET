@@ -7,7 +7,7 @@ Descripcion: Lista Tipo Documento
 {% load l10n humanize %}
 
 {% block breadcrumbs %}
-<a href="{# url 'accounts:index' #}"><i class="fa fa-home"></i> {% trans 'Home' %} &rsaquo;&rsaquo;</a>
+<a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %} &rsaquo;&rsaquo;</a>
  {{ opts.verbose_name_plural|capfirst }}
 {% endblock breadcrumbs %}
 
@@ -27,10 +27,10 @@ $(function() {
     });
 });
 </script>
+
 <div class="btn-toolbar btn-toolbar-top">
     <div class="row">
         <div class="btn-actions">
-
             <a href="{% url 'clinica:crear_mascota' %}" class="btn btn-primary text-bold" title="Agregar Mascota">
                 <i class="fa fa-plus"></i>
                 <span class="hidden-xs"> Agregar</span>
@@ -49,7 +49,7 @@ $(function() {
             <tr>
                 <th>#</th>
                 <th class="col-hidden" data-search="nombre" data-order="nombre">Nombre</th>
-                <th class="col-hidden" data-search="descripcion" data-order="descripcion">Dueño</th>
+                <th class="col-hidden">Dueño</th>
                 <th class="col-hidden">Especie</th>
                 <th class="col-hidden">Raza</th>
                 <th class="col-hidden">C. Corporal</th>
