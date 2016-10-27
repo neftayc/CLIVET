@@ -16,7 +16,6 @@ VACUNA = (
 )
 
 class Vacunacion(models.Model):
-
     fecha_programada = models.DateTimeField()
     Observacion = models.CharField(max_length=100)
     vacuna = models.CharField(max_length=100,choices=VACUNA)

@@ -7,24 +7,23 @@ from django.db.models import signals
 from unicodedata import normalize
 from django.core.exceptions import ValidationError
 
+
 from ..models.historia import Historial
 
 # Create your models here.
 
 ESTADOS = (
-    ('normal', "Normal"),
-    ('emergencia', "Emergencia"),
+    ('atencion', "En Atencion"),
+    ('espera', "En Espera"),
     ('reservado', "Reservado")
 )
 
 
-
 class ColaMedica(models.Model):
-
     historia = models.ForeignKey(Historial)
     fecha = models.DateTimeField(_('Fecha Creada'), auto_now_add=True)
     descripcion = models.CharField(max_length=100)
-    estado = models.CharField(max_length=100,choices=ESTADOS)
+    estado = models.BooleanField(_('Estado de Atencion'), max_length=100, default=False)
 
     class Meta:
         verbose_name = "ColaMedica"

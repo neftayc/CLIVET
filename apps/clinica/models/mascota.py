@@ -25,14 +25,7 @@ BOOL_GENERO= (
     ('Macho', "Macho"),
     ('Hembra', "Hembra")
 )
-BOOL= (
-    ('Si', "Sí"),
-    ('No', "No")
-)
-BOOL_ESTADO= (
-    ('Vivo', "Vivo"),
-    ('Fallecio', "Fallecio")
-)
+
 class Mascota(models.Model):
 
     nombre = models.CharField(max_length=100)
@@ -44,6 +37,7 @@ class Mascota(models.Model):
     color = models.CharField(max_length=20)
     cond_corporal = models.CharField(max_length=10, choices=CONDICION, default='Buena')
     esterelizado = models.BooleanField(capfirst(_('Esterelizado...?')), default=True)
+    historia = models.BooleanField(capfirst(_('Historia')), default=False)
     is_active = models.BooleanField(capfirst(_('active')), default=True)
     is_actived = models.BooleanField(_('Actived'), default=False)
     descripcion = models.CharField(max_length=200)

@@ -2,6 +2,7 @@ from apps.utils.decorators import permission_resource_required
 from apps.utils.forms import empty
 from apps.utils.security import get_dep_objects, log_params, SecurityKey
 from django.views import generic
+from django.db import transaction
 
 from django.conf import settings
 from django.contrib import messages
@@ -14,9 +15,11 @@ from django.utils.translation import ugettext as _
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 
-from ..forms.historiaform import HistoriaForm, MascotaHistoriDetailForm
+from ..forms.historiaform import HistoriaForm, MascotaHistoriDetailForm, HistoriaMascotaForm
 
 from ..models.historia import Historial
+from ..models.mascota import Mascota
+from apps.clivet.models.cliente import Cliente
 
 import logging
 log = logging.getLogger(__name__)
@@ -85,15 +88,12 @@ class HistoriaCreateView(CreateView):
                      self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        """
-        Tipo Documento Identidad ListView List get context.
-        Funcion con los primeros datos iniciales para la carga del template.
-        """
         context = super(HistoriaCreateView,
                         self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
         # context['cmi'] = 'tipodoc'
-        context['title'] = ('Agregar %s') % ('Tipo Documento')
+        context['title'] = ('Registro %s') % ('de historias clinicas')
+        context['subtitle'] = ('Registrando %s') % ('nueva historia')
         return context
 
     def form_valid(self, form):
@@ -223,6 +223,105 @@ class HistoriaDeleteView(DeleteView):
         """Empresa Delete View get."""
         return self.delete(request, *args, **kwargs)
 
+
+
+class HistoriaMascotaCreateView(CreateView):
+    """  """
+    model = Historial
+    form_class = HistoriaMascotaForm
+    template_name = "clinica/form/historia.html"
+    success_url = reverse_lazy("clinica:listar_historia")
+
+    @method_decorator(permission_resource_required)
+    def dispatch(self, request, *args, **kwargs):
+        key = self.kwargs.get('pk', None)
+        self.mascota_pk = None
+        if key:
+            self.mascota_pk = SecurityKey.is_valid_key(
+                self.request, key, 'historia_cre')
+            if not self.mascota_pk:
+                return HttpResponseRedirect(reverse_lazy('sad:user-person_search'))
+        return super(HistoriaMascotaCreateView, self).dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(HistoriaMascotaCreateView, self).get_context_data(**kwargs)
+        context['opts'] = self.model._meta
+        context['cmi'] = 'historia'
+        context['title'] = _('Add %s') % capfirst(_('historia'))
+        return context
+
+    def get_form_kwargs(self):
+        kwargs = super(HistoriaMascotaCreateView, self).get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
+
+    def get_initial(self):
+        initial = super(HistoriaMascotaCreateView, self).get_initial()
+        initial = initial.copy()
+        if self.mascota_pk:
+            d = Mascota.objects.get(pk=self.mascota_pk)
+            if d:
+                initial['nombre'] = d.nombre
+                initial['dueño'] = d.dueño.persona
+                initial['fecha_nacimiento'] = d.fecha_nacimiento
+                initial['genero'] = d.genero
+                initial['especie'] = d.especie
+                initial['raza'] = d.raza
+                initial['color'] = d.color
+                initial['cond_corporal'] = d.cond_corporal
+                initial['esterelizado'] = d.esterelizado
+                initial['historia'] = d.historia
+                initial['is_active'] = d.is_active
+                initial['is_actived'] = d.is_actived
+                initial['descripcion'] = d.descripcion
+                initial['person_id'] = d.pk
+        return initial
+
+    @transaction.atomic
+    def form_valid(self, form):
+        sid = transaction.savepoint()
+        try:
+            try:
+                mascota = Mascota.objects.get(
+                    pk=self.request.POST.get("person_id"))
+            except Exception as e:
+                mascota = Mascota()
+                mascota.save()
+                pass
+            mascota.nombre = form.cleaned_data['nombre']
+            mascota.fecha_nacimiento = form.cleaned_data['fecha_nacimiento']
+            mascota.genero = form.cleaned_data['genero']
+            mascota.especie = form.cleaned_data['especie']
+            mascota.raza = form.cleaned_data['raza']
+            mascota.color = form.cleaned_data['color']
+            mascota.cond_corporal = form.cleaned_data['cond_corporal']
+            mascota.esterelizado = form.cleaned_data['esterelizado']
+            mascota.historia = form.cleaned_data['historia']
+            mascota.is_active = form.cleaned_data['is_active']
+            mascota.is_actived = form.cleaned_data['is_actived']
+            mascota.descripcion = form.cleaned_data['descripcion']
+
+            mascota.save()
+            self.object = form.save(commit=False)
+            self.object.mascota = mascota
+            self.object.save()
+
+            msg = _('The %(name)s "%(obj)s" was added successfully.') % {
+                'name': capfirst(force_text(self.model._meta.verbose_name)),
+                'obj': force_text(self.object)
+            }
+            if self.object.id:
+                messages.success(self.request, msg)
+                log.warning(msg, extra=log_params(self.request))
+            return super(HistoriaMascotaCreateView, self).form_valid(form)
+        except Exception as e:
+            try:
+                transaction.savepoint_rollback(sid)
+            except:
+                pass
+            messages.success(self.request, e)
+            log.warning(force_text(e), extra=log_params(self.request))
+            return super(HistoriaMascotaCreateView, self).form_invalid(form)
 
 
 

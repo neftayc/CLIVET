@@ -507,6 +507,7 @@ class UserForm(forms.ModelForm):
             help_text=u'<small class="help-error"></small> %s' % _(
                 u' '),
         )
+        
         self.fields['identity_num'] = forms.CharField(
             label=capfirst(_(u'number')), required=False,
             help_text=u'<small class="help-error"></small> %s' % _(

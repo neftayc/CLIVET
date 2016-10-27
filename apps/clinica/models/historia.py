@@ -23,4 +23,4 @@ class Historial(models.Model):
         verbose_name_plural = "Historias"
 
     def __str__(self):
-        return "%s" % (self.num_historia)
+        return "%s %s %s %s" % ('El paciente  ', self.mascota, '   con N° historia  ', self.num_historia)

@@ -11,8 +11,8 @@ from django.core.exceptions import ValidationError
 
 class Notas(models.Model):
 
-    descripcion = models.CharField(max_length=200)
-
+    ndescripcion = models.CharField(max_length=200, default='Mascota en buen estado')
+    
     class Meta:
         verbose_name = "Nota"
         verbose_name_plural = "Notas"

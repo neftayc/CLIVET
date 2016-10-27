@@ -114,7 +114,7 @@ class ColaMedicaUpdateView(UpdateView):
 
     model = ColaMedica
     form_class = ColaMedicaForm
-    template_name = "clinica/model.html"
+    template_name = "clinica/form/colamedica.html"
     success_url = reverse_lazy("clinica:listar_medica")
 
     @method_decorator(permission_resource_required)

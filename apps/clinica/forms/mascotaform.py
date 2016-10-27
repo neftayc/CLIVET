@@ -13,7 +13,7 @@ from datetime import datetime
 
 from apps.utils.forms import smtSave, btnCancel, btnReset
 
-from ..models.mascota import Mascota, BOOL, BOOL_ESTADO, BOOL_GENERO, TIPO_MASCOTA, CONDICION
+from ..models.mascota import Mascota, BOOL_GENERO, TIPO_MASCOTA, CONDICION
 
 class MascotaForm(forms.ModelForm):
     """Tipo Documeto Form."""
@@ -21,7 +21,7 @@ class MascotaForm(forms.ModelForm):
         """Meta."""
         model = Mascota
         exclude = ()
-        fields = ['nombre','dueño','fecha_nacimiento','genero','especie','raza','color','esterelizado','is_active','is_actived','descripcion',]
+        fields = ['nombre','dueño','fecha_nacimiento','genero','especie','raza','color','esterelizado','is_active','is_actived','descripcion','historia',]
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
@@ -48,7 +48,7 @@ class MascotaForm(forms.ModelForm):
         self.fields['genero'] = forms.ChoiceField(
             label=capfirst(_(u'genero*:')), required=False,
             choices=BOOL_GENERO,
-            widget=forms.RadioSelect(attrs={'default':1,}),
+            widget=forms.RadioSelect(attrs={'default':'macho',}),
             help_text=u'<small class="help-error"></small> %s' % _(
                 u' '),
         )
@@ -123,13 +123,15 @@ class MascotaForm(forms.ModelForm):
             ),
             Row(
                 Div(Field('genero', ),
-            css_class='col-md-3'),
+            css_class='col-md-4'),
                 Div(Field('esterelizado',),
-            css_class='col-md-3'),
+            css_class='col-md-2'),
                 Div(Field('is_active', ),
-            css_class='col-md-3'),
+            css_class='col-md-2'),
                 Div(Field('is_actived',),
-            css_class='col-md-3'),
+            css_class='col-md-2'),
+                Div(Field('historia',),
+            css_class='col-md-2'),
             ),
             Row(
                 Div(Field('descripcion', ),

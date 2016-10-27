@@ -2,6 +2,8 @@ from apps.utils.decorators import permission_resource_required
 from apps.utils.forms import empty
 from apps.utils.security import get_dep_objects, log_params, SecurityKey
 
+from django.http import HttpResponse
+
 from django.conf import settings
 from django.contrib import messages
 from django.core.urlresolvers import reverse_lazy
@@ -10,13 +12,16 @@ from django.utils.decorators import method_decorator
 from django.utils.encoding import force_text
 from django.utils.text import capfirst
 from django.utils.translation import ugettext as _
-from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView, FormView
 from django.views.generic.list import ListView
 
 from ..forms.consultaform import ConsultaForm
 
 from ..models.consulta import Consulta
+from ..models.mascota import Mascota
 
+import csv
+import json
 import logging
 log = logging.getLogger(__name__)
 
@@ -75,7 +80,7 @@ class ConsultaCreateView(CreateView):
     model = Consulta
     form_class = ConsultaForm
     template_name = "clinica/form/consulta.html"
-    success_url = reverse_lazy("clinica:listar_atencion")
+    success_url = reverse_lazy("clinica:crear_atencion")
 
     @method_decorator(permission_resource_required)
     def dispatch(self, request, *args, **kwargs):
@@ -221,3 +226,21 @@ class ConsultaDeleteView(DeleteView):
     def get(self, request, *args, **kwargs):
         """Empresa Delete View get."""
         return self.delete(request, *args, **kwargs)
+
+#//*code in view which returns json data *//
+def lista_doctores1(request):
+    if request.is_ajax:
+        palabra=request.GET.get('term','')
+        doctores=Mascota.objects.filter(nombre__icontains=palabra) [:2]
+        results=[]
+        for doctor in doctores:
+            doctor_json={}
+            doctor_json['label']=doctor.nombre
+            doctor_json['value']=doctor.nombre
+            results.append(doctor_json)
+        data_json=json.dumps(results)
+
+    else:
+        data_json='fail'
+    mimetype="application/json"
+    return HttpResponse(data_json,mimetype)

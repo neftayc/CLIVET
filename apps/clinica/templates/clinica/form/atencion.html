@@ -1,1 +1,45 @@
-<h1>Otros Formularios</h1>
+{% extends "main/dashboard.html" %}
+{% load i18n crispy_forms_tags %}
+{% load l10n %}
+
+{% block breadcrumbs %}
+<a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %} &rsaquo;&rsaquo;</a>
+<a href="/clinica/atencion/listar/">{{ opts.verbose_name_plural|capfirst }}</a>
+&rsaquo; {{ title }}
+{% endblock breadcrumbs %}
+
+{% block content_title %}
+<h3><i class="fa fa-paw"></i> {{ opts.verbose_name_plural|capfirst }} | <small>{{ subtitle }}</small></h3>
+{% endblock content_title %}
+
+{% block content %}
+{% crispy form %}
+
+{% endblock %}
+
+{% block extrajs %}
+{{ block.super }}
+
+<script type="text/javascript">
+$('#id_test_image').fileinput({
+	showUpload: false,
+	showRemove: false,
+	initialCaption: '{{ form.test_image.value }}',
+	initialPreview: ['<img src="{{ MEDIA_URL }}{{ form.test_image.value }}">',],
+	browseClass: 'btn btn-warning',
+	browseLabel: '<span class="hidden-xs">{% trans "Pick image" %}</span>',
+	browseIcon: '<i class="btn-icon-only glyphicon glyphicon-picture"></i>',
+});
+
+$('#id_fecha_programada').datetimepicker({
+	format: 'YYYY-MM-DD',
+		//format: 'YYYY-MM-DD hh:mm:ss', //pata datatimes
+		language: '{{ LANGUAGE_CODE }}',
+		pickTime: false,
+		//showMeridian: true,
+		autoclose: true,
+		todayHighlight: true,
+	});
+
+</script>
+{% endblock extrajs %}

@@ -68,12 +68,12 @@ class HistoriaAdmin(admin.ModelAdmin):
 class ColaMedicaAdmin(admin.ModelAdmin):
     model = ColaMedica
     search_fields = ('historia',)
-    list_display = ('historia', 'fecha','descripcion','estado', )
+    list_display = ('historia', 'fecha','descripcion',)
 
 class AtencionAdmin(admin.ModelAdmin):
     model = Atencion
     search_fields = ('colamedica__historia__num_historia',)
-    list_display = ('get_numhistoria', 'consulta','notas','vacunacion','get_hmascota', 'get_hmascota', 'get_hdueño', )
+    list_display = ('get_numhistoria','get_hmascota', 'get_hmascota', 'get_hdueño', )
 
     def get_numhistoria(self, obj):
         return obj.colamedica.historia.num_historia

@@ -8,24 +8,192 @@ from crispy_forms.layout import Field, Div, Row, HTML
 from crispy_forms.bootstrap import FormActions, TabHolder, Tab
 
 from apps.utils.forms import smtSave, btnCancel, btnReset
-
+from django.utils.timezone import get_current_timezone
+from datetime import datetime
 
 from ..models.atencion import Atencion
-from ..models.colamedica import ColaMedica
+from ..models.vacunacion import Vacunacion, VACUNA
+from ..models.colamedica import ColaMedica, ESTADOS
 
 class AtencionForm(forms.ModelForm):
     """Tipo Documeto Form."""
+
+    person_id = forms.CharField(widget=forms.HiddenInput(), required=False,)
+    historia = forms.CharField(widget=forms.HiddenInput(), required=False,)
     class Meta:
         """Meta."""
         model = Atencion
         exclude = ()
+        fields = ['anamnesis','diagnostico','dx','hallasgos_clinicos',]
 
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        self.object = kwargs.pop('object', None)
+
+        super(AtencionForm, self).__init__(*args, **kwargs)
+
+        self.fields['descripcion'] = forms.CharField(
+            label=capfirst(_(u'Descripcion:')), required=True,
+            help_text=u'<small class="help-error"></small> %s' % _(
+                u' '),
+        )
+        self.fields['estado'] = forms.BooleanField(
+            label=capfirst(_(u'estado:')), required=False,
+            help_text=u'<small class="help-error"></small> %s' % _(
+                u' '),
+        )
+        #form para consultas
+        self.fields['anamnesis'] = forms.CharField(
+            label=capfirst(_(u'Anamnesis y/o Descripcion:')), required=True,
+            help_text=u'<small class="help-error"></small> %s' % _(
+                u' '),
+        )
+        self.fields['diagnostico'] = forms.CharField(
+            label=capfirst(_(u'diagnostico:')), required=True,
+            help_text=u'<small class="help-error"></small> %s' % _(
+                u' '),
+        )
+        self.fields['dx'] = forms.CharField(
+            label=capfirst(_(u'dx:')), required=True,
+            help_text=u'<small class="help-error"></small> %s' % _(
+                u' '),
+        )
+        self.fields['hallasgos_clinicos'] = forms.CharField(
+            label=capfirst(_(u'hallasgos_clinicos:')), required=False,
+            help_text=u'<small class="help-error"></small> %s' % _(
+                u' '),
+        )
+        self.fields['motivo_atencion'] = forms.CharField(
+            label=capfirst(_(u'motivo_atencion:')), required=True,
+            help_text=u'<small class="help-error"></small> %s' % _(
+                u' '),
+        )
+        self.fields['observacion'] = forms.CharField(
+            label=capfirst(_(u'observacion:')), required=True,
+            help_text=u'<small class="help-error"></small> %s' % _(
+                u' '),
+        )
+        self.fields['pronostico'] = forms.CharField(
+            label=capfirst(_(u'pronostico:')), required=True,
+            help_text=u'<small class="help-error"></small> %s' % _(
+                u' '),
+        )
+        self.fields['pruebas_auxiliares'] = forms.CharField(
+            label=capfirst(_(u'pruebas_auxiliares:')), required=True,
+            help_text=u'<small class="help-error"></small> %s' % _(
+                u' '),
+        )
+        self.fields['tratamiento'] = forms.CharField(
+            label=capfirst(_(u'tratamiento:')), required=True,
+            help_text=u'<small class="help-error"></small> %s' % _(
+                u' '),
+        )
+        #form para vacunacion
+        self.fields['vacuna'] = forms.ChoiceField(
+            label=capfirst(_(u'Vacuna')), required=False,
+            choices=VACUNA,
+            help_text=u'<small class="help-error"></small> %s' % _(
+                u' '),
+        )
+
+        self.fields['fecha_programada'] = forms.DateTimeField(
+            label=_(u'Fecha Programada'), required=False,
+            initial=datetime.now().replace(tzinfo=get_current_timezone()),
+            widget=forms.DateTimeInput(format='%Y-%m-%d %H:%M:%S',),
+            input_formats=(
+                '%d/%m/%Y', '%d/%m/%y', '%d-%m-%Y', '%d-%m-%y', '%Y-%m-%d',
+                '%Y-%m-%d %H:%M:%S'),
+            help_text=u'<small class="help-error"></small> %s' % _(
+                u'Some useful help text.'),
+        )
+        self.fields['Observacion'] = forms.CharField(
+            label=capfirst(_(u'Observacion:')), required=False,
+            help_text=u'<small class="help-error"></small> %s' % _(
+                u' '),
+        )
+        #form notas
+        self.fields['ndescripcion'] = forms.CharField(
+            label=capfirst(_(u'Descripcion:')), required=False,
+            help_text=u'<small class="help-error"></small> %s' % _(
+                u' '),
+        )
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Field('person_id',),
+            TabHolder(
+                Tab(_('Atencion'),
+                    Row(
+                        Div(Field('descripcion', css_class='input-required'),
+                        css_class='col-md-12'),
+                        Div(Field('estado', ),
+                        css_class='col-md-6'),
+                    ),
+                    Row(
+                        Div(Field('mascota', css_class='input-required'),
+                        css_class='col-md-12'),
+                        Div(Field('colamedica', ),
+                        css_class='col-md-6'),
+                        Div(Field('consulta', ),
+                        css_class='col-md-6'),
+                        Div(HTML('<a href="/clinica/consulta/crear/" class="btn btn-warning btn-sm text-bold" rel="tooltip" title="Agregar consulta"><i class="btn-icon-only fa fa-hospital-o"></i></a>', ),
+                        css_class='col-md-6'),
+                        Div(Field('notas', ),
+                        css_class='col-md-6'),
+                        Div(Field('vacunacion', ),
+                        css_class='col-md-6'),
+                    ),
+                ),
+                Tab(_('Consulta'),
+                    Row(
+                        Div(Field('anamnesis', css_class='input-required'),
+                        css_class='col-md-12'),
+                        Div(Field('diagnostico', ),
+                        css_class='col-md-6'),
+                        Div(Field('dx', ),
+                        css_class='col-md-6'),
+                        Div(Field('hallasgos_clinicos', ),
+                        css_class='col-md-6'),
+                        Div(Field('motivo_atencion', ),
+                        css_class='col-md-6'),
+                        Div(Field('observacion', ),
+                        css_class='col-md-6'),
+                        Div(Field('pronostico', ),
+                        css_class='col-md-6'),
+                        Div(Field('pruebas_auxiliares', ),
+                        css_class='col-md-6'),
+                        Div(Field('tratamiento', ),
+                        css_class='col-md-6'),
+                    ),
+                ),
+                Tab(_('Vacuna'),
+                    Row(
+                        Div(Field('vacuna', css_class='input-required'),
+                        css_class='col-md-6'),
+                        Div(Field('fecha_programada', ),
+                        css_class='col-md-6'),
+                        Div(Field('Observacion', ),
+                        css_class='col-md-12'),
+                    ),
+                ),
+                Tab(_('Notas'),
+                    Row(
+                        Div(Field('descripcion', css_class='input-required'),
+                        css_class='col-md-12'),
+                    ),
+                ),
+            ),
+            Row(
+                FormActions(
+                    smtSave(),
+                    btnCancel(),
+                ),
+            ),
+        )
 class AtencionMascotaForm(forms.ModelForm):
-
     """ """
     class Meta:
         model = ColaMedica
-        fields = []
+        exclude= []
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
@@ -110,11 +278,12 @@ class AtencionMascotaForm(forms.ModelForm):
             help_text=u'<small class="help-error"></small> %s' % _(
                 u' '),
         )
+
+
         self.helper = FormHelper()
         self.helper.layout = Layout(
             TabHolder(
-                Tab(
-                    _('Perfil'),
+                Tab(_('Perfil'),
                     Row(
                         Div(HTML('''
                                 <div class="form-group">
@@ -195,6 +364,7 @@ class AtencionMascotaForm(forms.ModelForm):
             ),
             Row(
                 FormActions(
+                    smtSave(),
                     btnCancel(),
                 ),
             ),

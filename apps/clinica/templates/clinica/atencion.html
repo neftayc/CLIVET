@@ -3,7 +3,7 @@
 {% load l10n humanize %}
 
 {% block breadcrumbs %}
-<a href="{# url 'accounts:index' #}"><i class="fa fa-home"></i> {% trans 'Home' %} &rsaquo;&rsaquo;</a>
+<a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %} &rsaquo;&rsaquo;</a>
  {{ opts.verbose_name_plural|capfirst }}
 {% endblock breadcrumbs %}
 
@@ -16,18 +16,19 @@
 $(function() {
     $('table').kgrid({
         form_data : ['{{f}}', '{{q}}'],
-        form_to   : '/clinica/colamedica/listar/?f={{f}}&q={{q}}',
+        form_to   : '/clinica/atencion/listar/?f={{f}}&q={{q}}',
         order_attr: 'class=""',
-        order_to  : '/clinica/colamedica/listar/?f={{f}}&q={{q}}',
+        order_to  : '/clinica/atencion/listar/?f={{f}}&q={{q}}',
     });
 });
 </script>
 <div class="btn-toolbar btn-toolbar-top">
     <div class="row">
         <div class="btn-actions">
-            <a href="{% url 'clinica:crear_medica' %}" class="btn btn-primary text-bold" title="Agregar Tipo Documento Identidad">
+            <a href="#" class="btn btn-primary text-bold" title="Agregar Tipo Documento Identidad">
                 <i class="fa fa-plus"></i>
                 <span class="hidden-xs"> Agregar</span>
+                <span class="hidden-xs"> {{ cantidad }} {{o}}</span>
             </a>
         </div>
     </div>
@@ -37,7 +38,6 @@ $(function() {
         <thead>
             <tr>
                 <th>#</th>
-                <th class="col-hidden" data-search="fecha" data-order="fecha">Hora</th>
                 <th class="col-hidden">N° Historia</th>
                 <th class="col-hidden">Descripcion</th>
                 <th class="col-hidden col-blocked text-center">Estado</th>
@@ -53,16 +53,9 @@ $(function() {
                     {{ forloop.counter }}
                     {% endif %}
                 </td>
-                <td>{{ d.fecha|time }}</td>
-                <td>{{ d.historia }}</td>
-                <td>{{ d.descripcion }}</td>
-                <td class="text-center">
-                    <span class="label label-{{ d.estado|yesno:'success,danger' }}">
-                        {%  if d.estado %}{% trans 'Atendido ' %}
-                        {% else %}{% trans 'En espera ' %}
-                        {% endif %}
-                    </span>
-                </td>
+                <td>{{ d.colamedica }}</td>
+                <td>{{ d.colamedica.descripcion }}</td>
+                <td class="text-center">{{ d.anamnesis }}</td>
                 <td class="text-center">
                     <a href="{% url 'clinica:colamedica_detail' d.pk|key:'aten_det' %}" class="btn btn-info btn-sm text-bold" title="Atencion mascota" rel="tooltip">
                         <i class="btn-icon-only fa fa-paw"></i>

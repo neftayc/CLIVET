@@ -35,13 +35,13 @@
                 <a href="{% url 'compras:proveedor_list' %}"><i class="fa fa-fw fa-wrench"></i> Compras</a>
             </li>
             <li>
-                <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Servicios <i class="fa fa-fw fa-caret-down"></i></a>
-                <ul id="demo" class="collapse">
+                <a href="javascript:;" data-toggle="collapse" data-target="#servicios"><i class="fa fa-fw fa-arrows-v"></i> Servicios <i class="fa fa-fw fa-caret-down"></i></a>
+                <ul id="servicios" class="collapse">
                     <li>
-                        <a href="#">Servicio Item</a>
+                        <a href="{% url 'clinica:crear_consulta' %}"><i class="fa fa-fw fa-wrench"></i> Consultas</a>
                     </li>
                     <li>
-                        <a href="#">Servicio Item</a>
+                        <a href="{% url 'clinica:listar_notas' %}"><i class="fa fa-fw fa-wrench"></i> Notas</a>
                     </li>
                 </ul>
             </li>

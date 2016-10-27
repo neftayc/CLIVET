@@ -2,7 +2,9 @@ from apps.utils.decorators import permission_resource_required
 from apps.utils.forms import empty
 from apps.utils.security import get_dep_objects, log_params, SecurityKey
 from django.views import generic
+from django.db import transaction
 
+from django.shortcuts import render, redirect, get_object_or_404
 from django.conf import settings
 from django.contrib import messages
 from django.core.urlresolvers import reverse_lazy
@@ -13,17 +15,17 @@ from django.utils.text import capfirst
 from django.utils.translation import ugettext as _
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
+from django.views.generic import TemplateView
 
 from ..forms.atencionform import AtencionForm, AtencionMascotaForm
 
 from ..models.atencion import Atencion
 from ..models.colamedica import ColaMedica
-
 import logging
 log = logging.getLogger(__name__)
 
 # Create your views here.
-class AtencionListView(generic.ListView):
+class AtencionListView(TemplateView):
     u"""Tipo Documento Identidad."""
 
     model = Atencion
@@ -52,13 +54,10 @@ class AtencionListView(generic.ListView):
         return self.model.objects.filter(
             **{column_contains: self.q}).order_by(self.o)
 
-    def get_context_data(self, **kwargs):
-        """
-        Tipo Documento Identidad ListView List get context.
-        Funcion con los primeros datos iniciales para la carga del template.
-        """
-        context = super(AtencionListView,
-                        self).get_context_data(**kwargs)
+    def get_context_data(self, request, **kwargs):
+        context = super(AtencionListView, self).get_context_data(request, **kwargs)
+        context['atencion'] = Atencion.objects.filter(colamedica = request.historia.mascota ).order_by('anamnesis')
+        context['cantidad'] = context['atencion'].count()
         context['opts'] = self.model._meta
         # context['cmi'] = 'menu' #  Validacion de manual del menu
         context['title'] = ('Seleccione %s para cambiar'
@@ -73,42 +72,81 @@ class AtencionListView(generic.ListView):
 
 class AtencionCreateView(CreateView):
     """Tipo Documento Identidad."""
-
     model = Atencion
     form_class = AtencionForm
-    template_name = "clinica/model.html"
-    success_url = reverse_lazy("clinica:listar_atencion")
+    template_name = "clinica/form/atencion.html"
+    success_url = reverse_lazy("clinica:listar_medica")
 
     @method_decorator(permission_resource_required)
     def dispatch(self, request, *args, **kwargs):
         """dispatch."""
-        return super(AtencionCreateView,
-                     self).dispatch(request, *args, **kwargs)
+        key = self.kwargs.get('pk', None)
+        self.medica_pk = None
+        if key:
+            self.medica_pk = SecurityKey.is_valid_key(
+                self.request, key, 'medica_cre')
+            if not self.medica_pk:
+                return HttpResponseRedirect(reverse_lazy('sad:user-person_search'))
+        return super(AtencionCreateView, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        """
-        Tipo Documento Identidad ListView List get context.
-        Funcion con los primeros datos iniciales para la carga del template.
-        """
-        context = super(AtencionCreateView,
-                        self).get_context_data(**kwargs)
+        context = super(AtencionCreateView, self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
-        # context['cmi'] = 'tipodoc'
-        context['title'] = ('Agregar %s') % ('Tipo Documento')
+        context['cmi'] = 'atencion'
+        context['title'] = _('Add %s') % capfirst(_('atencion'))
         return context
 
+    def get_form_kwargs(self):
+        kwargs = super(AtencionCreateView, self).get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
+
+    def get_initial(self):
+        initial = super(AtencionCreateView, self).get_initial()
+        initial = initial.copy()
+        if self.medica_pk:
+            d = ColaMedica.objects.get(pk=self.medica_pk)
+            if d:
+                initial['historia'] = d.historia.num_historia
+                initial['descripcion'] = d.descripcion
+                initial['estado'] = d.estado
+                initial['person_id'] = d.pk
+        return initial
+
+    @transaction.atomic
     def form_valid(self, form):
-        """"Empresa Crete View  form valid."""
-        self.object = form.save(commit=True)
+        sid = transaction.savepoint()
+        try:
+            try:
+                colamedica = ColaMedica.objects.get(
+                    pk=self.request.POST.get("person_id"))
+            except Exception as e:
+                colamedica = ColaMedica()
+                colamedica.save()
+            colamedica.descripcion = form.cleaned_data['descripcion']
+            colamedica.estado = form.cleaned_data['estado']
 
-        msg = _(' %(name)s "%(obj)s" fue creado satisfactoriamente.') % {
-            'name': capfirst(force_text(self.model._meta.verbose_name)),
-            'obj': force_text(self.object)
-        }
+            colamedica.save()
+            self.object = form.save(commit=False)
+            self.object.colamedica = colamedica
+            self.object.save()
 
-        messages.success(self.request, msg)
-        log.warning(msg, extra=log_params(self.request))
-        return super(AtencionCreateView, self).form_valid(form)
+            msg = _('The %(name)s "%(obj)s" was added successfully.') % {
+                'name': capfirst(force_text(self.model._meta.verbose_name)),
+                'obj': force_text(self.object)
+            }
+            if self.object.id:
+                messages.success(self.request, msg)
+                log.warning(msg, extra=log_params(self.request))
+            return super(AtencionCreateView, self).form_valid(form)
+        except Exception as e:
+            try:
+                transaction.savepoint_rollback(sid)
+            except:
+                pass
+            messages.success(self.request, e)
+            log.warning(force_text(e), extra=log_params(self.request))
+            return super(AtencionCreateView, self).form_invalid(form)
 
 
 class AtencionUpdateView(UpdateView):
@@ -186,11 +224,6 @@ class AtencionDeleteView(DeleteView):
                      self).dispatch(request, *args, **kwargs)
 
     def delete(self, request, *args, **kwargs):
-        """
-        Empresa Delete View delte.
-        Función para eliminar la empresa sobre un metodo que verifica las
-        dependencias de que tiene la tabla mostrando un mensaje de validacion.
-        """
         try:
             d = self.get_object()
             deps, msg = get_dep_objects(d)
@@ -287,4 +320,14 @@ class AtencionMedicaView(generic.DetailView):
                 'status': UserStatus.objects.filter(user=self.object).order_by('-created_at'),
             }
         context['form'] = AtencionMascotaForm(initial=initial)
+        return context
+
+
+
+class MainAtencionesView(TemplateView):
+    template_name = 'clinica/atencion.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(MainAtencionesView, self).get_context_data(**kwargs)
+        context['atencion'] = Atencion.objects.filter(anamnesis = 'dsdsd' ).order_by('created_ath')
         return context

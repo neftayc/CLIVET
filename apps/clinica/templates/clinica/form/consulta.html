@@ -1,113 +1,34 @@
 {% extends "main/dashboard.html" %}
-{% load i18n app_security %}
-{% load l10n humanize %}
+{% load i18n crispy_forms_tags %}
+{% load l10n %}
 
 {% block breadcrumbs %}
-<a href="{# url 'accounts:index' #}">{% trans 'Home' %}</a>
+<a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %} &rsaquo;&rsaquo;</a>
+<a href="/clinica/consulta/listar/">{{ opts.verbose_name_plural|capfirst }}</a>
 &rsaquo; {{ title }}
 {% endblock breadcrumbs %}
 
 {% block content_title %}
-{{ opts.verbose_name_plural|capfirst }} | <small>{{ title }}</small>
+<h3><i class="fa fa-paw"></i> {{ opts.verbose_name_plural|capfirst }} | <small>{{ subtitle }}</small></h3>
 {% endblock content_title %}
 
 {% block content %}
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">Nueva Atencion Clinica de Roky</h4>
-        </div>
-        <div class="panel-body">
-            <form  class="" action="" method="post">
-<!--                <div class="row">
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <script type="text/javascript">
-                                //<![CDATA[
-                                var  today = new Date();
-                                var m = today.getMonth() + 1;
-                                var mes = (m < 10) ? '0' + m : m;
-                                document.write('<label>Fecha:</label></br> '+today.getDate(),'/' +mes,'/'+today.getYear());
-                                //]]>
-                            </script>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <script type="text/javascript">
-                                var d = new Date();
-                                document.write('<label>Hora:</label></br>'+d.getHours(),':'+d.getMinutes(),':'+d.getSeconds());
-                            </script>
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="form-group">
-                            <label for="motivo">Motivo de Atención:</label>
-                            <input type="email" class="form-control" id="motivo" placeholder="Ingrese el porque de la atención">
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-md-2">
-                        <div class="input-group">
-                            <span class="input-group-addon" id="t">T°</span>
-                            <input type="text" class="form-control" placeholder="Username" aria-describedby="t">
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="input-group">
-                            <span class="input-group-addon" id="basic-addon1">FC</span>
-                            <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="input-group">
-                            <span class="input-group-addon" id="basic-addon1">FR</span>
-                            <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="input-group">
-                            <span class="input-group-addon" id="basic-addon1">Kg</span>
-                            <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="input-group">
-                            <span class="input-group-addon" id="basic-addon1">%</span>
-                            <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="input-group">
-                            <span class="input-group-addon" id="basic-addon1">TLC</span>
-                            <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
-                        </div>
-                    </div>
-                </div>
-                <hr>-->
-                <div class="row">
-                    {% csrf_token %}
-                    {{ form }}
-                </div>
-                <button type="submit" class="btn btn-primary text-bold">
-                    <i class="btn-icon-onlyx fa fa-save"></i>
-                    <span> Grabar</span>
-                </button>
-                <a href="{% url 'clinica:listar_atencion' %}" class="btn btn-danger btn-back text-bol">
-                    <i class="btn-icon-onlyx fa fa-ban"></i>
-                    <span class="hidden-xs"> Cancel</span>
-                </a>
-            </form>
-        </div>
-    </div><!-- /.modal--content -->
-    {% endblock content %}
-    {% block extrajs %}
-    {{ block.super }}
+<div class="ui-widget">
+  <label for="tags3">Tags: </label>
+  <input id="tags3">
+</div>
+{% crispy form %}
+{% endblock %}
 
-    <script type="text/javascript">
-    $('#myModal').modal({
-      keyboard: false
-    })
-    </script>
-    {% endblock extrajs %}
+{% block extrajs %}
+{{ block.super }}
+<script type="text/javascript">
+	$(function() {
+		$("#tags3").autocomplete({
+			minLength:1,
+			source: "/clinica/consulta/solo_url/"
+		});
+	});
+</script>
+
+{% endblock extrajs %}

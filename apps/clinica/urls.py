@@ -1,17 +1,20 @@
 from django.conf.urls import url
 
-from .views.atencionviews import (AtencionListView, AtencionCreateView, AtencionUpdateView, AtencionDeleteView, AtencionMedicaView)
+from .views.atencionviews import (AtencionListView, AtencionCreateView, AtencionUpdateView, AtencionDeleteView, AtencionMedicaView, MainAtencionesView)
 from .views.colamedicaviews import (ColaMedicaListView, ColaMedicaCreateView, ColaMedicaUpdateView, ColaMedicaDeleteView)
-from .views.consultaviews import (ConsultaListView, ConsultaCreateView, ConsultaUpdateView, ConsultaDeleteView)
-from .views.historiaviews import (HistoriaListView, HistoriaCreateView, HistoriaUpdateView, HistoriaDeleteView, HistoriaMascotaDetailView)
-from .views.mascotaviews import (MascotaListView, MascotaCreateView, MascotaUpdateView, MascotaDeleteView, MascotaUpdateActiveView)
+from .views.consultaviews import (ConsultaListView, ConsultaCreateView, ConsultaUpdateView, ConsultaDeleteView, lista_doctores1)
+from .views.historiaviews import (HistoriaListView, HistoriaCreateView, HistoriaUpdateView, HistoriaDeleteView, HistoriaMascotaDetailView, HistoriaMascotaCreateView)
+from .views.mascotaviews import (MascotaListView, MascotaCreateView, MascotaUpdateView, MascotaUpdateActiveView)
 from .views.notasviews import (NotasListView, NotasCreateView, NotasUpdateView, NotasDeleteView)
 from .views.vacunacionviews import (VacunacionListView, VacunacionCreateView, VacunacionUpdateView, VacunacionDeleteView)
 
 urlpatterns = [
     #Atencion
     url(r'^atencion/listar/$', AtencionListView.as_view(), name="listar_atencion"),
-    url(r'^atencion/crear/$', AtencionCreateView.as_view(), name="crear_atencion"),
+
+    url(r'^atencion/mainlistar/$', MainAtencionesView.as_view(), name="mainlistar"),
+
+    url(r'^atencion/crear/(?P<pk>.*)/$', AtencionCreateView.as_view(), name="crear_atencion"),
     url(r'^atencion/actualizar/(?P<pk>.*)/$', AtencionUpdateView.as_view(), name="actualizar_atencion"),
     url(r'^atencion/eliminar/(?P<pk>.*)/$', AtencionDeleteView.as_view(), name="eliminar_atencion"),
 
@@ -28,10 +31,12 @@ urlpatterns = [
     url(r'^consulta/crear/$', ConsultaCreateView.as_view(), name="crear_consulta"),
     url(r'^consulta/actualizar/(?P<pk>.*)/$', ConsultaUpdateView.as_view(), name="actualizar_consulta"),
     url(r'^consulta/eliminar/(?P<pk>.*)/$', ConsultaDeleteView.as_view(), name="eliminar_consulta"),
-
+    url(r'^consulta/solo_url/$', lista_doctores1),
     #Historia
     url(r'^historia/listar/$', HistoriaListView.as_view(), name="listar_historia"),
     url(r'^historia/crear/$', HistoriaCreateView.as_view(), name="crear_historia"),
+    url(r'^historia/mascota_add/(?P<pk>.*)/$', HistoriaMascotaCreateView.as_view(), name='crear_historiamascota'),
+
     url(r'^historia/actualizar/(?P<pk>.*)/$', HistoriaUpdateView.as_view(), name="actualizar_historia"),
     url(r'^historia/eliminar/(?P<pk>.*)/$', HistoriaDeleteView.as_view(), name="eliminar_historia"),
     url(r'^historia/detail/(?P<pk>.*)/$', HistoriaMascotaDetailView.as_view(), name='historia_detail'),
@@ -40,7 +45,6 @@ urlpatterns = [
     url(r'^mascota/listar/$', MascotaListView.as_view(), name="listar_mascotas"),
     url(r'^mascota/crear/$', MascotaCreateView.as_view(), name="crear_mascota"),
     url(r'^mascota/actualizar/(?P<pk>.*)/$', MascotaUpdateView.as_view(), name="actualizar_mascota"),
-    url(r'^mascota/eliminar/(?P<pk>.*)/$', MascotaDeleteView.as_view(), name="eliminar_mascota"),
     url(r'^mascota/state/(?P<state>[\w\d\-]+)/(?P<pk>.*)/$',
         MascotaUpdateActiveView.as_view(), name='mascota-state'),
 
