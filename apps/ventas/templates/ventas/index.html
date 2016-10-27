@@ -1,105 +1,110 @@
-{% extends "main/dashboard.html" %} {% block title %}Recepcion{% endblock title %}
-{% block content %}
-<div class="container-fluid panel panel-default">
-	<h1>Recepcion</h1>
-	<div class="row">
-		<div class="col-md-8">
-			<div class="panel panel-default ">
-				<p><span class="glyphicon glyphicon-shopping-cart btn-lg" aria-hidden="true"></span>Añadir Productos o Servicios a la cuenta del Cliente</p>
-				<div class="form-group ">
-					<label class="sr-only" for="producto"></label>
-					<div class="input-group col-md-12">
-						<div class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></div>
-						<input type="text" class="form-control" id="producto" placeholder="Producto o Servicio">
-					</div>
-				</div>
-			</div>
-			<div class="btn-group">
-				<button type="button" class="btn btn-danger">Ventass Pendientes</button>
-				<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				<span class="">4</span>
-				<span class="sr-only">Toggle Dropdown</span>
-				</button>
-				<ul class="dropdown-menu">
-					<li><a href="#">cliente 1</a></li>
-					<li><a href="#">cliente 2</a></li>
-					<li><a href="#">cliente 3</a></li>
-					<li><a href="#">Cliente 4</a></li>
-				</ul>
-			</div>
-			<div class="panel panel-default">
-				<table class="table table-condensed">
-					<thead>
-						<tr>
-							<th>Cantidad</th>
-							<th>Descripcion</th>
-							<th>Precio unitario</th>
-							<th>Importe</th>
-							<th>Opciones</th>
-						</tr>
-					</thead>
-					<tfoot>
-					</tfoot>
-					<tbody>
-						<tr>
-							<td>
-								<input type="text" name="">
-							</td>
-							<td>Croquetas-pollo</td>
-							<td>1.00</td>
-							<td>20</td>
-							<td>
-								<button type="button" class="btn btn-default btn-md">
-								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Quitar
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<input type="text" name="">
-							</td>
-							<td>Croquetas-pollo</td>
-							<td>1.00</td>
-							<td>20</td>
-							<td>
-								<button type="button" class="btn btn-default btn-md">
-								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Quitar
-								</button>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="panel panel-default">
-				<p><span class="glyphicon glyphicon-user btn-lg" aria-hidden="true"></span>Seleccionar Cliente (Opcional)</p>
-				<div class="form-group">
-					<label class="sr-only" for="cliente"></label>
-					<div class="input-group">
-						<div class="input-group-btn">
-							<button type="submit" class="btn btn-primary">Nuevo Cliente</button>
-						</div>
-						<input type="text" class="form-control" id="cliente" placeholder="Nombre o Documento">
-						<div class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></div>
-					</div>
-				</div>
-			</div>
-			<div class="panel panel-default container ">
-				<p><span class="glyphicon glyphicon-shopping-cart btn-lg" aria-hidden="true"></span>Resumen de la Venta</p>
-				<div class="form-group">
-					<label class="sr-only" for="cliente"></label>
-					<div class="input-group">
-						<div class="input-group-btn">
-							<button type="submit" class="btn btn-primary">Nuevo Cliente</button>
-						</div>
-						<input type="text" class="form-control" id="cliente" placeholder="Nombre o Documento">
-						<div class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+{% extends "main/dashboard.html" %} {% load i18n app_security %} {% load l10n humanize %} {% block breadcrumbs %}
+<a href="{# url 'accounts:index' #}">{% trans 'Home' %}</a> &rsaquo; {{ title }} {% endblock breadcrumbs %} {% block content_title %} {{ opts.verbose_name_plural|capfirst }} | <small>{{ title }}</small> {% endblock content_title %} {% block content %}
+<div class="container-fluid">
+    <div class="btn-group col-md-offset-10">
+        <button type="button" class="btn btn-danger">Ventass Pendientes</button>
+        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="">4</span>
+            <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="#">cliente 1</a></li>
+            <li><a href="#">cliente 2</a></li>
+            <li><a href="#">cliente 3</a></li>
+            <li><a href="#">Cliente 4</a></li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-default ">
+                <p><span class="glyphicon glyphicon-shopping-cart btn-lg" aria-hidden="true"></span>Añadir Productos o Servicios a la cuenta del Cliente</p>
+                <div class="form-group ">
+                    <label class="sr-only" for="producto"></label>
+                    <div class="input-group col-md-12">
+                        <div class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></div>
+                        <input type="text" class="form-control" id="producto" placeholder="Producto o Servicio">
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Cantidad</th>
+                            <th>Descripcion</th>
+                            <th>Precio unitario</th>
+                            <th>Importe</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                    </tfoot>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input type="text" name="">
+                            </td>
+                            <td>Croquetas-pollo</td>
+                            <td>1.00</td>
+                            <td>20</td>
+                            <td>
+                                <button type="button" class="btn btn-default btn-md">
+                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Quitar
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" name="">
+                            </td>
+                            <td>Croquetas-pollo</td>
+                            <td>1.00</td>
+                            <td>20</td>
+                            <td>
+                                <button type="button" class="btn btn-default btn-md">
+                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Quitar
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default container row">
+                <p><span class="glyphicon glyphicon-user btn-lg" aria-hidden="true"></span>Seleccionar Cliente (Opcional)</p>
+                <div class="form-group">
+                    <label class="sr-only" for="cliente"></label>
+                    <div class="input-group">
+                        <div class="input-group-btn">
+                            <button type="submit" class="btn btn-primary">Nuevo Cliente</button>
+                        </div>
+                        <input type="text" class="form-control" id="cliente" placeholder="Nombre o Documento">
+                        <div class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default container row">
+                <p><span class="glyphicon glyphicon-shopping-cart btn-lg" aria-hidden="true"></span>Resumen de la Venta</p>
+                <div class="col-md-6">
+                    <div>
+                        <p>Cantidad de articulos<span>0</span></p>
+                    </div>
+                    <div>
+                        <p>Sub Total<span>S/. 0.00</span></p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div>
+                        <p>Total:<span>S/. 0.00</span></p>
+                    </div>
+                    <div>
+                        <p>Monto a pagar<span>S/. 0.00 </span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- /#page-wrapper -->
 {% endblock content %}

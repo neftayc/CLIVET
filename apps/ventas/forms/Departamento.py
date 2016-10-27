@@ -10,4 +10,6 @@ class DepartamentoForm(forms.ModelForm):
 
         model = Departamento
         exclude = ()
-        # widgets = {
+        widgets = {
+            'descripcion': forms.TextInput(attrs={'class': 'col-md-8'}),
+        }

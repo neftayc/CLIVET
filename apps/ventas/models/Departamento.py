@@ -1,3 +1,4 @@
+# encoding=utf-8
 from django.db import models
 
 
@@ -9,4 +10,4 @@ class Departamento(models.Model):
         verbose_name_plural = "Departamentos"
 
     def __str__(self):
-        return "%s" % (self.descripcion)
+        return self.descripcion
