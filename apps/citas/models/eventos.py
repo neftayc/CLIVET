@@ -6,7 +6,8 @@ from django.db import models
 class Evento(models.Model):
     u"""Modelo Evento."""
 
-    descripcion = models.TextField()
+    title = models.CharField(max_length=100)
+    color = models.CharField(max_length=24)
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -18,4 +19,4 @@ class Evento(models.Model):
 
     def __str__(self):
         """Str."""
-        return "%s" % self.descripcion
+        return "%s" % self.title

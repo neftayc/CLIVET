@@ -7,9 +7,11 @@ from apps.params.models import Person
 class Cliente(models.Model):
     u"""Modelo Cliente."""
     persona = models.OneToOneField(Person)
-    direccion = models.CharField(max_length=50)
-    ciudad = models.CharField(max_length=50)
-    telefono = models.IntegerField()
+    direccion = models.CharField(max_length=50, blank=True)
+    ciudad = models.CharField(max_length=50, blank=True)
+    email = models.EmailField('E-mail', blank=True)
+    telefono = models.IntegerField(blank=True, null=True)
+
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 

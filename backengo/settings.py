@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.flatpages',
 
     # third-party tools
-    #'south', en la 1.7 ya no, ahora es django_migrations
+    # 'south', en la 1.7 ya no, ahora es django_migrations
     'crispy_forms',
 
 

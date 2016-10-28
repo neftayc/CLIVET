@@ -39,6 +39,7 @@ urlpatterns = [
     url(r'^', include('apps.ventas.urls', namespace='ventas')),
     url(r'^conf/', include('apps.conf.urls', namespace="conf")),
     url(r'^compras/', include('apps.compras.urls', namespace='compras')),
+    url(r'^cita/', include('apps.citas.urls', namespace='citas')),
 
 
     # http://stackoverflow.com/questions/19625102/django-javascript-translation-not-working

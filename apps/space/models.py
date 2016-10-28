@@ -9,8 +9,6 @@ Descripcion: Registro de los modelos de la app space
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils.text import capfirst
-from django.dispatch import receiver
-from django.db.models import signals
 from unicodedata import normalize
 from django.core.exceptions import ValidationError
 
@@ -80,8 +78,8 @@ class Solution(models.Model):
             raise ValidationError({
                 'name':
                 (_(u'%(model_name)s with this %(field_label)s already exists.') % {
-                'model_name': _('Solution'),
-                'field_label': capfirst(_('name')),
+                    'model_name': _('Solution'),
+                    'field_label': capfirst(_('name')),
                 },),
             })
 

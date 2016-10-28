@@ -8,6 +8,9 @@ from apps.sad.models import User
 class Trabajador(models.Model):
     u"""Modelo Trabajador."""
     persona = models.OneToOneField(Person)
+    is_veterinario = models.BooleanField()
+    telefono = models.IntegerField(blank=True, null=True)
+
     usuario = models.OneToOneField(User)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

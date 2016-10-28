@@ -15,7 +15,7 @@ from django.contrib import messages
 from crispy_forms.helper import FormHelper, Layout
 from crispy_forms.layout import Field, Div, Row, HTML
 from crispy_forms.bootstrap import FormActions, TabHolder, Tab, \
-    PrependedAppendedText, PrependedText
+    PrependedAppendedText
 
 from apps.utils.forms import smtSave, btnCancel, btnReset
 #from apps.utils.forms import Submit, Button, Reset

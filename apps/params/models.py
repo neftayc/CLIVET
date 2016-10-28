@@ -9,11 +9,6 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils.text import capfirst, get_text_list
-from django.dispatch import receiver
-from django.db.models import signals
-from unicodedata import normalize
-from django.core.exceptions import ValidationError
-from django.core.exceptions import NON_FIELD_ERRORS
 
 # models
 
@@ -51,8 +46,6 @@ class Person(models.Model):
         _('Photo'), upload_to='persons', default='persons/default.png',
         null=True, blank=True)
 
-  
-
     class Meta:
         verbose_name = _('Person')
         verbose_name_plural = _('Persons')
@@ -75,9 +68,8 @@ class Person(models.Model):
         ):
             raise Exception(_(u'%(model_name)s with this %(field_label)s already exists.') % {
                 'model_name': _('Person'),
-                'field_label': get_text_list((capfirst(_('first name')),capfirst(_('last name')),capfirst(_('number')), capfirst(_('Type'))), _('and')),
+                'field_label': get_text_list((capfirst(_('first name')), capfirst(_('last name')), capfirst(_('number')), capfirst(_('Type'))), _('and')),
             })
-
 
         if Person.objects.exclude(id=self.id).filter(identity_type=self.identity_type, identity_num=self.identity_num).count() > 0:
             raise Exception(_(u'%(model_name)s with this %(field_label)s already exists.') % {
