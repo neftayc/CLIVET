@@ -5,7 +5,7 @@ from apps.clivet.models.trabajador import Trabajador
 
 
 class Venta(models.Model):
-    fechaV = models.DateTimeField(auto_now_add=True)
+    fechav = models.DateTimeField(auto_now_add=True)
     total = models.DecimalField(max_digits=20, decimal_places=2)
     cliente = models.ForeignKey(Cliente)
     trabajador = models.ForeignKey(Trabajador)

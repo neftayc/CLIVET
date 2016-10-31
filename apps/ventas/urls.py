@@ -1,5 +1,5 @@
 from django.conf.urls import *
-from apps.ventas.views.main import Ventas
+from apps.ventas.views.main import *
 from apps.ventas.views.Departamento import *
 from apps.ventas.views.Categoria import *
 from apps.ventas.views.Producto import *
@@ -9,7 +9,7 @@ from apps.ventas.views.VentaDetalle import *
 
 
 urlpatterns = [
-    url(r'ventas', Ventas.as_view()),
+    url(r'ventas', MainCreateView.as_view(),name="ventaslist"),
     # departamento
     url(r'^departamento/listar/$', DepartamentoListView.as_view(),
         name="departamento_list"),
@@ -52,8 +52,7 @@ urlpatterns = [
     # venta
     url(r'^venta/listar/$', VentaListView.as_view(),
         name="venta_list"),
-    url(r'^venta/crear/$', VentaCreateView.as_view(),
-        name="venta_add"),
+    #   name="venta_add"),
     url(r'^venta/actualizar/(?P<pk>.*)/$', VentaUpdateView.as_view(),
         name="venta_upd"),
     url(r'^venta/eliminar/(?P<pk>.*)/$', VentaDeleteView.as_view(),
@@ -62,8 +61,8 @@ urlpatterns = [
     # Detallaventa
     url(r'^ventadetalle/listar/$', DetalleVentaListView.as_view(),
         name="ventadetalle_list"),
-    url(r'^ventadetalle/crear/$', DetalleVentaCreateView.as_view(),
-        name="ventadetalle_add"),
+    # url(r'^ventadetalle/crear/$', DetalleVentaCreateView.as_view(),
+    #  name="ventadetalle_add"),
     url(r'^ventadetalle/actualizar/(?P<pk>.*)/$', DetalleVentaUpdateView.as_view(),
         name="ventadetalle_upd"),
     url(r'^ventadetalle/eliminar/(?P<pk>.*)/$', DetalleVentaDeleteView.as_view(),

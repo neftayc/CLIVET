@@ -72,47 +72,6 @@ class DetalleVentaListView(ListView):
         return context
 
 
-class DetalleVentaCreateView(CreateView):
-    u"""Tipo Documento Identidad."""
-
-    model = Detalle_Venta
-    form_class = Detalle_VentaForm
-    template_name = "ventas/venta/formVentaDetalle.html"
-    success_url = reverse_lazy("ventas:ventadetalle_list")
-
-    @method_decorator(permission_resource_required)
-    def dispatch(self, request, *args, **kwargs):
-        """dispatch."""
-        return super(DetalleVentaCreateView,
-                     self).dispatch(request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        """
-        Tipo Documento Identidad ListView List get context.
-
-        Funcion con los primeros datos iniciales para la carga del template.
-        """
-        context = super(DetalleVentaCreateView,
-                        self).get_context_data(**kwargs)
-        context['opts'] = self.model._meta
-        # context['cmi'] = 'tipodoc'
-        context['title'] = ('Agregar %s') % ('DetalleVenta')
-        return context
-
-    def form_valid(self, form):
-        """"Empresa Crete View  form valid."""
-        self.object = form.save(commit=True)
-
-        msg = _(' %(name)s "%(obj)s" fue creado satisfactoriamente.') % {
-            'name': capfirst(force_text(self.model._meta.verbose_name)),
-            'obj': force_text(self.object)
-        }
-
-        messages.success(self.request, msg)
-        log.warning(msg, extra=log_params(self.request))
-        return super(DetalleVentaCreateView, self).form_valid(form)
-
-
 class DetalleVentaUpdateView(UpdateView):
     """Tipo Documento Update View."""
 
