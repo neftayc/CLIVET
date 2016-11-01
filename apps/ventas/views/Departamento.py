@@ -135,7 +135,7 @@ class DepartamentoCreateView(CreateView):
     def form_valid(self, form):
         """"Empresa Crete View  form valid."""
         self.object = form.save(commit=True)
-
+        print(self.object, form)
         msg = _(' %(name)s "%(obj)s" fue creado satisfactoriamente.') % {
             'name': capfirst(force_text(self.model._meta.verbose_name)),
             'obj': force_text(self.object)

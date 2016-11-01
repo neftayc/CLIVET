@@ -9,7 +9,7 @@ from apps.ventas.views.VentaDetalle import *
 
 
 urlpatterns = [
-    url(r'ventas', MainCreateView.as_view(),name="ventaslist"),
+    url(r'ventas', CrateVenta, name="ventaslist"),
     # departamento
     url(r'^departamento/listar/$', DepartamentoListView.as_view(),
         name="departamento_list"),

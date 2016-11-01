@@ -25,6 +25,42 @@ import logging
 log = logging.getLogger(__name__)
 
 
+def CrateVenta(request):
+
+    if request.method == "POST":
+        if 'form' in request.POST:
+            form = Detalle_VentaForm(request.POST)
+            if form.is_valid():
+                Detalle_Venta.objects.create(
+                    producto=form.cleaned_data['producto'],
+                    venta=form.cleaned_data[
+                        'venta'],
+                    cantidad=form.cleaned_data[
+                        'cantidad'],
+                    igv=form.cleaned_data['igv'],
+                    importe=form.cleaned_data['importe'])
+                # self.object = form1.save(commit=True)
+
+     #   if 'form1' in request.POST:
+                form1 = VentaForm(request.POST)
+                if form1.is_valid():
+                    Venta.objects.create(codigo=form1.cleaned_data['codigo'],
+                                         total=form1.cleaned_data[
+                        'total'],
+                        cliente=form1.cleaned_data['cliente'],
+                        trabajador=form1.cleaned_data['trabajador'])
+                    # <process form cleaned data>
+                    return HttpResponseRedirect('ventas/')
+
+    else:
+        form1 = VentaForm()
+        form = Detalle_VentaForm()
+        # form1 = Detalle_VentaForm(initial={'cliente': 'rusbel'})
+
+    return render(request, 'ventas/index.html',
+                  {'form': form, 'form1': form1, })
+
+
 class MainCreateView(CreateView):
     u"""Tipo Documento Identidad."""
 
@@ -34,23 +70,9 @@ class MainCreateView(CreateView):
     success_url = reverse_lazy("ventas:ventaslist",)
 
     @method_decorator(permission_resource_required)
-    def dispatch(self, request, *args, **kwargs):
+    def dispatch(self, request):
+        pass
         """dispatch."""
-        if request.method == "POST":
-            form = VentaForm(request.POST)
-            if form.is_valid():
-                # <process form cleaned data>
-                return HttpResponseRedirect('ventas/index.html')
-        elif request.method == "POST":
-            form1 = Detalle_VentaForm(request.POST)
-            if form1.is_valid():
-                # <process form cleaned data>
-                return HttpResponseRedirect('ventas/index.html')
-        else:
-            form = VentaForm()
-            form1 = Detalle_VentaForm(initial={'cliente': 'rusbel'})
-
-        return render(request, 'ventas/index.html', {'l': form, 's': form1})
 
     def get_context_data(self, **kwargs):
         """
@@ -68,7 +90,6 @@ class MainCreateView(CreateView):
     def form_valid(self, form):
         """"Empresa Crete View  form valid."""
         self.object = form.save(commit=True)
-
         msg = _(' %(name)s "%(obj)s" fue creado satisfactoriamente.') % {
             'name': capfirst(force_text(self.model._meta.verbose_name)),
             'obj': force_text(self.object)

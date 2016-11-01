@@ -18,53 +18,14 @@ class VentaForm(forms.ModelForm):
     class Meta:
 
         model = Venta
-        fields = ('total', 'cliente', 'trabajador')
+        fields = ('codigo', 'total', 'cliente', 'trabajador',)
         exclude = ()
         widgets = {
             'cliente': forms.Select(attrs={'class': 'form-control'}),
             'trabajador': forms.Select(attrs={'class': 'form-control'}),
             'total': forms.TextInput(attrs={'class': 'form-control'}),
+            'codigo': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': "Ingrese codigo De venta"
+            }),
         }
-
-    def __init__(self, *args, **kwargs):
-        self.request = kwargs.pop('request', None)
-        self.object = kwargs.pop('object', None)
-
-        super(VentaForm, self).__init__(*args, **kwargs)
-
-        self.fields['username'] = forms.CharField(
-            label=capfirst(_(u'username')), required=True,
-            help_text=u'<small class="help-error"></small> %s' % _(
-                u' '),
-        )
-
-        self.helper = FormHelper()
-        self.helper.layout = Layout(
-
-            TabHolder(
-                Tab(
-                    _('Account Info'),
-                    Row(
-                        Div(HTML('''
-                                <div class="form-group">
-                                <label class="control-label"> {{ form.first_name.label }} </label>
-                                <div class="controls ">{{ form.first_name.value }}</div>
-                                </div>
-                                '''),
-                            css_class='col-md-6'),
-                    ),
-
-                    Tab(_('Image'),
-                        HTML("""
-                        {% if form.photo.value %}<img class="img-responsive" src="{{ MEDIA_URL }}{{ form.photo.value }}">{% endif %}
-                        """),
-                        ),
-                ),
-                Row(
-                    FormActions(
-
-                      #  btnCancel(),
-
-                    ),
-                ),
-            ))

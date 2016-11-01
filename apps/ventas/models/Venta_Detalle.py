@@ -16,4 +16,7 @@ class Detalle_Venta(models.Model):
         verbose_name_plural = 'Detalles Venta'
 
     def __str__(self):
-        return "%d" % (self.cantidad)
+        return "%s %s %s %s" % (self.venta.codigo,
+                                self.venta.cliente.persona.first_name,
+                                self.venta.cliente.persona.last_name,
+                                self.producto.nombre)
