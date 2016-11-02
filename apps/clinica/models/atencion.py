@@ -21,7 +21,6 @@ VACUNA = (
 )
 
 # Create your models here.
-
 class Atencion(models.Model):
     colamedica = models.ForeignKey(ColaMedica, blank=True, unique=True  )
 #Consulta

@@ -21,52 +21,23 @@ from ..forms.atencionform import AtencionForm, AtencionMascotaForm
 
 from ..models.atencion import Atencion
 from ..models.colamedica import ColaMedica
+from ..models.mascota import Mascota
 import logging
 log = logging.getLogger(__name__)
 
 # Create your views here.
-class AtencionListView(TemplateView):
+class AtencionListView(ListView):
     u"""Tipo Documento Identidad."""
 
     model = Atencion
-    paginate_by = settings.PER_PAGE
     template_name = "clinica/atencion.html"
 
-    @method_decorator(permission_resource_required)
-    def dispatch(self, request, *args, **kwargs):
-        """dispatch."""
-        return super(AtencionListView,
-                     self).dispatch(request, *args, **kwargs)
+    def get_context_data(self, **kwargs):
 
-    def get_paginate_by(self, queryset):
-        """Paginate."""
-        if 'all' in self.request.GET:
-            return None
-        return ListView.get_paginate_by(self, queryset)
-
-    def get_queryset(self):
-        """Tipo Doc List Queryset."""
-        self.o = empty(self.request, 'o', '-id')
-        self.f = empty(self.request, 'f', 'created_ath')
-        self.q = empty(self.request, 'q', '')
-        column_contains = u'%s__%s' % (self.f, 'contains')
-
-        return self.model.objects.filter(
-            **{column_contains: self.q}).order_by(self.o)
-
-    def get_context_data(self, request, **kwargs):
-        context = super(AtencionListView, self).get_context_data(request, **kwargs)
-        context['atencion'] = Atencion.objects.filter(colamedica = request.historia.mascota ).order_by('anamnesis')
+        mascota = Mascota.objects.get(nombre='Boby')
+        context = super(AtencionListView, self).get_context_data(**kwargs)
+        context['atencion'] = Atencion.objects.filter(colamedica__historia__mascota__nombre=mascota ).order_by('pk')
         context['cantidad'] = context['atencion'].count()
-        context['opts'] = self.model._meta
-        # context['cmi'] = 'menu' #  Validacion de manual del menu
-        context['title'] = ('Seleccione %s para cambiar'
-                            ) % capfirst('Tipo Documento')
-
-        context['o'] = self.o
-        context['f'] = self.f
-        context['q'] = self.q.replace('/', '-')
-
         return context
 
 
@@ -325,9 +296,12 @@ class AtencionMedicaView(generic.DetailView):
 
 
 class MainAtencionesView(TemplateView):
+
     template_name = 'clinica/atencion.html'
 
     def get_context_data(self, **kwargs):
         context = super(MainAtencionesView, self).get_context_data(**kwargs)
-        context['atencion'] = Atencion.objects.filter(anamnesis = 'dsdsd' ).order_by('created_ath')
+        context['title'] = _('Add %s') % capfirst(_('atencion'))
+        context['atencion'] = Atencion.objects.filter(colamedica = '0001').order_by('anamnesis')
+        context['cantidad'] = context['atencion'].count()
         return context

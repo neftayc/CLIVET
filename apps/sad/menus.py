@@ -35,7 +35,6 @@ class Menus:
     def load(request, menu_module):
         """
         Carga el menu del usuario
-
         Entrada::
 
                 menu_module=BACKEND
@@ -102,9 +101,6 @@ class Menus:
     # Metodo para renderizar el menu de escritorio
     @staticmethod
     def desktop(request):
-        """
-        Método para renderizar el menu de escritorio
-    """
         html = ''
         route = request.path
         if Menus.menu_list:
@@ -177,9 +173,6 @@ class Menus:
     # Método para listar los items en el backend
     @staticmethod
     def desktop_items(request):
-        """
-        Metodo para listar los items del menu de escritorio
-    """
         html = ''
         route = request.path
         for menu, items in Menus.menu_item_list.iteritems():
@@ -201,13 +194,10 @@ class Menus:
     # Método para renderizar el menú de dispositivos móviles
     @staticmethod
     def view(request):
-        """
-        Metodo para renderizar el menu de dispositivos moviles
-    """
         html = ''
         route = request.path
         if Menus.menu_list:
-            html = html + '<ul class="nav navbar-nav">\n'
+            html = html + '<ul class="nav navbar-nav  side-nav">\n'
             for main in Menus.menu_list:
                 text = '%s<b class="caret"></b>' % capfirst(_("%s" % main.title))
                 html = html + '<li class="dropdown">\n'
@@ -227,9 +217,6 @@ class Menus:
     # Método para listar los items en el sidebar
     @staticmethod
     def side_items(request):
-        """
-        Metodo para listar los items del menu del sidebar
-    """
         html = ''
         route = request.path
         for menu, items in Menus.menu_item_list.iteritems():
