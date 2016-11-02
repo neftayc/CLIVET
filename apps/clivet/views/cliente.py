@@ -3,7 +3,7 @@ u"""Módulo View Cliente."""
 from apps.utils.decorators import permission_resource_required
 from apps.utils.forms import empty
 from apps.utils.security import get_dep_objects, log_params, SecurityKey
-
+from apps.params.models import Person
 from django.conf import settings
 from django.contrib import messages
 from django.core.urlresolvers import reverse_lazy
@@ -100,12 +100,23 @@ class ClienteCreateView(CreateView):
 
     def form_valid(self, form):
         """"Empresa Crete View  form valid."""
-        self.object = form.save(commit=True)
+        self.object = form.save(commit=False)
+
+        persona = Person()
+        # persona.first_name = form.cleaned_data('nombre')
+        persona.first_name = self.request.GET.get("nombre")
+        persona.last_name = self.request.GET.get("apellido")
+        persona.save()
+
+        self.object.persona = persona
+        self.object.save()
+
 
         msg = _(' %(name)s "%(obj)s" fue creado satisfactoriamente.') % {
             'name': capfirst(force_text(self.model._meta.verbose_name)),
             'obj': force_text(self.object)
         }
+
 
         messages.success(self.request, msg)
         log.warning(msg, extra=log_params(self.request))
@@ -161,6 +172,14 @@ class ClienteUpdateView(UpdateView):
             messages.success(self.request, msg)
             log.warning(msg, extra=log_params(self.request))
         return super(ClienteUpdateView, self).form_valid(form)
+
+    def get_initial(self):
+        context = super(ClienteUpdateView, self).get_initial()
+        context = context.copy()
+        if self.object.persona:
+            context['nombre'] = self.object.persona.first_name
+
+        return context
 
 
 class ClienteDeleteView(DeleteView):

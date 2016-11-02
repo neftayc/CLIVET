@@ -49,6 +49,19 @@ urlpatterns = [
     url(r'^uni/eliminar/(?P<pk>.*)/$', UnidadMedidaDeleteView.as_view(),
         name="unidad_medida_del"),
 
+
+
+
+    url(r'^uni/cargarcarro/$', CrearCarroTemplateView.as_view(),
+        name="carro"),
+
+    url(r'^uni/vendercarr/$', VenderTemplate.as_view(),
+        name="vender_carro"),
+    
+
+
+
+
     # venta
     url(r'^venta/listar/$', VentaListView.as_view(),
         name="venta_list"),

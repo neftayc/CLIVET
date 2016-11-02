@@ -1,10 +1,7 @@
-u"""Módulo View DetalleVenta"""
+u"""Módulo View Cita."""
 
 from apps.utils.decorators import permission_resource_required
-from apps.utils.forms import empty
 from apps.utils.security import get_dep_objects, log_params, SecurityKey
-
-from django.conf import settings
 from django.contrib import messages
 from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect
@@ -13,79 +10,133 @@ from django.utils.encoding import force_text
 from django.utils.text import capfirst
 from django.utils.translation import ugettext as _
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
-from django.views.generic.list import ListView
 from django.views.generic import TemplateView
-from apps.ventas.models.Producto import Producto
 
-from ..models.Venta_Detalle import Detalle_Venta
-from ..forms.VentaDetalle import Detalle_VentaForm
+from ..models.cita import Cita
+from ..forms.cita import CitaForm
+from django.core import serializers
+from django.http import HttpResponse
+import json
 
 import logging
 log = logging.getLogger(__name__)
 
 
-class DetalleVentaListView(ListView):
-    u"""Tipo Documento Identidad."""
-
-    model = Detalle_Venta
-    paginate_by = settings.PER_PAGE
-    template_name = "ventas/venta/DetalleVenta.html"
+class CitaView(TemplateView):
+    u"""Cita."""
+    template_name = "cita/index.html"
 
     @method_decorator(permission_resource_required)
     def dispatch(self, request, *args, **kwargs):
         """dispatch."""
-        return super(DetalleVentaListView,
+        return super(CitaView,
                      self).dispatch(request, *args, **kwargs)
-
-    def get_paginate_by(self, queryset):
-        """Paginate."""
-        if 'all' in self.request.GET:
-            return None
-        return ListView.get_paginate_by(self, queryset)
-
-    def get_queryset(self):
-        """Tipo Doc List Queryset."""
-        self.o = empty(self.request, 'o', '-id')
-        self.f = empty(self.request, 'f', 'cantidad')
-        self.q = empty(self.request, 'q', '')
-        column_contains = u'%s__%s' % (self.f, 'contains')
-
-        return self.model.objects.filter(
-            **{column_contains: self.q}).order_by(self.o)
 
     def get_context_data(self, **kwargs):
         """
-        Tipo Documento Identidad ListView List get context.
-
-        Funcion con los primeros datos iniciales para la carga del template.
+        Cita ListView List get context.
         """
-        context = super(DetalleVentaListView,
+        context = super(CitaView,
                         self).get_context_data(**kwargs)
-        context['opts'] = self.model._meta
-        # context['cmi'] = 'menu' #  Validacion de manual del menu
-        context['title'] = ('Seleccione %s para cambiar'
-                            ) % capfirst('DetalleVenta')
-
-        context['o'] = self.o
-        context['f'] = self.f
-        context['q'] = self.q.replace('/', '-')
-
+        context['title'] = ('Seleccione %s para editar'
+                            ) % capfirst('Cita')
         return context
 
 
-class DetalleVentaUpdateView(UpdateView):
-    """Tipo Documento Update View."""
+def GetCitaAjax(request):
+    if request.is_ajax():
+        citas = Cita.objects.all()
+        data = serializers.serialize("json", citas)
+        count = 0
+        for cita in citas:
+            count = count+1
+            print(data[1])
+    else:
+        data = 'fail'
+    return HttpResponse(data, content_type='application/json')
 
-    model = Detalle_Venta
-    form_class = Detalle_VentaForm
-    template_name = "ventas/venta/formVentaDetalle.html"
-    success_url = reverse_lazy("ventas:ventadetalle_list")
+
+def PostCitaAjax(request):
+    if request.is_ajax():
+        data = serializers.serialize(
+            "json", Cita.objects.all())
+        return HttpResponse(data, content_type='application/json')
+
+
+# def GetCitaAjax(request):
+#     if request.is_ajax:
+#         # search = request.GET('term')
+
+#         citas = Cita.objects.all()
+#         results = []
+#         for cita in citas:
+#             cita_json = {}
+#             cita_json['color'] = cita.evento.color
+#             cita_json['title'] = cita.evento.title
+#             #cita_json['cit'] = cita
+#             results.append(cita_json)
+
+#         data_json = json.dumps(results)
+
+#     else:
+#         data_json = 'fail'
+#     return HttpResponse(data_json, "application/json")
+
+
+class CitaCreateView(CreateView):
+    u"""Cita."""
+
+    model = Cita
+    form_class = CitaForm
+    template_name = "cita/form.html"
+    success_url = reverse_lazy("clivet:cita_list")
 
     @method_decorator(permission_resource_required)
     def dispatch(self, request, *args, **kwargs):
-        """Tipo Documento Create View dispatch."""
+        """dispatch."""
+        return super(CitaCreateView,
+                     self).dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        """
+        Cita ListView List get context.
+
+        Funcion con los primeros datos iniciales para la carga del template.
+        """
+        context = super(CitaCreateView,
+                        self).get_context_data(**kwargs)
+        context['opts'] = self.model._meta
+        # context['cmi'] = 'tipodoc'
+        context['title'] = ('Agregar %s') % ('Cita')
+        return context
+
+    def form_valid(self, form):
+        """"Cita Crete View  form valid."""
+        self.object = form.save(commit=True)
+
+        msg = _(' %(name)s "%(obj)s" fue creado satisfactoriamente.') % {
+            'name': capfirst(force_text(self.model._meta.verbose_name)),
+            'obj': force_text(self.object)
+        }
+
+        messages.success(self.request, msg)
+        log.warning(msg, extra=log_params(self.request))
+        return super(CitaCreateView, self).form_valid(form)
+
+
+class CitaUpdateView(UpdateView):
+    """Cita Update View."""
+
+    model = Cita
+    form_class = CitaForm
+    template_name = "cita/form.html"
+    success_url = reverse_lazy("clivet:cita_list")
+
+    @method_decorator(permission_resource_required)
+    def dispatch(self, request, *args, **kwargs):
+        """Cita Create View dispatch."""
         key = self.kwargs.get(self.pk_url_kwarg, None)
-        pk = SecurityKey.is_valid_key(request, key, 'cat_upd')
+        pk = SecurityKey.is_valid_key(request, key, 'doc_upd')
         if not pk:
             return HttpResponseRedirect(self.success_url)
         self.kwargs['pk'] = pk
@@ -96,20 +147,20 @@ class DetalleVentaUpdateView(UpdateView):
             log.warning(force_text(e), extra=log_params(self.request))
             return HttpResponseRedirect(self.success_url)
 
-        return super(DetalleVentaUpdateView,
+        return super(CitaUpdateView,
                      self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        """Tipo Documento Update View context data."""
-        context = super(DetalleVentaUpdateView,
+        """Cita Update View context data."""
+        context = super(CitaUpdateView,
                         self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
-        # context['cmi'] = 'empresa'
-        context['title'] = ('Actualizar %s') % ('DetalleVenta')
+        # context['cmi'] = 'Cita'
+        context['title'] = ('Actualizar %s') % ('Cita')
         return context
 
     def form_valid(self, form):
-        """Tipo Documento Update View form_valid."""
+        """Cita Update View form_valid."""
         self.object = form.save(commit=False)
 
         self.object.usuario = self.request.user
@@ -121,20 +172,20 @@ class DetalleVentaUpdateView(UpdateView):
         if self.object.id:
             messages.success(self.request, msg)
             log.warning(msg, extra=log_params(self.request))
-        return super(DetalleVentaUpdateView, self).form_valid(form)
+        return super(CitaUpdateView, self).form_valid(form)
 
 
-class DetalleVentaDeleteView(DeleteView):
-    """Empresa Delete View."""
+class CitaDeleteView(DeleteView):
+    """Cita Delete View."""
 
-    model = Detalle_Venta
-    success_url = reverse_lazy('ventas:ventadetalle_list')
+    model = Cita
+    success_url = reverse_lazy('clivet:cita_list')
 
     @method_decorator(permission_resource_required)
     def dispatch(self, request, *args, **kwargs):
-        """Empresa Delete View dispatch."""
+        """Cita Delete View dispatch."""
         key = self.kwargs['pk']
-        pk = SecurityKey.is_valid_key(request, key, 'cat_del')
+        pk = SecurityKey.is_valid_key(request, key, 'doc_del')
         if not pk:
             return HttpResponseRedirect(self.success_url)
         self.kwargs['pk'] = pk
@@ -144,14 +195,14 @@ class DetalleVentaDeleteView(DeleteView):
             messages.error(self.request, e)
             log.warning(force_text(e), extra=log_params(self.request))
             return HttpResponseRedirect(self.success_url)
-        return super(DetalleVentaDeleteView,
+        return super(CitaDeleteView,
                      self).dispatch(request, *args, **kwargs)
 
     def delete(self, request, *args, **kwargs):
         u"""
-        Empresa Delete View delte.
+        Cita Delete View delte.
 
-        Función para eliminar la empresa sobre un metodo que verifica las
+        Función para eliminar la Cita sobre un metodo que verifica las
         dependencias de que tiene la tabla mostrando un mensaje de validacion.
         """
         try:
@@ -171,7 +222,7 @@ class DetalleVentaDeleteView(DeleteView):
 
             d.delete()
             msg = _(
-                ' %(name)s "%(obj)s" fuel eliminado satisfactorialmente.') % {
+                ' %(name)s "%(obj)s" fue eliminado satisfactorialmente.') % {
                 'name': capfirst(force_text(self.model._meta.verbose_name)),
                 'obj': force_text(d)
             }
@@ -184,43 +235,5 @@ class DetalleVentaDeleteView(DeleteView):
         return HttpResponseRedirect(self.success_url)
 
     def get(self, request, *args, **kwargs):
-        """Empresa Delete View get."""
+        """Cita Delete View get."""
         return self.delete(request, *args, **kwargs)
-
-
-class CrearCarroTemplateView(TemplateView):
-
-    template_name = "ventas/venta/detalle.html"
-
-    def get_context_data(self, **kwargs):
-        context = super(CrearCarroTemplateView,
-                        self).get_context_data(**kwargs)
-        detalle = []
-        producto = Producto.objects.get(id=2)
-        
-        print(producto)
-        try:
-            if self.request.session['detalle']:
-                detalle = self.request.session['detalle']
-                detalle.append(producto)
-
-        except Exception as e:
-            self.request.session['detalle'] = detalle.append(producto)
-
-        self.request.session['detalle'] = detalle
-        return context
-
-class VenderTemplate(TemplateView):
-    template_name = "ventas/venta/detalle.html"
-    def get_context_data(self, **kwargs):
-        context = super(VenderTemplate,
-                        self).get_context_data(**kwargs)
-
-        # Guardar Venta
-
-        # guardar detalle
-            # for session
-
-        del self.request.session['detalle']
-
-        return context

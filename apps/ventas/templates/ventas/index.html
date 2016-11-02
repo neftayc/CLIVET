@@ -123,6 +123,16 @@
         </div>
     </div>
 </div>
+<button id="enviar">cargar</button>
+<div class="detalle" id="detalle_id">
+    
+</div>
+
+<div class="">
+    <form action="{% url 'ventas:vender_carro' %}" method="get">
+        <button type="submit"> matar session</button>
+    </form>
+</div>
 <div id="the-basics">
     <input class="typeahead" type="text" placeholder="States of USA">
 </div>
@@ -149,6 +159,26 @@ var substringMatcher = function(strs) {
     cb(matches);
   };
 };
+
+$("#enviar").click(function(){
+    $.ajax({
+        url: "{% url 'ventas:carro' %}",
+        type: 'get',
+       
+        data: {param1: 'value1'},
+    })
+    .done(function(data) {
+        $("#detalle_id").html(data);
+    })
+    .fail(function() {
+        console.log("error");
+    })
+    .always(function() {
+        console.log("complete");
+    });
+    
+    
+});
 
 var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
   'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii',

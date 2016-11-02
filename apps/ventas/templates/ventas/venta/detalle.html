@@ -1,0 +1,14 @@
+
+{{request.session.detalle}}
+<table>
+	<thead></thead>
+	<tbody>
+		{% for de in detalle %}
+			<tr>
+				<td>#{{forloop.counter}}</td>
+				<td>{{dd.nombre}}</td>
+			</tr>
+		{% endfor %}
+
+	</tbody>
+</table>
