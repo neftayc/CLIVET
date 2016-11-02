@@ -9,7 +9,7 @@ from apps.ventas.views.VentaDetalle import *
 
 
 urlpatterns = [
-    url(r'ventas', CrateVenta, name="ventaslist"),
+    url(r'^ventas/$', CrateVenta, name="ventaslist"),
     # departamento
     url(r'^departamento/listar/$', DepartamentoListView.as_view(),
         name="departamento_list"),
@@ -67,4 +67,7 @@ urlpatterns = [
         name="ventadetalle_upd"),
     url(r'^ventadetalle/eliminar/(?P<pk>.*)/$', DetalleVentaDeleteView.as_view(),
         name="ventadetalle_del"),
+
+    url(r'^producto/listar/ajax/$', ProductoGetAjax),
+
 ]
