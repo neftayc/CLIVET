@@ -6,12 +6,14 @@ from ..models.cliente import Cliente
 
 class ClienteForm(forms.ModelForm):
     u"""Cliente Form."""
+    nombre = forms.CharField()
+    apellido = forms.CharField()
 
     class Meta:
         """Meta."""
 
         model = Cliente
-        exclude = ()
+        exclude = ('persona',)
         # widgets = {
         #     'numero': forms.TextInput(attrs={
         #         'class': 'form-control', 'required': 'true',

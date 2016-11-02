@@ -24,10 +24,8 @@
                         <label class="sr-only" for="producto"></label>
                         <div class="input-group col-md-12">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></div>
-                            <div id="custom-templates">
-                                <input class="typeahead" type="text" placeholder="Oscar winners for Best Picture">
-                            </div>
-                            <input type="input" class="form-control typeahead" data-provide="typeahead" id="productoajax" name=""> {{ form.producto }} {{ form.producto.errors }} {{ form.venta }} {{ form.venta.errors }}
+                            
+                             {{ form.producto }} {{ form.producto.errors }} <input type="number" name="cantidad" id="cantidad_producto"><button id="enviar">cargar</button>
                         </div>
                     </div>
                 </div>
@@ -123,6 +121,16 @@
         </div>
     </div>
 </div>
+
+<div class="detalle" id="detalle_id">
+    
+</div>
+
+<div class="">
+    <form action="{% url 'ventas:vender_carro' %}" method="get">
+        <button type="submit"> matar session</button>
+    </form>
+</div>
 <div id="the-basics">
     <input class="typeahead" type="text" placeholder="States of USA">
 </div>
@@ -149,6 +157,26 @@ var substringMatcher = function(strs) {
     cb(matches);
   };
 };
+
+$("#enviar").click(function(){
+    $.ajax({
+        url: "{% url 'ventas:carro' %}",
+        type: 'get',
+       
+        data: {cantidad: $('#cantidad_producto').val(), producto_id: $('#id_producto').val()},
+    })
+    .done(function(data) {
+        $("#detalle_id").html(data);
+    })
+    .fail(function() {
+        console.log("error");
+    })
+    .always(function() {
+        console.log("complete");
+    });
+    
+    
+});
 
 var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
   'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii',

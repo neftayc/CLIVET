@@ -9,7 +9,7 @@ from apps.ventas.views.VentaDetalle import *
 
 
 urlpatterns = [
-    url(r'^ventas/$', CrateVenta, name="ventaslist"),
+    url(r'^ventas/$', MainCreateView.as_view(), name="ventaslist"),
     # departamento
     url(r'^departamento/listar/$', DepartamentoListView.as_view(),
         name="departamento_list"),
@@ -48,6 +48,19 @@ urlpatterns = [
         name="unidad_medida_upd"),
     url(r'^uni/eliminar/(?P<pk>.*)/$', UnidadMedidaDeleteView.as_view(),
         name="unidad_medida_del"),
+
+
+
+
+    url(r'^uni/cargarcarro/$', CrearCarroTemplateView.as_view(),
+        name="carro"),
+
+    url(r'^uni/vendercarr/$', VenderTemplate.as_view(),
+        name="vender_carro"),
+    
+
+
+
 
     # venta
     url(r'^venta/listar/$', VentaListView.as_view(),

@@ -18,14 +18,11 @@ class VentaForm(forms.ModelForm):
     class Meta:
 
         model = Venta
-        fields = ('codigo', 'total', 'cliente', 'trabajador',)
+        fields = ('total', 'cliente', 'trabajador',)
         exclude = ()
         widgets = {
             'cliente': forms.Select(attrs={'class': 'form-control'}),
             'trabajador': forms.Select(attrs={'class': 'form-control'}),
             'total': forms.TextInput(attrs={'class': 'form-control'}),
-            'codigo': forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': "Ingrese codigo De venta"
-            }),
+
         }

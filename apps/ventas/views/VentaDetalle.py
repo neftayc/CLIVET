@@ -14,7 +14,8 @@ from django.utils.text import capfirst
 from django.utils.translation import ugettext as _
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
-
+from django.views.generic import TemplateView
+from apps.ventas.models.Producto import Producto
 
 from ..models.Venta_Detalle import Detalle_Venta
 from ..forms.VentaDetalle import Detalle_VentaForm
@@ -185,3 +186,67 @@ class DetalleVentaDeleteView(DeleteView):
     def get(self, request, *args, **kwargs):
         """Empresa Delete View get."""
         return self.delete(request, *args, **kwargs)
+
+
+class CrearCarroTemplateView(TemplateView):
+
+    template_name = "ventas/venta/detalle.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(CrearCarroTemplateView,
+                        self).get_context_data(**kwargs)
+        detalle = []
+        producto = Producto.objects.get(id=2)
+
+        # fechav = models.DateTimeField(auto_now_add=True)
+        # total = models.DecimalField(max_digits=20, decimal_places=2)
+        # cliente = models.ForeignKey(Cliente)
+        # trabajador = models.ForeignKey(Trabajador)
+        venta = Venta()
+        venta.cliente = self.request.GET.get('cliente_id')
+        venta.trabajador = self.request.user
+        venta.save()
+
+        dv = Detalle_Venta()
+        p = Producto.objects.get(
+            id=self.request.GET.get('producto_id'))
+        cant = int(self.request.GET.get('cantidad'))
+        dv.cantidad = cant
+        dv.producto = p
+        dv.importe = p.precioV * cant
+        dv.venta = 1
+        dv.igv = 0.18 * p.precioV * cant
+
+        print(producto)
+        # producto = models.ForeignKey(Producto)
+        # venta = models.ForeignKey(Venta)
+        # cantidad = models.IntegerField()
+        # igv = models.DecimalField(decimal_places=2, max_digits=20)
+        # importe = models.DecimalField(decimal_places=2, max_digits=20)
+        try:
+            if self.request.session['detalle']:
+                detalle = self.request.session['detalle']
+                detalle.append(producto)
+
+        except Exception as e:
+            self.request.session['detalle'] = detalle.append(producto)
+
+        self.request.session['detalle'] = detalle
+        return context
+
+
+class VenderTemplate(TemplateView):
+    template_name = "ventas/venta/detalle.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(VenderTemplate,
+                        self).get_context_data(**kwargs)
+
+        # Guardar Venta
+
+        # guardar detalle
+        # for session
+
+        del self.request.session['detalle']
+
+        return context

@@ -44,35 +44,36 @@ def CrateVenta(request):
      #   if 'form1' in request.POST:
                 form1 = VentaForm(request.POST)
                 if form1.is_valid():
-                    Venta.objects.create(codigo=form1.cleaned_data['codigo'],
-                                         total=form1.cleaned_data[
-                        'total'],
+                    Venta.objects.create(
+                        total=form1.cleaned_data[
+                            'total'],
                         cliente=form1.cleaned_data['cliente'],
                         trabajador=form1.cleaned_data['trabajador'])
                     # <process form cleaned data>
                     return HttpResponseRedirect('ventas/')
 
     else:
-        form1 = VentaForm()
+        #form1 = VentaForm()
         form = Detalle_VentaForm()
         # form1 = Detalle_VentaForm(initial={'cliente': 'rusbel'})
 
     return render(request, 'ventas/index.html',
-                  {'form': form, 'form1': form1, })
+                  {'form': form})
 
 
 class MainCreateView(CreateView):
     u"""Tipo Documento Identidad."""
 
-    model = Venta, Detalle_Venta
-    form_class = VentaForm, Detalle_VentaForm
+    model = Detalle_Venta
+    form_class = Detalle_VentaForm
     template_name = "ventas/index.html"
     success_url = reverse_lazy("ventas:ventaslist",)
 
     @method_decorator(permission_resource_required)
-    def dispatch(self, request):
-        pass
+    def dispatch(self, request, *args, **kwargs):
         """dispatch."""
+        return super(MainCreateView,
+                     self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         """
