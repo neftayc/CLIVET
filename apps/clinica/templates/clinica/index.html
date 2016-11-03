@@ -7,7 +7,7 @@ Descripcion: Lista Tipo Documento
 {% load l10n humanize %}
 
 {% block breadcrumbs %}
-<a href="{# url 'accounts:index' #}"><i class="fa fa-home"></i> {% trans 'Home' %} &rsaquo;&rsaquo;</a>
+<a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %} &rsaquo;&rsaquo;</a>
  {{ opts.verbose_name_plural|capfirst }}
 {% endblock breadcrumbs %}
 
@@ -17,12 +17,27 @@ Descripcion: Lista Tipo Documento
 
 {% block content %}
 
+<script type="text/javascript">
+$(function() {
+    $('table').kgrid({
+        form_data : ['{{f}}', '{{q}}'],
+        form_to   : '/clinica/mascota/listar/?f={{f}}&q={{q}}',
+        order_attr: 'class=""',
+        order_to  : '/clinica/mascota/listar/?f={{f}}&q={{q}}',
+    });
+});
+</script>
+
 <div class="btn-toolbar btn-toolbar-top">
     <div class="row">
         <div class="btn-actions">
-            <a href="{% url 'clinica:crear_mascota' %}" class="btn btn-primary text-bold" title="Agregar Tipo Documento Identidad">
+            <a href="{% url 'clinica:crear_mascota' %}" class="btn btn-primary text-bold" title="Agregar Mascota">
                 <i class="fa fa-plus"></i>
                 <span class="hidden-xs"> Agregar</span>
+            </a>
+            <a href="{% url 'clinica:listar_historia' %}" class="btn btn-success text-bold" title="Ir al Historial">
+                <i class="fa fa-hospital-o"></i>
+                <span class="hidden-xs"> Historiales</span>
             </a>
         </div>
     </div>
@@ -33,55 +48,62 @@ Descripcion: Lista Tipo Documento
         <thead>
             <tr>
                 <th>#</th>
-                <th class="col-hidden" data-search="numero" data-order="numero">N° Historia</th>
-                <th class="col-hidden" data-search="descripcion" data-order="descripcion">Nombre</th>
-                <th class="col-hidden" data-search="descripcion" data-order="descripcion">Duehoo</th>
-                <th class="col-hidden" data-search="descripcion" data-order="descripcion">Especie</th>
-                <th class="col-hidden" data-search="descripcion" data-order="descripcion">Raza</th>
-                <th class="col-hidden" data-search="descripcion" data-order="descripcion">C. Corporal</th>
-                <th class="col-hidden" data-search="descripcion" data-order="descripcion">Estado</th>
+                <th class="col-hidden" data-search="nombre" data-order="nombre">Nombre</th>
+                <th class="col-hidden">Dueño</th>
+                <th class="col-hidden">Especie</th>
+                <th class="col-hidden">Raza</th>
+                <th class="col-hidden">Esterel..?</th>
+                <th class="col-hidden">C. Corporal</th>
+                <th class="col-hidden">Activo</th>
+                <th class="col-hidden">¿Historia?</th>
                 <th class="btn-actions col-blocked text-center">Acción</th>
             </tr>
         </thead>
         <tbody>
             {% for d in object_list %}
-            <tr>
+            <tr class="{{ d.is_active|yesno:',danger' }}">
                 <td>{% if is_paginated %}
                     {{ page_obj.start_index|add:forloop.counter0 }}
                     {% else %}
                     {{ forloop.counter }}
                     {% endif %}
                 </td>
-                <td>{{ d.num_historia }}</td>
                 <td>{{ d.nombre }}</td>
                 <td>{{ d.dueño }}</td>
                 <td>{{ d.especie }}</td>
                 <td>{{ d.raza }}</td>
+                <td>
+                    <span class="label label-{{ d.esterelizado|yesno:'primary,success' }}">
+                        {% if d.esterelizado %}{% trans 'Yes'|upper %} {% else %} {% trans 'No'|upper %} {% endif %}
+                    </span>
+                </td>
                 <td>{{ d.cond_corporal }}</td>
-                <td>{{ d.estado }}</td>
-
+                <td>
+                    <span class="label label-{{ d.is_active|yesno:'primary,success' }}">
+                        {% if d.is_active %}{% trans 'Yes'|upper %} {% else %} {% trans 'No'|upper %} {% endif %}
+                        </span>
+                </td>
+                <td>
+                    <span class="label label-{{ d.historia|yesno:'primary,success' }}">
+                        {% if d.historia %}{% trans 'Yes'|upper %} {% else %} {% trans 'No'|upper %} {% endif %}
+                    </span>
+                </td>
                 <td class="text-center">
 
-                    <a href="http://127.0.0.1:8000/clinica/atencion/historial/" class="btn btn-warning btn-sm text-bold"
-                       title="Ver el Perfil de Mascota"
-                       rel="tooltip">
-                        <i class="btn-icon-only fa fa-paw"></i>
-                    </a>
-                    <a href="" class="btn btn-success btn-sm text-bold"
-                       title="Ir al Historial"
-                       rel="tooltip">
-                        <i class="btn-icon-only fa fa-hospital-o"></i>
-                    </a>
+                    <a href="/clinica/historia/mascota_add/{{d.pk|key:'historia_cre'}}/" class="btn btn-warning btn-sm text-bold" title="{% trans 'Crear' %} {% trans 'Historia' %}" rel="tooltip"><i class="btn-icon-only fa fa-hospital-o"></i></a>
+
                     <a href="{% url 'clinica:actualizar_mascota' d.pk|key:'doc_upd' %}" class="btn btn-info btn-sm text-bold" title="Ediatar datos de la Mascota" rel="tooltip">
                         <i class="btn-icon-only fa fa-edit"></i>
                     </a>
-                    <a href="{% url 'clinica:eliminar_mascota' d.pk|key:'doc_del' %}" class="btn btn-danger btn-sm js-confirm text-bold"
-                       msg-title="Eliminar Mascotas."
-                       msg="Esta Seguro que desea eliminar?
-                       <br/>Recuerde esta operación no puede revertirse"
-                       title="Cambiar estado de la Mascota" rel="tooltip">
-                        <i class="btn-icon-only fa fa-minus"></i>
-                    </a>
+                    {% if d.is_active %}
+
+                    <a href="/clinica/mascota/state/ina/{{d.pk|key:'mascota_ina'}}/" class="btn btn-success btn-sm text-bold" title="{% trans 'inactivate'|capfirst %} {% trans 'Mascota' %}" rel="tooltip"><i class="btn-icon-only fa fa-flag"></i></a>
+
+                    {% else %}
+
+                    <a href="/clinica/mascota/state/rea/{{d.pk|key:'mascota_rea'}}/" class="btn btn-info btn-sm text-bold" title="{% trans 'reactivate'|capfirst %} {% trans 'Mascota' %}" rel="tooltip"><i class="btn-icon-only fa fa-flag"></i></a>
+
+                    {% endif %}
 
                 </td>
             </tr>

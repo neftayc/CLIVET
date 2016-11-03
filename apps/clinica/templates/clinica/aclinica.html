@@ -1,73 +1,78 @@
 <hr>
 <nav class="navbar" role="navigation">
-    <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-            <input type="text" class="form-control" placeholder="Buscar">
+
+    <form class="" action="" method="post">
+        <div class="row">
+            {% csrf_token %}
+            {{ form }}
+        </div>
+        <div class="btn-group">
+            <button type="button" class="btn btn-default"><i class="fa fa-home"></i> Nueva Atención </button>
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="{% url 'clinica:crear_consulta' %}" ><i class="fa fa-home"></i> Nueva Consulta</a></li>
+                <li><a href="#avacuna" data-toggle="tab"><i class="fa fa-home"></i> Aplicar Vacuna</a></li>
+                <li><a href="#adisparasitar" data-toggle="tab"><i class="fa fa-home"></i> Aplicar disparasitario</a></li>
+                <li><a href="#apulga" data-toggle="tab"><i class="fa fa-home"></i> Aplicar Antipulga</a></li>
+                <li><a href="#internamiento" data-toggle="tab"><i class="fa fa-home"></i> Internamiento</a></li>
+            </ul>
+        </div>
+        <button type="button" class="btn btn-default navbar-btn" name="button"  data-toggle="modal" data-target="#MiModal"><i class="fa fa-home"> Notas</i></button>
+        <button type="button" class="btn btn-default navbar-btn" name="button"><i class="fa fa-home"> Adjuntar archivo</i></button>
+        <button type="button" class="btn btn-default navbar-btn" name="button"><i class="fa fa-home"> Agenda Medica</i></button>
+        <button type="submit" class="btn btn-default navbar-btn btn-warning" >
+            <i class="fa fa-home"></i>
+            <span> Terminar Atención</span>
+        </button>
+
+        <div class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" id="MiModal" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="panel modal-content panel-primary">
+                    <div class="modal-header panel-heading">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Registrar Nota</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="row">
+                                <div class="col-xs-6 col-md-6">
+                                    <div class="form-group">
+                                        <script type="text/javascript">
+                                            //<![CDATA[
+                                                var  today = new Date();
+                                                var m = today.getMonth() + 1;
+                                                var mes = (m < 10) ? '0' + m : m;
+                                                document.write('<label>Fecha:</label> '+today.getDate(),'/' +mes,'/'+today.getYear());
+                                            //]]>
+                                        </script>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-md-6">
+                                    <div class="form-group">
+                                        <script type="text/javascript">
+                                            var d = new Date();
+                                            document.write('<label>Hora:</label>'+d.getHours(),':'+d.getMinutes(),':'+d.getSeconds());
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="nota">Nota:</label>
+                                <input type="text" class="form-control" id="nota" placeholder="Escriba el texto que desee resaltar o recordar">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Registrar</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
         </div>
     </form>
-    <div class="btn-group">
-        <button type="button" class="btn btn-default"><i class="fa fa-home"></i> Nueva Atención </button>
-        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-            <span class="caret"></span>
-            <span class="sr-only">Toggle Dropdown</span>
-        </button>
-        <ul class="dropdown-menu" role="menu">
-            <li><a href="#natencion" data-toggle="tab"><i class="fa fa-home"></i> Nueva Consulta</a></li>
-            <li><a href="#avacuna" data-toggle="tab"><i class="fa fa-home"></i> Aplicar Vacuna</a></li>
-            <li><a href="#adisparasitar" data-toggle="tab"><i class="fa fa-home"></i> Aplicar disparasitario</a></li>
-            <li><a href="#apulga" data-toggle="tab"><i class="fa fa-home"></i> Aplicar Antipulga</a></li>
-            <li><a href="#internamiento" data-toggle="tab"><i class="fa fa-home"></i> Internamiento</a></li>
-        </ul>
-    </div>
-    <button type="button" class="btn btn-default navbar-btn" name="button"  data-toggle="modal" data-target="#MiModal"><i class="fa fa-home"> Notas</i></button>
-    <button type="button" class="btn btn-default navbar-btn" name="button"><i class="fa fa-home"> Adjuntar archivo</i></button>
-    <button type="button" class="btn btn-default navbar-btn" name="button"><i class="fa fa-home"> Agenda Medica</i></button>
-    <button type="button" class="btn btn-default navbar-btn btn-warning" name="button"><i class="fa fa-home"> Terminar Atención</i></button>
-
-    <div class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" id="MiModal" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="panel modal-content panel-primary">
-                <div class="modal-header panel-heading">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Registrar Nota</h4>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="row">
-                            <div class="col-xs-6 col-md-6">
-                                <div class="form-group">
-                                    <script type="text/javascript">
-                                        //<![CDATA[
-                                            var  today = new Date();
-                                            var m = today.getMonth() + 1;
-                                            var mes = (m < 10) ? '0' + m : m;
-                                            document.write('<label>Fecha:</label> '+today.getDate(),'/' +mes,'/'+today.getYear());
-                                        //]]>
-                                    </script>
-                                </div>
-                            </div>
-                            <div class="col-xs-6 col-md-6">
-                                <div class="form-group">
-                                    <script type="text/javascript">
-                                        var d = new Date();
-                                        document.write('<label>Hora:</label>'+d.getHours(),':'+d.getMinutes(),':'+d.getSeconds());
-                                    </script>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="nota">Nota:</label>
-                            <input type="text" class="form-control" id="nota" placeholder="Escriba el texto que desee resaltar o recordar">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Registrar</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div>
 </nav>
 <hr>
 <div class="row">

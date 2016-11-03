@@ -1,137 +1,34 @@
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">Nueva Atencion Clinica de Roky</h4>
-        </div>
-        <div class="panel-body">
-            <form>
-                <div class="row">
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <script type="text/javascript">
-                                //<![CDATA[
-                                var  today = new Date();
-                                var m = today.getMonth() + 1;
-                                var mes = (m < 10) ? '0' + m : m;
-                                document.write('<label>Fecha:</label></br> '+today.getDate(),'/' +mes,'/'+today.getYear());
-                                //]]>
-                            </script>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <script type="text/javascript">
-                                var d = new Date();
-                                document.write('<label>Hora:</label></br>'+d.getHours(),':'+d.getMinutes(),':'+d.getSeconds());
-                            </script>
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="form-group">
-                            <label for="motivo">Motivo de Atención:</label>
-                            <input type="email" class="form-control" id="motivo" placeholder="Ingrese el porque de la atención">
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-md-2">
-                        <div class="input-group">
-                            <span class="input-group-addon" id="t">T°</span>
-                            <input type="text" class="form-control" placeholder="Username" aria-describedby="t">
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="input-group">
-                            <span class="input-group-addon" id="basic-addon1">FC</span>
-                            <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="input-group">
-                            <span class="input-group-addon" id="basic-addon1">FR</span>
-                            <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="input-group">
-                            <span class="input-group-addon" id="basic-addon1">Kg</span>
-                            <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="input-group">
-                            <span class="input-group-addon" id="basic-addon1">%</span>
-                            <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="input-group">
-                            <span class="input-group-addon" id="basic-addon1">TLC</span>
-                            <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="form-group">
-                            <label for="">Anamnesis y Descripcion:</label>
-                            <textarea rows="2" class="form-control" placeholder="Descriocion del estado del paciente"></textarea>
-                        </div>
-                    </div>
-                    <div class="col-xs-12">
-                        <div class="form-group">
-                            <label for="">Hallasgos Clinicos:</label>
-                            <input type="password" class="form-control" id="inputPassword" placeholder="Password">
-                        </div>
-                    </div>
-                    <div class="col-xs-12">
-                        <div class="form-group">
-                            <label for="">Diagnostico:</label>
-                            <input type="password" class="form-control" placeholder="Confirmar Password">
-                        </div>
-                    </div>
-                    <div class="col-xs-12">
-                        <div class="form-group">
-                            <label for="">Dx:</label>
-                            <input type="text" class="form-control" placeholder="Nombre">
-                        </div>
-                    </div>
-                    <div class="col-xs-12">
-                        <div class="form-group">
-                            <label for="">Pronostico:</label>
-                            <input type="text" class="form-control" placeholder="Apellido">
-                        </div>
-                    </div>
-                    <div class="col-xs-12">
-                        <div class="form-group">
-                            <label for="" >Pruebas Auxiliares:</label>
-                            <input type="tel" class="form-control" placeholder="Telefono">
-                        </div>
-                    </div>
-                    <div class="col-xs-12">
-                        <div class="form-group">
-                            <label for="">Observaciones:</label>
-                            <textarea rows="3" class="form-control" placeholder="Dirección"></textarea>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-                <button type="submit" name="submit" class="btn btn-primary text-bold" id="submit-id-submit" title="Grabar">
-                    <i class="btn-icon-onlyx fa fa-save"></i>
-                    <span class="hidden-xsx"> Grabar</span>
-                </button>
-                <button type="button" name="cancel" class="btn btn btn-danger btn-back text-bold" id="button-id-cancel" title="Cancel">
-                    <i class="btn-icon-onlyx fa fa-ban"></i>
-                    <span class="hidden-xs"> Cancel</span>
-                </button>
-                <button type="reset" name="reset" class="btn btn btn-default text-bold" id="reset-id-reset" title="Reset">
-                    <i class="btn-icon-onlyx fa fa-undo"></i>
-                    <span class="hidden-xs"> Reset</span>
-                </button>
-             </div>
-        </div>
-    </div><!-- /.modal--content -->
+{% extends "main/dashboard.html" %}
+{% load i18n crispy_forms_tags %}
+{% load l10n %}
+
+{% block breadcrumbs %}
+<a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %} &rsaquo;&rsaquo;</a>
+<a href="/clinica/consulta/listar/">{{ opts.verbose_name_plural|capfirst }}</a>
+&rsaquo; {{ title }}
+{% endblock breadcrumbs %}
+
+{% block content_title %}
+<h3><i class="fa fa-paw"></i> {{ opts.verbose_name_plural|capfirst }} | <small>{{ subtitle }}</small></h3>
+{% endblock content_title %}
+
+{% block content %}
+<div class="ui-widget">
+  <label for="tags3">Tags: </label>
+  <input id="tags3">
+</div>
+{% crispy form %}
+{% endblock %}
+
+{% block extrajs %}
+{{ block.super }}
+<script type="text/javascript">
+	$(function() {
+		$("#tags3").autocomplete({
+			minLength:1,
+			source: "/clinica/consulta/solo_url/"
+		});
+	});
+</script>
+
+{% endblock extrajs %}

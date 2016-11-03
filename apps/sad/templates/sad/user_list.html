@@ -35,9 +35,9 @@ $(function() {
         <div class="btn-actions">
             <a href="/sad/user/create/" class="btn btn-primary text-bold" title="{% trans 'Add' %} {% trans 'user' %}"><i class="fa fa-plus"></i> <span class="hidden-xs"> {% trans 'Add'  %}</span></a>
 
-            <a href="/sad/user/person_search/" class="btn btn-success text-bold" title="{% trans 'Add' %} {% trans 'from'  %} {% trans 'user' %}"><i class="fa fa-plus"></i> <span class="hidden-xs"> {% trans 'Add'  %} {% trans 'from'  %} {% trans 'Person'  %}</span></a> 
+            <a href="/sad/user/person_search/" class="btn btn-success text-bold" title="{% trans 'Add' %} {% trans 'from'  %} {% trans 'user' %}"><i class="fa fa-plus"></i> <span class="hidden-xs"> {% trans 'Add'  %} {% trans 'from'  %} {% trans 'Person'  %}</span></a>
 
-        </div>            
+        </div>
     </div>
 </div>
 <div class="container-overflow">
@@ -57,7 +57,7 @@ $(function() {
             </tr>
         </thead>
         <tbody>
-            {% for d in object_list %}       
+            {% for d in object_list %}
             <tr class="{{ d.is_active|yesno:',danger' }}">
                 <td>{% if is_paginated %}
                     {{ page_obj.start_index|add:forloop.counter0 }}
@@ -71,7 +71,7 @@ $(function() {
                 <td>{{ d.person.last_name   }} </td>
                 <td>{{ d.person.get_identity_type_display }}{{ d.person.identity_num|add:'' }}</td>
                  <td>{{ d.email }}</td>
-                <td>{{d.status}} - 
+                <td>{{d.status}} -
                     <span class="label label-{{ d.is_active|yesno:'primary,success' }}">
                         {% if d.is_active %}{% trans 'Yes'|upper %} {% else %} {% trans 'No'|upper %} {% endif %}
                     </span>
@@ -80,6 +80,7 @@ $(function() {
 
                 <td class="text-center">
                     <a href="/sad/user/detail/{{d.pk|key:'user_det'}}/" class="btn btn-warning btn-sm text-bold" title="{% trans 'Detail' %} {% trans 'user' %}" rel="tooltip"><i class="btn-icon-only fa fa-eye"></i></a>
+
 
                     <a href="/sad/user/update/{{d.pk|key:'user_upd'}}/" class="btn btn-info btn-sm text-bold" title="{% trans 'Change' %} {% trans 'user' %}" rel="tooltip"><i class="btn-icon-only fa fa-edit"></i></a>
 
@@ -92,7 +93,7 @@ $(function() {
                     <a href="/sad/user/state/rea/{{d.pk|key:'user_rea'}}/" class="btn btn-info btn-sm text-bold" title="{% trans 'reactivate'|capfirst %} {% trans 'user' %}" rel="tooltip"><i class="btn-icon-only fa fa-flag"></i></a>
 
                     {% endif %}
-                    
+
                     <a href="/sad/user/delete/{{d.pk|key:'user_del'}}/" class="btn btn-danger btn-sm js-confirm text-bold" msg-title="{% trans 'Delete' %} {% trans 'user' %}?." msg="{% trans 'Are you sure?' %}<br/>{% trans 'Remember that this operation can not be reversed.' %}" title="{% trans 'Delete' %} {% trans 'user' %}" rel="tooltip"><i class="btn-icon-only fa fa-trash-o"></i></a>
 
                 </td>

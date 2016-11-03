@@ -1,17 +1,32 @@
 from apps.utils.decorators import permission_resource_required
 from apps.utils.forms import empty
-from apps.utils.security import get_dep_objects, log_params, SecurityKey
+from apps.utils.security import SecurityKey, log_params, UserToken, get_dep_objects
+from django.views import generic
 
+from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.contrib import messages
+from django.db import transaction
+from django.db.models import Q
+
+import datetime
+import json
+from django.contrib.sites.models import Site
+from django.core.mail import send_mail
+
+from django.template.loader import render_to_string
+
 from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.utils.encoding import force_text
-from django.utils.text import capfirst
+from django.utils.text import capfirst, get_text_list
 from django.utils.translation import ugettext as _
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
+
+from django.contrib.auth.models import Permission, Group
+from django.contrib.contenttypes.models import ContentType
 
 from ..forms.mascotaform import MascotaForm
 
@@ -22,7 +37,7 @@ import logging
 log = logging.getLogger(__name__)
 
 # Create your views here.
-class MascotaListView(ListView):
+class MascotaListView(generic.ListView):
     u"""Tipo Documento Identidad."""
 
     model = Mascota
@@ -48,20 +63,15 @@ class MascotaListView(ListView):
         self.q = empty(self.request, 'q', '')
         column_contains = u'%s__%s' % (self.f, 'contains')
 
-        return self.model.objects.filter(
-            **{column_contains: self.q}).order_by(self.o)
+        return self.model.objects.filter(**{column_contains: self.q}).order_by(self.o)
 
     def get_context_data(self, **kwargs):
-        """
-        Tipo Documento Identidad ListView List get context.
-        Funcion con los primeros datos iniciales para la carga del template.
-        """
         context = super(MascotaListView,
                         self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
-        # context['cmi'] = 'menu' #  Validacion de manual del menu
+        #context['cmi'] = 'mascota' #  Validacion de manual del menu
         context['title'] = ('Seleccione %s'
-                            ) % capfirst('una Mascota')
+                            ) % capfirst(' una mascota')
 
         context['o'] = self.o
         context['f'] = self.f
@@ -75,7 +85,7 @@ class MascotaCreateView(CreateView):
 
     model = Mascota
     form_class = MascotaForm
-    template_name = "clinica/form.html"
+    template_name = "clinica/form/mascota.html"
     success_url = reverse_lazy("clinica:listar_mascotas")
 
     @method_decorator(permission_resource_required)
@@ -92,8 +102,9 @@ class MascotaCreateView(CreateView):
         context = super(MascotaCreateView,
                         self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
-        # context['cmi'] = 'tipodoc'
-        context['title'] = ('Agregar %s') % ('Mascota')
+        #context['cmi'] = 'mascota'
+        context['title'] = ('Agregar %s') % ('nueva mascota')
+        context['subtitle'] = ('Agregando %s') % ('nueva mascota')
         return context
 
     def form_valid(self, form):
@@ -104,9 +115,9 @@ class MascotaCreateView(CreateView):
             'name': capfirst(force_text(self.model._meta.verbose_name)),
             'obj': force_text(self.object)
         }
-
-        messages.success(self.request, msg)
-        log.warning(msg, extra=log_params(self.request))
+        if self.object.id:
+            messages.success(self.request, msg)
+            log.warning(msg, extra=log_params(self.request))
         return super(MascotaCreateView, self).form_valid(form)
 
 
@@ -115,7 +126,7 @@ class MascotaUpdateView(UpdateView):
 
     model = Mascota
     form_class = MascotaForm
-    template_name = "clinica/form.html"
+    template_name = "clinica/form/mascota.html"
     success_url = reverse_lazy("clinica:listar_mascotas")
 
     @method_decorator(permission_resource_required)
@@ -161,64 +172,49 @@ class MascotaUpdateView(UpdateView):
         return super(MascotaUpdateView, self).form_valid(form)
 
 
-class MascotaDeleteView(DeleteView):
-    """Empresa Delete View."""
+class MascotaUpdateActiveView(ListView):
 
+    """ """
     model = Mascota
+    template_name = "clinica/mascota.html"
     success_url = reverse_lazy('clinica:listar_mascotas')
 
     @method_decorator(permission_resource_required)
     def dispatch(self, request, *args, **kwargs):
-        """Empresa Delete View dispatch."""
         key = self.kwargs['pk']
-        pk = SecurityKey.is_valid_key(request, key, 'doc_del')
+        state = self.kwargs['state']
+        pk = SecurityKey.is_valid_key(request, key, 'mascota_%s' % state)
         if not pk:
             return HttpResponseRedirect(self.success_url)
-        self.kwargs['pk'] = pk
         try:
-            self.get_object()
+            self.object = self.model.objects.get(pk=pk)
         except Exception as e:
             messages.error(self.request, e)
             log.warning(force_text(e), extra=log_params(self.request))
             return HttpResponseRedirect(self.success_url)
-        return super(MascotaDeleteView,
-                     self).dispatch(request, *args, **kwargs)
 
-    def delete(self, request, *args, **kwargs):
-        """
-        Empresa Delete View delte.
-        Función para eliminar la empresa sobre un metodo que verifica las
-        dependencias de que tiene la tabla mostrando un mensaje de validacion.
-        """
+        msg = _('La %(name)s "%(obj)s" %(action)s.') % {
+            'name': capfirst(force_text(self.model._meta.verbose_name)),
+            'obj': force_text(self.object),
+            'action': (_('esta vivo') if state == 'rea' else _('fallecio'))
+        }
+        mse = _('The %(name)s "%(obj)s" is already %(action)s.') % {
+            'name': capfirst(force_text(self.model._meta.verbose_name)),
+            'obj': force_text(self.object),
+            'action': (_('active') if state == 'rea' else _('inactive'))
+        }
         try:
-            d = self.get_object()
-            deps, msg = get_dep_objects(d)
-            print(deps)
-            if deps:
-                messages.warning(
-                    self.request,
-                    ('No se puede Eliminar %(name)s') %
-                    {
-                        "name": capfirst(force_text(
-                            self.model._meta.verbose_name)
-                        ) + ' "' + force_text(d) + '"'
-                    })
-                raise Exception(msg)
-
-            d.delete()
-            msg = _(
-                ' %(name)s "%(obj)s" fuel eliminado satisfactorialmente.') % {
-                'name': capfirst(force_text(self.model._meta.verbose_name)),
-                'obj': force_text(d)
-            }
-            if not d.id:
-                messages.success(self.request, msg)
-                log.warning(msg, extra=log_params(self.request))
+            if state == 'ina' and not self.object.is_active:
+                raise Exception(mse)
+            else:
+                if state == 'rea' and self.object.is_active:
+                    raise Exception(mse)
+                else:
+                    self.object.is_active = (True if state == 'rea' else False)
+                    self.object.save()
+                    messages.success(self.request, msg)
+                    log.warning(msg, extra=log_params(self.request))
         except Exception as e:
-            messages.error(request, e)
+            messages.error(self.request, e)
             log.warning(force_text(e), extra=log_params(self.request))
         return HttpResponseRedirect(self.success_url)
-
-    def get(self, request, *args, **kwargs):
-        """Empresa Delete View get."""
-        return self.delete(request, *args, **kwargs)

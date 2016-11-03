@@ -19,6 +19,7 @@ from .views import GroupListView, GroupCreateView, GroupUpdateView,\
 from .views import PermissionListView, PermissionCreateView, \
     PermissionUpdateView, PermissionDeleteView
 
+
 # public
 urlpatterns = [
     # user x asullom
@@ -38,6 +39,7 @@ urlpatterns = [
         UserCreateView.as_view(), name='user-create'),
     url(r'^user/index/$',
         UserListView.as_view(), name='user-list'),
+
 
     # menu x asullom
     url(r'^menu/state/(?P<state>[\w\d\-]+)/(?P<pk>.*)/$',

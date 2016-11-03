@@ -1,0 +1,37 @@
+{% extends "main/dashboard.html" %}
+{% load i18n crispy_forms_tags staticfiles %}
+{% load app_security %}
+{% load l10n humanize %}
+
+{% block breadcrumbs %}
+<a href="{# url 'clivet:clivet' #}"><i class="fa fa-home"></i> {% trans 'Home' %} &rsaquo;&rsaquo;</a>
+<a href="/clinica/mascota/listar/">{{ opts.verbose_name_plural|capfirst }}</a>
+&rsaquo; {{ title }}
+{% endblock breadcrumbs %}
+
+{% block content_title %}
+<h3><i class="fa fa-paw"></i> Listado de {{ opts.verbose_name_plural|capfirst }} | <small>{{ title }}</small></h3>
+{% endblock content_title %}
+
+{% block content %}
+{% crispy form %}
+
+{% endblock %}
+
+
+{% block extrajs %}
+{{ block.super }}
+
+<script type="text/javascript">
+$('#id_fecha_nacimiento').datetimepicker({
+	format: 'YYYY-MM-DD',
+		//format: 'YYYY-MM-DD hh:mm:ss', //pata datatimes
+		language: '{{ LANGUAGE_CODE }}',
+		pickTime: false,
+		//showMeridian: true,
+		autoclose: true,
+		todayHighlight: true,
+	});
+
+</script>
+{% endblock extrajs %}
