@@ -13,7 +13,7 @@ urlpatterns = [
     # departamento
     url(r'^departamento/listar/$', DepartamentoListView.as_view(),
         name="departamento_list"),
-    url(r'^departamento/listar/search/$', buscarDep),
+
 
     url(r'^departamento/crear/$', DepartamentoCreateView.as_view(),
         name="departamento_add"),
@@ -82,5 +82,10 @@ urlpatterns = [
         name="ventadetalle_del"),
 
     url(r'^producto/listar/ajax/$', ProductoGetAjax),
+
+    # buscadores
+    url(r'^departamento/listar/search/$', buscarDep),
+    url(r'^producto/search/$', buscarProducto, name='producto_s'),
+
 
 ]

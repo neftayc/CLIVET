@@ -18,7 +18,9 @@ class VentaForm(forms.ModelForm):
     producto = forms.ModelChoiceField(
         queryset=Producto.objects.all(), required=False, label="", help_text="")
     data_venta = forms.CharField(
-        required=False, widget=forms.TextInput(attrs={'type': 'hidden'}))
+        required=False,  widget=forms.TextInput(attrs={'type': 'hidden'}))
+    producto = forms.CharField(label="",
+                               widget=forms.TextInput(attrs={'class': 'typeahead'}))
 
     class Meta:
 

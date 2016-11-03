@@ -15,9 +15,12 @@ from django.utils.translation import ugettext as _
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 from django.shortcuts import render
+from django.http import HttpResponse
 import json
 
+
 from ..models.Venta import Venta
+from ..models.Producto import Producto
 from ..forms.Venta import VentaForm
 from ..models.Venta_Detalle import Detalle_Venta
 from ..forms.VentaDetalle import Detalle_VentaForm
@@ -252,3 +255,25 @@ class DetalleVentaCreateView(CreateView):
 
 # return render_to_response('facturacion/crear_factura.html', {'form':
 # form}, context_instance=RequestContext(request))
+
+
+def buscarProducto(request):
+    if request.is_ajax:
+        search = request.GET.get('term', '')
+
+        productos = Producto.objects.filter(
+            nombre__icontains=search)[:5]
+
+        results = []
+        for producto in productos:
+            producto_json = {}
+            producto_json['id'] = producto.id
+            producto_json['company_name'] = producto.nombre
+            results.append(producto_json)
+
+        data_json = json.dumps(results)
+
+    else:
+        data_json = 'fail'
+    mimetype = "application/json"
+    return HttpResponse(data_json, mimetype)

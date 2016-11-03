@@ -23,8 +23,11 @@
                     <div class="input-group">
                         <div class="input-group-addon">
                             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                        </div>
+                        </div id="bloodhound">
+                        <div class="#">
+                            
                         {{ form.producto|as_crispy_field }}
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-2">
@@ -109,6 +112,69 @@
     </div>
 </div>
 <script type="text/javascript">
+var stocksdata=[
+    {
+        "company_name": "Facebook",
+        "code": "fb",
+        "id": 1,
+    },
+    {
+        "company_name": "Twitter",
+        "code": "fb",
+        "id": 2,
+    },
+    {
+        "company_name": "Whatsapp",
+        "code": "fb",
+        "id": 3,
+    },
+    {
+        "company_name": "Google",
+        "code": "goog",
+        "id": 4,
+    },
+    {
+        "company_name": "Yahoo",
+        "code": "yhoo",
+        "id": 5,
+    },
+    {
+        "company_name": "Apple",
+        "code": "aapl",
+        "id": 6,
+    },
+    {
+        "company_name": "Royal Mail",
+        "code": "rmg.l",
+        "id": 5,
+    },
+ ];
+
+$(document).ready(function(){
+   
+
+var stocks = new Bloodhound({
+
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('sss'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        //url:"{% url 'ventas:producto_s' %}"//'stockCodes.json',
+        //local: stocksdata,
+        remote: '/departamento/listar/search',
+    });
+
+    stocks.initialize();
+
+    $('.typeahead ').typeahead(
+       null,  {
+
+        displayKey: 'descripcion',
+        source: stocks.ttAdapter()
+    }).on('typeahead:selected', function(event, data){            
+        $('.typeahead').val(data.id);  
+        Venta.temp=data.id;    
+    });
+
+});
 $(document).ready(function() {
     $("#enviar_producto").click(function() {
         function not_exist(dd) {
@@ -120,12 +186,12 @@ $(document).ready(function() {
             }
             return true;
         }
-        if (not_exist($('#id_producto').val())) {
+        if ((not_exist(Venta.temp) && Venta.temp!==-1)) {
             $.ajax({
                     url: "{% url 'ventas:carro' %}",
                     type: 'get',
                     data: {
-                        p: $('#id_producto').val()
+                        p:  Venta.temp
                     },
                 })
                 .done(function(data) {
@@ -154,6 +220,7 @@ var Venta = {
     igv: 0.00,
     sub_total: 0.00,
     total: 0.00,
+    temp:-1
 };
 
 function draw() {
