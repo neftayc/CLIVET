@@ -90,7 +90,7 @@ $(function() {
                 </td>
 
                 <td class="text-center">
-                    <a href="/clinica/atencion/listar/" class="btn btn-danger btn-sm text-bold" title="{% trans 'Ver' %} {% trans 'Atenciones' %}" rel="tooltip"><i class="btn-icon-only fa fa-paw"></i></a>
+                    <a href="/clinica/atencion/listar/{{d.pk}}/" class="btn btn-danger btn-sm text-bold" title="{% trans 'Ver' %} {% trans 'Atenciones' %}" rel="tooltip"><i class="btn-icon-only fa fa-paw"></i></a>
 
                     <a href="/clinica/historia/mascota_add/{{d.pk|key:'historia_cre'}}/" class="btn btn-warning btn-sm text-bold" title="{% trans 'Crear' %} {% trans 'Historia' %}" rel="tooltip"><i class="btn-icon-only fa fa-hospital-o"></i></a>
 

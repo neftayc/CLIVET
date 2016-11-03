@@ -37,12 +37,13 @@ class Atencion(models.Model):
 #vacunacion
     fecha_programada = models.DateTimeField(null=True, blank=True)
     vobservacion = models.CharField(max_length=100,null=True, blank=True)
-    vacuna = models.CharField(max_length=100,choices=VACUNA,null=True, blank=True)
+    vacuna = models.CharField(max_length=100,choices=VACUNA, null=True, blank=True)
 
 #notas
     ndescripcion = models.CharField(max_length=200, default='Mascota en buen estado',null=True, blank=True)
 
     created_ath = models.DateTimeField(_('Fecha Creada'), auto_now_add=True)
+
     class Meta:
         verbose_name = "Atencion"
         verbose_name_plural = "Atenciones"

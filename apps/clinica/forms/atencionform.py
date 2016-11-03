@@ -16,7 +16,6 @@ from ..models.vacunacion import Vacunacion, VACUNA
 from ..models.colamedica import ColaMedica, ESTADOS
 
 class AtencionForm(forms.ModelForm):
-    """Tipo Documeto Form."""
 
     person_id = forms.CharField(widget=forms.HiddenInput(), required=False,)
     historia = forms.CharField(widget=forms.HiddenInput(), required=False,)
@@ -24,7 +23,7 @@ class AtencionForm(forms.ModelForm):
         """Meta."""
         model = Atencion
         exclude = ()
-        fields = ['anamnesis','diagnostico','dx','hallasgos_clinicos',]
+        fields = ['anamnesis','diagnostico','dx','hallasgos_clinicos','motivo_atencion', 'observacion', 'pronostico', 'pruebas_auxiliares', 'tratamiento', 'fecha_programada', 'vobservacion', 'vacuna', 'ndescripcion',]
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)

@@ -16,8 +16,6 @@
     <div class="row">
         <div class="btn-actions">
             <a href="#" class="btn btn-primary text-bold" title="Agregar Tipo Documento Identidad">
-                <i class="fa fa-plus"></i>
-                <span class="hidden-xs"> Agregar</span>
                 <span class="hidden-xs"> {{ cantidad }}</span>
             </a>
         </div>
@@ -40,7 +38,7 @@
                     {{ page_obj.start_index|add:forloop.counter0 }}
                     {% else %}
                     {{ forloop.counter }}
-                    {% endif %}
+                     {% endif %}
                 </td>
                 <td>{{ d.colamedica.historia.mascota.nombre }}</td>
                 <td>{{ d.colamedica.descripcion }}</td>
@@ -50,6 +48,103 @@
         </tbody>
     </table>
 </div>
+
+
+<div class="row">
+    <div class="col-xs-12 col-md-8">
+        <div class="panel panel-default"  id="global">
+            {% for d in atencion %}
+            <div class="panel-body">
+                <p class="">{{ d.created_ath|date }}</p>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                Consulta Medica
+                            </div>
+                            <div class="col-xs-6 ">
+                                <i class="fa fa-home"></i>
+                                <span>{{d.created_ath|time}}</span>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default dropdown-toggle"
+                                    data-toggle="dropdown">
+                                        <span class="caret"></span>
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#"><i class="fa fa-home"></i> Facturar</a></li>
+                                        <li><a href="{% url 'clinica:actualizar_atencion' d.pk|key:'doc_upd' %}"
+                                           class="text-bold"
+                                           title="Actualizar atencion"
+                                           rel="tooltip">
+                                            <i class="btn-icon-only fa fa-edit"> Editar</i>
+                                        </a></li>
+                                        <li  class="divider"></li>
+                                        <li><a href="{% url 'clinica:eliminar_atencion' d.pk|key:'doc_del' %}"
+                                           class="js-confirm text-bold"
+                                           msg-title="Desea eliminar esta atencion?."
+                                           msg="Esta Seguro
+                                           <br/>Recuerde esta operación no puede revertirse"
+                                           title="Eliminar Atencion" rel="tooltip">
+                                            <i class="btn-icon-only fa fa-trash-o"> Eliminar</i>
+                                        </a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            <label>Amnesia y/o Descripción:</label>
+                            <li>{{d.anamnesis}}</li>
+                        </p>
+                        <p>
+                            <label>Dx:</label>
+                            <li>{{ d.dx}}</li>
+                        </p>
+                        <p>
+                            <label>Hallasgos Clinicos:</label>
+                            <li>{{ d.hallasgos_clinicos}}</li>
+                        </p>
+                        <p>
+                            <label>Diagnostico:</label>
+                            <li><span>T°: </span>259 <span> FCT: </span> 1221</li>
+                        </p>
+                        <p>
+                            <label>Tratamientos</label>
+                            <li>{{ d.tratamiento}}</li>
+                        </p>
+                        <p>
+                            <img src="/media/clivet/logo.png" class="img-responsive" alt="Imagen de la consulta" />
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-4">
+        <h4><i class="fa fa-home"></i> Proximos Eventos</h4>
+        <div class="panel panel-default">
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <td><i class="fa fa-home"></i> 07/06</td>
+                        <td>Cita</td>
+                        <td><i class="fa fa-save"></i><i class="fa fa-edit"></i><i class="fa fa-remove"></i></td>
+                    </tr>
+                    <tr>
+                        <td><i class="fa fa-home"></i> 07/06</td>
+                        <td>Control</td>
+                        <td><i class="fa fa-save"></i><i class="fa fa-edit"></i><i class="fa fa-remove"></i></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
 {% endblock content %}
 {% block extrajs %}
 {{ block.super }}
