@@ -280,6 +280,7 @@ class MascotaHistoriDetailForm(forms.ModelForm):
             help_text=u'<small class="help-error"></small> %s' % _(
                 u' '),
         )
+        
         self.fields['genero'] = forms.CharField(
             label=capfirst(_(u'genero')), required=False,
             help_text=u'<small class="help-error"></small> %s' % _(

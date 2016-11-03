@@ -7,6 +7,7 @@ https://docs.djangoproject.com/en/1.6/topics/forms/modelforms/
 Descripcion: Implementacion de los controladores de la app sad
 """
 
+
 import logging
 log = logging.getLogger(__name__)
 from django.utils.translation import ugettext as _  # , ungettext

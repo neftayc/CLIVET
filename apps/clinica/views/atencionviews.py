@@ -17,56 +17,42 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 from django.views.generic import TemplateView
 
-from ..forms.atencionform import AtencionForm, AtencionMascotaForm
+from ..forms.atencionform import AtencionForm, AtencionMascotaDetailForm
 
 from ..models.atencion import Atencion
 from ..models.colamedica import ColaMedica
+from ..models.mascota import Mascota
 import logging
 log = logging.getLogger(__name__)
 
 # Create your views here.
-class AtencionListView(TemplateView):
-    u"""Tipo Documento Identidad."""
-
+class AtencionListView(ListView):
     model = Atencion
-    paginate_by = settings.PER_PAGE
     template_name = "clinica/atencion.html"
 
-    @method_decorator(permission_resource_required)
-    def dispatch(self, request, *args, **kwargs):
-        """dispatch."""
-        return super(AtencionListView,
-                     self).dispatch(request, *args, **kwargs)
+    def get_context_data(self, **kwargs):
+        #mascota = Mascota.objects.get(nombre='Boby')
+        context = super(AtencionListView, self).get_context_data(**kwargs)
+        mascota = Mascota.objects.get(id=self.kwargs['pk'])
 
-    def get_paginate_by(self, queryset):
-        """Paginate."""
-        if 'all' in self.request.GET:
-            return None
-        return ListView.get_paginate_by(self, queryset)
-
-    def get_queryset(self):
-        """Tipo Doc List Queryset."""
-        self.o = empty(self.request, 'o', '-id')
-        self.f = empty(self.request, 'f', 'created_ath')
-        self.q = empty(self.request, 'q', '')
-        column_contains = u'%s__%s' % (self.f, 'contains')
-
-        return self.model.objects.filter(
-            **{column_contains: self.q}).order_by(self.o)
-
-    def get_context_data(self, request, **kwargs):
-        context = super(AtencionListView, self).get_context_data(request, **kwargs)
-        context['atencion'] = Atencion.objects.filter(colamedica = request.historia.mascota ).order_by('anamnesis')
-        context['cantidad'] = context['atencion'].count()
         context['opts'] = self.model._meta
-        # context['cmi'] = 'menu' #  Validacion de manual del menu
-        context['title'] = ('Seleccione %s para cambiar'
-                            ) % capfirst('Tipo Documento')
+        context['atencion'] = Atencion.objects.filter(colamedica__historia__mascota__nombre=mascota ).order_by('pk')
+        context['nombre'] = mascota
+        context['raza'] = mascota.raza
+        context['dueño'] = mascota.dueño
+        context['cantidad'] = context['atencion'].count()
 
-        context['o'] = self.o
-        context['f'] = self.f
-        context['q'] = self.q.replace('/', '-')
-
+        if mascota:
+            initial = {
+                'nombre': mascota.nombre,
+                'dueño': mascota.dueño.persona,
+                'edad': mascota.fecha_nacimiento,
+                'genero': mascota.genero,
+                'especie': mascota.especie,
+                'raza': mascota.raza,
+                'color': mascota.color,
+            }
+        context['form'] = AtencionMascotaDetailForm(initial=initial)
         return context
 
 
@@ -150,16 +136,15 @@ class AtencionCreateView(CreateView):
 
 
 class AtencionUpdateView(UpdateView):
-    """Tipo Documento Update View."""
 
     model = Atencion
     form_class = AtencionForm
-    template_name = "clinica/model.html"
-    success_url = reverse_lazy("clinica:listar_atencion")
+    template_name = "clinica/form/atencion.html"
+    success_url = reverse_lazy("clinica:listar_medica")
 
     @method_decorator(permission_resource_required)
     def dispatch(self, request, *args, **kwargs):
-        """Tipo Documento Create View dispatch."""
+
         key = self.kwargs.get(self.pk_url_kwarg, None)
         pk = SecurityKey.is_valid_key(request, key, 'doc_upd')
         if not pk:
@@ -172,8 +157,7 @@ class AtencionUpdateView(UpdateView):
             log.warning(force_text(e), extra=log_params(self.request))
             return HttpResponseRedirect(self.success_url)
 
-        return super(AtencionUpdateView,
-                     self).dispatch(request, *args, **kwargs)
+        return super(AtencionUpdateView, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         """Tipo Documento Update View context data."""
@@ -184,20 +168,59 @@ class AtencionUpdateView(UpdateView):
         context['title'] = ('Actualizar %s') % ('Tipo Documento')
         return context
 
+    def get_form_kwargs(self):
+        kwargs = super(AtencionUpdateView, self).get_form_kwargs()
+        kwargs['request'] = self.request
+        kwargs['object'] = self.object
+        return kwargs
+
+    def get_initial(self):
+        initial = super(AtencionUpdateView, self).get_initial()
+        initial = initial.copy()
+        d = self.object
+        if d.colamedica:
+            initial['historia'] = d.colamedica.historia.num_historia
+            initial['descripcion'] = d.colamedica.descripcion
+            initial['estado'] = d.colamedica.estado
+        return initial
+
+    @transaction.atomic
     def form_valid(self, form):
-        """Tipo Documento Update View form_valid."""
-        self.object = form.save(commit=False)
+        sid = transaction.savepoint()
+        try:
+            self.object = form.save(commit=False)
+            try:
+                colamedica = ColaMedica.objects.get(pk=self.object.colamedica.pk)
+            except:
+                colamedica = ColaMedica()
+                # person.save()
+                pass
 
-        self.object.usuario = self.request.user
+            colamedica.historia.num_historia = form.cleaned_data['historia']
+            colamedica.descripcion = form.cleaned_data['descripcion']
+            colamedica.estado = form.cleaned_data['estado']
+            colamedica.save()
+            self.object.colamedica = colamedica
 
-        msg = ('%(name)s "%(obj)s" fue cambiado satisfacoriamente.') % {
-            'name': capfirst(force_text(self.model._meta.verbose_name)),
-            'obj': force_text(self.object)
-        }
-        if self.object.id:
+            self.object.save()
+            d = self.object
+
+            msg = _('The %(name)s "%(obj)s" was changed successfully.') % {
+                'name': capfirst(force_text(self.model._meta.verbose_name)),
+                'obj': force_text(self.object)
+            }
             messages.success(self.request, msg)
             log.warning(msg, extra=log_params(self.request))
-        return super(AtencionUpdateView, self).form_valid(form)
+
+            return super(AtencionUpdateView, self).form_valid(form)
+        except Exception as e:
+            try:
+                transaction.savepoint_rollback(sid)
+            except:
+                pass
+            messages.success(self.request, e)
+            log.warning(force_text(e), extra=log_params(self.request))
+            return super(AtencionUpdateView, self).form_invalid(form)
 
 
 class AtencionDeleteView(DeleteView):
@@ -254,9 +277,7 @@ class AtencionDeleteView(DeleteView):
         return HttpResponseRedirect(self.success_url)
 
     def get(self, request, *args, **kwargs):
-        """Empresa Delete View get."""
         return self.delete(request, *args, **kwargs)
-
 
 class AtencionMedicaView(generic.DetailView):
     model = ColaMedica
@@ -322,12 +343,13 @@ class AtencionMedicaView(generic.DetailView):
         context['form'] = AtencionMascotaForm(initial=initial)
         return context
 
-
-
 class MainAtencionesView(TemplateView):
+
     template_name = 'clinica/atencion.html'
 
     def get_context_data(self, **kwargs):
         context = super(MainAtencionesView, self).get_context_data(**kwargs)
-        context['atencion'] = Atencion.objects.filter(anamnesis = 'dsdsd' ).order_by('created_ath')
+        context['title'] = _('Add %s') % capfirst(_('atencion'))
+        context['atencion'] = Atencion.objects.filter(colamedica = '0001').order_by('anamnesis')
+        context['cantidad'] = context['atencion'].count()
         return context

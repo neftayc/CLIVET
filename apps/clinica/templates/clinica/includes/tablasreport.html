@@ -1,0 +1,47 @@
+<h3 class="text-primary"><u>Historial de Vacunas</u></h3>
+<table class="panel panel-info table table-hover">
+    <thead class="panel-heading">
+        <tr>
+            <th>#</th>
+            <th>Doctor</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+    <tbody class="panel-body">
+        {% for d in atencion %}
+        <tr>
+            <td>{{ d.id }}</td>
+            <td>{{ d.colamedica.historia.veterinario }}</td>
+            <td>{{ d.created_ath|date }}</td>
+            <td>{{ d.created_ath|time }}</td>
+            <td>{{ d.estado }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<hr>
+<h3 class="text-primary"><u>Historial de Citas</u></h3>
+<table class="panel panel-info table table-hover">
+    <thead class="panel-heading">
+        <tr>
+            <th>#</th>
+            <th>Doctor</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+    <tbody class="panel-body">
+        {% for d in atencion %}
+        <tr>
+            <td>{{ d.id }}</td>
+            <td>{{ d.colamedica.historia.veterinario }}</td>
+            <td>{{ d.created_ath|date }}</td>
+            <td>{{ d.created_ath|time }}</td>
+            <td>{{ d.estado }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

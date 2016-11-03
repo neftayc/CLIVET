@@ -16,7 +16,6 @@ from ..models.vacunacion import Vacunacion, VACUNA
 from ..models.colamedica import ColaMedica, ESTADOS
 
 class AtencionForm(forms.ModelForm):
-    """Tipo Documeto Form."""
 
     person_id = forms.CharField(widget=forms.HiddenInput(), required=False,)
     historia = forms.CharField(widget=forms.HiddenInput(), required=False,)
@@ -24,7 +23,7 @@ class AtencionForm(forms.ModelForm):
         """Meta."""
         model = Atencion
         exclude = ()
-        fields = ['anamnesis','diagnostico','dx','hallasgos_clinicos',]
+        fields = ['anamnesis','diagnostico','dx','hallasgos_clinicos','motivo_atencion', 'observacion', 'pronostico', 'pruebas_auxiliares', 'tratamiento', 'fecha_programada', 'vobservacion', 'vacuna', 'ndescripcion',]
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
@@ -189,25 +188,20 @@ class AtencionForm(forms.ModelForm):
                 ),
             ),
         )
-class AtencionMascotaForm(forms.ModelForm):
+class AtencionMascotaDetailForm(forms.ModelForm):
     """ """
     class Meta:
-        model = ColaMedica
+        model = Atencion
         exclude= []
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
         self.object = kwargs.pop('object', None)
 
-        super(AtencionMascotaForm, self).__init__(*args, **kwargs)
+        super(AtencionMascotaDetailForm, self).__init__(*args, **kwargs)
 
         self.fields['num_historia'] = forms.CharField(
-            label=capfirst(_(u'num_historia')), required=True,
-            help_text=u'<small class="help-error"></small> %s' % _(
-                u' '),
-        )
-        self.fields['created_ath'] = forms.CharField(
-            label=capfirst(_(u'created_ath')), required=False,
+            label=capfirst(_(u'N° Historia')), required=True,
             help_text=u'<small class="help-error"></small> %s' % _(
                 u' '),
         )
@@ -225,31 +219,6 @@ class AtencionMascotaForm(forms.ModelForm):
             label=capfirst(_(u'dueño')), required=True,
             # widget=forms.RadioSelect(),
 
-            help_text=u'<small class="help-error"></small> %s' % _(
-                u' '),
-        )
-        self.fields['direccion'] = forms.CharField(
-            label=capfirst(_(u'direccion')), required=False,
-            help_text=u'<small class="help-error"></small> %s' % _(
-                u' '),
-        )
-        self.fields['direccion'] = forms.CharField(
-            label=capfirst(_(u'direccion')), required=False,
-            help_text=u'<small class="help-error"></small> %s' % _(
-                u' '),
-        )
-        self.fields['direccion'] = forms.CharField(
-            label=capfirst(_(u'direccion')), required=False,
-            help_text=u'<small class="help-error"></small> %s' % _(
-                u' '),
-        )
-        self.fields['ciudad'] = forms.CharField(
-            label=capfirst(_(u'ciudad')), required=False,
-            help_text=u'<small class="help-error"></small> %s' % _(
-                u' '),
-        )
-        self.fields['telefono'] = forms.CharField(
-            label=capfirst(_(u'telefono')), required=False,
             help_text=u'<small class="help-error"></small> %s' % _(
                 u' '),
         )
@@ -285,56 +254,34 @@ class AtencionMascotaForm(forms.ModelForm):
             TabHolder(
                 Tab(_('Perfil'),
                     Row(
-                        Div(HTML('''
-                                <div class="form-group">
-                                <label class="control-label"> {{ form.nombre.label }} </label>
-                                <div class="controls ">{{ form.nombre.value }}</div>
-                                </div>
+                        Div(Div(HTML('''
+                                <img src="/media/clivet/images.jpg"" alt="{{ form.nombre.value}}" class="img-responsive">
                                 '''),
-                            css_class='col-md-6'),
+                                Div(HTML('''
+                                    <h3>{{ form.nombre.value}}</h3>
+                                    <p><strong>{{ form.num_historia.label }}</strong>: {{ form.num_historia.value}}</p>
+                                    <button type="button" class="btn btn-info btn-lg">
+                                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-warning btn-lg">
+                                        <i class="fa fa-hospital-o" aria-hidden="true"></i>
+                                    </button>
+                                    '''
+                                    ),
+                                css_class='caption text-center'),
+                                css_class='thumbnail'),
+                            css_class='col-sm-6 col-md-offset-1 col-md-2'),
                         Div(HTML('''
-                                <div class="form-group">
-                                <label class="control-label"> {{ form.edad.label }} </label>
-                                <div class="controls ">{{ form.edad.value }}</div>
-                                </div>
+                                {% include "clinica/includes/tablaperfil.html" %}
                                 '''),
-                            css_class='col-md-6'),
-                    ),
-                    Row(
+                            css_class='col-md-offset-1 col-md-4 panel panel-default'),
                         Div(HTML('''
-                                <div class="form-group">
-                                <label class="control-label"> {{ form.genero.label }} </label>
-                                <div class="controls ">{{ form.genero.value }}</div>
-                                </div>
+                                {% include "clinica/includes/tablasreport.html" %}
                                 '''),
-                            css_class='col-md-6'),
-                        Div(HTML('''
-                                <div class="form-group">
-                                <label class="control-label"> {{ form.especie.label }} </label>
-                                <div class="controls ">{{ form.especie.value }}</div>
-                                </div>
-                                '''),
-                            css_class='col-md-6'),
-                    ),
-                    Row(
-                        Div(HTML('''
-                                <div class="form-group">
-                                <label class="control-label"> {{ form.raza.label }} </label>
-                                <div class="controls ">{{ form.raza.value }}</div>
-                                </div>
-                                '''),
-                            css_class='col-md-6'),
-                        Div(HTML('''
-                                <div class="form-group">
-                                <label class="control-label"> {{ form.color.label }} </label>
-                                <div class="controls ">{{ form.color.value }}</div>
-                                </div>
-                                '''),
-                            css_class='col-md-6'),
+                            css_class='col-md-offset-1 col-md-3'),
                     ),
                 ),
-
-                Tab(_('Historial Clinico'),
+                Tab(_('Historial de Compras'),
                     Row(
                         Div(HTML('''
                                 <div class="form-group">
@@ -361,11 +308,16 @@ class AtencionMascotaForm(forms.ModelForm):
                             css_class='col-md-6'),
                     ),
                 ),
-            ),
-            Row(
-                FormActions(
-                    smtSave(),
-                    btnCancel(),
+                Tab(_('Historia Clinico'),
+                    Row(
+                        Div(HTML('''
+                                 {% include "clinica/includes/atencion.html" %}
+                                 '''
+                                 ),
+                            ),
+                        ),
+                ),
+                Tab(_('Agenda Medica'),
                 ),
             ),
         )
