@@ -16,4 +16,4 @@ class Venta(models.Model):
         verbose_name_plural = "Ventas"
 
     def __str__(self):
-        return " %d" % (self.id)
+        return " %s" % (self.id)

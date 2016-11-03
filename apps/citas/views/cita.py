@@ -16,10 +16,7 @@ from ..models.cita import Cita
 from ..forms.cita import CitaForm
 from django.core import serializers
 from django.http import HttpResponse
-<<<<<<< HEAD
-=======
 import json
->>>>>>> ventas
 
 import logging
 log = logging.getLogger(__name__)
@@ -46,53 +43,6 @@ class CitaView(TemplateView):
         return context
 
 
-<<<<<<< HEAD
-def CitaAjax(request):
-=======
-def GetCitaAjax(request):
-    if request.is_ajax():
-        citas = Cita.objects.all()
-        data = serializers.serialize("json", citas)
-        count = 0
-        for cita in citas:
-            count = count+1
-            print(data[1])
-    else:
-        data = 'fail'
-    return HttpResponse(data, content_type='application/json')
-
-
-def PostCitaAjax(request):
->>>>>>> ventas
-    if request.is_ajax():
-        data = serializers.serialize(
-            "json", Cita.objects.all())
-        return HttpResponse(data, content_type='application/json')
-
-
-<<<<<<< HEAD
-=======
-# def GetCitaAjax(request):
-#     if request.is_ajax:
-#         # search = request.GET('term')
-
-#         citas = Cita.objects.all()
-#         results = []
-#         for cita in citas:
-#             cita_json = {}
-#             cita_json['color'] = cita.evento.color
-#             cita_json['title'] = cita.evento.title
-#             #cita_json['cit'] = cita
-#             results.append(cita_json)
-
-#         data_json = json.dumps(results)
-
-#     else:
-#         data_json = 'fail'
-#     return HttpResponse(data_json, "application/json")
-
-
->>>>>>> ventas
 class CitaCreateView(CreateView):
     u"""Cita."""
 
@@ -247,3 +197,35 @@ class CitaDeleteView(DeleteView):
     def get(self, request, *args, **kwargs):
         """Cita Delete View get."""
         return self.delete(request, *args, **kwargs)
+
+
+def GetCitaAjax(request):
+    if request.is_ajax():
+        citas = Cita.objects.all()
+        data = serializers.serialize("json", citas)
+        count = 0
+        for cita in citas:
+            count = count + 1
+            print(data[1])
+    else:
+        data = 'fail'
+    return HttpResponse(data, content_type='application/json')
+
+
+def PostCitaAjax(request):
+    pass
+    # def GetCitaAjax(request):
+    #     if request.is_ajax:
+    #         # search = request.GET('term')
+    #         citas = Cita.objects.all()
+    #         results = []
+    #         for cita in citas:
+    #             cita_json = {}
+    #             cita_json['color'] = cita.evento.color
+    #             cita_json['title'] = cita.evento.title
+    #             #cita_json['cit'] = cita
+    #             results.append(cita_json)
+    #         data_json = json.dumps(results)
+    #     else:
+    #         data_json = 'fail'
+    # return HttpResponse(data_json, "application/json")
