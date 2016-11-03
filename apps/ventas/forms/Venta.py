@@ -10,19 +10,22 @@ from apps.utils.security import UserToken
 from django.db.models import Q
 from django.core.exceptions import NON_FIELD_ERRORS
 from ..models.Venta import Venta
+from apps.ventas.models.Producto import Producto
 
 
 class VentaForm(forms.ModelForm):
     u"""Tipo Documeto Form."""
+    producto = forms.ModelChoiceField(
+        queryset=Producto.objects.all(), required=False, label="", help_text="")
+    data_venta = forms.CharField(
+        required=False, widget=forms.TextInput(attrs={'type': 'hidden'}))
 
     class Meta:
 
         model = Venta
-        fields = ('total', 'cliente', 'trabajador',)
+        fields = ('total', 'cliente',)
         exclude = ()
         widgets = {
             'cliente': forms.Select(attrs={'class': 'form-control'}),
-            'trabajador': forms.Select(attrs={'class': 'form-control'}),
             'total': forms.TextInput(attrs={'class': 'form-control'}),
-
         }

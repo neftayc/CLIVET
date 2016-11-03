@@ -52,12 +52,12 @@ urlpatterns = [
 
 
 
-    url(r'^uni/cargarcarro/$', CrearCarroTemplateView.as_view(),
+    url(r'^uni/cargarcarro/$', CrearCarroTemplateView,
         name="carro"),
 
-    url(r'^uni/vendercarr/$', VenderTemplate.as_view(),
+    url(r'^uni/vendercarr/$', VenderCarro,
         name="vender_carro"),
-    
+
 
 
 
