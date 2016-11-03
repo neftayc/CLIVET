@@ -10,7 +10,7 @@ from .views.vacunacionviews import (VacunacionListView, VacunacionCreateView, Va
 
 urlpatterns = [
     #Atencion
-    url(r'^atencion/listar/$', AtencionListView.as_view(), name="listar_atencion"),
+    url(r'^atencion/listar/(?P<pk>\d+)/$', AtencionListView.as_view(), name="listar_atencion"),
 
     url(r'^atencion/mainlistar/$', MainAtencionesView.as_view(), name="mainlistar"),
 

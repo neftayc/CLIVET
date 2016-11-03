@@ -72,7 +72,6 @@ class HistoriaListView(ListView):
 
         return context
 
-
 class HistoriaCreateView(CreateView):
     """Tipo Documento Identidad."""
 
