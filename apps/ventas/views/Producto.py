@@ -14,9 +14,11 @@ from django.utils.text import capfirst
 from django.utils.translation import ugettext as _
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
+from django.http import HttpResponse
 
 from ..models.Producto import Producto
 from ..forms.Producto import ProductoForm
+from django.core import serializers
 
 import logging
 log = logging.getLogger(__name__)
@@ -225,3 +227,13 @@ class ProductoDeleteView(DeleteView):
     def get(self, request, *args, **kwargs):
         """Empresa Delete View get."""
         return self.delete(request, *args, **kwargs)
+
+
+def ProductoGetAjax(request):
+    if request.is_ajax():
+        con = Producto.objects.filter(
+            nombre__icontains=request.GET['producto'][:5])
+        data = serializers.serialize(
+            "json", con)
+
+        return HttpResponse(data, content_type='application/json')

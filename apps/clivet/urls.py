@@ -15,6 +15,7 @@ from .views.persona import (
 
 urlpatterns = [
     url(r'^clivet', clivet, name='clivet'),
+
     # ===================TRABAJADOR==========================
     url(r'^trabajador/listar/$', TrabajadorListView.as_view(),
         name="trabajador_list"),

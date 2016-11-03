@@ -1,16 +1,4 @@
-u"""Módulo View Departamento."""
-from django.shortcuts import render
-from django.http import HttpResponseBadRequest, HttpResponse, HttpRequest
-from django.contrib.auth.models import User
-from django.core import serializers
-import re
-from django.http import Http404, HttpResponse
-from django.shortcuts import render_to_response
-from django.template.context import RequestContext
-from django.db.models import Q
-
-from django.http import HttpResponse
-import json
+u"""Módulo View Venta"""
 
 from apps.utils.decorators import permission_resource_required
 from apps.utils.forms import empty
@@ -27,24 +15,25 @@ from django.utils.translation import ugettext as _
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 
-from ..models.Departamento import Departamento
-from ..forms.Departamento import DepartamentoForm
+
+from ..models.Venta import Venta
+from ..forms.Venta import VentaForm
 
 import logging
 log = logging.getLogger(__name__)
 
 
-class DepartamentoListView(ListView):
+class VentaListView(ListView):
     u"""Tipo Documento Identidad."""
 
-    model = Departamento
+    model = Venta
     paginate_by = settings.PER_PAGE
-    template_name = "ventas/inventario/Departamento.html"
+    template_name = "ventas/venta/Venta.html"
 
     @method_decorator(permission_resource_required)
     def dispatch(self, request, *args, **kwargs):
         """dispatch."""
-        return super(DepartamentoListView,
+        return super(VentaListView,
                      self).dispatch(request, *args, **kwargs)
 
     def get_paginate_by(self, queryset):
@@ -56,7 +45,7 @@ class DepartamentoListView(ListView):
     def get_queryset(self):
         """Tipo Doc List Queryset."""
         self.o = empty(self.request, 'o', '-id')
-        self.f = empty(self.request, 'f', 'descripcion')
+        self.f = empty(self.request, 'f', 'fechaV')
         self.q = empty(self.request, 'q', '')
         column_contains = u'%s__%s' % (self.f, 'contains')
 
@@ -69,12 +58,12 @@ class DepartamentoListView(ListView):
 
         Funcion con los primeros datos iniciales para la carga del template.
         """
-        context = super(DepartamentoListView,
+        context = super(VentaListView,
                         self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
         # context['cmi'] = 'menu' #  Validacion de manual del menu
         context['title'] = ('Seleccione %s para cambiar'
-                            ) % capfirst('Tipo Departamento')
+                            ) % capfirst('Venta')
 
         context['o'] = self.o
         context['f'] = self.f
@@ -83,82 +72,19 @@ class DepartamentoListView(ListView):
         return context
 
 
-def buscarDep(request):
-    if request.is_ajax:
-        search = request.GET.get('term', '')
-
-        departamentos = Departamento.objects.filter(
-            descripcion__icontains=search)[:5]
-
-        results = []
-        for departamento in departamentos:
-            departamento_json = {}
-            departamento_json['label'] = departamento.descripcion
-            departamento_json['value'] = departamento.descripcion
-            results.append(departamento_json)
-
-        data_json = json.dumps(results)
-
-    else:
-        data_json = 'fail'
-    mimetype = "application/json"
-    return HttpResponse(data_json, mimetype)
-
-
-class DepartamentoCreateView(CreateView):
-    u"""Tipo Documento Identidad."""
-
-    model = Departamento
-    form_class = DepartamentoForm
-    template_name = "ventas/inventario/formDepartamento.html"
-    success_url = reverse_lazy("ventas:departamento_list")
-
-    @method_decorator(permission_resource_required)
-    def dispatch(self, request, *args, **kwargs):
-        """dispatch."""
-        return super(DepartamentoCreateView,
-                     self).dispatch(request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        """
-        Tipo Documento Identidad ListView List get context.
-
-        Funcion con los primeros datos iniciales para la carga del template.
-        """
-        context = super(DepartamentoCreateView,
-                        self).get_context_data(**kwargs)
-        context['opts'] = self.model._meta
-        # context['cmi'] = 'tipodoc'
-        context['title'] = ('Agregar %s') % ('Departamento')
-        return context
-
-    def form_valid(self, form):
-        """"Empresa Crete View  form valid."""
-        self.object = form.save(commit=True)
-        print(self.object, form)
-        msg = _(' %(name)s "%(obj)s" fue creado satisfactoriamente.') % {
-            'name': capfirst(force_text(self.model._meta.verbose_name)),
-            'obj': force_text(self.object)
-        }
-
-        messages.success(self.request, msg)
-        log.warning(msg, extra=log_params(self.request))
-        return super(DepartamentoCreateView, self).form_valid(form)
-
-
-class DepartamentoUpdateView(UpdateView):
+class VentaUpdateView(UpdateView):
     """Tipo Documento Update View."""
 
-    model = Departamento
-    form_class = DepartamentoForm
-    template_name = "ventas/inventario/formDepartamento.html"
-    success_url = reverse_lazy("ventas:departamento_list")
+    model = Venta
+    form_class = VentaForm
+    template_name = "ventas/venta/formVenta.html"
+    success_url = reverse_lazy("ventas:venta_list")
 
     @method_decorator(permission_resource_required)
     def dispatch(self, request, *args, **kwargs):
         """Tipo Documento Create View dispatch."""
         key = self.kwargs.get(self.pk_url_kwarg, None)
-        pk = SecurityKey.is_valid_key(request, key, 'dep_upd')
+        pk = SecurityKey.is_valid_key(request, key, 'cat_upd')
         if not pk:
             return HttpResponseRedirect(self.success_url)
         self.kwargs['pk'] = pk
@@ -169,16 +95,16 @@ class DepartamentoUpdateView(UpdateView):
             log.warning(force_text(e), extra=log_params(self.request))
             return HttpResponseRedirect(self.success_url)
 
-        return super(DepartamentoUpdateView,
+        return super(VentaUpdateView,
                      self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         """Tipo Documento Update View context data."""
-        context = super(DepartamentoUpdateView,
+        context = super(VentaUpdateView,
                         self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
         # context['cmi'] = 'empresa'
-        context['title'] = ('Actualizar %s') % ('Tipo Departamento')
+        context['title'] = ('Actualizar %s') % ('Venta')
         return context
 
     def form_valid(self, form):
@@ -194,20 +120,20 @@ class DepartamentoUpdateView(UpdateView):
         if self.object.id:
             messages.success(self.request, msg)
             log.warning(msg, extra=log_params(self.request))
-        return super(DepartamentoUpdateView, self).form_valid(form)
+        return super(VentaUpdateView, self).form_valid(form)
 
 
-class DepartamentoDeleteView(DeleteView):
+class VentaDeleteView(DeleteView):
     """Empresa Delete View."""
 
-    model = Departamento
-    success_url = reverse_lazy('ventas:departamento_list')
+    model = Venta
+    success_url = reverse_lazy('ventas:venta_list')
 
     @method_decorator(permission_resource_required)
     def dispatch(self, request, *args, **kwargs):
         """Empresa Delete View dispatch."""
         key = self.kwargs['pk']
-        pk = SecurityKey.is_valid_key(request, key, 'dep_del')
+        pk = SecurityKey.is_valid_key(request, key, 'cat_del')
         if not pk:
             return HttpResponseRedirect(self.success_url)
         self.kwargs['pk'] = pk
@@ -217,7 +143,7 @@ class DepartamentoDeleteView(DeleteView):
             messages.error(self.request, e)
             log.warning(force_text(e), extra=log_params(self.request))
             return HttpResponseRedirect(self.success_url)
-        return super(DepartamentoDeleteView,
+        return super(VentaDeleteView,
                      self).dispatch(request, *args, **kwargs)
 
     def delete(self, request, *args, **kwargs):
