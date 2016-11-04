@@ -4,7 +4,7 @@ from apps.compras.views.Proveedor import (ProveedorListView, ProveedorCreateView
 
 urlpatterns = [
     # Examples
-    url(r'compras', compras,name='compras'),
+    url(r'compras', compras, name='compras'),
 
     url(r'^proveedor/listar/$', ProveedorListView.as_view(),  name="proveedor_list"),
     url(r'^proveedor/crear/$', ProveedorCreateView.as_view(),name="proveedor_add"),

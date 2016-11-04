@@ -41,31 +41,31 @@
                 </ul>
             </li>
             <li>
-                <a href="{% url 'clivet:persona_list' %}"><i class="fa fa-fw fa-user"></i> Persona</a>
-            </li>
-            <li>
-                <a href="{% url 'clivet:cliente_list' %}"><i class="fa fa-fw fa-users"></i> Clientes</a>
-            </li>
-            <li>
-                <a href="{% url 'clivet:trabajador_list' %}"><i class="fa fa-fw fa-users"></i> Trabajadores</a>
-            </li>
-            <li>
                 <a href="{% url 'citas:cita_add' %}"><i class="fa fa-fw fa-calendar"></i>mod Citas</a>
                 <a href="{% url 'citas:cita_list' %}"><i class="fa fa-fw fa-calendar"></i>ver Citas</a>
             </li>
             <li>
-                <a href="javascript:;" data-toggle="collapse" data-target="#servicios"><i class="fa fa-fw fa-arrows-v"></i> Servicios <i class="fa fa-fw fa-caret-down"></i></a>
+                <a href="javascript:;" data-toggle="collapse" data-target="#servicios"><i class="fa fa-fw fa-arrows-v"></i> Mantenimiento <i class="fa fa-fw fa-caret-down"></i></a>
                 <ul id="servicios" class="collapse">
                     <li>
-                        <a href="{% url 'clinica:crear_consulta' %}"><i class="fa fa-fw fa-wrench"></i> Consultas</a>
+                        <a href="{% url 'ventas:categoria_list' %}"><i class="fa fa-fw fa-wrench"></i> Categoria</a>
                     </li>
                     <li>
-                        <a href="{% url 'clinica:listar_notas' %}"><i class="fa fa-fw fa-wrench"></i> Notas</a>
+                        <a href="{% url 'ventas:departamento_list' %}"><i class="fa fa-fw fa-wrench"></i> Departamento</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'ventas:unidad_medida_list' %}"><i class="fa fa-fw fa-wrench"></i> U. Medida</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'clivet:trabajador_list' %}"><i class="fa fa-fw fa-users"></i> Trabajadores</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'compras:proveedor_list' %}"><i class="fa fa-fw fa-file"></i> Proveedores</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'clivet:cliente_list' %}"><i class="fa fa-fw fa-users"></i> Clientes</a>
                     </li>
                 </ul>
-            </li>
-            <li>
-                <a href="{% url 'compras:proveedor_list' %}"><i class="fa fa-fw fa-file"></i> Proveedores</a>
             </li>
         </li>
         <li>
