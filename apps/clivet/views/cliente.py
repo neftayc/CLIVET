@@ -101,23 +101,23 @@ class ClienteCreateView(CreateView):
     def form_valid(self, form):
         """"Empresa Crete View  form valid."""
         self.object = form.save(commit=False)
-
-        persona = Person()
-        # persona.first_name = form.cleaned_data('nombre')
-        persona.first_name = self.request.GET.get("nombre")
-        persona.last_name = self.request.GET.get("apellido")
-        persona.save()
-
-        self.object.persona = persona
-        self.object.save()
-
+        if form.is_valid():
+            persona = Person()
+            # print(form.cleaned_data.get("numero"))
+            persona.first_name = self.request.POST.get("nombre")
+            persona.last_name = self.request.POST.get("apellidos")
+            persona.birth_date = self.request.POST.get("fecha_de_nacimiento")
+            persona.photo = self.request.POST.get("apellido")
+            persona.identity_num = self.request.POST.get("numero")
+            persona.identity_type = self.request.POST.get("tipo_documento")
+            persona.save()
+            self.object.persona = persona
+            self.object.save()
 
         msg = _(' %(name)s "%(obj)s" fue creado satisfactoriamente.') % {
             'name': capfirst(force_text(self.model._meta.verbose_name)),
             'obj': force_text(self.object)
         }
-
-
         messages.success(self.request, msg)
         log.warning(msg, extra=log_params(self.request))
         return super(ClienteCreateView, self).form_valid(form)
@@ -161,8 +161,22 @@ class ClienteUpdateView(UpdateView):
     def form_valid(self, form):
         """Tipo Documento Update View form_valid."""
         self.object = form.save(commit=False)
-
-        self.object.usuario = self.request.user
+        if form.is_valid():
+            if self.object.persona:
+                self.object.persona.first_name = self.request.POST.get(
+                    "nombre")
+                self.object.persona.last_name = self.request.POST.get(
+                    "apellidos")
+                self.object.persona.birth_date = self.request.POST.get(
+                    "fecha_de_nacimiento")
+                self.object.persona.identity_num = self.request.POST.get(
+                    "numero")
+                self.object.persona.identity_type = self.request.POST.get(
+                    "tipo_documento")
+                self.object.persona.photo = self.request.POST.get(
+                    "foto_perfil")
+                self.object.persona.save()
+                self.object.save()
 
         msg = ('%(name)s "%(obj)s" fue cambiado satisfacoriamente.') % {
             'name': capfirst(force_text(self.model._meta.verbose_name)),
@@ -178,6 +192,11 @@ class ClienteUpdateView(UpdateView):
         context = context.copy()
         if self.object.persona:
             context['nombre'] = self.object.persona.first_name
+            context['apellidos'] = self.object.persona.last_name
+            context['tipo_documento'] = self.object.persona.identity_type
+            context['numero'] = self.object.persona.identity_num
+            context['fecha_de_nacimiento'] = self.object.persona.birth_date
+            context['foto_perfil'] = self.object.persona.photo
 
         return context
 

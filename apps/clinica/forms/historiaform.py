@@ -23,7 +23,7 @@ class HistoriaForm(forms.ModelForm):
         """Meta."""
         model = Historial
         exclude = ()
-        fields = ['num_historia','veterinario','mascota',]
+        fields = ['num_historia','usuario','mascota',]
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
@@ -44,7 +44,7 @@ class HistoriaForm(forms.ModelForm):
                     Row(
                         Div(Field('num_historia', css_class='input-required'),
                         css_class='col-md-4'),
-                        Div(Field('veterinario', ),
+                        Div(Field('usuario', ),
                         css_class='col-md-4'),
 
                         Div(Field('mascota',),
@@ -73,7 +73,7 @@ class HistoriaMascotaForm(forms.ModelForm):
     dueño = forms.CharField(widget=forms.HiddenInput(), required=False,)
     class Meta:
         model = Historial
-        fields = ['num_historia','mascota','veterinario',]
+        fields = ['num_historia','mascota','usuario',]
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
@@ -192,7 +192,7 @@ class HistoriaMascotaForm(forms.ModelForm):
                 Tab(_('Account Info'),
                     Div(Field('num_historia', css_class='input-required'),
                     css_class='col-md-4'),
-                    Div(Field('veterinario', ),
+                    Div(Field('usuario', ),
                     css_class='col-md-4'),
 
                     Div(Field('mascota',),
@@ -233,8 +233,8 @@ class MascotaHistoriDetailForm(forms.ModelForm):
             help_text=u'<small class="help-error"></small> %s' % _(
                 u' '),
         )
-        self.fields['veterinario'] = forms.CharField(
-            label=capfirst(_(u'veterinario')), required=True,
+        self.fields['usuario'] = forms.CharField(
+            label=capfirst(_(u'usuario')), required=True,
             help_text=u'<small class="help-error"></small> %s' % _(
                 u' '),
         )
@@ -411,8 +411,8 @@ class MascotaHistoriDetailForm(forms.ModelForm):
                     Row(
                         Div(HTML('''
                                 <div class="form-group">
-                                <label class="control-label"> {{ form.veterinario.label }} </label>
-                                <div class="controls ">{{ form.veterinario.value }}</div>
+                                <label class="control-label"> {{ form.usuario.label }} </label>
+                                <div class="controls ">{{ form.usuario.value }}</div>
                                 </div>
                                 '''),
                             css_class='col-md-6'),

@@ -9,20 +9,30 @@
 {% endblock breadcrumbs %}
 
 {% block content_title %}
-{{ opts.verbose_name|capfirst }} | <small>{{ title }}</small>
+<h3><i class="fa fa-user"></i> {{ opts.verbose_name_plural|capfirst }} | <small>{{ subtitle }}</small></h3>
 {% endblock content_title %}
 
 {% block content %}
 
  <form action="" method="post">
-    {{ form|crispy}}
     {% csrf_token %}
-    <button type="submit" class="btn btn-primary">Agregar</button>
-    <a href="{% url 'clivet:cliente_list' %}" class="btn btn-danger">Cancelar</a>
+    {% crispy form %}
     </form>
 
 {% endblock %}
 
 {% block extrajs %}
 {{ block.super }}
+<script type="text/javascript">
+$('#id_fecha_de_nacimiento').datetimepicker({
+	format: 'YYYY-MM-DD',
+		//format: 'YYYY-MM-DD hh:mm:ss', //pata datatimes
+		language: 'es',
+		pickTime: false,
+		//showMeridian: true,
+		autoclose: true,
+		todayHighlight: true,
+	});
+
+</script>
 {% endblock extrajs %}

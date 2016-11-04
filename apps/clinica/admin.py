@@ -12,12 +12,11 @@ from .models.vacunacion import Vacunacion
 from .models.historia import Historial
 from .models.atencion import Atencion
 
-from apps.clivet.models.trabajador import Trabajador
 
 class HistoriaAdmin(admin.ModelAdmin):
     model = Historial
     search_fields = ('num_historia',)
-    list_display = ('num_historia','mascota','get_dueño','created_ath', 'veterinario', 'get_direccion','get_ciudad', 'get_telefono','get_especie','get_raza', 'get_color','get_sexo', 'get_edad', )
+    list_display = ('num_historia','mascota','get_dueño','created_ath', 'usuario', 'get_direccion','get_ciudad', 'get_telefono','get_especie','get_raza', 'get_color','get_sexo', 'get_edad', )
 
     def get_direccion(self, obj):
         return obj.mascota.dueño.direccion

@@ -2,7 +2,8 @@ u"""Módulo Cita."""
 
 from django.db import models
 from .eventos import Evento
-from apps.clivet.models.trabajador import Trabajador
+from apps.sad.models import User
+from apps.clivet.models.cliente import Cliente
 
 
 class Cita(models.Model):
@@ -13,8 +14,11 @@ class Cita(models.Model):
     evento = models.ForeignKey(
         Evento, verbose_name='Eventos frecuentes')
     veterinario = models.ForeignKey(
-        Trabajador,
-        limit_choices_to={'is_veterinario': True})
+        User,)
+    cliente = models.ForeignKey(Cliente)
+    # veterinario = models.ForeignKey(
+    #     Trabajador,
+    #     limit_choices_to={'is_veterinario': True})
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

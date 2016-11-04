@@ -42,23 +42,25 @@ $(document).ready(function() {
         weekends: false,//si incluye fin de semanas or //hiddenDays: [ 1, 3, 5 ]
         events: function(start, end, timezone, callback) {
             $.ajax({
-                url: '/cita/listar/',
-                dataType: 'json',
-                type:'get',
-                success: function(doc) {
+                    url: '/cita/listar/',
+                    type: 'get',
+                    dataType: 'json',
+                    //data: {param1: 'value1'},
+                })
+                .done(function(dat) {
+                    console.log("success",dat);
                     var events = [];
-                   for (var i in doc) {
-                       events.push({
-                            title: doc[i].fields.descripcion,
-                            start: doc[i].fields.date,
-                        });
-                   }
+                    for (var i in dat) {
+                        events.push(dat[i]);
+                    }
                     callback(events);
-                },
-                failure: function(data) {
-                    console.error('Ocurrió un problema al cargar.');
-                }
-            });
+                })
+                .fail(function() {
+                    console.log("error");
+                })
+                .always(function() {
+                    console.log("complete");
+                });
         }
     });
 });
