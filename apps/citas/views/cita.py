@@ -140,24 +140,7 @@ class CitaDeleteView(DeleteView):
     """Cita Delete View."""
 
     model = Cita
-    success_url = reverse_lazy('clivet:cita_list')
-
-    @method_decorator(permission_resource_required)
-    def dispatch(self, request, *args, **kwargs):
-        """Cita Delete View dispatch."""
-        key = self.kwargs['pk']
-        pk = SecurityKey.is_valid_key(request, key, 'doc_del')
-        if not pk:
-            return HttpResponseRedirect(self.success_url)
-        self.kwargs['pk'] = pk
-        try:
-            self.get_object()
-        except Exception as e:
-            messages.error(self.request, e)
-            log.warning(force_text(e), extra=log_params(self.request))
-            return HttpResponseRedirect(self.success_url)
-        return super(CitaDeleteView,
-                     self).dispatch(request, *args, **kwargs)
+    success_url = reverse_lazy('cita:cita_add')
 
     def delete(self, request, *args, **kwargs):
         u"""
@@ -215,11 +198,11 @@ def GetCitaAjax(request):
                 cita_json['descripcion'] = cita.descripcion
                 cita_json['start'] = "%s" % cita.date
                 cita_json['veterinario'] = cita.veterinario.id
+                cita_json['cliente'] = cita.cliente.id
+                cita_json['cliente_nombre'] = cita.cliente.persona.first_name
                 if cita.veterinario.person:
-                    cita_json[
-                        'veterinario_nombre'] = cita.veterinario.person.first_name
-                    cita_json[
-                        'veterinario_apellidos'] = cita.veterinario.person.last_name
+                    cita_json['veterinario_nombre'] = "%s %s" % (cita.veterinario.person.first_name,
+                                                                 cita.veterinario.person.last_name)
 
                 results.append(cita_json)
             data_json = json.dumps(results)
