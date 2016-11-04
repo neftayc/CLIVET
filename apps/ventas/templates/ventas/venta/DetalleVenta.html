@@ -5,13 +5,12 @@ Descripcion: Lista Tipo Documento
 -->
 {% load i18n app_security %} {% load l10n humanize %} {% block breadcrumbs %}
 <a href="{# url 'accounts:index' #}">{% trans 'Home' %}</a> &rsaquo; {{ title }} {% endblock breadcrumbs %} {% block content_title %} {{ opts.verbose_name_plural|capfirst }} | <small>{{ title }}</small> {% endblock content_title %} {% block content %}
-
 <div class="btn-toolbar btn-toolbar-top">
     <div class="row">
         <div class="btn-actions">
-            <a href="{% url 'ventas:ventadetalle_add' %}" class="btn btn-primary text-bold" title="Agregar Venta detalle">
+            <a href="{% url 'ventas:reporte_ventas' %}" class="btn btn-primary text-bold" title="Agregar Venta detalle">
                 <i class="fa fa-plus"></i>
-                <span class="hidden-xs"> Agregar</span>
+                <span class="hidden-xs">Regresar</span>
             </a>
         </div>
     </div>
@@ -21,45 +20,33 @@ Descripcion: Lista Tipo Documento
         <thead>
             <tr>
                 <th>#</th>
-                <th class="col-hidden" data-search="producto" data-order="producto">producto</th>
-                <th class="col-hidden" data-search="cliente" data-order="cliente">cliente</th>
-                <th class="col-hidden" data-search="cantidad" data-order="cantidad">cantidad</th>
-                <th class="col-hidden" data-search="igv" data-order="igv">igv</th>
-                <th class="col-hidden" data-search="importe" data-order="importe">importe</th>
-                <th class="btn-actions col-blocked text-center">Acción</th>
+                <th class="col-hidden  text-center">Fecha</th>
+                <th class="col-hidden text-center">producto</th>
+                <th class="col-hidden text-center">cliente</th>
+                <th class="col-hidden text-center">cantidad</th>
+                <th class="col-hidden text-center">importe</th>
             </tr>
         </thead>
+        <tfoot>
+        </tfoot>
         <tbody>
-            {% for d in object_list %}
+            {% for d in detalle %}
             <tr>
-                <td>{% if is_paginated %} {{ page_obj.start_index|add:forloop.counter0 }} {% else %} {{ forloop.counter }} {% endif %}
-                </td>
-                <td>{{ d.producto__nombre }}</td>
-                <td>{{ d.venta__cliente__persona__nombre }}</td>
-                <td>{{ d.cantidad }}</td>
-                <td>{{ d.igv }}</td>
-                <td>{{ d.importe }}</td>
-                <td class="text-center">
-                    <a href="{% url 'ventas:ventadetalle_upd' d.pk|key:'cat_upd' %}" class="btn btn-info btn-sm text-bold" title="editar" rel="tooltip">
-                        <i class="btn-icon-only fa fa-edit"></i>
-                    </a>
-                    <a href="{% url 'ventas:ventadetalle_del' d.pk|key:'cat_del' %}" class="btn btn-danger btn-sm js-confirm text-bold" msg-title="Eliminar Documento Identidad?." msg="Esta Seguro
-                            <br/>Recuerde esta operación no puede revertirse" title="Eliminar detalle" rel="tooltip">
-                        <i class="btn-icon-only fa fa-trash-o"></i>
-                    </a>
-                </td>
+                <td class="text-center">{% if is_paginated %} {{ page_obj.start_index|add:forloop.counter0 }} {% else %} {{ forloop.counter }} {% endif %}
+                </td class="text-center">
+                <td class="text-center">{{ d.producto.nombre }}</td>
+                <td class="text-center">{{ d.venta.fechav }}</td>
+                <td class="text-center">{{ d.venta.cliente }}</td>
+                <td class="text-center">{{ d.cantidad }} {{unidadv}}</td>
+                <td class="text-center"> S/. {{ d.importe }}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-</div>
-<div class="row">
-    {% if is_paginated %} {% load paginator %} {% paginator %} {% else %}
-    <div class="col-md-12">
-        <ul class="breadcrumbpag">
-            {{ object_list.count }} {% ifequal object_list.count 1 %}{{ opts.verbose_name|capfirst }}{% else %}{{ opts.verbose_name_plural|capfirst }}{% endifequal %}
-        </ul>
+    <div class="panel panel-default col-md-3 col-md-offset-9" >
+        <p style="font-size:20px;"> Igv:    <span  style="color:grey; font-size: 15px;  ">{{igv}}</span></p>
+        <p style="font-size:20px;">Sub Total:   <span  style="color:grey; font-size: 15px;  ">{{sub}}</span></p>
+        <p style="font-size:20px;">Total:   <span  style="color:grey; font-size: 20px;  ">{{total}}</span></p>
     </div>
-    {% endif %}
 </div>
 {% endblock content %}

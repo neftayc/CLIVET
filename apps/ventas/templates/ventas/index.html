@@ -155,11 +155,11 @@ $(document).ready(function(){
 
 var stocks = new Bloodhound({
 
-        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('sss'),
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('company_name'),
         queryTokenizer: Bloodhound.tokenizers.whitespace,
         //url:"{% url 'ventas:producto_s' %}"//'stockCodes.json',
-        //local: stocksdata,
-        remote: '/departamento/listar/search',
+        local: stocksdata,
+        //remote: '/producto/search/',
     });
 
     stocks.initialize();
@@ -167,7 +167,7 @@ var stocks = new Bloodhound({
     $('.typeahead ').typeahead(
        null,  {
 
-        displayKey: 'descripcion',
+        displayKey: 'company_name',
         source: stocks.ttAdapter()
     }).on('typeahead:selected', function(event, data){            
         $('.typeahead').val(data.id);  

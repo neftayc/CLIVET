@@ -102,13 +102,14 @@ class MainCreateView(CreateView):
             print(venta)
             print(self.request.POST.get('cliente'))
             self.object.total = venta['total']
+            self.object.igv = venta['igv']
             self.object.save()
             for p in venta['productos']:
                 dv = Detalle_Venta(
                     producto_id=p['id'],
                     venta=self.object,
                     cantidad=p['cantidad'],
-                    igv=p['igv'],
+                    # igv=p['igv'],
                     importe=p['importe'],
                 )
                 dv.save()

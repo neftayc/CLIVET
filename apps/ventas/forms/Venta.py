@@ -19,15 +19,16 @@ class VentaForm(forms.ModelForm):
         queryset=Producto.objects.all(), required=False, label="", help_text="")
     data_venta = forms.CharField(
         required=False,  widget=forms.TextInput(attrs={'type': 'hidden'}))
-    producto = forms.CharField(label="",
+    producto = forms.CharField(label="", required=False,
                                widget=forms.TextInput(attrs={'class': 'typeahead'}))
 
     class Meta:
 
         model = Venta
-        fields = ('total', 'cliente',)
+        fields = ('total', 'cliente', 'igv',)
         exclude = ()
         widgets = {
             'cliente': forms.Select(attrs={'class': 'form-control'}),
             'total': forms.TextInput(attrs={'class': 'form-control'}),
+            'igv': forms.TextInput(attrs={'class': 'form-control'}),
         }
