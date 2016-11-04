@@ -16,6 +16,7 @@ from ..models.cita import Cita
 from ..forms.cita import CitaForm
 from django.core import serializers
 from django.http import HttpResponse
+from ..models.eventos import Evento
 import json
 
 import logging
@@ -49,7 +50,7 @@ class CitaCreateView(CreateView):
     model = Cita
     form_class = CitaForm
     template_name = "cita/form.html"
-    success_url = reverse_lazy("clivet:cita_list")
+    success_url = reverse_lazy("citas:cita_add")
 
     @method_decorator(permission_resource_required)
     def dispatch(self, request, *args, **kwargs):
@@ -90,7 +91,7 @@ class CitaUpdateView(UpdateView):
     model = Cita
     form_class = CitaForm
     template_name = "cita/form.html"
-    success_url = reverse_lazy("clivet:cita_list")
+    success_url = reverse_lazy("citas:cita_add")
 
     @method_decorator(permission_resource_required)
     def dispatch(self, request, *args, **kwargs):
@@ -139,24 +140,7 @@ class CitaDeleteView(DeleteView):
     """Cita Delete View."""
 
     model = Cita
-    success_url = reverse_lazy('clivet:cita_list')
-
-    @method_decorator(permission_resource_required)
-    def dispatch(self, request, *args, **kwargs):
-        """Cita Delete View dispatch."""
-        key = self.kwargs['pk']
-        pk = SecurityKey.is_valid_key(request, key, 'doc_del')
-        if not pk:
-            return HttpResponseRedirect(self.success_url)
-        self.kwargs['pk'] = pk
-        try:
-            self.get_object()
-        except Exception as e:
-            messages.error(self.request, e)
-            log.warning(force_text(e), extra=log_params(self.request))
-            return HttpResponseRedirect(self.success_url)
-        return super(CitaDeleteView,
-                     self).dispatch(request, *args, **kwargs)
+    success_url = reverse_lazy('cita:cita_add')
 
     def delete(self, request, *args, **kwargs):
         u"""
@@ -201,31 +185,39 @@ class CitaDeleteView(DeleteView):
 
 def GetCitaAjax(request):
     if request.is_ajax():
-        citas = Cita.objects.all()
-        data = serializers.serialize("json", citas)
-        count = 0
-        for cita in citas:
-            count = count + 1
-            print(data[1])
+        try:
+            citas = Cita.objects.all()
+            results = []
+            for cita in citas:
+                cita_json = {}
+                cita_json['id'] = cita.id
+                cita_json['title'] = cita.evento.title
+                cita_json['sin_atender'] = cita.estado
+                cita_json['color'] = cita.evento.color
+                cita_json['evento_id'] = cita.evento.id
+                cita_json['descripcion'] = cita.descripcion
+                cita_json['start'] = "%s" % cita.date
+                cita_json['veterinario'] = cita.veterinario.id
+                cita_json['cliente'] = cita.cliente.id
+                cita_json['cliente_nombre'] = cita.cliente.persona.first_name
+                if cita.veterinario.person:
+                    cita_json['veterinario_nombre'] = "%s %s" % (cita.veterinario.person.first_name,
+                                                                 cita.veterinario.person.last_name)
+
+                results.append(cita_json)
+            data_json = json.dumps(results)
+        except Exception as e:
+            raise e
+
+    else:
+        data_json = 'fail'
+    return HttpResponse(data_json, content_type='application/json')
+
+
+def GetEventsAjax(request):
+    if request.is_ajax():
+        eventos = Evento.objects.all()
+        data = serializers.serialize("json", eventos)
     else:
         data = 'fail'
     return HttpResponse(data, content_type='application/json')
-
-
-def PostCitaAjax(request):
-    pass
-    # def GetCitaAjax(request):
-    #     if request.is_ajax:
-    #         # search = request.GET('term')
-    #         citas = Cita.objects.all()
-    #         results = []
-    #         for cita in citas:
-    #             cita_json = {}
-    #             cita_json['color'] = cita.evento.color
-    #             cita_json['title'] = cita.evento.title
-    #             #cita_json['cit'] = cita
-    #             results.append(cita_json)
-    #         data_json = json.dumps(results)
-    #     else:
-    #         data_json = 'fail'
-    # return HttpResponse(data_json, "application/json")

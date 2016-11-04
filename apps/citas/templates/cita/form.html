@@ -1,58 +1,90 @@
-{% extends "main/dashboard.html" %} {% load i18n app_security %} {% load l10n humanize %} 
-{% block content_title %}{% endblock content_title %}
-{% block content %}
+{% extends "main/dashboard.html" %} {% load i18n app_security %} {% load l10n humanize %} {% block content_title %}{% endblock content_title %} {% block content %} {% load crispy_forms_tags %}
 <style>
-    #external-events {
-        float: left;
-        width: 150px;
-        padding: 0 10px;
-        border: 1px solid #ccc;
-        background: #eee;
-        text-align: left;
-    }
-        
-    #external-events h4 {
-        font-size: 16px;
-        margin-top: 0;
-        padding-top: 1em;
-    }
-        
-    #external-events .fc-event {
-        margin: 10px 0;
-        cursor: pointer;
-    }
-        
-    #external-events p {
-        margin: 1.5em 0;
-        font-size: 11px;
-        color: #666;
-    }
-        
-    #external-events p input {
-        margin: 0;
-        vertical-align: middle;
-    }
+#external-events {
+    float: left;
+    width: 150px;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    background: #eee;
+    text-align: left;
+}
 
-    #calendar {
-        float: right;
-        width: 900px;
-    }
+#external-events h4 {
+    font-size: 16px;
+    margin-top: 0;
+    padding-top: 1em;
+}
 
+#external-events .fc-event {
+    margin: 10px 0;
+    cursor: pointer;
+}
+
+#external-events p {
+    margin: 1.5em 0;
+    font-size: 11px;
+    color: #666;
+}
+
+#external-events p input {
+    margin: 0;
+    vertical-align: middle;
+}
+
+#calendar {
+    float: right;
+    width: 900px;
+}
 </style>
 <div class="container-overflow">
+    <h4>Eventos Frecuentes</h4>
     <div id='external-events'>
-        <h4>Eventos Frecuentes</h4>
-        <div class='fc-event'>Vacuna</div>
-        <div class='fc-event'>Evento 1</div>
-        <div class='fc-event'>Evento 2</div>
-        <div class='fc-event'>Evento 3</div>
-        <div class='fc-event'>Evento 4</div>
-        <p>
-            <input type='checkbox' id='drop-remove' />
-            <label for='drop-remove'>Eliminar despues de jalar.</label>
-        </p>
     </div>
     <div id='calendar'></div>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">{{ title }}</h4>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post">
+                    {% csrf_token %} {% crispy form %}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModalOptions" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Opciones</h4>
+            </div>
+            <div class="modal-body">
+                <ul class="list-group" id="detailCita">
+                </ul>
+                <div class="row">
+                    <div class="col-md-6">
+                        <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-edit"></span>Editar</button>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="#" class="btn btn-danger btn-sm btn-block js-confirm text-bold" msg-title="Eliminar Cliente?." msg="Esta Seguro
+                       <br/>Recuerde esta operación no puede revertirse" title="Eliminar Cliente" rel="tooltip">
+                            <i class="btn-icon-only fa fa-trash-o"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <script>
 $(document).ready(function() {
@@ -61,22 +93,6 @@ $(document).ready(function() {
     var YESTERDAY = todayDate.clone().subtract(1, 'day').format('YYYY-MM-DD');
     var TODAY = todayDate.format('YYYY-MM-DD');
     var TOMORROW = todayDate.clone().add(1, 'day').format('YYYY-MM-DD');
-    $('#external-events .fc-event').each(function() {
-
-        // store data so the calendar knows to render an event upon drop
-        $(this).data('event', {
-            title: $.trim($(this).text()), // use the element's text as the event title
-            stick: true // maintain when user navigates (see docs on the renderEvent method)
-        });
-
-        // make the event draggable using jQuery UI
-        $(this).draggable({
-            zIndex: 999,
-            revert: true, // will cause the event to go back to its
-            revertDuration: 0 //  original position after the drag
-        });
-
-    });
     $('#calendar').fullCalendar({
         locale: 'es',
         header: {
@@ -87,8 +103,7 @@ $(document).ready(function() {
             // right: 'month,agendaWeek,agendaDay,listWeek,listDay,listMonth,listYear,list',
         },
         defaultView: 'agendaWeek',
-        buttonText:
-        {
+        buttonText: {
             today: 'Hoy',
             month: 'Mes',
             week: 'Semana',
@@ -98,96 +113,154 @@ $(document).ready(function() {
             listMonth: 'Lista por mes',
             listYear: 'Lista por año',
         },
+        eventClick: function(calEvent, jsEvent, view) {
+            console.log(calEvent);
+            console.log(calEvent.id);
+            var h = '<li class="list-group-item"><strong>Titulo: </strong>' + calEvent.title + '</li>' +
+                '<li class="list-group-item"><strong>Descripcion: </strong>' + calEvent.descripcion + '</li>' +
+                '<li class="list-group-item"><strong>Estado: </strong>' + calEvent.sin_atender + '</li>' +
+                '<li class="list-group-item"><strong>Veterinario: </strong>' + calEvent.veterinario_nombre + '</li>' +
+                '<li class="list-group-item"><strong>Cliente: </strong>' + calEvent.cliente_nombre + '</li>';
+            $('#detailCita').html(h);
+            $('#myModalOptions').modal('show');
+        },
         // header: {
         //     left: '',
         //     center: 'prev title next',
         //     right: ''
         // },
         //defaultDate: '2016-01-12',
-        editable: true,
         eventLimit: true, // allow "more" link when too many events
         selectable: true,
         //selectHelper: true,
+        resize: false,
         slotMinutes: 30,
         navLinks: true,
-        allDaySlot: false,//para mostar en el calendario todo el dia
+        allDaySlot: false, //para mostar en el calendario todo el dia
         scrollTime: '08:00:00',
         minTime: "08:00:00",
         maxTime: "18:00:00",
-        weekends: false,//si incluye fin de semanas or //hiddenDays: [ 1, 3, 5 ]
+        weekends: false, //si incluye fin de semanas or //hiddenDays: [ 1, 3, 5 ]
         droppable: true, // this allows things to be dropped onto the calendar
-        drop: function() {
-            // is the "remove after drop" checkbox checked?
-            if ($('#drop-remove').is(':checked')) {
-                // if so, remove the element from the "Draggable Events" list
-                $(this).remove();
-            }
-            console.table($('#calendar').fullCalendar('getEventSources'));
+        drop: function(date, data) {
+            $('#myModal').modal('show');
+            $("#id_evento").val(data.target.getAttribute("data-event"));
+            $('#id_date').val(moment(date).format("YYYY-MM-DD HH:mm:ss"));
         },
-        select: function(start, end) {
-            var title = prompt('Event Title:');
-            var events;
-            if (title) {
-                events = {
-                    title: title,
-                    start: start,
-                    end: end
-                };
-                $('#calendar').fullCalendar('renderEvent', events, true); // stick? = true
-            }
-            $('#calendar').fullCalendar('unselect');
+        select: function(start, end,date) {
+            $('#myModal').modal('show');
+            $("#id_evento").val("");
+            $('#id_date').val(moment(start).format("YYYY-MM-DD HH:mm:ss"));
+            // var title = prompt('Event Title:');
+            // var events;
+            // if (title) {
+            //     events = {
+            //         title: title,
+            //         start: start,
+            //         end: end
+            //     };
+            //     $('#calendar').fullCalendar('renderEvent', events, true); // stick? = true
+            // }
+            // $('#calendar').fullCalendar('unselect');
         },
-        events: [
-        {
-            title: 'Conference',
-            start: YESTERDAY,
-            end: TOMORROW,
-            color: 'yellow',
-            textColor: 'red',
-            backgroundColor: 'blue',
-            borderColor: 'green',
-            //editable:false,
-            overlap: false, //If false, prevents this event from being dragged/resized over other events. ///EVITA la sobreposicion
-        }, {
-            title: 'All Day Event',
-            start: YM + '-01',
-            color: 'yellow',
-            textColor: 'red',
-        }, {
-            title: 'Long Event',
-            start: YM + '-07',
-            end: YM + '-10'
-        }, {
-            id: 999,
-            title: 'Repeating Event',
-            start: YM + '-09T16:00:00'
-        }, {
-            id: 999,
-            title: 'Repeating Event',
-            start: YM + '-16T16:00:00',
-            end: TODAY + 'T12:30:00'
-        }, {
-            title: 'Lunch',
-            start: TODAY + 'T12:00:00'
-        }, {
-            title: 'Meeting',
-            start: TODAY + 'T14:30:00'
-        }, {
-            title: 'Happy Hour',
-            start: TODAY + 'T17:30:00'
-        }, {
-            title: 'Dinner',
-            start: TODAY + 'T20:00:00'
-        }, {
-            title: 'Birthday Party',
-            start: TOMORROW + 'T07:00:00'
-        }, {
-            title: 'Click for Google',
-            url: 'http://google.com/',
-            start: YM + '-28'
-        }]
+        events: function(start, end, timezone, callback) {
+            // $.ajax({
+            //     url: '/cita/listar/',
+            //     dataType: 'json',
+            //     type: 'get',
+            //     success: function(doc) {
+            //         var events = [];
+            //         for (var i in doc) {
+            //             events.push({
+            //                 title: doc[i].fields.descripcion,
+            //                 start: doc[i].fields.date,
+            //             });
+            //         }
+            //         callback(events);
+            //     },
+            //     failure: function(data) {
+            //         console.error('Ocurrió un problema al cargar.');
+            //     }
+            // });
+            $.ajax({
+                    url: '/cita/listar/',
+                    type: 'get',
+                    dataType: 'json',
+                    //data: {param1: 'value1'},
+                })
+                .done(function(dat) {
+                    console.log("success", dat);
+                    var events = [];
+                    for (var i in dat) {
+                        dat[i].editable = false;
+                        events.push(dat[i]);
+                    }
+                    callback(events);
+                })
+                .fail(function() {
+                    console.log("error");
+                })
+                .always(function() {
+                    console.log("complete");
+                });
+
+        },
+        // events: [
+        // {
+        //     title: 'Conference',
+        //     start: YESTERDAY,
+        //     end: TOMORROW,
+        //     color: 'yellow',
+        //     textColor: 'red',
+        //     backgroundColor: 'blue',
+        //     borderColor: 'green',
+        //     //editable:false,
+        //     overlap: false, //If false, prevents this event from being dragged/resized over other events. ///EVITA la sobreposicion
+        // },]
 
     });
+    getEvents();
+
+    function getEvents() {
+        $.ajax({
+                url: '/cita/eventos/listar/',
+                type: 'get',
+                dataType: 'json',
+                //data: {param1: 'value1'},
+            })
+            .done(function(dat) {
+                console.log("success", dat);
+                var html = "";
+                for (var i in dat) {
+                    html = html +
+                        "<div data-event='" + dat[i].pk + "'class='fc-event'>" +
+                        dat[i].fields.title + "</div>";
+                }
+                $("#external-events").html(html);
+                $('#external-events .fc-event').each(function() {
+
+                    // store data so the calendar knows to render an event upon drop
+                    $(this).data('event', {
+                        title: $.trim($(this).text()), // use the element's text as the event title
+                        stick: true // maintain when user navigates (see docs on the renderEvent method)
+                    });
+
+                    // make the event draggable using jQuery UI
+                    $(this).draggable({
+                        zIndex: 999,
+                        revert: true, // will cause the event to go back to its
+                        revertDuration: 0 //  original position after the drag
+                    });
+                });
+            })
+            .fail(function() {
+                console.log("error");
+            })
+            .always(function() {
+                console.log("complete");
+            });
+    }
+
 });
 </script>
 {% endblock content %}

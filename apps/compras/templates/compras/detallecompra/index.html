@@ -1,0 +1,44 @@
+{% extends "main/dashboard.html" %}
+{% load i18n app_security %}
+{% load l10n humanize %}
+{% block breadcrumbs %}
+<a href="{# url 'accounts:index' #}">{% trans 'Home' %}</a>
+&rsaquo; {{ title }}
+{% endblock breadcrumbs %}
+{% block content_title %}
+{{ opts.verbose_name_plural|capfirst }} | <small>{{ title }}</small>
+{% endblock content_title %}
+{% block content %}
+<div class="container-overflow">
+    <table class="table table-bordered table-hover table-striped table-condensed table-responsive">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th class="col-hidden" data-search="compra" data-order="compra">Compra</th>
+                <th class="col-hidden" data-search="producto" data-order="producto">Producto</th>
+                <th class="col-hidden" data-search="cantidad" data-order="cantidad">Cantidad</th>
+                <th class="col-hidden" data-search="precio_total" data-order="precio_total">Importe</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for d in lista %}       
+            <tr>
+                <td>{% if is_paginated %}
+                    {{ page_obj.start_index|add:forloop.counter0 }}
+                    {% else %}
+                    {{ forloop.counter }}
+                    {% endif %}
+                </td>
+
+                <td>{{ d.compra.id}}</td>
+                <td>{{ d.producto.nombre }}</td>
+                <td>{{ d.cantidad }}</td>
+                <td>{{ d.precio_total}}</td>
+                
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+</div>
+{% endblock content %}

@@ -3,7 +3,7 @@
 {% load l10n humanize %}
 
 {% block content_title %}
-{{ opts.verbose_name_plural|capfirst }}  <small>{{ title }}</small>
+<h3><i class="fa fa-users"></i> {{ opts.verbose_name_plural|capfirst }} | <small>{{ subtitle }}</small></h3>
 {% endblock content_title %}
 
 {% block content %}

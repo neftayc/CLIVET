@@ -1,4 +1,4 @@
-u"""Módulo View Trabajador."""
+u"""Módulo View Tipo Documento."""
 
 from apps.utils.decorators import permission_resource_required
 from apps.utils.forms import empty
@@ -14,25 +14,26 @@ from django.utils.text import capfirst
 from django.utils.translation import ugettext as _
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
-
-from ..models.trabajador import Trabajador
-from ..forms.trabajador import TrabajadorForm
-
+import json
+from ..models.compra import Compra
+from ..forms.compra import CompraForm
+from ..models.detallecompra import DetalleCompra
+from django.db import transaction
 import logging
 log = logging.getLogger(__name__)
 
 
-class TrabajadorListView(ListView):
+class CompraListView(ListView):
     u"""Tipo Documento Identidad."""
 
-    model = Trabajador
+    model = Compra
     paginate_by = settings.PER_PAGE
-    template_name = "clivet/trabajador/index.html"
+    template_name = "compras/compra/index.html"
 
     @method_decorator(permission_resource_required)
     def dispatch(self, request, *args, **kwargs):
         """dispatch."""
-        return super(TrabajadorListView,
+        return super(CompraListView,
                      self).dispatch(request, *args, **kwargs)
 
     def get_paginate_by(self, queryset):
@@ -44,7 +45,7 @@ class TrabajadorListView(ListView):
     def get_queryset(self):
         """Tipo Doc List Queryset."""
         self.o = empty(self.request, 'o', '-id')
-        self.f = empty(self.request, 'f', 'persona__first_name')
+        self.f = empty(self.request, 'f', 'total')
         self.q = empty(self.request, 'q', '')
         column_contains = u'%s__%s' % (self.f, 'contains')
 
@@ -57,12 +58,12 @@ class TrabajadorListView(ListView):
 
         Funcion con los primeros datos iniciales para la carga del template.
         """
-        context = super(TrabajadorListView,
+        context = super(CompraListView,
                         self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
         # context['cmi'] = 'menu' #  Validacion de manual del menu
-        context['title'] = ('Seleccione %s para editar'
-                            ) % capfirst('Trabajador')
+        context['title'] = ('Seleccione %s para cambiar'
+                            ) % capfirst('Compra')
 
         context['o'] = self.o
         context['f'] = self.f
@@ -71,18 +72,18 @@ class TrabajadorListView(ListView):
         return context
 
 
-class TrabajadorCreateView(CreateView):
+class CompraCreateView(CreateView):
     u"""Tipo Documento Identidad."""
 
-    model = Trabajador
-    form_class = TrabajadorForm
-    template_name = "clivet/trabajador/form.html"
-    success_url = reverse_lazy("clivet:trabajador_list")
+    model = Compra
+    form_class = CompraForm
+    template_name = "compras/compra/form.html"
+    success_url = reverse_lazy("compras:compra_add")
 
     @method_decorator(permission_resource_required)
     def dispatch(self, request, *args, **kwargs):
         """dispatch."""
-        return super(TrabajadorCreateView,
+        return super(CompraCreateView,
                      self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
@@ -91,16 +92,36 @@ class TrabajadorCreateView(CreateView):
 
         Funcion con los primeros datos iniciales para la carga del template.
         """
-        context = super(TrabajadorCreateView,
+        context = super(CompraCreateView,
                         self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
         # context['cmi'] = 'tipodoc'
-        context['title'] = ('Agregar %s') % ('Trabajador')
+        context['title'] = ('Nueva %s') % ('Compra')
         return context
 
     def form_valid(self, form):
         """"Empresa Crete View  form valid."""
-        self.object = form.save(commit=True)
+        self.object = form.save(commit=False)
+        sid = transaction.savepoint()
+        try:
+            compra = json.loads(self.request.POST.get("data_compra"))
+            self.object.total = compra['total']
+            self.object.usuario = self.request.user
+            self.object.save()
+            for p in compra['productos']:
+                dv = DetalleCompra(
+                    producto_id=p['id'],
+                    compra=self.object,
+                    cantidad=p['cantidad'],
+                    precio_total=p['importe']
+                )
+                dv.save()
+        except Exception as e:
+            try:
+                transaction.savepoint_rollback(sid)
+            except:
+                pass
+            messages.error(self.request, e)
 
         msg = _(' %(name)s "%(obj)s" fue creado satisfactoriamente.') % {
             'name': capfirst(force_text(self.model._meta.verbose_name)),
@@ -109,16 +130,16 @@ class TrabajadorCreateView(CreateView):
 
         messages.success(self.request, msg)
         log.warning(msg, extra=log_params(self.request))
-        return super(TrabajadorCreateView, self).form_valid(form)
+        return super(CompraCreateView, self).form_valid(form)
 
 
-class TrabajadorUpdateView(UpdateView):
+class CompraUpdateView(UpdateView):
     """Tipo Documento Update View."""
 
-    model = Trabajador
-    form_class = TrabajadorForm
-    template_name = "clivet/trabajador/form.html"
-    success_url = reverse_lazy("clivet:trabajador_list")
+    model = Compra
+    form_class = CompraForm
+    template_name = "compras/compra/form.html"
+    success_url = reverse_lazy("compras:compra_list")
 
     @method_decorator(permission_resource_required)
     def dispatch(self, request, *args, **kwargs):
@@ -135,16 +156,16 @@ class TrabajadorUpdateView(UpdateView):
             log.warning(force_text(e), extra=log_params(self.request))
             return HttpResponseRedirect(self.success_url)
 
-        return super(TrabajadorUpdateView,
+        return super(CompraUpdateView,
                      self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         """Tipo Documento Update View context data."""
-        context = super(TrabajadorUpdateView,
+        context = super(CompraUpdateView,
                         self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
         # context['cmi'] = 'empresa'
-        context['title'] = ('Actualizar %s') % ('Trabajador')
+        context['title'] = ('Actualizar %s') % ('Compra')
         return context
 
     def form_valid(self, form):
@@ -160,68 +181,4 @@ class TrabajadorUpdateView(UpdateView):
         if self.object.id:
             messages.success(self.request, msg)
             log.warning(msg, extra=log_params(self.request))
-        return super(TrabajadorUpdateView, self).form_valid(form)
-
-
-class TrabajadorDeleteView(DeleteView):
-    """Empresa Delete View."""
-
-    model = Trabajador
-    success_url = reverse_lazy('clivet:trabajador_list')
-
-    @method_decorator(permission_resource_required)
-    def dispatch(self, request, *args, **kwargs):
-        """Empresa Delete View dispatch."""
-        key = self.kwargs['pk']
-        pk = SecurityKey.is_valid_key(request, key, 'doc_del')
-        if not pk:
-            return HttpResponseRedirect(self.success_url)
-        self.kwargs['pk'] = pk
-        try:
-            self.get_object()
-        except Exception as e:
-            messages.error(self.request, e)
-            log.warning(force_text(e), extra=log_params(self.request))
-            return HttpResponseRedirect(self.success_url)
-        return super(TrabajadorDeleteView,
-                     self).dispatch(request, *args, **kwargs)
-
-    def delete(self, request, *args, **kwargs):
-        u"""
-        Empresa Delete View delte.
-
-        Función para eliminar la empresa sobre un metodo que verifica las
-        dependencias de que tiene la tabla mostrando un mensaje de validacion.
-        """
-        try:
-            d = self.get_object()
-            deps, msg = get_dep_objects(d)
-            print(deps)
-            if deps:
-                messages.warning(
-                    self.request,
-                    ('No se puede Eliminar %(name)s') %
-                    {
-                        "name": capfirst(force_text(
-                            self.model._meta.verbose_name)
-                        ) + ' "' + force_text(d) + '"'
-                    })
-                raise Exception(msg)
-
-            d.delete()
-            msg = _(
-                ' %(name)s "%(obj)s" fue eliminado satisfactorialmente.') % {
-                'name': capfirst(force_text(self.model._meta.verbose_name)),
-                'obj': force_text(d)
-            }
-            if not d.id:
-                messages.success(self.request, msg)
-                log.warning(msg, extra=log_params(self.request))
-        except Exception as e:
-            messages.error(request, e)
-            log.warning(force_text(e), extra=log_params(self.request))
-        return HttpResponseRedirect(self.success_url)
-
-    def get(self, request, *args, **kwargs):
-        """Empresa Delete View get."""
-        return self.delete(request, *args, **kwargs)
+        return super(CompraUpdateView, self).form_valid(form)
