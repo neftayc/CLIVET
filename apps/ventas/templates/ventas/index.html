@@ -25,8 +25,7 @@
                             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                         </div id="bloodhound">
                         <div class="#">
-                            
-                        {{ form.producto|as_crispy_field }}
+                            {{ form.producto|as_crispy_field }}
                         </div>
                     </div>
                 </div>
@@ -37,7 +36,6 @@
                 </div>
                 <div class="col-md-2">
                     <button id="enviar_producto" class="btn btn-primary">Enviar</button>
-                    
                 </div>
             </div>
             <div class="panel panel-default">
@@ -68,9 +66,7 @@
                             <div class="input-group-btn">
                                 <button type="" class="btn btn-primary">Nuevo Cliente</button>
                             </div>
-                            {{ form.cliente}}
-                            {{ form.cliente.errors}}
-                            {{ form.data_venta}}
+                            {{ form.cliente}} {{ form.cliente.errors}} {{ form.data_venta}}
                             <div class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></div>
                         </div>
                     </div>
@@ -112,66 +108,122 @@
     </div>
 </div>
 <script type="text/javascript">
-var stocksdata=[
-    {
-        "company_name": "Facebook",
-        "code": "fb",
-        "id": 1,
-    },
-    {
-        "company_name": "Twitter",
-        "code": "fb",
-        "id": 2,
-    },
-    {
-        "company_name": "Whatsapp",
-        "code": "fb",
-        "id": 3,
-    },
-    {
-        "company_name": "Google",
-        "code": "goog",
-        "id": 4,
-    },
-    {
-        "company_name": "Yahoo",
-        "code": "yhoo",
-        "id": 5,
-    },
-    {
-        "company_name": "Apple",
-        "code": "aapl",
-        "id": 6,
-    },
-    {
-        "company_name": "Royal Mail",
-        "code": "rmg.l",
-        "id": 5,
-    },
- ];
+var stocksdata = [{
+    "company_name": "Facebook",
+    "code": "fb",
+    "id": 1,
+}, {
+    "company_name": "Twitter",
+    "code": "fb",
+    "id": 2,
+}, {
+    "company_name": "Whatsapp",
+    "code": "fb",
+    "id": 3,
+}, {
+    "company_name": "Google",
+    "code": "goog",
+    "id": 4,
+}, {
+    "company_name": "Yahoo",
+    "code": "yhoo",
+    "id": 5,
+}, {
+    "company_name": "Apple",
+    "code": "aapl",
+    "id": 6,
+}, {
+    "company_name": "Royal Mail",
+    "code": "rmg.l",
+    "id": 5,
+}, {
+    "company_name": "Whatsapp",
+    "code": "fb",
+    "id": 3,
+}, {
+    "company_name": "Google",
+    "code": "goog",
+    "id": 4,
+}, {
+    "company_name": "Yahoo",
+    "code": "yhoo",
+    "id": 5,
+}, {
+    "company_name": "Apple",
+    "code": "aapl",
+    "id": 6,
+}, {
+    "company_name": "Royal Mail",
+    "code": "rmg.l",
+    "id": 5,
+}, {
+    "company_name": "Whatsapp",
+    "code": "fb",
+    "id": 3,
+}, {
+    "company_name": "Google",
+    "code": "goog",
+    "id": 4,
+}, {
+    "company_name": "Yahoo",
+    "code": "yhoo",
+    "id": 5,
+}, {
+    "company_name": "Apple",
+    "code": "aapl",
+    "id": 6,
+}, {
+    "company_name": "Royal Mail",
+    "code": "rmg.l",
+    "id": 5,
+}, {
+    "company_name": "Whatsapp",
+    "code": "fb",
+    "id": 3,
+}, {
+    "company_name": "Google",
+    "code": "goog",
+    "id": 4,
+}, {
+    "company_name": "Yahoo",
+    "code": "yhoo",
+    "id": 5,
+}, {
+    "company_name": "german",
+    "code": "aapl",
+    "id": 6,
+}, {
+    "company_name": "Royal Mail",
+    "code": "rmg.l",
+    "id": 5,
+}, ];
 
-$(document).ready(function(){
-   
+$(document).ready(function() {
 
-var stocks = new Bloodhound({
 
-        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('company_name'),
+    var stocks = new Bloodhound({
+
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('nombre'),
         queryTokenizer: Bloodhound.tokenizers.whitespace,
         //url:"{% url 'ventas:producto_s' %}"//'stockCodes.json',
         local: stocksdata,
         //remote: '/producto/search/',
+        remote: '/departamento/listar/search',
+        prefetch:'/producto/search/',
     });
 
     stocks.initialize();
 
     $('.typeahead ').typeahead(
-       null,  {
+        null, {
+      
+            minLength: 2,
 
-        displayKey: 'company_name',
-        source: stocks.ttAdapter()
-    }).on('typeahead:selected', function(event, data){            
-        $('.typeahead').val(data.id);  
-        Venta.temp=data.id;    
+            displayKey: 'nombre',
+            source: stocks.ttAdapter()
+        }).on('typeahead:selected', function(event, data) {
+        $('.typeahead').val(data.id);
+        Venta.temp = data.id;
     });
 
 });
@@ -186,12 +238,12 @@ $(document).ready(function() {
             }
             return true;
         }
-        if ((not_exist(Venta.temp) && Venta.temp!==-1)) {
+        if ((not_exist(Venta.temp) && Venta.temp !== -1)) {
             $.ajax({
                     url: "{% url 'ventas:carro' %}",
                     type: 'get',
                     data: {
-                        p:  Venta.temp
+                        p: Venta.temp
                     },
                 })
                 .done(function(data) {
@@ -220,7 +272,7 @@ var Venta = {
     igv: 0.00,
     sub_total: 0.00,
     total: 0.00,
-    temp:-1
+    temp: -1
 };
 
 function draw() {

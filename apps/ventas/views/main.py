@@ -263,13 +263,14 @@ def buscarProducto(request):
         search = request.GET.get('term', '')
 
         productos = Producto.objects.filter(
-            nombre__icontains=search)[:5]
+            existencia__icontains=search)[:100]
 
         results = []
         for producto in productos:
             producto_json = {}
+            producto_json['nombre'] = producto.nombre
+            producto_json['cantidad'] = producto.existencia
             producto_json['id'] = producto.id
-            producto_json['company_name'] = producto.nombre
             results.append(producto_json)
 
         data_json = json.dumps(results)

@@ -12,7 +12,7 @@ Descripcion: Lista Tipo Documento
         <div class="btn-actions">
             <a href="{% url 'ventas:ventaslist' %}" class=" btn btn-primary text-bold" title="Agregar Departamento">
                 <i class="fa fa-plus"></i>
-                <span class="hidden-xs"> Agregar</span>
+                <span class="hidden-xs"> Realizar Venta</span>
             </a>
         </div>
     </div>
@@ -47,11 +47,7 @@ Descripcion: Lista Tipo Documento
             {% endfor %}
         </tbody>
     </table>
-    <div>
-        <p> Igv: <span>{{igv}}</span></p>
-        <p>Sub Total: <span>{{sub}}</span></p>
-        <p>Total: <span>{{total}}</span></p>
-    </div>
+   
 </div>
 <div class="row">
     {% if is_paginated %} {% load paginator %} {% paginator %} {% else %}
