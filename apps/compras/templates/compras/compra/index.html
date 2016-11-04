@@ -1,9 +1,4 @@
 {% extends "main/dashboard.html" %}
-<!--
-@package     conf
-
-Descripcion: Lista Tipo Documento
--->
 {% load i18n app_security %}
 {% load l10n humanize %}
 
@@ -47,11 +42,11 @@ $(function() {
         <thead>
             <tr>
                 <th>#</th>
-                <th class="col-hidden" data-search="tipodoc" data-order="fe_compra">Fecha de compra</th>
-                <th class="col-hidden" data-search="numdoc" data-order="comprobante">Comprobante</th>
-                <th class="col-hidden" data-search="razon_social" data-order="total">Total</th>
-                <th class="col-hidden" data-search="proveedor" data-order="proveedor">Proveedor</th>
+                <th class="col-hidden" data-search="fe_compra" data-order="fe_compra">Fecha de compra</th>
+                <th class="panel panel-default" data-search="total" data-order="total">Total</th>
+                <th class= "panel-body" data-search="proveedor" data-order="proveedor">Proveedor</th>
                 <th class="col-hidden" data-search="trabajador" data-order="trabajador">Trabajador</th>
+                 <th class="col-hidden" data-search="comprobante" data-order="comprobante">Comprobante</th>
                 <th class="btn-actions col-blocked text-center">Acción</th>
             </tr>
         </thead>
@@ -66,13 +61,13 @@ $(function() {
                 </td>
 
                 <td>{{ d.fe_compra }}</td>
-                <td>{{ d.comprobante }}</td>
                 <td>{{ d.total}}</td>
                 <td>{{ d.proveedor}}</td>
-                <td>{{ d.ptrabajador}}</td>
+                <td>{{ d.usuario}}</td>
+                <td>{{ d.comprobante }}</td>
                 
                 <td class="text-center">
-                    <a href="/compras/detalle-compra/listar/{{d.pk}}/">Ver detalles</a>
+                    <a href="/compras/detalle-compra/listar/{{d.pk}}/">Ver detalle</a>
                 </td>
             </tr>
             {% endfor %}
