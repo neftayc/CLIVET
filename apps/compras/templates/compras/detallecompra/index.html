@@ -14,12 +14,10 @@
         <thead>
             <tr>
                 <th>#</th>
-                <th class="col-hidden" data-search="tipodoc" data-order="fe_compra">Fecha de compra</th>
-                <th class="col-hidden" data-search="numdoc" data-order="comprobante">Comprobante</th>
-                <th class="col-hidden" data-search="razon_social" data-order="total">Total</th>
-                <th class="col-hidden" data-search="proveedor" data-order="proveedor">Proveedor</th>
-                <th class="col-hidden" data-search="trabajador" data-order="trabajador">Trabajador</th>
-                <th class="btn-actions col-blocked text-center">Acción</th>
+                <th class="col-hidden" data-search="compra" data-order="compra">Compra</th>
+                <th class="col-hidden" data-search="producto" data-order="producto">Producto</th>
+                <th class="col-hidden" data-search="cantidad" data-order="cantidad">Cantidad</th>
+                <th class="col-hidden" data-search="precio_total" data-order="precio_total">Importe</th>
             </tr>
         </thead>
         <tbody>
@@ -32,11 +30,11 @@
                     {% endif %}
                 </td>
 
+                <td>{{ d.compra.id}}</td>
                 <td>{{ d.producto.nombre }}</td>
                 <td>{{ d.cantidad }}</td>
-                <td>{{ d.total}}</td>
-                <td>{{ d.proveedor}}</td>
-                <td>{{ d.ptrabajador}}</td>
+                <td>{{ d.precio_total}}</td>
+                
             </tr>
             {% endfor %}
         </tbody>
