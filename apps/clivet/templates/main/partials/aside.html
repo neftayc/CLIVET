@@ -30,13 +30,13 @@
                 <a href="javascript:;" data-toggle="collapse" data-target="#compras"><i class="fa fa-fw fa-arrows-v"></i> Compras <i class="fa fa-fw fa-caret-down"></i></a>
                 <ul id="compras" class="collapse">
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-table"></i>Realizar Compra</a>
+                        <a href="{% url 'compras:compra_add' %}"><i class="fa fa-fw fa-table"></i>Realizar Compra</a>
                     </li>
                     <li>
                         <a href="{% url 'ventas:producto_list' %}"><i class="fa fa-fw fa-table"></i>Inventario</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-table"></i>Reporte</a>
+                        <a href="{% url 'compras:compra_list' %}"><i class="fa fa-fw fa-table"></i>Reporte</a>
                     </li>
                 </ul>
             </li>
