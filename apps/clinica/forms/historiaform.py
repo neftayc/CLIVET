@@ -23,7 +23,7 @@ class HistoriaForm(forms.ModelForm):
         """Meta."""
         model = Historial
         exclude = ()
-        fields = ['num_historia','veterinario','mascota',]
+        fields = ['num_historia','veterinario',]
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
@@ -43,12 +43,9 @@ class HistoriaForm(forms.ModelForm):
                 Div(
                     Row(
                         Div(Field('num_historia', css_class='input-required'),
-                        css_class='col-md-4'),
+                        css_class='col-md-6'),
                         Div(Field('veterinario', ),
-                        css_class='col-md-4'),
-
-                        Div(Field('mascota',),
-                        css_class='col-md-4'),
+                        css_class='col-md-6'),
                         ),
                     css_class='modal-body'
                     ),
@@ -73,7 +70,7 @@ class HistoriaMascotaForm(forms.ModelForm):
     dueño = forms.CharField(widget=forms.HiddenInput(), required=False,)
     class Meta:
         model = Historial
-        fields = ['num_historia','mascota','veterinario',]
+        fields = ['num_historia','veterinario',]
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
@@ -191,12 +188,9 @@ class HistoriaMascotaForm(forms.ModelForm):
                     ),
                 Tab(_('Account Info'),
                     Div(Field('num_historia', css_class='input-required'),
-                    css_class='col-md-4'),
+                    css_class='col-md-6'),
                     Div(Field('veterinario', ),
-                    css_class='col-md-4'),
-
-                    Div(Field('mascota',),
-                    css_class='col-md-4'),
+                    css_class='col-md-6'),
                     ),
             ),
             Row(
@@ -280,7 +274,7 @@ class MascotaHistoriDetailForm(forms.ModelForm):
             help_text=u'<small class="help-error"></small> %s' % _(
                 u' '),
         )
-        
+
         self.fields['genero'] = forms.CharField(
             label=capfirst(_(u'genero')), required=False,
             help_text=u'<small class="help-error"></small> %s' % _(
@@ -296,6 +290,7 @@ class MascotaHistoriDetailForm(forms.ModelForm):
             help_text=u'<small class="help-error"></small> %s' % _(
                 u' '),
         )
+
         self.fields['color'] = forms.CharField(
             label=capfirst(_(u'color')), required=False,
             help_text=u'<small class="help-error"></small> %s' % _(

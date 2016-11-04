@@ -4,12 +4,10 @@
 
 {% block breadcrumbs %}
 <a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %} &rsaquo;&rsaquo;</a>
-<a href="/clinica/atencion/listar/">{{ opts.verbose_name_plural|capfirst }}</a>
-&rsaquo; {{ title }}
+<a href="/clinica/colamedica/listar/">{% trans 'Cola' %} {% trans 'Medica' %}</a> &rsaquo; {{title}}
 {% endblock breadcrumbs %}
 
 {% block content_title %}
-<h3><i class="fa fa-paw"></i> {{ opts.verbose_name_plural|capfirst }} | <small>{{ subtitle }}</small></h3>
 {% endblock content_title %}
 
 {% block content %}

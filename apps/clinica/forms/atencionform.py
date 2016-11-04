@@ -13,12 +13,17 @@ from datetime import datetime
 
 from ..models.atencion import Atencion
 from ..models.vacunacion import Vacunacion, VACUNA
-from ..models.colamedica import ColaMedica, ESTADOS
+from ..models.colamedica import ColaMedica
 
 class AtencionForm(forms.ModelForm):
 
     person_id = forms.CharField(widget=forms.HiddenInput(), required=False,)
     historia = forms.CharField(widget=forms.HiddenInput(), required=False,)
+    nombre = forms.CharField(widget=forms.HiddenInput(), required=False,)
+    raza = forms.CharField(widget=forms.HiddenInput(), required=False,)
+    dueño = forms.CharField(widget=forms.HiddenInput(), required=False,)
+    descripcion = forms.CharField(widget=forms.HiddenInput(), required=False,)
+
     class Meta:
         """Meta."""
         model = Atencion
@@ -31,16 +36,12 @@ class AtencionForm(forms.ModelForm):
 
         super(AtencionForm, self).__init__(*args, **kwargs)
 
-        self.fields['descripcion'] = forms.CharField(
-            label=capfirst(_(u'Descripcion:')), required=True,
-            help_text=u'<small class="help-error"></small> %s' % _(
-                u' '),
-        )
         self.fields['estado'] = forms.BooleanField(
-            label=capfirst(_(u'estado:')), required=False,
+            label=capfirst(_(u'Marque el check para que sea como atendido')), required=False,
             help_text=u'<small class="help-error"></small> %s' % _(
                 u' '),
         )
+
         #form para consultas
         self.fields['anamnesis'] = forms.CharField(
             label=capfirst(_(u'Anamnesis y/o Descripcion:')), required=True,
@@ -87,13 +88,6 @@ class AtencionForm(forms.ModelForm):
             help_text=u'<small class="help-error"></small> %s' % _(
                 u' '),
         )
-        #form para vacunacion
-        self.fields['vacuna'] = forms.ChoiceField(
-            label=capfirst(_(u'Vacuna')), required=False,
-            choices=VACUNA,
-            help_text=u'<small class="help-error"></small> %s' % _(
-                u' '),
-        )
 
         self.fields['fecha_programada'] = forms.DateTimeField(
             label=_(u'Fecha Programada'), required=False,
@@ -119,30 +113,21 @@ class AtencionForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Field('person_id',),
+            Row(Div(HTML('''{% block content_title %}
+            <p><h3><i class="fa fa-paw"></i> {{ form.nombre.value}} &rsaquo;  <small>{{ form.raza.value}} Propietario: {{ form.dueño.value}}</small></h3></p>
+            {% endblock content_title %}'''),),),
             TabHolder(
-                Tab(_('Atencion'),
+                Tab(_('Nueva Atencion'),
                     Row(
-                        Div(Field('descripcion', css_class='input-required'),
-                        css_class='col-md-12'),
+                        Div(HTML('''<p><strong>N° Historia: </strong>{{ form.historia.value}} </p>'''),
+                        css_class='col-md-4'),
+                        Div(HTML('''<p><strong>Descripcion: </strong>{{ form.descripcion.value}} </p>'''),
+                        css_class='col-md-4'),
                         Div(Field('estado', ),
-                        css_class='col-md-6'),
-                    ),
-                    Row(
-                        Div(Field('mascota', css_class='input-required'),
-                        css_class='col-md-12'),
-                        Div(Field('colamedica', ),
-                        css_class='col-md-6'),
-                        Div(Field('consulta', ),
-                        css_class='col-md-6'),
-                        Div(HTML('<a href="/clinica/consulta/crear/" class="btn btn-warning btn-sm text-bold" rel="tooltip" title="Agregar consulta"><i class="btn-icon-only fa fa-hospital-o"></i></a>', ),
-                        css_class='col-md-6'),
-                        Div(Field('notas', ),
-                        css_class='col-md-6'),
-                        Div(Field('vacunacion', ),
-                        css_class='col-md-6'),
+                        css_class='col-md-4'),
                     ),
                 ),
-                Tab(_('Consulta'),
+                Tab(_('Nueva Consulta'),
                     Row(
                         Div(Field('anamnesis', css_class='input-required'),
                         css_class='col-md-12'),
@@ -164,7 +149,7 @@ class AtencionForm(forms.ModelForm):
                         css_class='col-md-6'),
                     ),
                 ),
-                Tab(_('Vacuna'),
+                Tab(_('Agregar Vacuna'),
                     Row(
                         Div(Field('vacuna', css_class='input-required'),
                         css_class='col-md-6'),
@@ -174,9 +159,11 @@ class AtencionForm(forms.ModelForm):
                         css_class='col-md-12'),
                     ),
                 ),
-                Tab(_('Notas'),
+                Tab(_('Agregar Notas'),
                     Row(
-                        Div(Field('descripcion', css_class='input-required'),
+                        Div(Field('vobservacion', css_class='input-required'),
+                        css_class='col-md-12'),
+                        Div(Field('ndescripcion', css_class='input-required'),
                         css_class='col-md-12'),
                     ),
                 ),
@@ -270,15 +257,15 @@ class AtencionMascotaDetailForm(forms.ModelForm):
                                     ),
                                 css_class='caption text-center'),
                                 css_class='thumbnail'),
-                            css_class='col-sm-6 col-md-offset-1 col-md-2'),
+                            css_class='col-sm-6 col-md-3 '),
                         Div(HTML('''
                                 {% include "clinica/includes/tablaperfil.html" %}
                                 '''),
-                            css_class='col-md-offset-1 col-md-4 panel panel-default'),
+                            css_class='col-md-5 panel panel-default'),
                         Div(HTML('''
                                 {% include "clinica/includes/tablasreport.html" %}
                                 '''),
-                            css_class='col-md-offset-1 col-md-3'),
+                            css_class='col-md-4'),
                     ),
                 ),
                 Tab(_('Historial de Compras'),

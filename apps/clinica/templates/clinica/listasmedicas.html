@@ -4,26 +4,25 @@
 
 {% block breadcrumbs %}
 <a href="{# url 'accounts:index' #}"><i class="fa fa-home"></i> {% trans 'Home' %} &rsaquo;&rsaquo;</a>
- {{ opts.verbose_name_plural|capfirst }}
+ {{ opts.verbose_name|capfirst }}
 {% endblock breadcrumbs %}
 
+
 {% block content_title %}
-<h3><i class="fa fa-paw"></i> Listado de {{ opts.verbose_name_plural|capfirst }} Clinicas | <small>{{ title }}</small></h3>
+<h3><i class="fa fa-paw"></i>Listado de todo las colas medicas</h3>
 {% endblock content_title %}
 
 {% block content %}
-
 <script type="text/javascript">
 $(function() {
     $('table').kgrid({
         form_data : ['{{f}}', '{{q}}'],
-        form_to   : '/clinica/historia/listar/?f={{f}}&q={{q}}',
+        form_to   : '/clinica/colamedica/listar/?f={{f}}&q={{q}}',
         order_attr: 'class=""',
-        order_to  : '/clinica/historia/listar/?f={{f}}&q={{q}}',
+        order_to  : '/clinica/colamedica/listar/?f={{f}}&q={{q}}',
     });
 });
 </script>
-
 <div class="btn-toolbar btn-toolbar-top">
     <div class="row">
         <div class="btn-actions">
@@ -35,11 +34,12 @@ $(function() {
         <thead>
             <tr>
                 <th>#</th>
-                <th class="col-hidden"  data-search="num_historia" data-order="num_historia">N° Historia</th>
-                <th class="col-hidden">Veterinario</th>
-                <th class="col-hidden">Mascota</th>
-                <th class="col-hidden">Fecha</th>
-                <th class="btn-actions col-blocked text-center">Acción</th>
+                <th class="col-hidden" data-search="fecha" data-order="fecha">Hora</th>
+                <th class="col-hidden">Paciente</th>
+                <th class="col-hidden">N° Historia</th>
+                <th class="col-hidden">Propietario</th>
+                <th class="col-hidden">Descripcion</th>
+                <th class="col-hidden text-center">Estado</th>
             </tr>
         </thead>
         <tbody>
@@ -51,21 +51,22 @@ $(function() {
                     {{ forloop.counter }}
                     {% endif %}
                 </td>
-                <td>{{ d.num_historia }}</td>
-                <td>{{ d.veterinario }}</td>
-                <td>{{ d.mascota }}</td>
-                <td>{{ d.created_ath }}</td>
+                <td>{{ d.fecha }}</td>
+                <td>{{ d.historia.mascota }} - {{ d.historia.mascota.raza}}</td>
+                <td>{{ d.historia.num_historia }}</td>
+                <td>{{ d.historia.mascota.dueño }}</td>
+                <td>{{ d.descripcion }}</td>
                 <td class="text-center">
-                    <a href="{% url 'clinica:historia_detail' d.pk|key:'historia_det' %}" class="btn btn-warning btn-sm text-bold" title="{% trans 'Detail' %} {% trans 'historia' %}" rel="tooltip">
-                        <i class="btn-icon-only fa fa-eye"></i>
-                    </a>
-                    <a href="{% url 'clinica:actualizar_historia' d.pk|key:'doc_upd' %}" class="btn btn-info btn-sm text-bold" title="Ediatar datos de tipo mascota" rel="tooltip">
-                        <i class="btn-icon-only fa fa-edit"></i>
-                    </a>
+                    <span class="label label-{{ d.estado|yesno:'success,danger' }}">
+                        {%  if d.estado %}{% trans 'A ' %}
+                        {% else %}{% trans 'E ' %}
+                        {% endif %}
+                    </span>
                 </td>
             </tr>
             {% endfor %}
         </tbody>
+
     </table>
 </div>
 <div  class="row" >

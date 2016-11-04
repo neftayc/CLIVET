@@ -9,25 +9,20 @@ from django.core.exceptions import ValidationError
 
 
 from ..models.historia import Historial
+from apps.sad.models import User
 
 # Create your models here.
 
-ESTADOS = (
-    ('atencion', "En Atencion"),
-    ('espera', "En Espera"),
-    ('reservado', "Reservado")
-)
-
-
 class ColaMedica(models.Model):
     historia = models.ForeignKey(Historial)
-    fecha = models.DateTimeField(_('Fecha Creada'), auto_now_add=True)
+    veterinario = models.ForeignKey(User)
+    fecha = models.DateField(_('Fecha Creada'), auto_now_add=True, )
     descripcion = models.CharField(max_length=100)
     estado = models.BooleanField(_('Estado de Atencion'), max_length=100, default=False)
 
     class Meta:
-        verbose_name = "ColaMedica"
-        verbose_name_plural = "ColasMedicas"
+        verbose_name = "Cola Medica"
+        verbose_name_plural = "Colas Medicas"
 
     def __str__(self):
         return "%s" % (self.historia)

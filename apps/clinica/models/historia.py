@@ -7,14 +7,14 @@ from django.db.models import signals
 from unicodedata import normalize
 from django.core.exceptions import ValidationError
 
-from apps.clivet.models.trabajador import Trabajador
+from apps.sad.models import User
 from apps.clinica.models.mascota import Mascota
 
 # Create your models here.
 
 class Historial(models.Model):
     num_historia = models.CharField(max_length=40)
-    veterinario = models.ForeignKey(Trabajador, blank=True, null=False)
+    veterinario = models.ForeignKey(User, blank=True, null=False)
     mascota = models.OneToOneField(Mascota, verbose_name=_('Mascota'), null=True, blank=True,)
     created_ath = models.DateTimeField(_('Fecha Creada'), auto_now_add=True)
 

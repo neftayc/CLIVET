@@ -1,84 +1,8 @@
 {% load i18n app_security %}
 {% load l10n humanize %}
 
-<nav class="navbar navbar-default">
-    <form class="navbar-form navbar-left col-md-3">
-       <div class="form-group">
-         <input type="text" class="form-control" placeholder="Search">
-       </div>
-       <button type="submit" class="btn btn-default">Submit</button>
-    </form>
-    <div class="btn-group">
-                    <button type="button" class="btn btn-default"><i class="fa fa-home"></i> Nueva Atención </button>
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                        <span class="caret"></span>
-                          <span class="sr-only">Toggle Dropdown</span>
-                    </button>
-                      <ul class="dropdown-menu" role="menu">
-                          <li><a href="{% url 'clinica:crear_consulta' %}" ><i class="fa fa-home"></i> Nueva Consulta</a></li>
-                          <li><a href="#avacuna" data-toggle="tab"><i class="fa fa-home"></i> Aplicar Vacuna</a></li>
-                          <li><a href="#adisparasitar" data-toggle="tab"><i class="fa fa-home"></i> Aplicar disparasitario</a></li>
-                          <li><a href="#apulga" data-toggle="tab"><i class="fa fa-home"></i> Aplicar Antipulga</a></li>
-                          <li><a href="#internamiento" data-toggle="tab"><i class="fa fa-home"></i> Internamiento</a></li>
-                      </ul>
-                </div>
-                <button type="button" class="btn btn-default navbar-btn" name="button"  data-toggle="modal" data-target="#MiModal"><i class="fa fa-home"> Notas</i></button>
-                <button type="button" class="btn btn-default navbar-btn" name="button"><i class="fa fa-home"> Adjuntar archivo</i></button>
-                <button type="button" class="btn btn-default navbar-btn" name="button"><i class="fa fa-home"> Agenda Medica</i></button>
-                <button type="submit" class="btn btn-default navbar-btn btn-warning" >
-                      <i class="fa fa-home"></i>
-                      <span> Terminar Atención</span>
-                </button>
-            <div class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" id="MiModal" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="panel modal-content panel-primary">
-                        <div class="modal-header panel-heading">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">Registrar Nota</h4>
-                        </div>
-                        <div class="modal-body">
-                            <form>
-                                <div class="row">
-                                    <div class="col-xs-6 col-md-6">
-                                        <div class="form-group">
-                                            <script type="text/javascript">
-                                                //<![CDATA[
-                                                    var  today = new Date();
-                                                    var m = today.getMonth() + 1;
-                                                    var mes = (m < 10) ? '0' + m : m;
-                                                    document.write('<label>Fecha:</label> '+today.getDate(),'/' +mes,'/'+today.getYear());
-                                                //]]>
-                                            </script>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-6 col-md-6">
-                                        <div class="form-group">
-                                            <script type="text/javascript">
-                                                var d = new Date();
-                                                document.write('<label>Hora:</label>'+d.getHours(),':'+d.getMinutes(),':'+d.getSeconds());
-                                            </script>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="nota">Nota:</label>
-                                    <input type="text" class="form-control" id="nota" placeholder="Escriba el texto que desee resaltar o recordar">
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary">Registrar</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div>
-
-</nav>
-
-         <hr>
 <div class="row">
-    <div class="col-xs-12 col-md-8">
+    <div class="col-xs-12">
         <div class="panel panel-default"  id="global">
             {% for d in atencion %}
             <div class="panel-body">
@@ -121,8 +45,9 @@
                         </div>
                     </div>
                     <div class="panel-body">
+                        <div class="col-xs-6">
                         <p>
-                            <label>Amnesia y/o Descripción:</label>
+                            <label class="">Amnesia y/o Descripción:</label>
                             <li>{{d.anamnesis}}</li>
                         </p>
                         <p>
@@ -137,37 +62,22 @@
                             <label>Diagnostico:</label>
                             <li><span>T°: </span>259 <span> FCT: </span> 1221</li>
                         </p>
+                    </div>
+                    <div class="col-xs-6">
                         <p>
                             <label>Tratamientos</label>
                             <li>{{ d.tratamiento}}</li>
                         </p>
                         <p>
-                            <img src="/media/clivet/logo.png" class="img-responsive" alt="Imagen de la consulta" />
+                            <img src="/media/clivet/images1.jpg" class="" style="width:250px"alt="Imagen de la consulta" />
                         </p>
+
+                    </div>
                     </div>
                 </div>
             </div>
 
             {% endfor %}
-        </div>
-    </div>
-    <div class="col-xs-12 col-md-4">
-        <h4><i class="fa fa-home"></i> Proximos Eventos</h4>
-        <div class="panel panel-default">
-            <table class="table table-hover">
-                <tbody>
-                    <tr>
-                        <td><i class="fa fa-home"></i> 07/06</td>
-                        <td>Cita</td>
-                        <td><i class="fa fa-save"></i><i class="fa fa-edit"></i><i class="fa fa-remove"></i></td>
-                    </tr>
-                    <tr>
-                        <td><i class="fa fa-home"></i> 07/06</td>
-                        <td>Control</td>
-                        <td><i class="fa fa-save"></i><i class="fa fa-edit"></i><i class="fa fa-remove"></i></td>
-                    </tr>
-                </tbody>
-            </table>
         </div>
     </div>
 </div>

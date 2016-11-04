@@ -5,7 +5,8 @@
 
 {% block breadcrumbs %}
 <a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %} &rsaquo;</a>
- {{ opts.verbose_name_plural|capfirst }}
+<a href="{% url 'clinica:listar_mascotas' %}">{% trans 'Mascota' %} &rsaquo;</a>
+ {% trans 'Historia clinica' %}
 {% endblock breadcrumbs %}
 
 {% block content_title %}

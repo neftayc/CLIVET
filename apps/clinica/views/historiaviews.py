@@ -63,8 +63,8 @@ class HistoriaListView(ListView):
                         self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
         # context['cmi'] = 'menu' #  Validacion de manual del menu
-        context['title'] = ('Seleccione %s para cambiar'
-                            ) % capfirst('Tipo Documento')
+        context['title'] = ('Seleccione %s para mas detalle'
+                            ) % capfirst(' una historia')
 
         context['o'] = self.o
         context['f'] = self.f
@@ -321,7 +321,6 @@ class HistoriaMascotaCreateView(CreateView):
             messages.success(self.request, e)
             log.warning(force_text(e), extra=log_params(self.request))
             return super(HistoriaMascotaCreateView, self).form_invalid(form)
-
 
 
 class HistoriaMascotaDetailView(generic.DetailView):

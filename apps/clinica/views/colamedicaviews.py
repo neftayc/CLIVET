@@ -16,14 +16,51 @@ from django.views.generic.list import ListView
 from ..forms.colamedicaform import ColaMedicaForm
 
 from ..models.colamedica import ColaMedica
-
+import datetime
 import logging
 log = logging.getLogger(__name__)
 
 # Create your views here.
-class ColaMedicaListView(ListView):
-    u"""Tipo Documento Identidad."""
+class ColasMedicasListView(ListView):
+    model = ColaMedica
+    paginate_by = settings.PER_PAGE
+    template_name = "clinica/listasmedicas.html"
 
+    @method_decorator(permission_resource_required)
+    def dispatch(self, request, *args, **kwargs):
+        """dispatch."""
+        return super(ColasMedicasListView,
+                     self).dispatch(request, *args, **kwargs)
+
+    def get_paginate_by(self, queryset):
+        """Paginate."""
+        if 'all' in self.request.GET:
+            return None
+        return ListView.get_paginate_by(self, queryset)
+
+    def get_queryset(self):
+        """Tipo Doc List Queryset."""
+        self.o = empty(self.request, 'o', '-id')
+        self.f = empty(self.request, 'f', 'descripcion')
+        self.q = empty(self.request, 'q', '')
+        column_contains = u'%s__%s' % (self.f, 'contains')
+
+        return self.model.objects.filter(
+            **{column_contains: self.q}).order_by(self.o)
+
+    def get_context_data(self, **kwargs):
+        context = super(ColasMedicasListView,
+                        self).get_context_data(**kwargs)
+        context['opts'] = self.model._meta
+        # context['cmi'] = 'menu' #  Validacion de manual del menu
+        context['title'] = ('Pacientes en  %s de atencion'
+                            ) % capfirst(' espera')
+
+        context['o'] = self.o
+        context['f'] = self.f
+        context['q'] = self.q.replace('/', '-')
+        return context
+class ColaMedicaListView(ListView):
     model = ColaMedica
     paginate_by = settings.PER_PAGE
     template_name = "clinica/colamedica.html"
@@ -51,27 +88,23 @@ class ColaMedicaListView(ListView):
             **{column_contains: self.q}).order_by(self.o)
 
     def get_context_data(self, **kwargs):
-        """
-        Tipo Documento Identidad ListView List get context.
-        Funcion con los primeros datos iniciales para la carga del template.
-        """
         context = super(ColaMedicaListView,
                         self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
         # context['cmi'] = 'menu' #  Validacion de manual del menu
-        context['title'] = ('Seleccione %s para cambiar'
-                            ) % capfirst('Tipo Documento')
+        context['title'] = ('Pacientes en  %s de atencion'
+                            ) % capfirst(' espera')
 
+        context['fecha'] = ColaMedica.objects.filter(fecha = datetime.date.today(), ).order_by('fecha')
         context['o'] = self.o
         context['f'] = self.f
         context['q'] = self.q.replace('/', '-')
 
+        context['cantidad'] = context['fecha'].count()
         return context
 
 
 class ColaMedicaCreateView(CreateView):
-    """Tipo Documento Identidad."""
-
     model = ColaMedica
     form_class = ColaMedicaForm
     template_name = "clinica/form/colamedica.html"
@@ -92,7 +125,7 @@ class ColaMedicaCreateView(CreateView):
                         self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
         # context['cmi'] = 'tipodoc'
-        context['title'] = ('Agregar %s') % ('Tipo Documento')
+        context['title'] = ('Agregar %s') % (' nueva mascota a la lista de espera')
         return context
 
     def form_valid(self, form):
@@ -141,7 +174,7 @@ class ColaMedicaUpdateView(UpdateView):
                         self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
         # context['cmi'] = 'empresa'
-        context['title'] = ('Actualizar %s') % ('Tipo Documento')
+        context['title'] = ('Actualizar %s') % (' paciente agregado')
         return context
 
     def form_valid(self, form):
@@ -164,7 +197,7 @@ class ColaMedicaDeleteView(DeleteView):
     """Empresa Delete View."""
 
     model = ColaMedica
-    success_url = reverse_lazy('clinica:listar_mascotas')
+    success_url = reverse_lazy('clinica:listar_medica')
 
     @method_decorator(permission_resource_required)
     def dispatch(self, request, *args, **kwargs):
@@ -184,11 +217,6 @@ class ColaMedicaDeleteView(DeleteView):
                      self).dispatch(request, *args, **kwargs)
 
     def delete(self, request, *args, **kwargs):
-        """
-        Empresa Delete View delte.
-        Función para eliminar la empresa sobre un metodo que verifica las
-        dependencias de que tiene la tabla mostrando un mensaje de validacion.
-        """
         try:
             d = self.get_object()
             deps, msg = get_dep_objects(d)
@@ -219,5 +247,4 @@ class ColaMedicaDeleteView(DeleteView):
         return HttpResponseRedirect(self.success_url)
 
     def get(self, request, *args, **kwargs):
-        """Empresa Delete View get."""
         return self.delete(request, *args, **kwargs)

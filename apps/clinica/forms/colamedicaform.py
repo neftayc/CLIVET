@@ -21,7 +21,8 @@ class ColaMedicaForm(forms.ModelForm):
         """Meta."""
         model = ColaMedica
         exclude = ()
-        fields = ['historia','descripcion','estado',]
+        fields = ['historia','descripcion','veterinario',]
+
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
@@ -44,8 +45,7 @@ class ColaMedicaForm(forms.ModelForm):
                         css_class='col-md-12'),
                         Div(Field('descripcion', ),
                         css_class='col-md-6'),
-
-                        Div(Field('estado',),
+                        Div(Field('veterinario', ),
                         css_class='col-md-6'),
                         ),
                     css_class='modal-body'

@@ -9,7 +9,7 @@ from django.core.exceptions import ValidationError
 from ..models.colamedica import ColaMedica
 from ..models.consulta import Consulta
 from ..models.notas import Notas
-from ..models.vacunacion import Vacunacion
+from apps.ventas.models.Producto import Producto
 from ..models.mascota import Mascota
 
 
@@ -23,7 +23,7 @@ VACUNA = (
 
 # Create your models here.
 class Atencion(models.Model):
-    colamedica = models.ForeignKey(ColaMedica, blank=True, unique=True  )
+    colamedica = models.OneToOneField(ColaMedica, blank=True, unique=True  )
 #Consulta
     anamnesis = models.CharField(max_length=200)
     diagnostico = models.CharField(max_length=300)
@@ -38,7 +38,7 @@ class Atencion(models.Model):
 #vacunacion
     fecha_programada = models.DateTimeField(null=True, blank=True)
     vobservacion = models.CharField(max_length=100,null=True, blank=True)
-    vacuna = models.CharField(max_length=100,choices=VACUNA, null=True, blank=True)
+    vacuna = models.ManyToManyField(Producto, max_length=100, null=True, blank=True)
 
 #notas
     ndescripcion = models.CharField(max_length=200, default='Mascota en buen estado',null=True, blank=True)

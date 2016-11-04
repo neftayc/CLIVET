@@ -1,38 +1,36 @@
 <table class="table table-hover">
     <tbody>
-       {% for d in atencion %}
       <tr>
           <th scope="row">Dueño:</th>
-          <td>{{d.colamedica.historia.mascota.dueño}}</td>
+          <td>{{dueño}}</td>
       </tr>
       <tr>
           <th scope="row">Fecha:</th>
-          <td>{{d.colamedica.historia.mascota.fecha_nacimiento}}</td>
+          <td>{{fecha}}</td>
       </tr>
       <tr>
           <th scope="row">Raza:</th>
-          <td>{{d.colamedica.historia.mascota.raza}}</td>
+          <td>{{raza}}</td>
       </tr>
       <tr>
           <th scope="row">Especie:</th>
-          <td>{{d.colamedica.historia.mascota.especie}}</td>
+          <td>{{especie}}</td>
       </tr>
       <tr>
           <th scope="row">Genero:</th>
-          <td>{{d.colamedica.historia.mascota.genero}}</td>
+          <td>{{genero}}</td>
       </tr>
       <tr>
           <th scope="row">Esterelizado:</th>
-          <td>{{d.colamedica.historia.mascota.esterelizado}}</td>
+          <td>{{esterelizado}}</td>
       </tr>
       <tr>
           <th scope="row">Peso:</th>
-          <td>{{d.colamedica.historia.mascota.peso}}</td>
+          <td>{{peso}}</td>
       </tr>
       <tr>
           <th scope="row">Color:</th>
-          <td>{{d.colamedica.historia.mascota.color}}</td>
+          <td>{{color}}</td>
       </tr>
-      {% endfor %}
     </tbody>
 </table>

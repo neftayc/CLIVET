@@ -38,8 +38,14 @@ class AtencionListView(ListView):
         context['opts'] = self.model._meta
         context['atencion'] = Atencion.objects.filter(colamedica__historia__mascota__nombre=mascota ).order_by('pk')
         context['nombre'] = mascota
-        context['raza'] = mascota.raza
         context['dueño'] = mascota.dueño
+        context['raza'] = mascota.raza
+        context['fecha'] = mascota.fecha_nacimiento
+        context['especie'] = mascota.especie
+        context['genero'] = mascota.genero
+        context['esterelizado'] = mascota.esterelizado
+        context['peso'] = '20kg'
+        context['color'] = mascota.color
         context['cantidad'] = context['atencion'].count()
 
         if mascota:
@@ -54,7 +60,6 @@ class AtencionListView(ListView):
             }
         context['form'] = AtencionMascotaDetailForm(initial=initial)
         return context
-
 
 class AtencionCreateView(CreateView):
     """Tipo Documento Identidad."""
@@ -78,8 +83,9 @@ class AtencionCreateView(CreateView):
     def get_context_data(self, **kwargs):
         context = super(AtencionCreateView, self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
-        context['cmi'] = 'atencion'
-        context['title'] = _('Add %s') % capfirst(_('atencion'))
+        #context['cmi'] = 'atencion'
+        context['nombre'] = self.medica_pk
+        context['title'] = _('%s') % capfirst(_('atencion'))
         return context
 
     def get_form_kwargs(self):
@@ -93,6 +99,9 @@ class AtencionCreateView(CreateView):
         if self.medica_pk:
             d = ColaMedica.objects.get(pk=self.medica_pk)
             if d:
+                initial['nombre'] = d.historia.mascota.nombre
+                initial['raza'] = d.historia.mascota.raza
+                initial['dueño'] = d.historia.mascota.dueño
                 initial['historia'] = d.historia.num_historia
                 initial['descripcion'] = d.descripcion
                 initial['estado'] = d.estado
@@ -109,7 +118,6 @@ class AtencionCreateView(CreateView):
             except Exception as e:
                 colamedica = ColaMedica()
                 colamedica.save()
-            colamedica.descripcion = form.cleaned_data['descripcion']
             colamedica.estado = form.cleaned_data['estado']
 
             colamedica.save()
@@ -221,7 +229,6 @@ class AtencionUpdateView(UpdateView):
             messages.success(self.request, e)
             log.warning(force_text(e), extra=log_params(self.request))
             return super(AtencionUpdateView, self).form_invalid(form)
-
 
 class AtencionDeleteView(DeleteView):
     """Empresa Delete View."""
@@ -340,7 +347,7 @@ class AtencionMedicaView(generic.DetailView):
                 'agroups': UserAssociation.objects.filter(user=self.object).order_by('association'),
                 'status': UserStatus.objects.filter(user=self.object).order_by('-created_at'),
             }
-        context['form'] = AtencionMascotaForm(initial=initial)
+        context['form'] = AtencionMascotaDetailForm(initial=initial)
         return context
 
 class MainAtencionesView(TemplateView):
