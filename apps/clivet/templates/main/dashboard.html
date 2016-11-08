@@ -1,37 +1,22 @@
-{%  extends "base.html" %}
-{% load i18n staticfiles user_menu %}
-
-{% block title %}{{ title }} | {{ site_title|default:_('Backend site admin') }} {% endblock title %}
-
-{% block extrastyle %}
+{% extends "base.html" %} {% load i18n staticfiles user_menu %} {% block title %}{{ title }} | {{ site_title|default:_('Backend site admin') }} {% endblock title %} {% block extrastyle %}
 <link href="{% static 'jasny-bootstrap/css/jasny-bootstrap.css' %}" rel="stylesheet">
-
 <link href="{% static 'custom/css/base.css' %}" rel="stylesheet">
 <link href="{% static 'custom/css/style.css' %}" rel="stylesheet">
 <link href="{% static 'bootstrap-fileinput/css/fileinput.css' %}" rel="stylesheet">
 <link href="{% static 'clivet/style.css' %}" rel="stylesheet">
-<link href="{% static 'fullcalendar/fullcalendar.min.css' %}" rel="stylesheet">
-{% endblock extrastyle %}
-{% block contentroot %}
+<link href="{% static 'clivet/ventas.css' %}" rel="stylesheet">
+<link href="{% static 'fullcalendar/fullcalendar.min.css' %}" rel="stylesheet"> {% endblock extrastyle %} {% block contentroot %}
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    {% load_menu request 'BACKEND' %}
-{% include "main/partials/header.html" %}
-{% include "main/partials/aside.html" %}
+    {% load_menu request 'BACKEND' %} {% include "main/partials/header.html" %} {% include "main/partials/aside.html" %}
 </nav>
-
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="page-header page-clivet">
-            <p class="title">{% block breadcrumbs %}<a href="{# url 'accounts:index' #}"><i class="fa fa-home"></i> {% trans 'Home' %}&rsaquo;&rsaquo;</a>
-            {% endblock breadcrumbs %}</p>
+            <p class="title">{% block breadcrumbs %}<a href="{# url 'accounts:index' #}"><i class="fa fa-home"></i> {% trans 'Home' %}&rsaquo;&rsaquo;</a> {% endblock breadcrumbs %}</p>
         </div>
-        {% block content_title %}<p class="escritorio btn-su">Escritorio</p> {% endblock content_title %}
-        {% block messages %}
-            {% load notify %}
-            {% get_notify request %}
-        {% endblock messages %}
-        {% block content %}
+        {% block content_title %}
+        <p class="escritorio btn-su">Escritorio</p> {% endblock content_title %} {% block messages %} {% load notify %} {% get_notify request %} {% endblock messages %} {% block content %}
         <div class="row">
             <div class="col-xs-4 col-md-2 col-md-offset-2">
                 <a href="#" class="thumbnail text-center">
@@ -82,23 +67,19 @@
                 </a>
             </div>
         </div>
-        {% endblock content %}
-
-        {% block sidebar %}{% endblock sidebar %}
+        {% endblock content %} {% block sidebar %}{% endblock sidebar %}
     </div>
 </div>
 <!-- /#page-wrapper -->
 {% endblock contentroot %}
 <div id="loading-content" class="alpha60"></div>
 <div id="spinner" class="preview corner-all shadow-dark"></div>
-
 {% block extrajs %}
 <!--
 <script src="{% static 'jquery/jquery.spinx.js' %}"></script>
 -->
 <script src="{% static 'custom/js/jquery.kumbiaphp.js' %}"></script>
 <script src="{% static 'jasny-bootstrap/js/jasny-bootstrap.js' %}"></script>
-
 <script src="{% static 'custom/js/jquery.kgrid.js' %}"></script>
 <!--
 <script src="{% static 'custom/js/jquery.kloadx.js' %}"></script>

@@ -16,11 +16,11 @@ from apps.ventas.models.Producto import Producto
 class VentaForm(forms.ModelForm):
     u"""Tipo Documeto Form."""
     producto = forms.ModelChoiceField(
-        queryset=Producto.objects.all(), required=False, label="", help_text="")
+        queryset=Producto.objects.all(), label="", help_text="")
     data_venta = forms.CharField(
         required=False,  widget=forms.TextInput(attrs={'type': 'hidden'}))
     producto = forms.CharField(label="", required=False,
-                               widget=forms.TextInput(attrs={'class': 'typeahead'}))
+                               widget=forms.TextInput(attrs={'class': 'form-control typeahead', 'placeholder': 'Buscar Producto o Servicio'}))
 
     class Meta:
 
