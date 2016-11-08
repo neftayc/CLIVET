@@ -1,3 +1,3 @@
-#Sistema clinico Basado en Backend Manager for Django
+#Sistema clinico Basado en [Backend Manager](https://github.com/submitconsulting/backengo) for Django
 
-[backengo](https://github.com/submitconsulting/backengo)
+
