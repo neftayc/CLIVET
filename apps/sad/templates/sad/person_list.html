@@ -35,8 +35,8 @@ $(function() {
 <div class="btn-toolbar btn-toolbar-top">
     <div class="row">
         <div class="btn-actions">
-
-        </div>
+            
+        </div>            
     </div>
 </div>
 <div class="container-overflow">
@@ -52,7 +52,7 @@ $(function() {
             </tr>
         </thead>
         <tbody>
-            {% for d in object_list %}
+            {% for d in object_list %}       
             <tr>
                 <td>{% if is_paginated %}
                     {{ page_obj.start_index|add:forloop.counter0 }}
@@ -60,14 +60,16 @@ $(function() {
                     {{ forloop.counter }}
                     {% endif %}
                 </td>
-
+                
                 <td>{{ d.first_name  }}</td>
                 <td>{{ d.last_name   }} </td>
                 <td>{{ d.get_identity_type_display }}{{ d.identity_num|add:'' }}</td>
-
+                 
 
                 <td class="text-center">
+                    
                     <a href="/sad/user/person_add/{{d.pk|key:'user_cre'}}/" class="btn btn-danger btn-sm text-bold" title="{% trans 'Add' %} {% trans 'a' %} {% trans 'user' %}" rel="tooltip"><i class="btn-icon-only fa fa-plus"></i></a>
+
                 </td>
             </tr>
             {% endfor %}

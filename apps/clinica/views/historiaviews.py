@@ -278,6 +278,7 @@ class HistoriaMascotaCreateView(CreateView):
 
     @transaction.atomic
     def form_valid(self, form):
+        form.instance.veterinario = self.request.user
         sid = transaction.savepoint()
         try:
             try:

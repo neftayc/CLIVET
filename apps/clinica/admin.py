@@ -68,7 +68,7 @@ class HistoriaAdmin(admin.ModelAdmin):
 class ColaMedicaAdmin(admin.ModelAdmin):
     model = ColaMedica
     search_fields = ('historia',)
-    list_display = ('historia', 'fecha','descripcion','veterinario',)
+    list_display = ('historia', 'fecha','descripcion','medico',)
 
 class AtencionAdmin(admin.ModelAdmin):
     model = Atencion

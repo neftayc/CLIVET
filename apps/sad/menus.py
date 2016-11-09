@@ -35,6 +35,7 @@ class Menus:
     def load(request, menu_module):
         """
         Carga el menu del usuario
+
         Entrada::
 
                 menu_module=BACKEND
@@ -79,7 +80,7 @@ class Menus:
                 print ("Sede no seleccionado")
                 # headquar=Headquar.objects.filter(userheadquar__user__id=request.user.id).distinct().first()
                 pass
-
+            
         if request.user.is_superuser:
             permission_list = []  # si es uperuser mostrarme todo los menús
         menu = Menu()
@@ -101,6 +102,9 @@ class Menus:
     # Metodo para renderizar el menu de escritorio
     @staticmethod
     def desktop(request):
+        """
+        Método para renderizar el menu de escritorio
+    """
         html = ''
         route = request.path
         if Menus.menu_list:
@@ -173,6 +177,9 @@ class Menus:
     # Método para listar los items en el backend
     @staticmethod
     def desktop_items(request):
+        """
+        Metodo para listar los items del menu de escritorio
+    """
         html = ''
         route = request.path
         for menu, items in Menus.menu_item_list.iteritems():
@@ -194,10 +201,13 @@ class Menus:
     # Método para renderizar el menú de dispositivos móviles
     @staticmethod
     def view(request):
+        """
+        Metodo para renderizar el menu de dispositivos moviles
+    """
         html = ''
         route = request.path
         if Menus.menu_list:
-            html = html + '<ul class="nav navbar-nav  side-nav">\n'
+            html = html + '<ul class="nav navbar-nav">\n'
             for main in Menus.menu_list:
                 text = '%s<b class="caret"></b>' % capfirst(_("%s" % main.title))
                 html = html + '<li class="dropdown">\n'
@@ -205,7 +215,7 @@ class Menus:
                 if main.title in Menus.menu_item_list:
                     html = html + '<ul class="dropdown-menu">\n'
                     for item in Menus.menu_item_list[main.title]:
-
+                    	
                         active = ('active' if item.url.strip("/") == route.strip("/") else '')
                         html = html + '<li class="%s">%s</li>\n' % (
                             active, Menus.link(item.url, item.title, item.icon))
@@ -217,6 +227,9 @@ class Menus:
     # Método para listar los items en el sidebar
     @staticmethod
     def side_items(request):
+        """
+        Metodo para listar los items del menu del sidebar
+    """
         html = ''
         route = request.path
         for menu, items in Menus.menu_item_list.iteritems():

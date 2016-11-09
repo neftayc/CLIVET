@@ -1,0 +1,45 @@
+<div class="btn-group">
+  <button type="button" class="btn btn-danger"><i class="fa fa-md"></i>Nueva Atencion</button>
+  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="caret"></span>
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+  <ul class="dropdown-menu">
+    <li><a href="#"  data-toggle="modal" data-target="#consulta">Consulta General</a></li>
+    <li><a href="#">Aplicar Vacuna</a></li>
+    <li><a href="#">Aplicar  Antiparasitario</a></li>
+    <li><a href="#">Aplicar Antipulga</a></li>
+  </ul>
+</div>
+<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-calendar"></i>
+  </button>
+<div class="modal fade" id="consulta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Cancelar</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Buscar Producto</h4>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <input name="producto" id="producto-id" class="form-control" placeholder="Ingrese nombre del producto" type="text">
+                    <span class="input-group-btn">
+                        <button name="seach" id="p-buscar" class="btn btn-flat"><i class="fa fa-search"></i></button>
+                    </span>
+                </div>
+                <div id="producto-resultado"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    Cancelar
+                </button>
+                <button type="button" class="btn btn-primary" id="p-seleccionar" disabled>
+                    Seleccionar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

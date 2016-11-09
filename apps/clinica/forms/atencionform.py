@@ -159,6 +159,11 @@ class AtencionForm(forms.ModelForm):
                         css_class='col-md-12'),
                     ),
                 ),
+                Tab(_('Historia Clinica'),
+                    Row(
+                        Div(HTML('''{% include "clinica/includes/menuatencion.html" %}'''),),
+                    ),
+                ),
                 Tab(_('Agregar Notas'),
                     Row(
                         Div(Field('vobservacion', css_class='input-required'),

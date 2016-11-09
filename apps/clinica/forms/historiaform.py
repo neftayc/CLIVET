@@ -70,7 +70,7 @@ class HistoriaMascotaForm(forms.ModelForm):
     dueño = forms.CharField(widget=forms.HiddenInput(), required=False,)
     class Meta:
         model = Historial
-        fields = ['num_historia','veterinario',]
+        fields = ['num_historia',]
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
@@ -188,8 +188,6 @@ class HistoriaMascotaForm(forms.ModelForm):
                     ),
                 Tab(_('Account Info'),
                     Div(Field('num_historia', css_class='input-required'),
-                    css_class='col-md-6'),
-                    Div(Field('veterinario', ),
                     css_class='col-md-6'),
                     ),
             ),
