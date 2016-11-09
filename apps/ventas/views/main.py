@@ -17,8 +17,8 @@ from django.views.generic.list import ListView
 from django.shortcuts import render
 from django.http import HttpResponse
 import json
-
-
+from decimal import Decimal
+from math import ceil, floor
 from ..models.Venta import Venta
 from ..models.Producto import Producto
 from ..forms.Venta import VentaForm
@@ -104,25 +104,56 @@ class MainCreateView(CreateView):
             print("______________1_________________")
             print(venta)
             print(self.request.POST.get('cliente'))
+
+            def float_round(num, places=0, direction=floor):
+                return direction(num * (10**places)) / float(10**places)
             self.object.total = venta['total']
             self.object.igv = venta['igv']
             self.object.save()
 
             for p in venta['productos']:
-                print(p)
-                # producto = Producto.objects.get(pk=p['id']).update(cantidad=)
-                # print(producto)
+
+                producto = Producto.objects.get(pk=p['id'])
+                producto.existencia = producto.existencia - int(p['cantidad'])
+                producto.MontoReal = float_round(
+                    producto.MontoReal -(Decimal(p['importe'])-Decimal(p['importe']*0.18)), 2, ceil)
+
+                producto.igv = float_round(
+                    producto.igv - Decimal(p['igvp']), 2, ceil)
+                print(producto.igv)
+                producto.save()
                 # producto.cantidad = producto.cantidad + int(p['cantidad'])
                 # print(producto)
                 # producto.update()
                 dv = Detalle_Venta(
-                    producto=p['cantidad'],
+                    producto_id=p['id'],
                     venta=self.object,
                     cantidad=p['cantidad'],
                     # igv=p['igv'],
                     importe=p['importe'],
                 )
                 dv.save()
+
+        #  self.object = form.save(commit=False)
+        # sid = transaction.savepoint()
+        # try:
+        #     venta = json.loads(self.request.POST.get('data_venta'))
+        #     print("______________1_________________")
+        #     print(venta)
+        #     print(self.request.POST.get('cliente'))
+        #     self.object.total = venta['total']
+        #     self.object.igv = venta['igv']
+        #     self.object.save()
+        #     for p in venta['productos']:
+        #         dv = Detalle_Venta(
+        #             producto_id=p['id'],
+        #             venta=self.object,
+        #             cantidad=p['cantidad'],
+        #             # igv=p['igv'],
+        #             importe=p['importe'],
+        #         )
+        #         dv.save()
+
         except Exception as e:
             try:
                 transaction.savepoint_rollback(sid)

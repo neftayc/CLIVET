@@ -85,7 +85,7 @@
                         </div>
                     </div>
                 </div>
-                                {{ form.data_venta}}
+                {{ form.data_venta}}
             </form>
         </div>
     </div>
@@ -183,7 +183,8 @@ $(document).ready(function() {
                         a = $('#cantidad_producto').val();
                         a = a * (-1);
                         data[0].fields.cantidad = a;
-                        data[0].fields.importe = (data[0].fields.precioV * data[0].fields.cantidad);
+                        data[0].fields.importe = Math.ceil10((data[0].fields.precioV * data[0].fields.cantidad), -2);
+                        data[0].fields.igvp = Math.ceil10((data[0].fields.precioV * data[0].fields.cantidad) * 0.18, -2);
                         data[0].fields.id = data[0].pk;
                         Venta.productos.push(data[0].fields);
                         $('#cantidad_producto').val("1");
@@ -197,6 +198,7 @@ $(document).ready(function() {
                     } else {
                         data[0].fields.cantidad = $('#cantidad_producto').val();
                         data[0].fields.importe = Math.ceil10(data[0].fields.precioV * data[0].fields.cantidad, -2);
+                        data[0].fields.igvp = Math.ceil10((data[0].fields.precioV * data[0].fields.cantidad) * 0.18, -2);
                         data[0].fields.id = data[0].pk;
                         Venta.productos.push(data[0].fields);
                         $('#cantidad_producto').val("1");
@@ -237,6 +239,7 @@ function draw() {
             "</td><td class='text-center'>" + Venta.productos[i].nombre +
             "</td><td class='text-center'>" + Venta.productos[i].precioV +
             "</td><td class='text-center'>" + Venta.productos[i].importe +
+            "</td><td class='col-hidden'>" + Venta.productos[i].igvp +
             "</td><td class='text-center'><button type='button' onclick='delete_p(" + i + ")'class='btn  btn-danger btn-md'><apan class='glyphicon glyphicon-trash'></span></button></td></tr>";
     }
     $("#tabla_producto").html(h);
@@ -259,6 +262,7 @@ function delete_p(d) {
 function change_p(d) {
     Venta.productos[d].cantidad = $("#id" + d).text();
     Venta.productos[d].importe = Math.ceil10(Venta.productos[d].cantidad * Venta.productos[d].precioV, -2);
+    Venta.productos[d].igvp = Math.ceil10((Venta.productos[d].cantidad * Venta.productos[d].precioV) * 0.18, -2);
     Venta.total = 0.00;
     for (var i in Venta.productos) {
         Venta.total = Math.ceil10(Venta.total + Venta.productos[i].importe, -2);
