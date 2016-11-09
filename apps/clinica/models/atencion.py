@@ -13,11 +13,11 @@ from apps.ventas.models.Producto import Producto
 from ..models.mascota import Mascota
 
 
-VACUNA = (
-    ('VACUNA1', "Vacuna1"),
-    ('VACUNA2', "Vacuna2"),
-    ('VACUNA3', "Vacuna3"),
-    ('VACUNA4', "Vacuna4")
+ATENCIONES = (
+    ('consulta', "Consulta General"),
+    ('vacuna', "Aplicar Vacuna"),
+    ('antiparasitario', "Aplicar Antiparasitario"),
+    ('antipulgas', "Aplicar Antipulga")
 )
 
 

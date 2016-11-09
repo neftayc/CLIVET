@@ -1,0 +1,77 @@
+{% extends "main/dashboard.html" %}
+{% load i18n crispy_forms_tags staticfiles %}
+{% load i18n app_security %}
+{% load l10n humanize %}
+
+{% block headjs %}
+<script type="text/javascript">
+	$(document).ready(function(){
+        $("input[name=nombre]").change(function () {
+			alert($(this).val());
+			});
+    });
+</script>
+{% endblock headjs %}
+
+{% block breadcrumbs %}
+<a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %} &rsaquo;</a>
+{% endblock breadcrumbs %}
+
+{% block content_title %}
+{% endblock content_title %}
+
+{% block content %}
+<select>
+    <option>Elige un Cliente</option>
+    {% for cliente in clientes %}
+        <option value="{{ cliente.id }}">{{ cliente.persona}}</option>
+    {% endfor %}
+
+</select>
+
+<div>
+    <form class="" name="datos" id="datos" method="post">
+
+    </form>
+</div>
+
+
+{% endblock content %}
+
+{% block extrajs %}
+<script type="text/javascript">
+    $('select').on('change', inicio);
+    function inicio() {
+        var id = $(this).val();
+        $.ajax({
+            data: {'id': id},
+            url: '/clinica/cliente/busqueda_ajax/',
+            type: 'get',
+            success: function (data) {
+                var html = ""
+                html += '<table class="table"><tdheader><tr><th>#</th><th>Nombre</th><th>Accion</th></tr></tdheader><tdbody>'
+                for(var i = 0; i<data.length; i++){
+                    html += '<tr><td>'+data[i].fields.pk+'</td><td>'+data[i].fields.mascota+'</td><td>'+data[i].fields.num_historia+'</td><td><a href="/clinica/colamedica/crear/{{d.pk|key:"cola_cre"}}/" class="btn btn-warning btn-sm text-bold" title="{% trans "Crear" %} {% trans "Historia" %}" rel="tooltip"><i class="btn-icon-only fa fa-hospital-o"></i></a></td></tr>'
+                    console.log(data[i]);
+                }
+                html += '</tdbody><table>'
+                $('#datos').html(html);
+
+                $("#boton").click(function () {
+        			if( $("#datos input[name='nombre']:radio").is(':checked')) {
+        				var valor = $('input:radio[name=nombre]:checked').val();
+                        alert("Bien!!!, la edad seleccionada es: " + valor);
+                        console.log(valor);
+
+        				} else{
+        					alert("Selecciona la edad por favor!!!");
+        					}
+        		});
+
+
+            }
+        });
+    }
+
+</script>
+{% endblock extrajs %}

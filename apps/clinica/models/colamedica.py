@@ -15,7 +15,7 @@ from apps.sad.models import User
 
 class ColaMedica(models.Model):
     historia = models.ForeignKey(Historial)
-    veterinario = models.ForeignKey(User)
+    medico = models.ForeignKey(User, blank=True, null=False)
     fecha = models.DateField(_('Fecha Creada'), auto_now_add=True, )
     descripcion = models.CharField(max_length=100)
     estado = models.BooleanField(_('Estado de Atencion'), max_length=100, default=False)

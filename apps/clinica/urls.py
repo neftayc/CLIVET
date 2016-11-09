@@ -1,14 +1,19 @@
 from django.conf.urls import url
 
+
 from .views.atencionviews import (AtencionListView, AtencionCreateView, AtencionUpdateView, AtencionDeleteView, AtencionMedicaView, MainAtencionesView)
 from .views.colamedicaviews import (ColaMedicaListView, ColaMedicaCreateView, ColaMedicaUpdateView, ColaMedicaDeleteView, ColasMedicasListView)
 from .views.consultaviews import (ConsultaListView, ConsultaCreateView, ConsultaUpdateView, ConsultaDeleteView, lista_doctores1)
 from .views.historiaviews import (HistoriaListView, HistoriaCreateView, HistoriaUpdateView, HistoriaDeleteView, HistoriaMascotaDetailView, HistoriaMascotaCreateView)
 from .views.mascotaviews import (MascotaListView, MascotaCreateView, MascotaUpdateView, MascotaUpdateActiveView)
 from .views.notasviews import (NotasListView, NotasCreateView, NotasUpdateView, NotasDeleteView)
-from .views.vacunacionviews import (VacunacionListView, VacunacionCreateView, VacunacionUpdateView, VacunacionDeleteView)
+from .views.vacunacionviews import (BusquedaClientView, BusquedaClientAjaxView)
 
 urlpatterns = [
+
+    url(r'^cliente/busqueda/$', BusquedaClientView.as_view(), name="busqueda_client"),
+    url(r'^cliente/busqueda_ajax/$', BusquedaClientAjaxView.as_view()),
+
     #Atencion
     url(r'^atencion/listar/(?P<pk>\d+)/$', AtencionListView.as_view(), name="listar_atencion"),
 
@@ -55,9 +60,4 @@ urlpatterns = [
     url(r'^notas/actualizar/(?P<pk>.*)/$', NotasUpdateView.as_view(), name="actualizar_notas"),
     url(r'^notas/eliminar/(?P<pk>.*)/$', NotasDeleteView.as_view(), name="eliminar_notas"),
 
-    #Vacunacion
-    url(r'^vacunacion/listar/$', VacunacionListView.as_view(), name="listar_vacunacion"),
-    url(r'^vacunacion/crear/$', VacunacionCreateView.as_view(), name="crear_vacunacion"),
-    url(r'^vacunacion/actualizar/(?P<pk>.*)/$', VacunacionUpdateView.as_view(), name="actualizar_vacunacion"),
-    url(r'^vacunacion/eliminar/(?P<pk>.*)/$', VacunacionDeleteView.as_view(), name="eliminar_vacunacion"),
 ]
