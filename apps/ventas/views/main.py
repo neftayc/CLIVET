@@ -99,6 +99,7 @@ class MainCreateView(CreateView):
         print("______________0_________________")
         try:
             print(self.request.POST.get(''))
+            print("==============")
             venta = json.loads(self.request.POST.get('data_venta'))
             print("______________1_________________")
             print(venta)
@@ -108,6 +109,7 @@ class MainCreateView(CreateView):
             self.object.save()
 
             for p in venta['productos']:
+                print(p)
                 # producto = Producto.objects.get(pk=p['id']).update(cantidad=)
                 # print(producto)
                 # producto.cantidad = producto.cantidad + int(p['cantidad'])
