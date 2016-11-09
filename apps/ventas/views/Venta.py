@@ -71,27 +71,3 @@ class VentaListView(ListView):
         context['q'] = self.q.replace('/', '-')
 
         return context
-
-
-class VentaDeleteView(DeleteView):
-    """Empresa Delete View."""
-
-    model = Venta
-    success_url = reverse_lazy('ventas:venta_list')
-
-    @method_decorator(permission_resource_required)
-    def dispatch(self, request, *args, **kwargs):
-        """Empresa Delete View dispatch."""
-        key = self.kwargs['pk']
-        pk = SecurityKey.is_valid_key(request, key, 'cat_del')
-        if not pk:
-            return HttpResponseRedirect(self.success_url)
-        self.kwargs['pk'] = pk
-        try:
-            self.get_object()
-        except Exception as e:
-            messages.error(self.request, e)
-            log.warning(force_text(e), extra=log_params(self.request))
-            return HttpResponseRedirect(self.success_url)
-        return super(VentaDeleteView,
-                     self).dispatch(request, *args, **kwargs)

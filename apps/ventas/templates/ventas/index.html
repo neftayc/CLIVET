@@ -85,6 +85,7 @@
                         </div>
                     </div>
                 </div>
+                                {{ form.data_venta}}
             </form>
         </div>
     </div>
@@ -182,13 +183,13 @@ $(document).ready(function() {
                         a = $('#cantidad_producto').val();
                         a = a * (-1);
                         data[0].fields.cantidad = a;
-                        data[0].fields.importe = Math.ceil10((data[0].fields.precioV * data[0].fields.cantidad), -2);
+                        data[0].fields.importe = (data[0].fields.precioV * data[0].fields.cantidad);
                         data[0].fields.id = data[0].pk;
                         Venta.productos.push(data[0].fields);
                         $('#cantidad_producto').val("1");
-                        Venta.igv = Math.ceil10((Venta.igv + (data[0].fields.importe * 0.18)), -2);
+                        Venta.igv = (Venta.igv + (data[0].fields.importe * 0.18));
                         Venta.total = Venta.total + data[0].fields.importe;
-                        Venta.sub_total = Math.ceil10(Venta.total - Venta.igv, -2);
+                        Venta.sub_total = Venta.total - Venta.igv;
                         draw();
                         $('#enviar_producto').attr('disabled', true);
                         $('.typeahead , #cantidad_producto').val('');

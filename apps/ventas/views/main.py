@@ -22,8 +22,8 @@ import json
 from ..models.Venta import Venta
 from ..models.Producto import Producto
 from ..forms.Venta import VentaForm
+from ..forms.Producto import ProductoForm
 from ..models.Venta_Detalle import Detalle_Venta
-from ..forms.VentaDetalle import Detalle_VentaForm
 from django.db import transaction
 import logging
 log = logging.getLogger(__name__)
@@ -96,7 +96,9 @@ class MainCreateView(CreateView):
         """"Empresa Crete View  form valid."""
         self.object = form.save(commit=False)
         sid = transaction.savepoint()
+        print("______________0_________________")
         try:
+            print(self.request.POST.get(''))
             venta = json.loads(self.request.POST.get('data_venta'))
             print("______________1_________________")
             print(venta)
@@ -104,34 +106,21 @@ class MainCreateView(CreateView):
             self.object.total = venta['total']
             self.object.igv = venta['igv']
             self.object.save()
+
             for p in venta['productos']:
+                # producto = Producto.objects.get(pk=p['id']).update(cantidad=)
+                # print(producto)
+                # producto.cantidad = producto.cantidad + int(p['cantidad'])
+                # print(producto)
+                # producto.update()
                 dv = Detalle_Venta(
-                    producto_id=p['id'],
+                    producto=p['cantidad'],
                     venta=self.object,
                     cantidad=p['cantidad'],
                     # igv=p['igv'],
                     importe=p['importe'],
                 )
                 dv.save()
-
-            # crearFactura.save()
-            # print ("Factura guardado")
-            # print (crearFactura.id)
-            # for k in proceso['producto']:
-            #     producto = Producto.objects.get(id=k['serial'])
-            #     crearDetalle = DetalleFactura(
-            #         producto=producto,
-            #         descripcion=producto.nombre,
-            #         precio=producto.precio,
-            #         cantidad=int(k['cantidad']),
-            #         impuesto=producto.igv * int(k['cantidad']),
-            #         subtotal=producto.precio * int(k['cantidad']),
-            #         factura=crearFactura
-            #     )
-            #     crearDetalle.save()
-
-            # messages.success(
-            #     self.request, 'La venta se ha realizado satisfactoriamente')
         except Exception as e:
             try:
                 transaction.savepoint_rollback(sid)
@@ -149,44 +138,56 @@ class MainCreateView(CreateView):
         return super(MainCreateView, self).form_valid(form)
 
 
-class DetalleVentaCreateView(CreateView):
-    u"""Tipo Documento Identidad."""
+class VentaProductoUpdateView(UpdateView):
+    """Tipo Documento Update View."""
 
-    model = Detalle_Venta
-    form_class = Detalle_VentaForm
+    model = Producto
+    form_class = ProductoForm
     template_name = "ventas/index.html"
-    success_url = reverse_lazy("ventas:recepcion_list")
+    success_url = reverse_lazy("ventas:ventaslist")
 
     @method_decorator(permission_resource_required)
     def dispatch(self, request, *args, **kwargs):
-        """dispatch."""
-        return super(DetalleVentaCreateView,
+        """Tipo Documento Create View dispatch."""
+        key = self.kwargs.get(self.pk_url_kwarg, None)
+        pk = SecurityKey.is_valid_key(request, key, 'pro_upd')
+        if not pk:
+            return HttpResponseRedirect(self.success_url)
+        self.kwargs['pk'] = pk
+        try:
+            self.get_object()
+        except Exception as e:
+            messages.error(self.request, e)
+            log.warning(force_text(e), extra=log_params(self.request))
+            return HttpResponseRedirect(self.success_url)
+
+        return super(VentaProductoUpdateView,
                      self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        """
-        Tipo Documento Identidad ListView List get context.
-
-        Funcion con los primeros datos iniciales para la carga del template.
-        """
-        context = super(DetalleVentaCreateView,
+        """Tipo Documento Update View context data."""
+        context = super(VentaProductoUpdateView,
                         self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
-        # context['cmi'] = 'tipodoc'
-        context['title'] = ('Agregar %s') % ('DetalleVenta')
+        # context['cmi'] = 'empresa'
+        context['title'] = ('Actualizar %s') % ('Producto')
         return context
 
     def form_valid(self, form):
-        """"Empresa Crete View  form valid."""
-        self.object = form.save(commit=True)
-        msg = _(' %(name)s "%(obj)s" fue creado satisfactoriamente.') % {
+        """Tipo Documento Update View form_valid."""
+        self.object = form.save(commit=False)
+
+        self.object.usuario = self.request.user
+
+        msg = ('%(name)s "%(obj)s" fue cambiado satisfacoriamente.') % {
             'name': capfirst(force_text(self.model._meta.verbose_name)),
             'obj': force_text(self.object)
         }
+        if self.object.id:
+            messages.success(self.request, msg)
+            log.warning(msg, extra=log_params(self.request))
+        return super(VentaProductoUpdateView, self).form_valid(form)
 
-        messages.success(self.request, msg)
-        log.warning(msg, extra=log_params(self.request))
-        return super(DetalleVentaCreateView, self).form_valid(form)
 
 # @transaction.atomic
 # def facturaCrear(request):
