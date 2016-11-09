@@ -1,4 +1,4 @@
-	{% extends "main/dashboard.html" %}
+ {% extends "main/dashboard.html" %}
 <!--
 @copyright   Copyright (c) 2014 Submit Consulting
 @author      Angel Sullon (@asullom)
@@ -6,35 +6,123 @@
 
 Descripcion: Create/Update group
 -->
-{% load i18n crispy_forms_tags %}
-{% load l10n %}
-
-{% block breadcrumbs %}
-<a href="{% url 'accounts:index' %}">Home</a>
-&rsaquo;
-<a href="{% url 'ventas:producto_list' %}">{{opts.verbose_name_plural|capfirst}}</a>
-&rsaquo; {{ title }}
-{% endblock breadcrumbs %}
-
-{% block content_title %}
-{{ opts.verbose_name|capfirst }} | <small>{{ title }}</small>
-{% endblock content_title %}
-
-{% block content %}
-
- <form action="" method="post">
-    {{ form|crispy }}
+{% load i18n crispy_forms_tags %} {% load l10n %} {% block breadcrumbs %}
+<a href="{% url 'accounts:index' %}">Home</a> &rsaquo;
+<a href="{% url 'ventas:producto_list' %}">{{opts.verbose_name_plural|capfirst}}</a> &rsaquo; {{ title }} {% endblock breadcrumbs %} {% block content_title %} {{ opts.verbose_name|capfirst }} | <small>{{ title }}</small> {% endblock content_title %} {% block content %}
+<form action="" method="post">
     {% csrf_token %}
-    <button type="submit" class="btn  btn-primary">Agregar</button>
-    <a href="{% url 'ventas:producto_list' %}" class="btn btn-danger">Cancelar</a>
-    </form>
-
-{% endblock %}
-
-{% block extrajs %}
-{{ block.super }}
-
+    <div class="row">
+        <div class="col-md-8 panel panel-default">
+            <div class="panel-body">{% crispy form %}</div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Resumen</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6 text-center">
+                        	<b>Precio de compra: </b>
+                        </div>
+                        <div  class="col-md-6">
+                        {{form.precioC}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 text-center">
+                        	<b>Precio de venta: </b>
+                        </div>
+                        <div  class="col-md-6">
+                        {{form.precioV}}
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-md-6 text-center">
+                        	<b>IGV: </b>
+                        </div>
+                        <div  class="col-md-6">
+                        {{form.igv}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 text-center">
+                        	<b>Total: </b>
+                        </div>
+                        <div  class="col-md-6">
+                        {{form.MontoReal}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Agragar Cat</h4>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post">
+                    <div class="form-group">
+                        <label for="nombre">nombre:</label>
+                        <input type="email" class="form-control" id="nombre" placeholder="Enter email">
+                    </div>
+                    <div class="form-group">
+                        <label for="departamento">departamento:</label>
+                        <input type="password" class="form-control" id="departamento" placeholder="Enter password">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">{{ title }}</h4>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post">
+                    {% csrf_token %} {% crispy form %}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} {% block extrajs %} {{ block.super }}
 <script type="text/javascript">
-
+$('#id_precioC').keyup(function() {
+    $('#id_igv').val($('#id_precioC').val() * $('#id_precioV').val() * 0.18)
+    $('#id_MontoReal').val($('#id_precioC').val() * $('#id_precioV').val())
+});
+$('#id_precioV').keyup(function() {
+    $('#id_igv').val($('#id_precioC').val() * $('#id_precioV').val() * 0.18)
+    $('#id_MontoReal').val($('#id_precioC').val() * $('#id_precioV').val())
+});
+$('#id_fechaVencimiento').datetimepicker({
+    format: 'YYYY-MM-DD',
+    //format: 'YYYY-MM-DD hh:mm:ss', //pata datatimes
+    language: 'es',
+    pickTime: false,
+    //showMeridian: true,
+    autoclose: true,
+    todayHighlight: true,
+});
+$('#addCategoria').click(function() {
+    $('#myModal').modal('show');
+});
+$('#addUnidad').click(function() {
+    $('#myModal2').modal('show');
+});
 </script>
 {% endblock extrajs %}

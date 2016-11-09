@@ -102,7 +102,12 @@ class ProductoCreateView(CreateView):
 
     def form_valid(self, form):
         """"Empresa Crete View  form valid."""
-        self.object = form.save(commit=True)
+        self.object = form.save(commit=False)
+        self.object.precioV = self.request.POST.get("precioV")
+        self.object.precioC = self.request.POST.get("precioC")
+        self.object.igv = self.request.POST.get("igv")
+        self.object.MontoReal = self.request.POST.get("MontoReal")
+        self.object.save()
 
         msg = _(' %(name)s "%(obj)s" fue creado satisfactoriamente.') % {
             'name': capfirst(force_text(self.model._meta.verbose_name)),
