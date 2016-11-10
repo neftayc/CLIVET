@@ -1,46 +1,30 @@
 {% extends "main/dashboard.html" %} {% load i18n app_security %} {% load l10n humanize %} {% block content_title %}{% endblock content_title %} {% block content %} {% load crispy_forms_tags %}
 <style>
-#external-events {
-    float: left;
-    width: 150px;
-    padding: 0 10px;
-    border: 1px solid #ccc;
-    background: #eee;
-    text-align: left;
-}
-
-#external-events h4 {
-    font-size: 16px;
-    margin-top: 0;
-    padding-top: 1em;
-}
-
 #external-events .fc-event {
-    margin: 10px 0;
-    cursor: pointer;
-}
-
-#external-events p {
-    margin: 1.5em 0;
-    font-size: 11px;
-    color: #666;
-}
-
-#external-events p input {
-    margin: 0;
+    color: #fff;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    white-space: nowrap;
     vertical-align: middle;
-}
-
-#calendar {
-    float: right;
-    width: 900px;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
 }
 </style>
-<div class="container-overflow">
-    <h4>Eventos Frecuentes</h4>
-    <div id='external-events'>
+<div class="row">
+    <div class="col-md-10">
+        <div id='calendar'></div>
     </div>
-    <div id='calendar'></div>
+    <div class="col-md-2">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Eventos Frecuentes</div>
+            <div class="panel-body" id='external-events'>Panel Content</div>
+        </div>
+    </div>
 </div>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -137,11 +121,11 @@ $(document).ready(function() {
         resize: false,
         slotMinutes: 60,
         navLinks: true,
-        //allDaySlot: false, //para mostar en el calendario todo el dia
+        allDaySlot: false, //para mostar en el calendario todo el dia
         scrollTime: '08:00:00',
         minTime: "08:00:00",
         maxTime: "18:00:00",
-        slotEventOverlap:false,//para que no se pueda poner encima mas o la misma hora
+        slotEventOverlap: false, //para que no se pueda poner encima mas o la misma hora
         weekends: false, //si incluye fin de semanas or //hiddenDays: [ 1, 3, 5 ]
         droppable: true, // this allows things to be dropped onto the calendar
         drop: function(date, data) {
@@ -149,7 +133,7 @@ $(document).ready(function() {
             $("#id_evento").val(data.target.getAttribute("data-event"));
             $('#id_date').val(moment(date).format("YYYY-MM-DD HH:mm:ss"));
         },
-        select: function(start, end,date) {
+        select: function(start, end, date) {
             $('#myModal').modal('show');
             $("#id_evento").val("");
             $('#id_date').val(moment(start).format("YYYY-MM-DD HH:mm:ss"));
@@ -235,8 +219,9 @@ $(document).ready(function() {
                 var html = "";
                 for (var i in dat) {
                     html = html +
-                        "<div data-event='" + dat[i].pk + "'class='fc-event'>" +
-                        dat[i].fields.title + "</div>";
+                        "<div data-event='" + 
+                        dat[i].pk + "'class='fc-event row' style='background-color:"+
+                        dat[i].fields.color+"'><div class='col-md-2 ext-left'><span class='glyphicon glyphicon-move'></span></div><div class='col-md-10 text-center'>"+dat[i].fields.title + "</div></div>";
                 }
                 $("#external-events").html(html);
                 $('#external-events .fc-event').each(function() {
