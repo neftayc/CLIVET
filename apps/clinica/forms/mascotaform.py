@@ -21,7 +21,7 @@ class MascotaForm(forms.ModelForm):
         """Meta."""
         model = Mascota
         exclude = ()
-        fields = ['nombre','dueño','fecha_nacimiento','genero','especie','raza','color','esterelizado','is_active','is_actived','descripcion','historia',]
+        fields = ['nombre','dueño','fecha_nacimiento','genero','especie','raza','color','esterelizado','descripcion','historia',]
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)

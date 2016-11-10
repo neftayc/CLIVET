@@ -183,7 +183,7 @@ class UserDetailForm(forms.ModelForm):
                         Div(HTML('''
                                 <div class="form-group">
                                 <label class="control-label"> {{ form.hgroups.label }} </label>
-                                <div class="controls ">{% for x in form.hgroups.value %} 
+                                <div class="controls ">{% for x in form.hgroups.value %}
                                 {{ x.headquar.enterprise.name }}-{{ x.headquar.name }}>{{ x.group.name }}<br>
                                 {% endfor %}</div>
                                 </div>
@@ -194,7 +194,7 @@ class UserDetailForm(forms.ModelForm):
                         Div(HTML('''
                                 <div class="form-group">
                                 <label class="control-label"> {{ form.egroups.label }} </label>
-                                <div class="controls ">{% for x in form.egroups.value %} 
+                                <div class="controls ">{% for x in form.egroups.value %}
                                 {{ x.enterprise.name }}>{{ x.group.name }}<br>
                                 {% endfor %}</div>
                                 </div>
@@ -203,7 +203,7 @@ class UserDetailForm(forms.ModelForm):
                         Div(HTML('''
                                 <div class="form-group">
                                 <label class="control-label"> {{ form.agroups.label }} </label>
-                                <div class="controls ">{% for x in form.agroups.value %} 
+                                <div class="controls ">{% for x in form.agroups.value %}
                                 {{ x.association.name }}>{{ x.group.name }}<br>
                                 {% endfor %}</div>
                                 </div>
@@ -227,7 +227,7 @@ class UserDetailForm(forms.ModelForm):
                         Div(HTML('''
                                 <div class="form-group">
                                 <label class="control-label"> {{ form.status.label }} </label>
-                                <div class="controls ">{% for x in form.status.value %} 
+                                <div class="controls ">{% for x in form.status.value %}
                                 {{ x.created_at }} | {{ x.description }} | {{ x.status }}<br>
                                 {% endfor %}</div>
                                 </div>
@@ -442,8 +442,8 @@ class UserForm(forms.ModelForm):
             queryset=Group.objects.filter(module_set__in=module_list).order_by("-id").distinct()
 
             )
-        self.fields['hgroups'].initial=Group.objects.filter(userheadquar__headquar__id=headquar.id, userheadquar__user__id=2).distinct() 
-        
+        self.fields['hgroups'].initial=Group.objects.filter(userheadquar__headquar__id=headquar.id, userheadquar__user__id=2).distinct()
+
         '''
         self.fields['hgroups'] = forms.MultipleChoiceField(
             label=u'%s %s' % (capfirst(_(u'groups')), capfirst(_(u'Headquar'))), required=False,
@@ -879,7 +879,7 @@ class PermissionForm(forms.ModelForm):
         self.cleaned_data['content_type'] = content_type
 
         return super(PermissionForm, self).save(commit)
-    
+
     def save(self, commit=True):
         # Save the provided password in hashed format
         #permission = super(PermissionForm, self).save(commit=False)

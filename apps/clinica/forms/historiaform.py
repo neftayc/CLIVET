@@ -83,6 +83,8 @@ class HistoriaMascotaForm(forms.ModelForm):
             help_text=u'<small class="help-error"></small> %s' % _(
             u' '),
         )
+        self.fields['dueño'] =  forms.ModelChoiceField(queryset=Cliente.objects.all())
+
         self.fields['fecha_nacimiento'] = forms.DateTimeField(
             label=_(u'Fecha Nacimiento'), required=False,
             initial=datetime.now().replace(tzinfo=get_current_timezone()),
@@ -90,8 +92,6 @@ class HistoriaMascotaForm(forms.ModelForm):
             input_formats=(
                 '%d/%m/%Y', '%d/%m/%y', '%d-%m-%Y', '%d-%m-%y', '%Y-%m-%d',
                 '%Y-%m-%d %H:%M:%S'),
-            help_text=u'<small class="help-error"></small> %s' % _(
-                u'Some useful help text.'),
         )
         self.fields['genero'] = forms.ChoiceField(
             label=capfirst(_(u'genero*:')), required=False,
@@ -127,21 +127,13 @@ class HistoriaMascotaForm(forms.ModelForm):
             help_text=u'<small class="help-error"></small> %s' % _(
                 u' '),
         )
-        self.fields['is_active'] = forms.BooleanField(
-            label=capfirst(_(u'activo')), required=True,
-            help_text=u'<small class="help-error"></small> %s' % _(
-                u' '),
-        )
+
         self.fields['historia'] = forms.BooleanField(
             label=capfirst(_(u'historia')), required=True,
             help_text=u'<small class="help-error"></small> %s' % _(
                 u' '),
         )
-        self.fields['is_actived'] = forms.BooleanField(
-            label=capfirst(_(u'inactivo')), required=False,
-            help_text=u'<small class="help-error"></small> %s' % _(
-                u' '),
-        )
+
         self.fields['descripcion'] = forms.CharField(
             label=capfirst(_(u'Descripcion')), required=False,
             widget=forms.Textarea(attrs = {'rows': 4, }),
@@ -155,6 +147,8 @@ class HistoriaMascotaForm(forms.ModelForm):
                 Tab(_('Mascota Info'),
                     Row(
                         Div(Field('nombre', css_class='input-required'),
+                    css_class='col-md-4'),
+                        Div(Field('dueño', css_class='input-datex'),
                     css_class='col-md-4'),
                         Div(Field('fecha_nacimiento', css_class='input-datex'),
                     css_class='col-md-4'),
@@ -173,10 +167,6 @@ class HistoriaMascotaForm(forms.ModelForm):
                         Div(Field('genero', ),
                     css_class='col-md-4'),
                         Div(Field('esterelizado',),
-                    css_class='col-md-2'),
-                        Div(Field('is_active', ),
-                    css_class='col-md-2'),
-                        Div(Field('is_actived',),
                     css_class='col-md-2'),
                         Div(Field('historia',),
                     css_class='col-md-2'),

@@ -21,17 +21,8 @@
 {{ block.super }}
 
 <script type="text/javascript">
-$('#id_test_image').fileinput({
-	showUpload: false,
-	showRemove: false,
-	initialCaption: '{{ form.test_image.value }}',
-	initialPreview: ['<img src="{{ MEDIA_URL }}{{ form.test_image.value }}">',],
-	browseClass: 'btn btn-warning',
-	browseLabel: '<span class="hidden-xs">{% trans "Pick image" %}</span>',
-	browseIcon: '<i class="btn-icon-only glyphicon glyphicon-picture"></i>',
-});
 
-$('#id_test_date').datetimepicker({
+$('#id_fecha_nacimiento').datetimepicker({
 	format: 'YYYY-MM-DD',
 		//format: 'YYYY-MM-DD hh:mm:ss', //pata datatimes
 		language: '{{ LANGUAGE_CODE }}',

@@ -113,71 +113,74 @@ class AtencionForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Field('person_id',),
-            Row(Div(HTML('''{% block content_title %}
-            <p><h3><i class="fa fa-paw"></i> {{ form.nombre.value}} &rsaquo;  <small>{{ form.raza.value}} Propietario: {{ form.dueño.value}}</small></h3></p>
-            {% endblock content_title %}'''),),),
-            TabHolder(
-                Tab(_('Nueva Atencion'),
-                    Row(
-                        Div(HTML('''<p><strong>N° Historia: </strong>{{ form.historia.value}} </p>'''),
-                        css_class='col-md-4'),
-                        Div(HTML('''<p><strong>Descripcion: </strong>{{ form.descripcion.value}} </p>'''),
-                        css_class='col-md-4'),
-                        Div(Field('estado', ),
-                        css_class='col-md-4'),
-                    ),
-                ),
-                Tab(_('Nueva Consulta'),
-                    Row(
-                        Div(Field('anamnesis', css_class='input-required'),
-                        css_class='col-md-12'),
-                        Div(Field('diagnostico', ),
-                        css_class='col-md-6'),
-                        Div(Field('dx', ),
-                        css_class='col-md-6'),
-                        Div(Field('hallasgos_clinicos', ),
-                        css_class='col-md-6'),
-                        Div(Field('motivo_atencion', ),
-                        css_class='col-md-6'),
-                        Div(Field('observacion', ),
-                        css_class='col-md-6'),
-                        Div(Field('pronostico', ),
-                        css_class='col-md-6'),
-                        Div(Field('pruebas_auxiliares', ),
-                        css_class='col-md-6'),
-                        Div(Field('tratamiento', ),
-                        css_class='col-md-6'),
-                    ),
-                ),
-                Tab(_('Agregar Vacuna'),
-                    Row(
-                        Div(Field('vacuna', css_class='input-required'),
-                        css_class='col-md-6'),
-                        Div(Field('fecha_programada', ),
-                        css_class='col-md-6'),
-                        Div(Field('Observacion', ),
-                        css_class='col-md-12'),
-                    ),
-                ),
-                Tab(_('Historia Clinica'),
-                    Row(
-                        Div(HTML('''{% include "clinica/includes/menuatencion.html" %}'''),),
-                    ),
-                ),
-                Tab(_('Agregar Notas'),
-                    Row(
-                        Div(Field('vobservacion', css_class='input-required'),
-                        css_class='col-md-12'),
-                        Div(Field('ndescripcion', css_class='input-required'),
-                        css_class='col-md-12'),
-                    ),
-                ),
-            ),
             Row(
-                FormActions(
-                    smtSave(),
-                    btnCancel(),
-                ),
+                Div(
+                    Div(
+                        Div(
+                            HTML('''{% block content_title %}
+                                 <div class="box-header row">
+                                    <div class="a-title col-md-3"><i class="fa fa-paw"></i> Atendiendo al paciente {{ form.nombre.value}}</div>
+                                    <div class="a-title col-md-2"> <strong>Especie:</strong> {{ form.raza.value}}</div>
+                                    <div class="a-title col-md-4 text-center"><strong>Propietario:</strong> {{ form.dueño.value}}</div>
+                                    <div class="col-md-2 col-md-offset-1 text-center"><div class="box-num">N° Historia {{ form.historia.value}}</div></div>
+                                </div>
+                        {% endblock content_title %}'''),
+                        css_class="panel-heading"),
+                        Div(
+                            TabHolder(
+                                Tab(_('Nueva Consulta'),
+                                    Row(
+                                        Div(Field('estado', ),
+                                        css_class='col-md-4'),
+                                        Div(Field('anamnesis', css_class='input-required'),
+                                        css_class='col-md-12 has-success'),
+                                        Div(Field('diagnostico', ),
+                                        css_class='col-md-6 has-success'),
+                                        Div(Field('dx', ),
+                                        css_class='col-md-6 has-success'),
+                                        Div(Field('hallasgos_clinicos', ),
+                                        css_class='col-md-6 has-success'),
+                                        Div(Field('motivo_atencion', ),
+                                        css_class='col-md-6 has-success'),
+                                        Div(Field('observacion', ),
+                                        css_class='col-md-6 has-success'),
+                                        Div(Field('pronostico', ),
+                                        css_class='col-md-6 has-success'),
+                                        Div(Field('pruebas_auxiliares', ),
+                                        css_class='col-md-6 has-success'),
+                                        Div(Field('tratamiento', ),
+                                        css_class='col-md-6 has-success'),
+                                    ),
+                                ),
+                                Tab(_('Agregar Vacuna'),
+                                    Row(
+                                        Div(Field('vacuna', css_class='input-required'),
+                                        css_class='col-md-6'),
+                                        Div(Field('fecha_programada', ),
+                                        css_class='col-md-6'),
+                                        Div(Field('Observacion', ),
+                                        css_class='col-md-12'),
+                                    ),
+                                ),
+                                Tab(_('Agregar Notas'),
+                                    Row(
+                                        Div(Field('vobservacion', css_class='input-required'),
+                                        css_class='col-md-12'),
+                                        Div(Field('ndescripcion', css_class='input-required'),
+                                        css_class='col-md-12'),
+                                    ),
+                                ),
+                            ),
+                            Div(
+                                FormActions(
+                                    smtSave(),
+                                    btnCancel(),
+                                ),
+                            ),
+                        css_class="panel-body"),
+                    css_class="panel panel-info"
+                    ),
+                css_class="col-md-12"),
             ),
         )
 class AtencionMascotaDetailForm(forms.ModelForm):

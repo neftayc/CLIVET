@@ -1,7 +1,6 @@
 {% extends "main/dashboard.html" %}
 {% load i18n crispy_forms_tags staticfiles %}
-{% load app_security %}
-{% load l10n humanize %}
+{% load l10n  %}
 
 {% block breadcrumbs %}
 <a href="{# url 'clivet:clivet' #}"><i class="fa fa-home"></i> {% trans 'Home' %} &rsaquo;&rsaquo;</a>
@@ -24,6 +23,17 @@
 
 <script type="text/javascript">
 $('#id_fecha_nacimiento').datetimepicker({
+	console.log("dsdsdssdds");
+	format: 'YYYY-MM-DD',
+		//format: 'YYYY-MM-DD hh:mm:ss', //pata datatimes
+		language: '{{ LANGUAGE_CODE }}',
+		pickTime: false,
+		//showMeridian: true,
+		autoclose: true,
+		todayHighlight: true,
+	});
+
+$('#id_test_date').datetimepicker({
 	format: 'YYYY-MM-DD',
 		//format: 'YYYY-MM-DD hh:mm:ss', //pata datatimes
 		language: '{{ LANGUAGE_CODE }}',

@@ -424,7 +424,7 @@ class Backup(models.Model):
         return self.file_name
 
 
-''' 
+'''
 Mantener esto desactivado hasta poner en producción
 Modelos que se usan solo para cambiar el verbose_name de las relaciones.
 Desactivar antes de hacer una migración a sad o un backup
@@ -470,7 +470,7 @@ class UserGroup(models.Model):
 class ModuleSolution(models.Model):
 
     """
-    Solo para cambiar el mensaje de 
+    Solo para cambiar el mensaje de
     Module-group relationship: "Module_initial_groups object" para
     Module-group: "Backend-MASTER"
     """

@@ -49,7 +49,7 @@ urlpatterns = [
 
     # Mascota
     url(r'^mascota/listar/$', MascotaListView.as_view(), name="listar_mascotas"),
-    url(r'^mascota/crear/$', MascotaCreateView.as_view(), name="crear_mascota"),
+    url(r'^mascota/crear/$', HistoriaMascotaCreateView.as_view(), name="crear_mascota"),
     url(r'^mascota/actualizar/(?P<pk>.*)/$', MascotaUpdateView.as_view(), name="actualizar_mascota"),
     url(r'^mascota/state/(?P<state>[\w\d\-]+)/(?P<pk>.*)/$',
         MascotaUpdateActiveView.as_view(), name='mascota-state'),

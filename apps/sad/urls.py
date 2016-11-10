@@ -18,6 +18,7 @@ from .views import GroupListView, GroupCreateView, GroupUpdateView,\
 from .views import PermissionListView, PermissionCreateView, \
     PermissionUpdateView, PermissionDeleteView
 
+
 # public
 urlpatterns = [
     # user x asullom

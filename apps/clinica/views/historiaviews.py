@@ -270,8 +270,6 @@ class HistoriaMascotaCreateView(CreateView):
                 initial['cond_corporal'] = d.cond_corporal
                 initial['esterelizado'] = d.esterelizado
                 initial['historia'] = d.historia
-                initial['is_active'] = d.is_active
-                initial['is_actived'] = d.is_actived
                 initial['descripcion'] = d.descripcion
                 initial['person_id'] = d.pk
         return initial
@@ -297,8 +295,6 @@ class HistoriaMascotaCreateView(CreateView):
             mascota.cond_corporal = form.cleaned_data['cond_corporal']
             mascota.esterelizado = form.cleaned_data['esterelizado']
             mascota.historia = form.cleaned_data['historia']
-            mascota.is_active = form.cleaned_data['is_active']
-            mascota.is_actived = form.cleaned_data['is_actived']
             mascota.descripcion = form.cleaned_data['descripcion']
 
             mascota.save()

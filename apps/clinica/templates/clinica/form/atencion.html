@@ -1,7 +1,37 @@
 {% extends "main/dashboard.html" %}
 {% load i18n crispy_forms_tags %}
 {% load l10n %}
+{% block extrastyle %}
+<style media="screen">
+	.controls .btn+.btn {
+	    margin-bottom: 0;
+	    margin-left: 5px;
+	}
 
+	.box-header {
+	    color: #444;
+	}
+
+	.box-header .box-title{
+	    display: inline-block;
+	    margin: 0;
+	    line-height: 1;
+	}
+	.a-title{
+		padding: 1em 15px .5em;
+		font-size: 1.1em;
+	}
+	.box-num{
+		background-color: #f0ad4e;
+		padding: .5em 0;
+		color: #fff;
+		font-size: 1.4em;
+	}
+	.panel-heading{
+		padding: 0 15px;
+	}
+</style>
+{% endblock extrastyle %}
 {% block breadcrumbs %}
 <a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %} &rsaquo;&rsaquo;</a>
 <a href="/clinica/colamedica/listar/">{% trans 'Cola' %} {% trans 'Medica' %}</a> &rsaquo; {{title}}
@@ -18,6 +48,7 @@
 
 {% block extrajs %}
 {{ block.super }}
+
 
 <script type="text/javascript">
 $('#id_test_image').fileinput({

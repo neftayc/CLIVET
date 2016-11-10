@@ -59,10 +59,6 @@ $(function() {
                     <a href="{% url 'clinica:historia_detail' d.pk|key:'historia_det' %}" class="btn btn-warning btn-sm text-bold" title="{% trans 'Detail' %} {% trans 'historia' %}" rel="tooltip">
                         <i class="btn-icon-only fa fa-eye"></i>
                     </a>
-
-                    <a href="{% url 'clinica:actualizar_historia' d.pk|key:'doc_upd' %}" class="btn btn-info btn-sm text-bold" title="Ediatar datos de tipo mascota" rel="tooltip">
-                        <i class="btn-icon-only fa fa-edit"></i>
-                    </a>
                 </td>
             </tr>
             {% endfor %}
