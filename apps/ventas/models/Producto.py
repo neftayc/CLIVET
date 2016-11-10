@@ -5,7 +5,7 @@ from ..models.UnidadMedida import UnidadMedida
 
 class Producto(models.Model):
     nombre = models.CharField('Nombre', max_length=50, unique=True)
-    codigo = models.CharField('Código', max_length=50, unique=True, blank=True)
+    codigo = models.CharField('Código', max_length=50, unique=True, blank=True, help_text='El codigo debe ser lalala')
     categoria = models.ForeignKey('Categoria', Categoria)
     fechaVencimiento = models.DateField('Fecha de vencimiento', blank=True, null=True)
     unidadMedidaV = models.ForeignKey(

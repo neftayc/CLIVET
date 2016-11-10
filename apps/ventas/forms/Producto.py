@@ -2,18 +2,22 @@ from django import forms
 from ..models.Producto import Producto
 from django.utils.translation import ugettext_lazy as _
 from crispy_forms.layout import Field, Div, Row, HTML
-from crispy_forms.bootstrap import FormActions, TabHolder, Tab, StrictButton,FieldWithButtons
+from crispy_forms.bootstrap import FormActions, TabHolder, Tab, StrictButton, FieldWithButtons
 from crispy_forms.helper import FormHelper, Layout
-from apps.utils.forms import smtSave, btnCancel, btnReset 	 		
+from apps.utils.forms import smtSave, btnCancel, btnReset
 from django.utils.text import capfirst, get_text_list
 
 
 class ProductoForm(forms.ModelForm):
     u"""Tipo Documeto Form."""
-    precioV = forms.DecimalField(widget=forms.TextInput(attrs={'type': 'number', 'class': 'form-control text-right'}))
-    precioC = forms.DecimalField(widget=forms.TextInput(attrs={'type': 'number', 'class': 'form-control text-right'}))
-    igv = forms.DecimalField(initial=0.00,widget=forms.TextInput(attrs={'class': 'form-control text-right'}))
-    MontoReal = forms.DecimalField(initial=0.00,widget=forms.TextInput(attrs={'class': 'form-control text-right'}))
+    precioV = forms.DecimalField(widget=forms.TextInput(
+        attrs={'type': 'number', 'class': 'form-control text-right'}))
+    precioC = forms.DecimalField(widget=forms.TextInput(
+        attrs={'type': 'number', 'class': 'form-control text-right'}))
+    igv = forms.DecimalField(initial=0.00, widget=forms.TextInput(
+        attrs={'class': 'form-control text-right'}))
+    MontoReal = forms.DecimalField(initial=0.00, widget=forms.TextInput(
+        attrs={'class': 'form-control text-right'}))
     # nombre = forms.CharField(max_length=100)
     # apellidos = forms.CharField(max_length=100, required=False)
     # numero = forms.IntegerField(required=False)
@@ -67,12 +71,15 @@ class ProductoForm(forms.ModelForm):
             Row(
                 Div(Field('nombre',placeholder="username"), css_class='col-md-6'),
                 Div(Field('codigo', placeholder="username"), css_class='col-md-3'),
-                Div(Field('fechaVencimiento',placeholder="YYYY-MM-DD"), css_class='col-md-3'),
+                Div(Field('fechaVencimiento', placeholder="YYYY-MM-DD"),
+                    css_class='col-md-3'),
             ),
             Row(
-            	Div(FieldWithButtons('categoria', StrictButton("Agregar",id='addCategoria')), css_class='col-md-4'),
+                Div(FieldWithButtons('categoria', StrictButton(
+                    "Agregar", id='addCategoria')), css_class='col-md-4'),
                 Div(Field('unidadMedidaV'), css_class='col-md-4'),
-                Div(FieldWithButtons('unidadMedidaC', StrictButton("Agregar", id='addUnidad')), css_class='col-md-4'),
+                Div(FieldWithButtons('unidadMedidaC', StrictButton(
+                    "Agregar", id='addUnidad')), css_class='col-md-4'),
             ),
             Div(Row(
                 FormActions(

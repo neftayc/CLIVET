@@ -1,96 +1,83 @@
 {% extends "main/dashboard.html" %} {% load i18n app_security %}{% load i18n crispy_forms_tags %} {% load l10n humanize %} {% block breadcrumbs %}
 <a href="{# url 'accounts:index' #}">{% trans 'Home' %}</a> &rsaquo; {{ title }} {% endblock breadcrumbs %} {% block content_title %} {{ opts.verbose_name_plural|capfirst }} | <small>{{ title }}</small> {% endblock content_title %} {% block content %}
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-8">
-            <div class="panel panel-default row ">
-                <p><span class="glyphicon glyphicon-shopping-cart btn-lg" aria-hidden="true"></span>Añadir productos</p>
-                <div class="form-group col-lg-8">
-                    <label class="sr-only" for="producto"></label>
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                        </div>
-                        {{ form.producto|as_crispy_field }}
+<div class="container-fluid row">
+    <form rule="" action="" method="post">{% csrf_token %}
+        <div class="col-md-12">
+            <p><span class="glyphicon glyphicon-user btn-lg" aria-hidden="true"></span>Seleccionar Proveedor</p>
+            <div class="form-group">
+                <label class="sr-only" for="cliente"></label>
+                <div class="input-group">
+                    <div class="input-group-btn">
+                        <a href="{% url 'compras:proveedor_add' %}" class="btn btn-primary">Nuevo Proveedor</a>
                     </div>
+                    {{ form.proveedor}} {{ form.proveedor.errors}} {{ form.data_compra}}
+                    <div class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></div>
                 </div>
-                <div class="col-md-2">
-                    <div class="">
-                        <input type="number" name="cantidad" class="form-control" id="cantidad_producto">
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <button id="enviar_producto" class="btn btn-primary">Enviar</button>
-                    
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <table class="table table-condensed">
-                    <thead>
-                        <tr>
-                            <th>Cantidad</th>
-                            <th>Producto</th>
-                            <th>Precio unitario</th>
-                            <th>Precio total</th>
-                            <th>Opciones</th>
-                        </tr>
-                    </thead>
-                    <tfoot>
-                    </tfoot>
-                    <tbody id="tabla_producto">
-                    </tbody>
-                </table>
             </div>
         </div>
-        <div class="col-md-4">
-            <form rule="" action="" method="post">{% csrf_token %}
-                <div class="panel panel-default  row">
-                    <p><span class="glyphicon glyphicon-user btn-lg" aria-hidden="true"></span>Seleccionar Proveedor</p>
-                    <div class="form-group">
-                        <label class="sr-only" for="cliente"></label>
+        <div class="col-md-12">
+            <div class="col-md-8">
+                <div class="panel panel-default row ">
+                    <p><span class="glyphicon glyphicon-shopping-cart btn-lg" aria-hidden="true"></span>Añadir productos</p>
+                    <div class="form-group col-lg-8">
+                        <label class="sr-only" for="producto"></label>
                         <div class="input-group">
-                            <div class="input-group-btn">
-                                <a href="{% url 'compras:proveedor_add' %}" class="btn btn-primary">Nuevo Proveedor</a>
+                            <div class="input-group-addon">
+                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                             </div>
-                            {{ form.proveedor}}
-                            {{ form.proveedor.errors}}
-                            {{ form.data_compra}}
-                            <div class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></div>
+                            {{ form.producto|as_crispy_field }}
                         </div>
                     </div>
+                    <div class="col-md-2">
+                        <div class="">
+                            <input type="number" name="cantidad" class="form-control" id="cantidad_producto">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button id="enviar_producto" class="btn btn-primary">Enviar</button>
+                    </div>
                 </div>
-                <div class="panel panel-default container row">
+                <div class="panel panel-default">
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th>Cantidad</th>
+                                <th>Producto</th>
+                                <th>Precio unitario</th>
+                                <th>Precio total</th>
+                                <th>Opciones</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                        </tfoot>
+                        <tbody id="tabla_producto">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
                     <p><span class="glyphicon glyphicon-shopping-cart btn-lg" aria-hidden="true"></span>Resumen de Compra Realizada</p>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <p>Cantidad de Producto</p>
-                        </div>
-                        <div class="col-md-6">
-                            <p><span id="r_cantidad_total">0</span></p>
-                        </div>
-                    </div>
-        
+                        <p>Cantidad de Producto</p>
+                    <p><span id="r_cantidad_total">0</span></p>
                     <div class="row center-block">
-                        <div class="col-md-6">
-                            <p>Total</p>
-                        </div>
-                        <div class="col-md-6">
-                            <p>S/.<span id="r_total">00.00</span></p>
-                        </div>
+                        <p>Total</p>
                     </div>
-                    <div class="row ">
-                        <div class="input-group-btn">
-                            <button id="btn_pagar" type="submit" name='form' class="col-md-8 col-md-offset-3  btn btn-success "> Realizar Compra</button>
-                        </div>
+                        <p>S/.<span id="r_total">00.00</span></p>
+                    <div class="input-group-btn">
+                    <button id="btn_pagar" type="submit" name='form' class="col-md-12 col-md-offset-4  btn btn-success "> Realizar Compra</button>
                     </div>
-                </div>
-            </form>
+                </div>    
+            </div>
         </div>
-    </div>
+    </form>
 </div>
 <script type="text/javascript">
 $(document).ready(function() {
-    $("#enviar_producto").click(function() {
+    //"use strict";
+    $("#enviar_producto").click(function(e) {
+        e.preventDefault();
+
         function not_exist(dd) {
             for (var i in Compra.productos) {
                 if (Compra.productos[i].id == dd) {
@@ -148,14 +135,14 @@ function draw() {
 
     }
     $("#tabla_producto").html(h);
-    
+
     $("#id_data_compra").val(JSON.stringify(Compra));
 }
 
 function delete_p(d) {
-    var deleted_product=Compra.productos.splice(d, 1);
-    Compra.total =Compra.total -deleted_product[0].importe;
-    Compra.cantidad_total = Compra.cantidad_total-deleted_product[0].cantidad;
+    var deleted_product = Compra.productos.splice(d, 1);
+    Compra.total = Compra.total - deleted_product[0].importe;
+    Compra.cantidad_total = Compra.cantidad_total - deleted_product[0].cantidad;
     draw();
 }
 
@@ -163,10 +150,10 @@ function change_p(d) {
     Compra.productos[d].cantidad = $("#id" + d).text();
     Compra.productos[d].importe = Compra.productos[d].cantidad * Compra.productos[d].precioC;
     Compra.total = 0.00;
-    Compra.cantidad_total=0;
+    Compra.cantidad_total = 0;
     for (var i in Compra.productos) {
         Compra.total = Compra.total + Compra.productos[i].importe;
-        Compra.cantidad_total= Compra.cantidad_total+Compra.productos[i].cantidad;
+        Compra.cantidad_total = Compra.cantidad_total + Compra.productos[i].cantidad;
     }
     draw();
 }
