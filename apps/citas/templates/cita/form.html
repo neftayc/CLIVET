@@ -94,6 +94,7 @@ $(document).ready(function() {
     var TODAY = todayDate.format('YYYY-MM-DD');
     var TOMORROW = todayDate.clone().add(1, 'day').format('YYYY-MM-DD');
     $('#calendar').fullCalendar({
+        //height: 650,
         locale: 'es',
         header: {
             left: 'prev,next today',
@@ -134,12 +135,13 @@ $(document).ready(function() {
         selectable: true,
         //selectHelper: true,
         resize: false,
-        slotMinutes: 30,
+        slotMinutes: 60,
         navLinks: true,
-        allDaySlot: false, //para mostar en el calendario todo el dia
+        //allDaySlot: false, //para mostar en el calendario todo el dia
         scrollTime: '08:00:00',
         minTime: "08:00:00",
         maxTime: "18:00:00",
+        slotEventOverlap:false,//para que no se pueda poner encima mas o la misma hora
         weekends: false, //si incluye fin de semanas or //hiddenDays: [ 1, 3, 5 ]
         droppable: true, // this allows things to be dropped onto the calendar
         drop: function(date, data) {
