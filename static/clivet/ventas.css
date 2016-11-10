@@ -8,10 +8,12 @@
     background-color: #2ec3d1;
     color: white;
 }
+
 .typeahead:focus {
     border: 0px solid #0097cf;
 }
-.typeahead{
+
+.typeahead {
     font-weight: bold;
     background-color: #2ec3d1 !important;
 }
@@ -19,7 +21,7 @@
 .tt-dropdown-menu {
     background-color: #D2EAF6;
     border-radius: 0px;
-    color: #E0EAF1 ;    
+    color: #E0EAF1;
 }
 
 .tt-suggestion {
@@ -27,53 +29,158 @@
     font-size: 15px;
     line-height: 24px;
     background: #1EA2B2;
-    color: #E0EAF1 ;
+    color: #E0EAF1;
 }
-
 
 .tt-suggestion.tt-cursor {
     border: 2px solid #0097A7;
     width: auto;
     font-size: 20px;
-    background:#2ec3d1 !important;
-    color: white ;
+    background: #2ec3d1 !important;
+    color: white;
 }
 
-.panel-titulo{
+.panel-titulo {
     background: #0097a7 !important;
 }
-.titulo-busqueda{
+
+.titulo-busqueda {
     font-size: 1.3em;
     font-style: normal;
     font-weight: bold;
     color: white;
 }
 
-.producto ::-webkit-input-placeholder{
-color: #E0EAF1 ;
+.producto::-webkit-input-placeholder {
+    color: #E0EAF1;
 }
 
-.contenedor-cantidad-input{
+.contenedor-cantidad-input {
     position: relative;
     left: -13px;
     background: transparent;
 }
-.cantidad-input{
+
+.cantidad-input {
     position: relative;
     left: -13px;
-    background:#2ec3d1 ;
+    background: #2ec3d1;
     font-weight: bold;
     opacity: 0.9;
-    color:  white ;
-     border: 0.5px solid #0097A7;
+    color: white;
+    border: 0.5px solid #0097A7;
 }
+
 .cantidad-input:focus {
     border: 0px solid #0097cf;
 }
-#enviar_producto{
-position: absolute;
-right: 4%;
-background-color: #03A9F4 !important;
-color: white;
-font-weight: bold;
+
+#enviar_producto {
+    position: absolute;
+    right: 4%;
+    background-color: #03A9F4 !important;
+    color: white;
+    font-weight: bold;
+}
+
+.detalle-titulo {
+    font-size: 1.5em;
+    font-weight: bold;
+    letter-spacing: .1em;
+}
+
+.label-d {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.label-d span {
+    font-size: .9em;
+    font-weight: normal;
+    padding-left: 1.5em;
+}
+
+img {
+    margin: 0;
+}
+
+.panel-titulo-detalle {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.td-producto {
+    letter-spacing: .3em;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.title-th-d {
+    text-transform: capitalize;
+    font-size: 1.2em;
+    letter-spacing: .13em;
+}
+
+.th-descripcion {
+    letter-spacing: .5em;
+}
+
+.cantidades-table {
+    letter-spacing: .3em;
+}
+
+.soles {
+    font-weight: bold;
+    font-style: oblique;
+}
+
+.container-footer-detalle {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.trabajador {
+    text-decoration: overline;
+    letter-spacing: .23em;
+    color: #757575;
+}
+
+.cancelado {
+    letter-spacing: 1em;
+    color: #616161;
+    font-weight: bold;
+}
+
+.resumen-d {
+    letter-spacing: .23em;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #317095;
+}
+
+.resumen-v {
+    letter-spacing: .30em;
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #317095;
+}
+
+.total-v {
+    text-shadow: 1px 0px #757575;
+}
+
+.resumen-v >span {
+    font-weight: bold;
+    font-style: oblique;
+}
+
+.panel-footer {
+    background: #CFD8DC;
+}
+
+.panel-footer:hover {
+    background: #D0E9F5;
+    color: red !important;
 }

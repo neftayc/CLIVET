@@ -41,11 +41,8 @@ class DetalleVentaListView(ListView):
         context['detalle'] = Detalle_Venta.objects.filter(
             venta=ventas).order_by('pk')
         context['cantidad'] = context['detalle'].count()
-        context['total'] = ventas.total
-        context['igv'] = ventas.igv
-        context['cliente'] = ventas.cliente
-        context['fechav'] = ventas.fechav
-        context['sub'] = int(ventas.total - ventas.igv)
+        context['venta'] = ventas
+        context['sub'] = ventas.total-ventas.igv
         return context
 
 

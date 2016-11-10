@@ -1,4 +1,4 @@
-{% extends "main/dashboard.html" %}
+{% extends "main/dashboard.html" %} {% load i18n staticfiles %}
 <!--
 @package     ventas
 Descripcion: Lista Tipo Documento
@@ -16,44 +16,69 @@ Descripcion: Lista Tipo Documento
         </div>
     </div>
 </div> -->
-<div class="container  panel panel-info">
-    <div class="panel-heading panel-titulo">
-        <p>DETALLE DE VENTA</p>
-        <span>{{cliente}}</span>
-        <span>{{fechav|date:"SHORT_DATE_FORMAT"}}</span>
-    </div>
-    <div class="panel panel-body">
-        <table class="table table-condensed ">
-            <thead>
-                <tr>
-                    <th width="3%" class="text-center">#</th>
-                    <th width="5%" class=" text-center">Cantidad</th>
-                    <th width="40%" class=" text-left">Descripcion</th>
-                    <th width="15%" class=" text-center">Precio</th>
-                    <th width="15%" class=" text-center">Importe</th>
-                </tr>
-            </thead>
-            <tfoot>
-            </tfoot>
-            <tbody>
-                {% for d in detalle %}
-                <tr>
-                    <td class="text-center">{% if is_paginated %} {{ page_obj.start_index|add:forloop.counter0 }} {% else %} {{ forloop.counter }} {% endif %}
-                    </td class="text-center">
-                    <td class="text-center">{{ d.cantidad }} {{unidadv}}</td>
-                    <td class="text-left">{{ d.producto.nombre }}</td>
-                    <td class="text-center"><span>S/.  </span>{{ d.producto.precioV }}</td>
-                    <td class="text-right"><span>S/.   </span> {{ d.importe }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-    <div class="panel panel-footer">
-        <p> Igv: <span>{{igv}}</span></p>
-        <p>Sub Total: <span>{{sub}}</span></p>
-        <p>Total: <span>{{total}}</span></p>
+<div class="container-fluid ">
+    <div class="panel panel-info container-main">
+        <div class="panel-heading   panel-titulo-detalle">
+            <div class="col-md-6 img-container col-xs-12 col-sm-12">
+                <img class="" width="70%" src='{% static "clivet/img/DogShop.png" %}'>
+            </div>
+            <div class="col-md-6 text-center  col-xs-12 col-sm-12 row">
+                <p class="detalle-titulo col-md-12">DETALLE DE VENTA</p>
+                <p class="label-d text-left col-md-6">Señor(a) :<span class="cliente-show">{{venta.cliente}}</span></p>
+                <p class="label-d text-left col-md-6 hidden-xs">Celular : <span class="cliente-show">{{venta.cliente.telefono}}</span></p>
+                <p class="label-d text-left col-md-6  hidden-sm hidden-xs">Ciudad : <span class="cliente-show">{{venta.cliente.ciudad}}</span></p>
+                <p class="label-d text-left col-md-6  hidden-sm hidden-xs">Dirección :<span class="cliente-show">{{venta.cliente.direccion}}</span></p>
+                <p class="label-d text-center col-md-10">FECHA DE VENTA : <span class="fehca-show">{{venta.fechav|date:"d-m-Y"}}</span></p>
+            </div>
+        </div>
+        <div class="panel-body container-body">
+            <table class="table table-condensed ">
+                <thead>
+                    <tr>
+                        <th width="3%" class="text-center title-th-d">#</th>
+                        <th width="7%" class=" text-center title-th-d">Cantidad</th>
+                        <th width="40%" class=" text-center title-th-d th-descripcion">Descripcion</th>
+                        <th width="15%" class=" text-center title-th-d">Precio Unitario</th>
+                        <th width="15%" class=" text-center title-th-d">Importe</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                </tfoot>
+                <tbody>
+                    {% for d in detalle %}
+                    <tr>
+                        <td class="text-center">{% if is_paginated %} {{ page_obj.start_index|add:forloop.counter0 }} {% else %} {{ forloop.counter }} {% endif %}
+                        </td class="text-center">
+                        <td class="text-center cantidades-table">{{ d.cantidad }} {{unidadv}}</td>
+                        <td class="text-left td-producto">{{ d.producto.nombre }}</td>
+                        <td class="text-right cantidades-table"><span class="soles">S/.  </span>{{ d.producto.precioV }}</td>
+                        <td class="text-right cantidades-table"><span class="soles">S/.   </span> {{ d.importe }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="panel panel-footer">
+            <div class="row container-footer-detalle">
+                <div class="col-md-9 container-cancelelado">
+                    <p class="cancelado">CANCELADO</p>
+                    <span class="trabajador">Clinica Vererinaria Pep-Shop- {{venta.user}}</span>
+                </div>
+                <div class="col-md-3 row">
+                    <div class="col-md-6">
+                        <p class="resumen-d text-left">Igv 18% :</p>
+                        <p class="resumen-d text-left">Sub Total : </p>
+                        <p class="resumen-d text-left">Total : </p>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="resumen-v text-right"><span>S/.</span>{{venta.igv}}</p>
+                        <p class="resumen-v text-right"><span>S/.</span>{{sub}}</p>
+                        <p class="resumen-v total-v text-right"><span>S/.</span>{{venta.total}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-</div>
+
 {% endblock content %}
