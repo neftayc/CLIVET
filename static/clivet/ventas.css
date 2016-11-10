@@ -5,10 +5,15 @@
     font-size: 15px;
     line-height: 30px;
     outline: none;
-    color: white !important;
+    background-color: #2ec3d1;
+    color: white;
 }
 .typeahead:focus {
     border: 0px solid #0097cf;
+}
+.typeahead{
+    font-weight: bold;
+    background-color: #2ec3d1 !important;
 }
 
 .tt-dropdown-menu {
@@ -30,12 +35,12 @@
     border: 2px solid #0097A7;
     width: auto;
     font-size: 20px;
-    background-color: #0097A7;
-    color: #E0EAF1 ;
+    background:#2ec3d1 !important;
+    color: white ;
 }
 
 .panel-titulo{
-    background: #1EA2B2 !important;
+    background: #0097a7 !important;
 }
 .titulo-busqueda{
     font-size: 1.3em;
@@ -56,8 +61,10 @@ color: #E0EAF1 ;
 .cantidad-input{
     position: relative;
     left: -13px;
-    background:#0097A7;
-    color:  #E0EAF1 ;
+    background:#2ec3d1 ;
+    font-weight: bold;
+    opacity: 0.9;
+    color:  white ;
      border: 0.5px solid #0097A7;
 }
 .cantidad-input:focus {
@@ -65,5 +72,8 @@ color: #E0EAF1 ;
 }
 #enviar_producto{
 position: absolute;
-right: 5%;
+right: 4%;
+background-color: #03A9F4 !important;
+color: white;
+font-weight: bold;
 }

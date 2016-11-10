@@ -4,8 +4,9 @@
 Descripcion: Lista Tipo Documento
 -->
 {% load i18n app_security %} {% load l10n humanize %} {% block breadcrumbs %}
-<a href="{# url 'accounts:index' #}">{% trans 'Home' %}</a> &rsaquo; {{ title }} {% endblock breadcrumbs %} {% block content_title %} {{ opts.verbose_name_plural|capfirst }} | <small>{{ title }}</small> {% endblock content_title %} {% block content %}
-<div class="btn-toolbar btn-toolbar-top">
+<a href="{# url 'accounts:index' #}">{% trans 'Home' %}</a> &rsaquo; {{ title }} {% endblock breadcrumbs %} {% block content_title %} {{ opts.verbose_name_plural|capfirst }}
+<small>{{ title }}</small> {% endblock content_title %} {% block content %}
+<!-- <div class="btn-toolbar btn-toolbar-top">
     <div class="row">
         <div class="btn-actions">
             <a href="{% url 'ventas:reporte_ventas' %}" class="btn btn-primary text-bold" title="Agregar Venta detalle">
@@ -14,39 +15,45 @@ Descripcion: Lista Tipo Documento
             </a>
         </div>
     </div>
-</div>
-<div class="container-overflow">
-    <table class="table table-bordered table-hover table-striped table-condensed table-responsive">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th class="col-hidden  text-center">Fecha</th>
-                <th class="col-hidden text-center">producto</th>
-                <th class="col-hidden text-center">cliente</th>
-                <th class="col-hidden text-center">cantidad</th>
-                <th class="col-hidden text-center">importe</th>
-            </tr>
-        </thead>
-        <tfoot>
-        </tfoot>
-        <tbody>
-            {% for d in detalle %}
-            <tr>
-                <td class="text-center">{% if is_paginated %} {{ page_obj.start_index|add:forloop.counter0 }} {% else %} {{ forloop.counter }} {% endif %}
-                </td class="text-center">
-                <td class="text-center">{{ d.producto.nombre }}</td>
-                <td class="text-center">{{ d.venta.fechav }}</td>
-                <td class="text-center">{{ d.venta.cliente }}</td>
-                <td class="text-center">{{ d.cantidad }} {{unidadv}}</td>
-                <td class="text-center"> S/. {{ d.importe }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <div class="panel panel-default col-md-3 col-md-offset-9" >
-        <p style="font-size:20px;"> Igv:    <span  style="color:grey; font-size: 15px;  ">{{igv}}</span></p>
-        <p style="font-size:20px;">Sub Total:   <span  style="color:grey; font-size: 15px;  ">{{sub}}</span></p>
-        <p style="font-size:20px;">Total:   <span  style="color:grey; font-size: 20px;  ">{{total}}</span></p>
+</div> -->
+<div class="container  panel panel-info">
+    <div class="panel-heading panel-titulo">
+        <p>DETALLE DE VENTA</p>
+        <span>{{cliente}}</span>
+        <span>{{fechav|date:"SHORT_DATE_FORMAT"}}</span>
     </div>
+    <div class="panel panel-body">
+        <table class="table table-condensed ">
+            <thead>
+                <tr>
+                    <th width="3%" class="text-center">#</th>
+                    <th width="5%" class=" text-center">Cantidad</th>
+                    <th width="40%" class=" text-left">Descripcion</th>
+                    <th width="15%" class=" text-center">Precio</th>
+                    <th width="15%" class=" text-center">Importe</th>
+                </tr>
+            </thead>
+            <tfoot>
+            </tfoot>
+            <tbody>
+                {% for d in detalle %}
+                <tr>
+                    <td class="text-center">{% if is_paginated %} {{ page_obj.start_index|add:forloop.counter0 }} {% else %} {{ forloop.counter }} {% endif %}
+                    </td class="text-center">
+                    <td class="text-center">{{ d.cantidad }} {{unidadv}}</td>
+                    <td class="text-left">{{ d.producto.nombre }}</td>
+                    <td class="text-center"><span>S/.  </span>{{ d.producto.precioV }}</td>
+                    <td class="text-right"><span>S/.   </span> {{ d.importe }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="panel panel-footer">
+        <p> Igv: <span>{{igv}}</span></p>
+        <p>Sub Total: <span>{{sub}}</span></p>
+        <p>Total: <span>{{total}}</span></p>
+    </div>
+</div>
 </div>
 {% endblock content %}

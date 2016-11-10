@@ -43,6 +43,8 @@ class DetalleVentaListView(ListView):
         context['cantidad'] = context['detalle'].count()
         context['total'] = ventas.total
         context['igv'] = ventas.igv
+        context['cliente'] = ventas.cliente
+        context['fechav'] = ventas.fechav
         context['sub'] = int(ventas.total - ventas.igv)
         return context
 

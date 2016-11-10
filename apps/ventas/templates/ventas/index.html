@@ -1,7 +1,7 @@
 {% extends "main/dashboard.html" %} {% load i18n app_security %}{% load i18n crispy_forms_tags %} {% load l10n humanize %} {% block breadcrumbs %}
 <a href="{# url 'accounts:index' #}">{% trans 'Home' %}</a> &rsaquo; {{ title }} {% endblock breadcrumbs %} {% block content_title %} {{ opts.verbose_name_plural|capfirst }} | <small>{{ title }}</small> {% endblock content_title %} {% block content %}
-<div class="container-fluid">
-    <div class="row">
+<div class="container-fluid  ">
+    <div class="row panel panel-default">
         <div class="panel panel-info col-md-8">
             <div class="panel-heading row panel-titulo">
                 <p class="titulo-busqueda"><span class="glyphicon glyphicon-shopping-cart btn-lg" aria-hidden="true"></span>Añadir productos o Servicios al Carrito</p>
@@ -12,30 +12,28 @@
                     <input type="number" name="cantidad" class="form-control cantidad-input" id="cantidad_producto">
                 </div>
                 <div>
-                    <button id="enviar_producto" type="button" class="btn btn-primary btn-md" aria-label="Left Align">Añadir al Carrito
+                    <button id="enviar_producto" type="button" class="btn btn-md" aria-label="Left Align">Añadir al Carrito
                     </button>
                 </div>
                 <div class="col-md-2">
                 </div>
             </div>
             <div class="panel-body ">
-                <div class="">
-                    <table class="table table-condensed">
-                        <thead>
-                            <tr>
-                                <th class="text-center">Cantidad</th>
-                                <th class="text-center">Descripcion</th>
-                                <th class="text-center">Precio unitario</th>
-                                <th class="text-center">Importe</th>
-                                <th class="text-center">Opciones</th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                        </tfoot>
-                        <tbody id="tabla_producto">
-                        </tbody>
-                    </table>
-                </div>
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Cantidad</th>
+                            <th class="text-center">Descripcion</th>
+                            <th class="text-center">Precio unitario</th>
+                            <th class="text-center">Importe</th>
+                            <th class="text-center">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                    </tfoot>
+                    <tbody id="tabla_producto">
+                    </tbody>
+                </table>
             </div>
         </div>
         <div class="col-md-4 row">
@@ -239,7 +237,7 @@ function draw() {
             "</td><td class='text-center'>" + Venta.productos[i].nombre +
             "</td><td class='text-center'>" + Venta.productos[i].precioV +
             "</td><td class='text-center'>" + Venta.productos[i].importe +
-            "</td><td class='col-hidden'>" + Venta.productos[i].igvp +
+            "</td><td style='display:none;'class='col-hidden'>" + Venta.productos[i].igvp +
             "</td><td class='text-center'><button type='button' onclick='delete_p(" + i + ")'class='btn  btn-danger btn-md'><apan class='glyphicon glyphicon-trash'></span></button></td></tr>";
     }
     $("#tabla_producto").html(h);
