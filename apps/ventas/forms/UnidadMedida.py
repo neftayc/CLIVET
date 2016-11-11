@@ -1,5 +1,5 @@
 from django import forms
-from ..models.UnidadMedida import UnidadMedida
+from ..models.UnidadMedida import UnidadMedidaC
 
 
 class UnidadMedidaForm(forms.ModelForm):
@@ -8,6 +8,6 @@ class UnidadMedidaForm(forms.ModelForm):
     class Meta:
         """Meta."""
 
-        model = UnidadMedida
+        model = UnidadMedidaC
         exclude = ()
         # widgets = {

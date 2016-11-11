@@ -43,8 +43,7 @@ class ProductoForm(forms.ModelForm):
         """Meta."""
         model = Producto
         exclude = ('existencia',)
-        fields = ('nombre', 'codigo', 'categoria', 'fechaVencimiento', 'unidadMedidaV',
-                  'unidadMedidaC')
+        fields = ('nombre', 'codigo', 'categoria', 'fechaVencimiento', 'unidad_medida')
     #         nombre = models.CharField('Nombre', max_length=50, unique=True)
     # codigo = models.CharField('Código', max_length=50, unique=True)
     # categoria = models.ForeignKey('Categoria', Categoria)
@@ -77,8 +76,7 @@ class ProductoForm(forms.ModelForm):
             Row(
                 Div(FieldWithButtons('categoria', StrictButton(
                     "Agregar", id='addCategoria')), css_class='col-md-4'),
-                Div(Field('unidadMedidaV'), css_class='col-md-4'),
-                Div(FieldWithButtons('unidadMedidaC', StrictButton(
+                Div(FieldWithButtons('unidad_medida', StrictButton(
                     "Agregar", id='addUnidad')), css_class='col-md-4'),
             ),
             Div(Row(

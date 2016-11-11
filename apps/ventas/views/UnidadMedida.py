@@ -16,7 +16,7 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 
 
-from ..models.UnidadMedida import UnidadMedida
+from ..models.UnidadMedida import UnidadMedidaC
 from ..forms.UnidadMedida import UnidadMedidaForm
 
 import logging
@@ -26,7 +26,7 @@ log = logging.getLogger(__name__)
 class UnidadMedidaListView(ListView):
     u"""Tipo Documento Identidad."""
 
-    model = UnidadMedida
+    model = UnidadMedidaC
     paginate_by = settings.PER_PAGE
     template_name = "ventas/inventario/UnidadMedida.html"
 
@@ -75,7 +75,7 @@ class UnidadMedidaListView(ListView):
 class UnidadMedidaCreateView(CreateView):
     u"""Tipo Documento Identidad."""
 
-    model = UnidadMedida
+    model = UnidadMedidaC
     form_class = UnidadMedidaForm
     template_name = "ventas/inventario/formUnidadMedida.html"
     success_url = reverse_lazy("ventas:unidad_medida_list")
@@ -116,7 +116,7 @@ class UnidadMedidaCreateView(CreateView):
 class UnidadMedidaUpdateView(UpdateView):
     """Tipo Documento Update View."""
 
-    model = UnidadMedida
+    model = UnidadMedidaC
     form_class = UnidadMedidaForm
     template_name = "ventas/inventario/formUnidadMedida.html"
     success_url = reverse_lazy("ventas:unidad_medida_list")
@@ -167,7 +167,7 @@ class UnidadMedidaUpdateView(UpdateView):
 class UnidadMedidaDeleteView(DeleteView):
     """Empresa Delete View."""
 
-    model = UnidadMedida
+    model = UnidadMedidaC
     success_url = reverse_lazy('ventas:unidad_medida_list')
 
     @method_decorator(permission_resource_required)
