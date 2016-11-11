@@ -19,15 +19,15 @@ Descripcion: Lista Tipo Documento
 <div class="container-fluid ">
     <div class="panel panel-info container-main">
         <div class="panel-heading   panel-titulo-detalle">
-            <div class="col-md-6 img-container col-xs-12 col-sm-12">
-                <img class="" width="70%" src='{% static "clivet/img/DogShop.png" %}'>
+            <div class="col-md-5 img-container col-xs-12 col-sm-12">
+                <img class="" width="100%" src='{% static "clivet/img/DogShop.png" %}'>
             </div>
-            <div class="col-md-6 text-center  col-xs-12 col-sm-12 row">
+            <div class="col-md-7 text-center  col-xs-12 col-sm-12 row">
                 <p class="detalle-titulo col-md-12">DETALLE DE VENTA</p>
-                <p class="label-d text-left col-md-6">Señor(a) :<span class="cliente-show">{{venta.cliente}}</span></p>
-                <p class="label-d text-left col-md-6 hidden-xs">Celular : <span class="cliente-show">{{venta.cliente.telefono}}</span></p>
-                <p class="label-d text-left col-md-6  hidden-sm hidden-xs">Ciudad : <span class="cliente-show">{{venta.cliente.ciudad}}</span></p>
-                <p class="label-d text-left col-md-6  hidden-sm hidden-xs">Dirección :<span class="cliente-show">{{venta.cliente.direccion}}</span></p>
+                <p class="label-d text-left col-md-7">Señor(a) :<span class="cliente-show">{{venta.cliente}}</span></p>
+                <p class="label-d text-left col-md-5 hidden-xs">Celular : <span class="cliente-show">{{venta.cliente.telefono}}</span></p>
+                <p class="label-d text-left col-md-7  hidden-sm hidden-xs">Ciudad : <span class="cliente-show">{{venta.cliente.ciudad}}</span></p>
+                <p class="label-d text-left col-md-5  hidden-sm hidden-xs">Dirección :<span class="cliente-show">{{venta.cliente.direccion}}</span></p>
                 <p class="label-d text-center col-md-10">FECHA DE VENTA : <span class="fehca-show">{{venta.fechav|date:"d-m-Y"}}</span></p>
             </div>
         </div>
@@ -60,11 +60,11 @@ Descripcion: Lista Tipo Documento
         </div>
         <div class="panel panel-footer">
             <div class="row container-footer-detalle">
-                <div class="col-md-9 container-cancelelado">
+                <div class="col-md-8 container-cancelelado">
                     <p class="cancelado">CANCELADO</p>
                     <span class="trabajador">Clinica Vererinaria Pep-Shop- {{venta.user}}</span>
                 </div>
-                <div class="col-md-3 row">
+                <div class="col-md-4 row">
                     <div class="col-md-6">
                         <p class="resumen-d text-left">Igv 18% :</p>
                         <p class="resumen-d text-left">Sub Total : </p>
