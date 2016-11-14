@@ -6,19 +6,16 @@ from apps.utils.security import get_dep_objects, log_params, SecurityKey
 
 from django.conf import settings
 from django.contrib import messages
-from django.core.urlresolvers import reverse_lazy
-from django.http import HttpResponseRedirect
-from django.utils.decorators import method_decorator
-from django.utils.encoding import force_text
-from django.utils.text import capfirst
-from django.utils.translation import ugettext as _
-from django.views.generic.edit import CreateView, DeleteView, UpdateView
-from django.views.generic.list import ListView
+from django.shortcuts import redirect
 
+from django.http import HttpResponse, JsonResponse
+from django.utils.decorators import method_decorator
+from django.utils.text import capfirst
+from django.views.generic.list import ListView
+import json
 
 from ..models.Venta import Venta
-from ..forms.Venta import VentaForm
-
+import datetime
 import logging
 log = logging.getLogger(__name__)
 
@@ -27,8 +24,9 @@ class VentaListView(ListView):
     u"""Tipo Documento Identidad."""
 
     model = Venta
-    paginate_by = settings.PER_PAGE
     template_name = "ventas/venta/Reporte.html"
+    context_object_name = 'ventas'
+    paginate_by = settings.PER_PAGE
 
     @method_decorator(permission_resource_required)
     def dispatch(self, request, *args, **kwargs):
@@ -59,8 +57,10 @@ class VentaListView(ListView):
 
         Funcion con los primeros datos iniciales para la carga del template.
         """
+
         context = super(VentaListView,
                         self).get_context_data(**kwargs)
+        print(context)
         context['opts'] = self.model._meta
         # context['cmi'] = 'menu' #  Validacion de manual del menu
         context['title'] = ('Seleccione %s para cambiar'
@@ -71,3 +71,44 @@ class VentaListView(ListView):
         context['q'] = self.q.replace('/', '-')
 
         return context
+
+
+def VentaAjax(request):
+    if request.is_ajax():
+
+        venta = Venta.objects.get(id=request.GET['id'])
+        response = JsonResponse(
+            {'igv': venta.igv,
+             'fecha': venta.fechav,
+             'usuario': venta.user,
+             'cliente': venta.cliente_id,
+             'total': venta.total})
+        return HttpResponse(response.content)
+    else:
+        return redirect('/reporte/venta/')
+
+
+def VentaAjaxDate(request):
+    if request.is_ajax():
+        m = str(request.GET['fechav'])
+        ven = Venta.objects.filter(
+            fechav=datetime.datetime.strptime(m, "%Y-%m-%d").date())
+        print(m)
+        print(ven)
+        results = []
+        for i in range(ven.count()):
+            print(i)
+            producto_json = {}
+            producto_json['id'] = ven[i].id
+            producto_json['igv'] = str(ven[i].igv)
+            producto_json['fecha'] = str(ven[i].fechav)
+            producto_json['usuario'] = ven[i].user_id
+            producto_json['cliente'] = str(ven[i].cliente)
+            producto_json['total'] = str(ven[i].total)
+            results.append(producto_json)
+            print(results)
+        data_json = json.dumps(results)
+
+        return HttpResponse(data_json)
+    else:
+        return redirect('/reporte/venta/')

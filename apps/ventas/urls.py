@@ -60,6 +60,10 @@ urlpatterns = [
 
     url(r'^uni/vendercarr/$', VenderCarro,
         name="vender_carro"),
+    url(r'^ajax/$', VentaAjax,
+        name="detalle_ajax"),
+    url(r'^date/filter/$', VentaAjaxDate,
+        name="detalle_ajax_date"),
 
 
 

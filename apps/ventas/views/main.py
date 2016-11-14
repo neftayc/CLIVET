@@ -29,42 +29,6 @@ import logging
 log = logging.getLogger(__name__)
 
 
-# def CrateVenta(request):
-
-#     if request.method == "POST":
-#         if 'form' in request.POST:
-#             form = Detalle_VentaForm(request.POST)
-#             if form.is_valid():
-#                 Detalle_Venta.objects.create(
-#                     producto=form.cleaned_data['producto'],
-#                     venta=form.cleaned_data[
-#                         'venta'],
-#                     cantidad=form.cleaned_data[
-#                         'cantidad'],
-#                     igv=form.cleaned_data['igv'],
-#                     importe=form.cleaned_data['importe'])
-#                 # self.object = form1.save(commit=True)
-
-#      #   if 'form1' in request.POST:
-#                 form1 = VentaForm(request.POST)
-#                 if form1.is_valid():
-#                     Venta.objects.create(
-#                         total=form1.cleaned_data[
-#                             'total'],
-#                         cliente=form1.cleaned_data['cliente'],
-#                         trabajador=form1.cleaned_data['trabajador'])
-#                     # <process form cleaned data>
-#                     return HttpResponseRedirect('ventas/')
-
-#     else:
-#         #form1 = VentaForm()
-#         form = Detalle_VentaForm()
-#         # form1 = Detalle_VentaForm(initial={'cliente': 'rusbel'})
-
-#     return render(request, 'ventas/index.html',
-#                   {'form': form})
-
-
 class MainCreateView(CreateView):
     u"""Tipo Documento Identidad."""
 
@@ -116,7 +80,7 @@ class MainCreateView(CreateView):
                 producto = Producto.objects.get(pk=p['id'])
                 producto.existencia = producto.existencia - int(p['cantidad'])
                 producto.MontoReal = float_round(
-                    producto.MontoReal -(Decimal(p['importe'])-Decimal(p['importe']*0.18)), 2, ceil)
+                    producto.MontoReal - (Decimal(p['importe']) - Decimal(p['importe'] * 0.18)), 2, ceil)
 
                 producto.igv = float_round(
                     producto.igv - Decimal(p['igvp']), 2, ceil)

@@ -42,7 +42,7 @@ class DetalleVentaListView(ListView):
             venta=ventas).order_by('pk')
         context['cantidad'] = context['detalle'].count()
         context['venta'] = ventas
-        context['sub'] = ventas.total-ventas.igv
+        context['sub'] = ventas.total - ventas.igv
         return context
 
 
