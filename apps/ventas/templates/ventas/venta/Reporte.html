@@ -127,7 +127,7 @@ $(document).ready(function() {
                         "</td><td class='text-center'>" + object[i].cliente +
                         "</td><td class='text-center'>" + object[i].igv +
                         "</td><td class='text-center'>" + object[i].total +
-                        "</td><td class='text-center'><a href='' class='btn btn-info btn-sm text-bold' title='Ver detalle de la Venta'><i class='btn-icon-only fa fa-edit'></i></a></td></tr>";
+                        "</td><td class='text-center'><a href='/reporte/venta/" +object[i].id+ "/' class='btn btn-info btn-sm text-bold' title='Ver detalle de la Venta'><i class='btn-icon-only fa fa-edit'></i></a></td></tr>";
 
                     $('.datos').html(list);
                     console.log(i);
