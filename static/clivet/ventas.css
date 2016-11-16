@@ -184,3 +184,44 @@ img {
     background: #D0E9F5;
     color: red !important;
 }
+
+.container-heading-reporte {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.tr-title-reporte {
+    font-size: 1.3em;
+    color: grey;
+    letter-spacing: .1em;
+}
+
+.totales {
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+}
+.resumen-reporte{
+    text-decoration:overline;
+    font-size: 1.4em;
+    color: #757575;
+    letter-spacing: .7em;
+}
+.resumen-fecha{
+    font-size: 1.7em;
+    color: #616161;
+    font-weight: bold;
+    letter-spacing: .4em;
+}
+.td-reporte{
+    letter-spacing: .3em;
+    font-weight: bold;
+}
+.soles-reporte{
+    letter-spacing: .2em;
+}
+.input-cliente{
+    background: white !important;
+}

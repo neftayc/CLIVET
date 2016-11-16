@@ -60,7 +60,7 @@ urlpatterns = [
 
     url(r'^uni/vendercarr/$', VenderCarro,
         name="vender_carro"),
-    url(r'^ajax/$', VentaAjax,
+    url(r'^cliente/filter/$', VentaAjaxCliente,
         name="detalle_ajax"),
     url(r'^date/filter/$', VentaAjaxDate,
         name="detalle_ajax_date"),
@@ -85,7 +85,8 @@ urlpatterns = [
 
     # buscadores
     url(r'^departamento/listar/search/$', buscarDep),
-    url(r'^producto/search/$', buscarProducto, name='producto_s'),
+    url(r'^producto/search/$', BuscarProducto, name='producto_s'),
+    url(r'^cliente/search/$', BuscarCliente, name='cliente_s'),
 
 
 ]

@@ -20,6 +20,7 @@ import json
 from decimal import Decimal
 from math import ceil, floor
 from ..models.Venta import Venta
+from apps.clivet.models.cliente import Cliente
 from ..models.Producto import Producto
 from ..forms.Venta import VentaForm
 from ..forms.Producto import ProductoForm
@@ -256,7 +257,7 @@ class VentaProductoUpdateView(UpdateView):
 # form}, context_instance=RequestContext(request))
 
 
-def buscarProducto(request):
+def BuscarProducto(request):
     if request.is_ajax:
         search = request.GET.get('term', '')
 
@@ -269,6 +270,33 @@ def buscarProducto(request):
             producto_json['nombre'] = producto.nombre
             producto_json['cantidad'] = producto.existencia
             producto_json['id'] = producto.id
+            results.append(producto_json)
+
+        data_json = json.dumps(results)
+
+    else:
+        data_json = 'fail'
+    mimetype = "application/json"
+    return HttpResponse(data_json, mimetype)
+
+
+def BuscarCliente(request):
+    if request.is_ajax:
+        search = request.GET.get('term', '')
+
+        clientes = Cliente.objects.filter(
+            direccion__icontains=search)[:100]
+
+        results = []
+        for cliente in clientes:
+            producto_json = {}
+            producto_json['id'] = cliente.id
+            producto_json['persona'] = str(cliente.persona)
+            producto_json['direccion'] = cliente.direccion
+            producto_json['ciudad'] = cliente.ciudad
+            producto_json['telefono'] = cliente.telefono
+            producto_json['email'] = cliente.email
+            producto_json['documento'] = cliente.persona.identity_num
             results.append(producto_json)
 
         data_json = json.dumps(results)

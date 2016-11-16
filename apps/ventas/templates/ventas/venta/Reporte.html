@@ -7,97 +7,180 @@ Descripcion: Lista Tipo Documento
 <link rel="stylesheet" type="text/css" href="{% static 'bootstrap-datepicker-1.6.4-dist/css/bootstrap-datepicker3.min.css' %}">
 <a href="{# url 'accounts:index' #}">
     {% trans 'Home' %}</a> &rsaquo; {{ title }} {% endblock breadcrumbs %} {% block content_title %} {{ opts.verbose_name_plural|capfirst }} | <small>{{ title }}</small> {% endblock content_title %} {% block content %}
-<div id="container">
-    <div class="btn-toolbar btn-toolbar-top">
-        <div class="row">
-            <div class="btn-actions">
-                <a href="{% url 'ventas:ventaslist' %}" class=" btn btn-primary text-bold" title="Agregar Departamento">
-                    <i class="fa fa-plus"></i>
-                    <span class="hidden-xs"> Realizar Venta</span>
-                </a>
-            </div>
-            <select>
-                <option>Elige un autor</option>
-                {% for venta in ventas %}
-                <option value="{{venta.id}} " style="color: black">{{venta.fechav}}</option>
-                {% endfor %}
-            </select>
-            <div class="col-md-6">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-        <button class="btn btn-default btn-info" type="button"><span  class="glyphicon glyphicon-list"></span></button>
-                    </span>
+<div id="container-fluid ">
+    <div class="panel panel-info">
+        <div class="panel-heading ">
+            <div class="row container-heading-reporte">
+                <div class="btn-actions col-md-2 ">
+                    <a href="{% url 'ventas:ventaslist' %}" class=" btn btn-success btn-lg text-bold" title="Agregar Departamento">
+                        <i class="fa fa-plus"></i>
+                        <span class="hidden-xs"> Realizar Venta</span>
+                    </a>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="input-group input-append date">
-                    <input type="text" class="form-control datepicker " value="{{ven.fechav|date:'Y,m,d'}}" data-date-format="yyyy,mm,dd">
-                    <span class="input-group-btn">
-        <button class="btn btn-info btn" type="button"><span class="add-on glyphicon glyphicon-calendar"></span></button>
-                    </span>
+                <div class="col-md-8 col-md-offset-0">
+                    <div class="input">
+                        <input type="text" class="form-control input-lg input-cliente " value="{{cliente.id}}" placeholder="Ingrese nombre de cliente">
+                    </div>
+                </div>
+                <div class="col-md-2 col-md-offset-2">
+                    <div class="input-group input-append date">
+                        <input type="text" class="form-control datepicker input-lg" value="{{ven.fechav|date:'Y-m-d'}}" data-date-format="yyyy-mm-dd">
+                        <span class="input-group-btn">
+                                <button class="btn btn-info btn-lg" type="button"><span class="add-on glyphicon glyphicon-calendar"></span></button>
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="container-overflow">
-        <table class="table table-bordered table-hover table-striped table-condensed table-responsive">
-            <thead>
-                <tr>
-                    <th class="">#</th>
-                    <th class="col-hidden" data-search="fechav" data-order="fechav">Fecha de Venta</th>
-                    <th class="btn-actions col-blocked text-center">Cliente</th>
-                    <th class="btn-actions col-blocked text-center">Igv</th>
-                    <th class="btn-actions col-blocked text-center">Total</th>
-                    <th class="btn-actions col-blocked text-center">Detalle</th>
-                </tr>
-            </thead>
-            <tbody class="datos">
-            </tbody>
-        </table>
-    </div>
-    <div class="container-overflow">
-        <table class="table table-bordered table-hover table-striped table-condensed table-responsive">
-            <thead>
-                <tr>
-                    <th class="">#</th>
-                    <th class="col-hidden" data-search="fechav" data-order="fechav">Fecha de Venta</th>
-                    <th class="btn-actions col-blocked text-center">Cliente</th>
-                    <th class="btn-actions col-blocked text-center">Igv</th>
-                    <th class="btn-actions col-blocked text-center">Total</th>
-                    <th class="btn-actions col-blocked text-center">Detalle</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for d in object_list %}
-                <tr>
-                    <td class="text-center">{% if is_paginated %} {{ page_obj.start_index|add:forloop.counter0 }} {% else %} {{ forloop.counter }} {% endif %}
-                    </td>
-                    <td class="text-center">{{ d.fechav }}</td>
-                    <td class="text-center">{{ d.cliente }}</td>
-                    <td class="text-center">{{ d.igv }}</td>
-                    <td class="text-center">{{ d.total}}</td>
-                    <td class="text-center">
-                        <a href="{% url 'ventas:detalle_go' d.pk %}" class="btn btn-info btn-sm text-bold" title="Ver detalle de la Venta" rel="tooltip">
-                            <i class="btn-icon-only fa fa-edit"></i>
-                        </a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-    <div class="row">
-        {% if is_paginated %} {% load paginator %} {% paginator %} {% else %}
-        <div class="col-md-12">
-            <ul class="breadcrumbpag">
-                {{ object_list.count }} {% ifequal object_list.count 1 %}{{ opts.verbose_name|capfirst }}{% else %}{{ opts.verbose_name_plural|capfirst }}{% endifequal %}
-            </ul>
+        <div class="panel-body">
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th width="5%" class="text-center tr-title-reporte">#</th>
+                        <th width="15%" class="text-center tr-title-reporte">Fecha de Venta</th>
+                        <th width="30%" class="text-center tr-title-reporte">Cliente</th>
+                        <th width="20%" class="text-center tr-title-reporte">Igv</th>
+                        <th width="20%" class="text-center tr-title-reporte">Total</th>
+                        <th width="10%" class="text-center tr-title-reporte">Detalle</th>
+                    </tr>
+                </thead>
+                <tbody class="datos">
+                    {% for d in object_list %}
+                    <tr>
+                        <td class="text-center td-reporte">{% if is_paginated %} {{ page_obj.start_index|add:forloop.counter0 }} {% else %} {{ forloop.counter }} {% endif %}
+                        </td>
+                        <td class="text-center td-reporte">{{ d.fechav|date:'Y-m-d'}}</td>
+                        <td class="text-left td-reporte">{{ d.cliente }}</td>
+                        <td class="text-right td-reporte">{{ d.igv }}</td>
+                        <td class="text-right td-reporte">{{ d.total}}</td>
+                        <td class="text-center">
+                            <a href="{% url 'ventas:detalle_go' d.pk %}" class="btn btn-lg btn-success" title="Ver detalle de la Venta" rel="tooltip">
+                                <span class="glyphicon glyphicon-th-list"></span>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
-        {% endif %}
+        <div class="panel-footer">
+            <div class="row totales">
+                {% if is_paginated %} {% load paginator %} {% paginator %} {% else %}
+                <div class="col-md-12">
+                    <ul class="breadcrumbpag">
+                        {{ object_list.count }} {% ifequal object_list.count 1 %}{{ opts.verbose_name|capfirst }}{% else %}{{ opts.verbose_name_plural|capfirst }}{% endifequal %}
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+        </div>
     </div>
 </div>
 <script>
+$(document).ready(function() {
+    var cliente = new Bloodhound({
+        limit: 5,
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('documento', 'persona'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        prefetch: '/cliente/search/',
+    });
+    cliente.initialize();
+    $('.input-cliente ').typeahead(
+        null, {
+            minLength: 5,
+            hint: true,
+            highlight: true,
+            displayKey: 'persona',
+            source: cliente.ttAdapter()
+        }).on('typeahead:selected', function(event, data) {
+        $('.typeahead').val(data.id);
+
+        var id = data.id;
+        console.log(id);
+        $.ajax({
+            data: {
+                'id': id
+            },
+            url: '/cliente/filter/',
+            type: 'get',
+            success: function(data) {
+                var object = JSON.parse(data);
+                console.log(object);
+                var list = "";
+                var totales = "";
+
+                var i;
+                var totalg = 0;
+                var igvg = 0;
+                var subtg = 0;
+                parseInt(i);
+                for (i in object) {
+                    list = list + "<tr>" +
+                        "<td class='text-center td-reporte'>" + (parseInt(+"" + i + "") + 1) +
+                        "</td><td class='text-center td-reporte'>" + object[i].fecha +
+                        "</td><td class='text-left td-reporte'>" + object[i].cliente +
+                        "</td><td class='text-right td-reporte'>" + object[i].igv +
+                        "</td><td class='text-right td-reporte'>" + object[i].total +
+                        "</td><td class='text-center'><a href='/reporte/venta/" + object[i].id + "/' class='btn btn-lg btn-success' title='Ver detalle de la Venta'><span class='glyphicon glyphicon-th-list'></span></a></td></tr>";
+                    $('.datos').html(list);
+                    totalg = Math.ceil10(parseFloat(object[i].total) + totalg, -2);
+                    igvg = Math.ceil10(parseFloat(object[i].igv) + igvg, -2);
+
+
+                    console.log(i);
+                }
+                subtg = Math.ceil10(totalg - igvg, -2);
+                totales = totales + "<div class='col-md-6'><p class='resumen-fecha'> RESUMEN TOTAL </p><p class='resumen-reporte text-center'>Veterinaria PepShop</p></div><div class='col-md-3'><p class = 'resumen-d text-left'> Igv 18 % : </p><p class='resumen-d text-left'>Sub Total : </p><p class = 'resumen-d text-left'> Total: </p></div><div class = 'col-md-3' >" +
+                    "<p class = 'resumen-v text-right'> <span class='soles-reporte'>S/.</span>" + igvg + "</p>" +
+                    "<p class = 'resumen-v text-right'> <span class='soles-reporte'>S/.</span>" + subtg + "</p>" +
+                    "<p class = 'resumen-v total-v text-right'> <span class='soles-reporte'>S/. </span>" + totalg + "</p>";
+                $('.totales').html(totales);
+                console.log(totalg);
+                console.log(igvg);
+                console.log(subtg);
+                console.log(object);
+
+            }
+        });
+    });
+});
+(function() {
+    function decimalAdjust(type, value, exp) {
+        if (typeof exp === 'undefined' || +exp === 0) {
+            return Math[type](value);
+        }
+        value = +value;
+        exp = +exp;
+        // Si el valor no es un número o el exp no es un entero...
+        if (isNaN(value) || !(typeof exp === 'number' && exp % 1 === 0)) {
+            return NaN;
+        }
+        // Shift
+        value = value.toString().split('e');
+        value = Math[type](+(value[0] + 'e' + (value[1] ? (+value[1] - exp) : -exp)));
+        // Shift back
+        value = value.toString().split('e');
+        return +(value[0] + 'e' + (value[1] ? (+value[1] + exp) : exp));
+    }
+    // Decimal round
+    if (!Math.round10) {
+        Math.round10 = function(value, exp) {
+            return decimalAdjust('round', value, exp);
+        };
+    }
+    // Decimal floor
+    if (!Math.floor10) {
+        Math.floor10 = function(value, exp) {
+            return decimalAdjust('floor', value, exp);
+        };
+    }
+    // Decimal ceil
+    if (!Math.ceil10) {
+        Math.ceil10 = function(value, exp) {
+            return decimalAdjust('ceil', value, exp);
+        };
+    }
+})();
 $(document).ready(function() {
     $('.input-append.date').datepicker({
         todayBtn: "linked",
@@ -105,7 +188,6 @@ $(document).ready(function() {
         format: 'yyyy-mm-dd',
         autoclose: true,
     });
-    $('select').on('change', Elegir);
     $('.datepicker').on('change', Fecha);
 
     function Fecha() {
@@ -120,42 +202,39 @@ $(document).ready(function() {
             success: function(data) {
                 var object = JSON.parse(data);
                 var list = "";
-                for (var i in object) {
-                    list = list + "<tr>" +
-                        "<td class='text-center'>" + i +
-                        "</td><td class='text-center'>" + object[i].fecha +
-                        "</td><td class='text-center'>" + object[i].cliente +
-                        "</td><td class='text-center'>" + object[i].igv +
-                        "</td><td class='text-center'>" + object[i].total +
-                        "</td><td class='text-center'><a href='/reporte/venta/" +object[i].id+ "/' class='btn btn-info btn-sm text-bold' title='Ver detalle de la Venta'><i class='btn-icon-only fa fa-edit'></i></a></td></tr>";
+                var totales = "";
 
+                var i;
+                var totalg = 0;
+                var igvg = 0;
+                var subtg = 0;
+                parseInt(i);
+                for (i in object) {
+                    list = list + "<tr>" +
+                        "<td class='text-center td-reporte'>" + (parseInt(+"" + i + "") + 1) +
+                        "</td><td class='text-center td-reporte'>" + object[i].fecha +
+                        "</td><td class='text-left td-reporte'>" + object[i].cliente +
+                        "</td><td class='text-right td-reporte'>" + object[i].igv +
+                        "</td><td class='text-right td-reporte'>" + object[i].total +
+                        "</td><td class='text-center'><a href='/reporte/venta/" + object[i].id + "/' class='btn btn-lg btn-success' title='Ver detalle de la Venta'><span class='glyphicon glyphicon-th-list'></span></a></td></tr>";
                     $('.datos').html(list);
+                    totalg = Math.ceil10(parseFloat(object[i].total) + totalg, -2);
+                    igvg = Math.ceil10(parseFloat(object[i].igv) + igvg, -2);
+
+
                     console.log(i);
                 }
+                subtg = Math.ceil10(totalg - igvg, -2);
+                totales = totales + "<div class='col-md-6'><p class='resumen-fecha'>" + fechav + "</p><p class='resumen-reporte'>RESUMEN TOTAL</p></div><div class='col-md-3'><p class = 'resumen-d text-left'> Igv 18 % : </p><p class='resumen-d text-left'>Sub Total : </p><p class = 'resumen-d text-left'> Total: </p></div><div class = 'col-md-3' >" +
+                    "<p class = 'resumen-v text-right'> <span class='soles-reporte'> S/. </span>" + igvg + "</p>" +
+                    "<p class = 'resumen-v text-right'> <span class='soles-reporte'> S/. </span>" + subtg + "</p>" +
+                    "<p class = 'resumen-v total-v text-right'> <span class='soles-reporte'>S/.</span>" + totalg + "</p>";
+                $('.totales').html(totales);
+                console.log(totalg);
+                console.log(igvg);
+                console.log(subtg);
                 console.log(object);
             }
-
-        });
-    }
-
-    function Elegir() {
-
-        var id = $(this).val();
-        console.log(id);
-        $.ajax({
-            data: {
-                'id': id
-            },
-            url: '/ajax/',
-            type: 'get',
-            success: function(data) {
-                var object = JSON.parse(data);
-                console.log(object);
-                var html = "<p>" + object.id + "<p><p>" + object.fecha + "<p>";
-                $('.datos').html(html);
-                console.log($('.input-append.date').datepicker('getDate'));
-            }
-
         });
     }
 

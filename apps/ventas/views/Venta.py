@@ -73,17 +73,26 @@ class VentaListView(ListView):
         return context
 
 
-def VentaAjax(request):
+def VentaAjaxCliente(request):
     if request.is_ajax():
+        print(request.GET['id'])
+        cliente = Venta.objects.filter(cliente=request.GET['id'])
+        print(cliente)
+        results = []
+        for i in range(cliente.count()):
+            print(i)
+            producto_json = {}
+            producto_json['id'] = cliente[i].id
+            producto_json['igv'] = str(cliente[i].igv)
+            producto_json['fecha'] = str(cliente[i].fechav)
+            producto_json['usuario'] = cliente[i].user_id
+            producto_json['cliente'] = str(cliente[i].cliente)
+            producto_json['total'] = str(cliente[i].total)
+            results.append(producto_json)
+            print(results)
+        data_json = json.dumps(results)
 
-        venta = Venta.objects.get(id=request.GET['id'])
-        response = JsonResponse(
-            {'igv': venta.igv,
-             'fecha': venta.fechav,
-             'usuario': venta.user,
-             'cliente': venta.cliente_id,
-             'total': venta.total})
-        return HttpResponse(response.content)
+        return HttpResponse(data_json)
     else:
         return redirect('/reporte/venta/')
 
