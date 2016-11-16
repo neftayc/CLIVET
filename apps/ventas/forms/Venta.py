@@ -20,15 +20,14 @@ class VentaForm(forms.ModelForm):
     data_venta = forms.CharField(
         required=False,  widget=forms.TextInput(attrs={'type': 'hidden'}))
     producto = forms.CharField(label="", required=False,
-                               widget=forms.TextInput(attrs={'class': 'form-control typeahead', 'placeholder': 'Buscar Producto o Servicio'}))
+                               widget=forms.TextInput(attrs={'type':'search','class': 'form-control typeahead', 'placeholder': 'Buscar Producto o Servicio'}))
 
     class Meta:
 
         model = Venta
-        fields = ('total', 'cliente', 'igv',)
-        exclude = ()
+        fields = ('total', 'igv',)
+        exclude = ('cliente',)
         widgets = {
-            'cliente': forms.Select(attrs={'class': 'form-control'}),
             'total': forms.TextInput(attrs={'class': 'form-control'}),
             'igv': forms.TextInput(attrs={'class': 'form-control'}),
         }

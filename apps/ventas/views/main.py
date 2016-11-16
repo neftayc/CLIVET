@@ -74,6 +74,7 @@ class MainCreateView(CreateView):
                 return direction(num * (10**places)) / float(10**places)
             self.object.total = venta['total']
             self.object.igv = venta['igv']
+            self.object.cliente_id = venta['cliente']
             self.object.save()
 
             for p in venta['productos']:

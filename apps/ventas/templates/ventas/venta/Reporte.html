@@ -82,7 +82,11 @@ $(document).ready(function() {
         limit: 5,
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('documento', 'persona'),
         queryTokenizer: Bloodhound.tokenizers.whitespace,
-        prefetch: '/cliente/search/',
+        prefetch: {
+            ttl: 1,
+            url: '/cliente/search/',
+
+        },
     });
     cliente.initialize();
     $('.input-cliente ').typeahead(
