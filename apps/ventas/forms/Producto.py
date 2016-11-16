@@ -6,7 +6,8 @@ from crispy_forms.bootstrap import FormActions, TabHolder, Tab, StrictButton, Fi
 from crispy_forms.helper import FormHelper, Layout
 from apps.utils.forms import smtSave, btnCancel, btnReset
 from django.utils.text import capfirst, get_text_list
-
+from apps.ventas.models.Departamento import Departamento
+from apps.ventas.models.UnidadMedida import UnidadMedidaV
 
 class ProductoForm(forms.ModelForm):
     u"""Tipo Documeto Form."""
@@ -18,6 +19,11 @@ class ProductoForm(forms.ModelForm):
         attrs={'class': 'form-control text-right'}))
     MontoReal = forms.DecimalField(initial=0.00, widget=forms.TextInput(
         attrs={'class': 'form-control text-right'}))
+        # =====================modal==========================
+    categoria_departamento = forms.ModelChoiceField(
+        queryset=Departamento.objects.all(), required=False,label='Departamento')
+    unidadc_ventas = forms.ModelChoiceField(
+        queryset=UnidadMedidaV.objects.all(), required=False,label='Unidad de medida de ventas')
     # nombre = forms.CharField(max_length=100)
     # apellidos = forms.CharField(max_length=100, required=False)
     # numero = forms.IntegerField(required=False)
@@ -75,9 +81,9 @@ class ProductoForm(forms.ModelForm):
             ),
             Row(
                 Div(FieldWithButtons('categoria', StrictButton(
-                    "Agregar", id='addCategoria')), css_class='col-md-4'),
+                    "Agregar", id='addCategoria')), css_class='col-md-6'),
                 Div(FieldWithButtons('unidad_medida', StrictButton(
-                    "Agregar", id='addUnidad')), css_class='col-md-4'),
+                    "Agregar", id='addUnidad')), css_class='col-md-6'),
             ),
             Div(Row(
                 FormActions(

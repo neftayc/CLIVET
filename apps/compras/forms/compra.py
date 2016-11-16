@@ -20,3 +20,5 @@ class CompraForm(forms.ModelForm):
             'proveedor': forms.Select(attrs={'class': 'form-control'}),
             'total': forms.TextInput(attrs={'class': 'form-control'}),
         }
+
+ 

@@ -2,13 +2,14 @@
 <a href="{# url 'accounts:index' #}">{% trans 'Home' %}</a> &rsaquo; {{ title }} {% endblock breadcrumbs %} {% block content_title %} {{ opts.verbose_name_plural|capfirst }} | <small>{{ title }}</small> {% endblock content_title %} {% block content %}
 <div class="container-fluid row">
     <form rule="" action="" method="post">{% csrf_token %}
-        <div class="col-md-12">
+        <div class="panel panel-default">
             <p><span class="glyphicon glyphicon-user btn-lg" aria-hidden="true"></span>Seleccionar Proveedor</p>
             <div class="form-group">
                 <label class="sr-only" for="cliente"></label>
                 <div class="input-group">
-                    <div class="input-group-btn">
-                        <a href="{% url 'compras:proveedor_add' %}" class="btn btn-primary">Nuevo Proveedor</a>
+                    <div class="input-group-btn", id='addProveedor'>
+                        {# <a href="{% url 'compras:proveedor_add' %}" class="btn btn-primary">Nuevo Proveedor</a> #}
+                        <a class="btn btn-primary">Nuevo Proveedor</a>
                     </div>
                     {{ form.proveedor}} {{ form.proveedor.errors}} {{ form.data_compra}}
                     <div class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></div>
@@ -58,12 +59,30 @@
             <div class="col-md-4">
                 <div class="panel panel-default">
                     <p><span class="glyphicon glyphicon-shopping-cart btn-lg" aria-hidden="true"></span>Resumen de Compra Realizada</p>
-                        <p>Cantidad de Producto</p>
-                    <p><span id="r_cantidad_total">0</span></p>
                     <div class="row center-block">
-                        <p>Total</p>
+                        <div class="col-md-8">
+                            <p>Cantidad de Producto</p>
+                        </div>
+                        <div class="col-md-4">
+                            <p><span id="r_cantidad_total">0</span></p>
+                        </div>
                     </div>
-                        <p>S/.<span id="r_total">00.00</span></p>
+                    <div class="row center-block">
+                        <div class="col-md-8">
+                            <p>Total</p>
+                        </div>
+                        <div class="col-md-4">
+                            <p>S/.<span id="r_total">00.00</span></p>
+                        </div>
+                    </div>
+                    <div class="row center-block">
+                        <div class="col-md-6">
+                            <p>Comprobante</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><span id="r_comprobante", class="btn btn-default">Examinar</span></p>
+                        </div>
+                    </div>
                     <div class="input-group-btn">
                     <button id="btn_pagar" type="submit" name='form' class="col-md-12 col-md-offset-4  btn btn-success "> Realizar Compra</button>
                     </div>
@@ -72,6 +91,47 @@
         </div>
     </form>
 </div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Agregar Proveedor</h4>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post">
+                    <div class="row center-block">
+                        <div class="col-md-6">
+                           <label for="nombre">Tipo de documento:</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="email" class="form-control" id="tipodoc">
+                        </div>
+                    </div>
+
+                    <div class="row center-block">
+                        <div class="col-md-6">
+                           <label for="nombre">N° de documento:</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="number" class="form-control" id="numdoc">
+                        </div>
+                    <div class="row center-block">
+                        <div class="col-md-6">
+                           <label for="nombre">Tipo de documento:</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="email" class="form-control" id="tipodoc">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script type="text/javascript">
 $(document).ready(function() {
     //"use strict";
@@ -157,6 +217,10 @@ function change_p(d) {
     }
     draw();
 }
+$('#addProveedor').click(function() {
+    $('#myModal').modal('show');
+});
+
 </script>
 <!-- /#page-wrapper -->
 {% endblock content %}

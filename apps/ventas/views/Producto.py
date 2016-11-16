@@ -19,7 +19,6 @@ from django.http import HttpResponse
 from ..models.Producto import Producto
 from ..forms.Producto import ProductoForm
 from django.core import serializers
-
 import logging
 log = logging.getLogger(__name__)
 

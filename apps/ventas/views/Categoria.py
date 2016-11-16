@@ -21,7 +21,17 @@ from ..forms.Categoria import CategoriaForm
 
 import logging
 log = logging.getLogger(__name__)
+from django.shortcuts import render, HttpResponse
+import json
 
+def post_ajax_categoria(request):
+    if request.method == 'POST':
+        if request.is_ajax():
+            print("_______________________________________________")
+            mydata = [{'foo': 1, 'baz': 2}]
+# return HttpResponse(json.dumps(mydata), mimetype="application/json")
+
+    return render(request)
 
 class CategoriaListView(ListView):
     u"""Tipo Documento Identidad."""

@@ -21,36 +21,36 @@ Descripcion: Create/Update group
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-6 text-center">
-                        	<b>Precio de compra: </b>
+                            <b>Precio de compra: </b>
                         </div>
-                        <div  class="col-md-6">
-                        {{form.precioC}}
+                        <div class="col-md-6">
+                            {{form.precioC}}
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 text-center">
-                        	<b>Precio de venta: </b>
+                            <b>Precio de venta: </b>
                         </div>
-                        <div  class="col-md-6">
-                        {{form.precioV}}
+                        <div class="col-md-6">
+                            {{form.precioV}}
                         </div>
                     </div>
                 </div>
                 <div class="panel-footer">
                     <div class="row">
                         <div class="col-md-6 text-center">
-                        	<b>IGV: </b>
+                            <b>IGV: </b>
                         </div>
-                        <div  class="col-md-6">
-                        {{form.igv}}
+                        <div class="col-md-6">
+                            {{form.igv}}
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 text-center">
-                        	<b>Total: </b>
+                            <b>Total: </b>
                         </div>
-                        <div  class="col-md-6">
-                        {{form.MontoReal}}
+                        <div class="col-md-6">
+                            {{form.MontoReal}}
                         </div>
                     </div>
                 </div>
@@ -65,19 +65,20 @@ Descripcion: Create/Update group
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel">Agragar Cat</h4>
+                <h4 class="modal-title" id="myModalLabel">Agregar Categoría</h4>
             </div>
             <div class="modal-body">
-                <form action="" method="post">
+                <form action="" method="post">{% csrf_token %}
                     <div class="form-group">
-                        <label for="nombre">nombre:</label>
-                        <input type="email" class="form-control" id="nombre" placeholder="Enter email">
+                        <label for="nombre_categoria">Nombre:</label>
+                        <input type="text" class="form-control" id="nombre_categoria" placeholder="Ingrese un nombre">
                     </div>
-                    <div class="form-group">
-                        <label for="departamento">departamento:</label>
-                        <input type="password" class="form-control" id="departamento" placeholder="Enter password">
-                    </div>
+                    {{form.categoria_departamento|as_crispy_field}}
                 </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary" id="save-categoria">Guardar</button>
             </div>
         </div>
     </div>
@@ -101,6 +102,35 @@ Descripcion: Create/Update group
 </div>
 {% endblock %} {% block extrajs %} {{ block.super }}
 <script type="text/javascript">
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+
+
 $('#id_precioC').keyup(function() {
     $('#id_igv').val($('#id_precioC').val() * $('#id_precioV').val() * 0.18)
     $('#id_MontoReal').val($('#id_precioC').val() * $('#id_precioV').val())
@@ -123,6 +153,26 @@ $('#addCategoria').click(function() {
 });
 $('#addUnidad').click(function() {
     $('#myModal2').modal('show');
+});
+$('#save-categoria').click(function(event) {
+    $.ajax({
+            url: "/producto/listar/ajax/",
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                nombre:$('#nombre_categoria').val(),
+                departmento:$('#id_categoria_departamento').val(),
+            },
+        })
+        .done(function() {
+            console.log("success");
+        })
+        .fail(function() {
+            console.log("error");
+        })
+        .always(function() {
+            console.log("complete");
+        });
 });
 </script>
 {% endblock extrajs %}
