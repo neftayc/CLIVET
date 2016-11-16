@@ -42,11 +42,4 @@ class CitaForm(forms.ModelForm):
             Row(
                 Div(Field('descripcion',), css_class='col-md-12'),
             ),
-            Div(Row(
-                FormActions(
-                    smtSave(),
-                    btnCancel(),
-                    btnReset(),
-                ),
-            ), css_class='modal-footer',),
         )

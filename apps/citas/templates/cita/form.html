@@ -40,6 +40,12 @@
                     {% csrf_token %} {% crispy form %}
                 </form>
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" name="submit" class="btn btn-primary text-bold" id="submit-id-submit" title="Grabar">
+                    <i class="btn-icon-onlyx fa fa-save"></i> <span class="hidden-xsx"> Grabar</span>
+                </button>
+            </div>
         </div>
     </div>
 </div>
@@ -219,9 +225,9 @@ $(document).ready(function() {
                 var html = "";
                 for (var i in dat) {
                     html = html +
-                        "<div data-event='" + 
-                        dat[i].pk + "'class='fc-event row' style='background-color:"+
-                        dat[i].fields.color+"'><div class='col-md-2 ext-left'><span class='glyphicon glyphicon-move'></span></div><div class='col-md-10 text-center'>"+dat[i].fields.title + "</div></div>";
+                        "<div data-event='" +
+                        dat[i].pk + "'class='fc-event row' style='background-color:" +
+                        dat[i].fields.color + "'><div class='col-md-2 ext-left'><span class='glyphicon glyphicon-move'></span></div><div class='col-md-10 text-center'>" + dat[i].fields.title + "</div></div>";
                 }
                 $("#external-events").html(html);
                 $('#external-events .fc-event').each(function() {
