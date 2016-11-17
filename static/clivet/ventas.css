@@ -5,53 +5,59 @@
     font-size: 15px;
     line-height: 30px;
     outline: none;
-    background-color: #2ec3d1;
     color: white;
 }
 
 .typeahead:focus {
-    border: 0px solid #0097cf;
+    border: none;
 }
 
 .typeahead {
     font-weight: bold;
-    background-color: #2ec3d1 !important;
+    background: rgb(0, 110, 106)!important;
 }
 
-.tt-dropdown-menu {
-    background-color: #D2EAF6;
-    border-radius: 0px;
-    color: #E0EAF1;
+.tt-menu {
+    width: auto;
+    background: rgb(0, 110, 106);
+    border-radius: 0em 0em .3em .3em;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
 }
 
 .tt-suggestion {
     width: auto;
     font-size: 15px;
     line-height: 24px;
-    background: #1EA2B2;
+    
     color: #E0EAF1;
 }
 
 .tt-suggestion.tt-cursor {
     border: 2px solid #0097A7;
     width: auto;
-    font-size: 20px;
-    background: #2ec3d1 !important;
+    font-size: 1.2em;
+    font-weight: bold;
+    background: rgb(0,150,136) !important;
     color: white;
 }
 
 .panel-titulo {
-    background: #0097a7 !important;
+    background: #009688 !important;
 }
 
 .titulo-busqueda {
-    font-size: 1.3em;
+    font-size: 1em;
+    letter-spacing: .08em;
     font-style: normal;
     font-weight: bold;
     color: white;
 }
 
-.producto::-webkit-input-placeholder {
+.th-carrito {
+    letter-spacing: .2em;
+}
+
+.typeahead::-webkit-input-placeholder {
     color: #E0EAF1;
 }
 
@@ -64,23 +70,28 @@
 .cantidad-input {
     position: relative;
     left: -13px;
-    background: #2ec3d1;
+    background: rgb(0, 110, 106)!important;
     font-weight: bold;
     opacity: 0.9;
     color: white;
-    border: 0.5px solid #0097A7;
+    border: 0.5px solid rgb(0, 105, 106);
 }
 
 .cantidad-input:focus {
     border: 0px solid #0097cf;
 }
 
-#enviar_producto {
+.enviar-producto {
     position: absolute;
-    right: 4%;
-    background-color: #03A9F4 !important;
+    right: 3%;
+    background: #8BC34A;
     color: white;
     font-weight: bold;
+}
+
+.enviar-producto:hover {
+    color: white;
+    background: rgb(139, 165, 74);
 }
 
 .detalle-titulo {
@@ -201,27 +212,113 @@ img {
     display: flex;
     align-items: center;
     text-align: center;
-
 }
-.resumen-reporte{
-    text-decoration:overline;
+
+.resumen-reporte {
+    text-decoration: overline;
     font-size: 1.4em;
     color: #757575;
     letter-spacing: .7em;
 }
-.resumen-fecha{
+
+.resumen-fecha {
     font-size: 1.7em;
     color: #616161;
     font-weight: bold;
     letter-spacing: .4em;
 }
-.td-reporte{
+
+.td-reporte {
     letter-spacing: .3em;
     font-weight: bold;
 }
-.soles-reporte{
+
+.soles-reporte {
     letter-spacing: .2em;
 }
-.input-cliente{
+
+.input-cliente {
     background: white !important;
+}
+
+.typeahead-cliente {
+    border: 2px;
+    font-size: 15px;
+    line-height: 30px;
+    outline: none;
+    background: rgb(0, 110, 106)!important;
+    color: white;
+    font-weight: bold;
+}
+
+.typeahead.cliente:focus {
+    border: 0px solid #0097cf;
+}
+
+.cliente-container {
+    background: #009688;
+    color: white;
+    font-size: 1em;
+    font-weight: bold;
+    letter-spacing: .08em;
+}
+
+.typeahead-cliente::-webkit-input-placeholder {
+    color: white;
+}
+
+.nuevo-cliente {
+    background: #8BC34A;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.nuevo-cliente:hover {
+    background: rgb(139, 165, 74);
+    color: white;
+}
+
+.pagar-button {
+    background: #8BC34A;
+    border: 0;
+    color: white;
+    font-weight: bold;
+    font-size: 2.3em;
+}
+
+.pagar-button:hover {
+    color: white;
+    background: rgb(139, 165, 74);
+}
+
+.panel-body {
+    padding: 0;
+    padding-bottom: 1em;
+}
+
+.container-resumen {
+    padding: 0em 2em 1em 2em;
+    letter-spacing: .2em;
+}
+
+.alerta-ventas {
+    width: auto;
+    left: auto;
+    right: 0;
+    position: absolute;
+    text-align: center;
+    padding: 1.2em;
+    top: 0em;
+    z-index: 1;
+    border: none;
+    background: rgba(255, 0, 0, .7);
+    border-color: rgba(200, 11, 34, .5);
+    border-radius: 2em 0em 0em 0em;
+    color: white;
+    box-shadow: 2px 3px 13px 1px rgba(64, 14, 14, 1);
+}
+
+.td-add {
+    letter-spacing: .2em;
 }
