@@ -143,19 +143,8 @@ $(document).ready(function() {
     });
 });
 
-$('#enviar_producto').attr('disabled', true);
-$('#cantidad_producto').on('change', ActiveButtonCantidad);
+$('#btn_pagar').attr('disabled', true);
 
-function ActiveButtonCantidad() {
-    if ($('#cantidad_producto').val() === '') {
-        $('#enviar_producto').attr('disabled', true);
-
-    } else {
-        $('#enviar_producto').attr('disabled', false);
-
-    }
-
-}
 (function() {
     function decimalAdjust(type, value, exp) {
         if (typeof exp === 'undefined' || +exp === 0) {
@@ -233,7 +222,7 @@ $(document).ready(function() {
                     });
             }
         }
-        var d;
+
 
         function not_exist(dd) {
             for (i in Venta.productos) {
@@ -260,6 +249,8 @@ $(document).ready(function() {
     });
 
 });
+var d;
+var c;
 
 function draw() {
     $("#r_sub_total").text(Venta.sub_total);
@@ -277,7 +268,9 @@ function draw() {
             "</td><td class='text-center'><button type='button' onclick='delete_p(" + i + ")'class='btn  btn-danger btn-md'><apan class='glyphicon glyphicon-trash'></span></button></td></tr>";
     }
     $("#tabla_producto").html(h);
-    console.log(JSON.stringify(Venta));
+    c = JSON.stringify(Venta);
+    console.log("ssssss", JSON.stringify(Venta));
+
     $("#id_data_venta").val(JSON.stringify(Venta));
 }
 
@@ -292,6 +285,7 @@ function delete_p(d) {
     draw();
     $('.typeahead , #cantidad_producto').val('');
 }
+
 
 function change_p(d) {
     var i;
@@ -313,6 +307,19 @@ function change_p(d) {
     }
 
 
+    $('#id' + i).on('change', ActiveButtonCantidad);
+
+    function ActiveButtonCantidad() {
+        console.log("zzzzzzzz", c);
+        if (Venta.productos[d].cantidad === ' ') {
+            $('#btn_pagar').attr('disabled', true);
+
+        } else {
+            $('#btn_pagar').attr('disabled', false);
+
+        }
+
+    }
 
     if (Venta.productos[d].cantidad <= Venta.productos[d].existencia) {
 
@@ -327,8 +334,10 @@ function change_p(d) {
             Venta.igv = Math.ceil10(Venta.total * 0.18, -2);
             Venta.sub_total = Math.ceil10(Venta.total - Venta.igv, -2);
             draw();
+
             $('.typeahead').focus();
             $('.typeahead , #cantidad_producto').val('');
+
         } else if (Venta.productos[d].cantidad < 0) {
             sms = '';
             sms = sms + "Cantidad Incorrecta para <strong>" + Venta.productos[d].nombre + "</strong>";
@@ -359,7 +368,7 @@ function change_p(d) {
                 $("#success-alert").hide();
                 $(".typeahead").val('');
             });
-            Venta.productos[d].cantidad ='';
+            Venta.productos[d].cantidad = '';
             Venta.productos[d].importe = Math.ceil10(Venta.productos[d].cantidad * Venta.productos[d].precioV, -2);
             Venta.productos[d].igvp = Math.ceil10((Venta.productos[d].cantidad * Venta.productos[d].precioV) * 0.18, -2);
             Venta.total = 0.00;
@@ -395,6 +404,8 @@ function change_p(d) {
     }
 
 }
+
+//$('.btn_pagar').on('change',DisableButton);
 </script>
 <!-- /#page-wrapper -->
 {% endblock content %}
