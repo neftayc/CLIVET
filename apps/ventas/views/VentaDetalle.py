@@ -1,24 +1,18 @@
 u"""Módulo View DetalleVenta"""
 
 from apps.utils.decorators import permission_resource_required
-from apps.utils.forms import empty
-from apps.utils.security import get_dep_objects, log_params, SecurityKey
+
 
 from django.conf import settings
-from django.contrib import messages
-from django.core.urlresolvers import reverse_lazy
-from django.http import HttpResponseRedirect
+
 from django.utils.decorators import method_decorator
-from django.utils.encoding import force_text
-from django.utils.text import capfirst
-from django.utils.translation import ugettext as _
-from django.views.generic.edit import CreateView, DeleteView, UpdateView
+
 from django.views.generic.list import ListView
-from django.views.generic import TemplateView
+
 from apps.ventas.models.Producto import Producto
 
 from ..models.Venta_Detalle import Detalle_Venta
-from ..forms.VentaDetalle import Detalle_VentaForm
+from ..models.Venta import Venta
 from django.core import serializers
 from django.http import HttpResponse
 
@@ -39,155 +33,17 @@ class DetalleVentaListView(ListView):
         return super(DetalleVentaListView,
                      self).dispatch(request, *args, **kwargs)
 
-    def get_paginate_by(self, queryset):
-        """Paginate."""
-        if 'all' in self.request.GET:
-            return None
-        return ListView.get_paginate_by(self, queryset)
-
-    def get_queryset(self):
-        """Tipo Doc List Queryset."""
-        self.o = empty(self.request, 'o', '-id')
-        self.f = empty(self.request, 'f', 'cantidad')
-        self.q = empty(self.request, 'q', '')
-        column_contains = u'%s__%s' % (self.f, 'contains')
-
-        return self.model.objects.filter(
-            **{column_contains: self.q}).order_by(self.o)
-
     def get_context_data(self, **kwargs):
-        """
-        Tipo Documento Identidad ListView List get context.
 
-        Funcion con los primeros datos iniciales para la carga del template.
-        """
-        context = super(DetalleVentaListView,
-                        self).get_context_data(**kwargs)
-        context['opts'] = self.model._meta
-        # context['cmi'] = 'menu' #  Validacion de manual del menu
-        context['title'] = ('Seleccione %s para cambiar'
-                            ) % capfirst('DetalleVenta')
+        context = super(DetalleVentaListView, self).get_context_data(**kwargs)
+        ventas = Venta.objects.get(id=self.kwargs['pk'])
 
-        context['o'] = self.o
-        context['f'] = self.f
-        context['q'] = self.q.replace('/', '-')
-
+        context['detalle'] = Detalle_Venta.objects.filter(
+            venta=ventas).order_by('pk')
+        context['cantidad'] = context['detalle'].count()
+        context['venta'] = ventas
+        context['sub'] = ventas.total - ventas.igv
         return context
-
-
-class DetalleVentaUpdateView(UpdateView):
-    """Tipo Documento Update View."""
-
-    model = Detalle_Venta
-    form_class = Detalle_VentaForm
-    template_name = "ventas/venta/formVentaDetalle.html"
-    success_url = reverse_lazy("ventas:ventadetalle_list")
-
-    @method_decorator(permission_resource_required)
-    def dispatch(self, request, *args, **kwargs):
-        """Tipo Documento Create View dispatch."""
-        key = self.kwargs.get(self.pk_url_kwarg, None)
-        pk = SecurityKey.is_valid_key(request, key, 'cat_upd')
-        if not pk:
-            return HttpResponseRedirect(self.success_url)
-        self.kwargs['pk'] = pk
-        try:
-            self.get_object()
-        except Exception as e:
-            messages.error(self.request, e)
-            log.warning(force_text(e), extra=log_params(self.request))
-            return HttpResponseRedirect(self.success_url)
-
-        return super(DetalleVentaUpdateView,
-                     self).dispatch(request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        """Tipo Documento Update View context data."""
-        context = super(DetalleVentaUpdateView,
-                        self).get_context_data(**kwargs)
-        context['opts'] = self.model._meta
-        # context['cmi'] = 'empresa'
-        context['title'] = ('Actualizar %s') % ('DetalleVenta')
-        return context
-
-    def form_valid(self, form):
-        """Tipo Documento Update View form_valid."""
-        self.object = form.save(commit=False)
-
-        self.object.usuario = self.request.user
-
-        msg = ('%(name)s "%(obj)s" fue cambiado satisfacoriamente.') % {
-            'name': capfirst(force_text(self.model._meta.verbose_name)),
-            'obj': force_text(self.object)
-        }
-        if self.object.id:
-            messages.success(self.request, msg)
-            log.warning(msg, extra=log_params(self.request))
-        return super(DetalleVentaUpdateView, self).form_valid(form)
-
-
-class DetalleVentaDeleteView(DeleteView):
-    """Empresa Delete View."""
-
-    model = Detalle_Venta
-    success_url = reverse_lazy('ventas:ventadetalle_list')
-
-    @method_decorator(permission_resource_required)
-    def dispatch(self, request, *args, **kwargs):
-        """Empresa Delete View dispatch."""
-        key = self.kwargs['pk']
-        pk = SecurityKey.is_valid_key(request, key, 'cat_del')
-        if not pk:
-            return HttpResponseRedirect(self.success_url)
-        self.kwargs['pk'] = pk
-        try:
-            self.get_object()
-        except Exception as e:
-            messages.error(self.request, e)
-            log.warning(force_text(e), extra=log_params(self.request))
-            return HttpResponseRedirect(self.success_url)
-        return super(DetalleVentaDeleteView,
-                     self).dispatch(request, *args, **kwargs)
-
-    def delete(self, request, *args, **kwargs):
-        u"""
-        Empresa Delete View delte.
-
-        Función para eliminar la empresa sobre un metodo que verifica las
-        dependencias de que tiene la tabla mostrando un mensaje de validacion.
-        """
-        try:
-            d = self.get_object()
-            deps, msg = get_dep_objects(d)
-            print(deps)
-            if deps:
-                messages.warning(
-                    self.request,
-                    ('No se puede Eliminar %(name)s') %
-                    {
-                        "name": capfirst(force_text(
-                            self.model._meta.verbose_name)
-                        ) + ' "' + force_text(d) + '"'
-                    })
-                raise Exception(msg)
-
-            d.delete()
-            msg = _(
-                ' %(name)s "%(obj)s" fuel eliminado satisfactorialmente.') % {
-                'name': capfirst(force_text(self.model._meta.verbose_name)),
-                'obj': force_text(d)
-            }
-            if not d.id:
-                messages.success(self.request, msg)
-                log.warning(msg, extra=log_params(self.request))
-        except Exception as e:
-            messages.error(request, e)
-            log.warning(force_text(e), extra=log_params(self.request))
-        return HttpResponseRedirect(self.success_url)
-
-    def get(self, request, *args, **kwargs):
-        """Empresa Delete View get."""
-        return self.delete(request, *args, **kwargs)
 
 
 def VenderCarro(request):

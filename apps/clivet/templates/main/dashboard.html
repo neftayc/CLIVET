@@ -4,6 +4,7 @@
 <link href="{% static 'custom/css/style.css' %}" rel="stylesheet">
 <link href="{% static 'bootstrap-fileinput/css/fileinput.css' %}" rel="stylesheet">
 <link href="{% static 'clivet/style.css' %}" rel="stylesheet">
+<link href="{% static 'clivet/ventas.css' %}" rel="stylesheet">
 <link href="{% static 'fullcalendar/fullcalendar.min.css' %}" rel="stylesheet"> {% endblock extrastyle %} {% block contentroot %}
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -14,7 +15,7 @@
         <div class="page-header page-clivet">
             <nav class="breadcrumb">
                 {% block breadcrumbs %}
-                <a href="{# url 'accounts:index' #}" class="breadcrumb-item"><i class="fa fa-home"></i> {% trans 'Home' %}&rsaquo;&rsaquo;</a> </p>
+                <a href="{# url 'accounts:index' #}" class="breadcrumb-item"><i class="fa fa-home"></i> {% trans 'Home' %}&rsaquo;&rsaquo;</a>
                 {% endblock breadcrumbs %}
             </nav>           
         </div>

@@ -16,10 +16,10 @@ class Producto(models.Model):
         'Precio de venta', max_digits=10, decimal_places=2)
     precioC = models.DecimalField(
         'Precio de Compra', max_digits=10, decimal_places=2)
-    existencia = models.IntegerField('Cantidad de Productos')
+    existencia = models.IntegerField('Cantidad de Productos',default=0.00)
     MontoReal = models.DecimalField(
-        'Monto Real', max_digits=10, decimal_places=2)
-    igv = models.DecimalField('IGV', max_digits=10, decimal_places=2)
+        'Monto Real', max_digits=10, decimal_places=2,default=0.00)
+    igv = models.DecimalField('IGV', max_digits=10, decimal_places=2,default=0.00)
 
     class Meta:
         verbose_name = "Producto"

@@ -16,16 +16,18 @@ from apps.ventas.models.Producto import Producto
 class VentaForm(forms.ModelForm):
     u"""Tipo Documeto Form."""
     producto = forms.ModelChoiceField(
-        queryset=Producto.objects.all(), required=False, label="", help_text="")
+        queryset=Producto.objects.all(), label="", help_text="")
     data_venta = forms.CharField(
-        required=False, widget=forms.TextInput(attrs={'type': 'hidden'}))
+        required=False,  widget=forms.TextInput(attrs={'type': 'hidden'}))
+    producto = forms.CharField(label="", required=False,
+                               widget=forms.TextInput(attrs={'type':'search','class': 'form-control typeahead input-lg', 'placeholder': 'Buscar Producto o Servicio','autofocus':'autofocus'}))
 
     class Meta:
 
         model = Venta
-        fields = ('total', 'cliente',)
-        exclude = ()
+        fields = ('total', 'igv',)
+        exclude = ('cliente',)
         widgets = {
-            'cliente': forms.Select(attrs={'class': 'form-control'}),
             'total': forms.TextInput(attrs={'class': 'form-control'}),
+            'igv': forms.TextInput(attrs={'class': 'form-control'}),
         }

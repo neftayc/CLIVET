@@ -5,11 +5,13 @@ from apps.sad.models import User
 
 
 class Venta(models.Model):
-    fechav = models.DateTimeField(auto_now_add=True)
+    fechav = models.DateField(auto_now_add=True)
     total = models.DecimalField(
         max_digits=20, decimal_places=2, blank=True, null=True)
     cliente = models.ForeignKey(Cliente)
     user = models.ForeignKey(User, blank=True, null=True)
+    igv = models.DecimalField(
+        max_digits=20, decimal_places=2, blank=True, null=True)
 
     class Meta:
         verbose_name = "Venta"
