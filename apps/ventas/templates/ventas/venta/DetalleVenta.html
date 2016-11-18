@@ -1,20 +1,10 @@
-{% extends "main/dashboard.html" %} {% load i18n staticfiles %}
-<!--
-@package     ventas
-Descripcion: Lista Tipo Documento
--->
-{% load i18n app_security %} {% load l10n humanize %} {% block breadcrumbs %}
-<a href="{# url 'accounts:index' #}">{% trans 'Home' %}</a> &rsaquo; {{ title }} {% endblock breadcrumbs %} {% block content_title %} {{ opts.verbose_name_plural|capfirst }}
-<small>{{ title }}</small> {% endblock content_title %} {% block content %}
-<!-- <div class="btn-toolbar btn-toolbar-top">
-    <div class="row">
-        <div class="btn-actions">
-            <a href="{% url 'ventas:reporte_ventas' %}" class="btn btn-primary text-bold" title="Agregar Venta detalle">
-                <i class="fa fa-plus"></i>
-                <span class="hidden-xs">Regresar</span>
-            </a>
-        </div>
-    </div>
+{% extends "main/dashboard.html" %} {% load i18n app_security staticfiles%} {% load i18n crispy_forms_tags %} {% load l10n humanize %} {% block style %}
+<link href="{% static 'clivet/ventas.css' %}" rel="stylesheet"> {% endblock style %} {% block breadcrumbs %}
+<ol class="breadcrumb">
+    <li><a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %}</a></li>
+    <li class="active"> {{ opts.verbose_name_plural|capfirst }}</li>
+</ol>
+{% endblock breadcrumbs %} {% block content_title %} {{title}}{% endblock content_title %} {% block content %}
 </div> -->
 <div class="container-fluid ">
     <div class="panel container-main">
@@ -80,5 +70,4 @@ Descripcion: Lista Tipo Documento
         </div>
     </div>
 </div>
-
 {% endblock content %}

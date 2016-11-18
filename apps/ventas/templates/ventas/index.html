@@ -1,5 +1,10 @@
-{% extends "main/dashboard.html" %} {% load i18n app_security %}{% load i18n crispy_forms_tags %} {% load l10n humanize %} {% block breadcrumbs %}
-<a href="{# url 'accounts:index' #}">{% trans 'Home' %}</a> &rsaquo; {{ title }} {% endblock breadcrumbs %} {% block content_title %} {{ opts.verbose_name_plural|capfirst }} | <small>{{ title }}</small> {% endblock content_title %} {% block content %}
+{% extends "main/dashboard.html" %} {% load i18n app_security staticfiles%} {% load i18n crispy_forms_tags %} {% load l10n humanize %} {% block style %}
+<link href="{% static 'clivet/ventas.css' %}" rel="stylesheet"> {% endblock style %} {% block breadcrumbs %}
+<ol class="breadcrumb">
+    <li><a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %}</a></li>
+    <li class="active"> {{ opts.verbose_name_plural|capfirst }}</li>
+</ol>
+{% endblock breadcrumbs %} {% block content_title %} {{title}}{% endblock content_title %} {% block content %}
 <div class="container-fluid  ">
     <div class="row panel panel-default">
         <div class="panel panel-info col-md-8">
@@ -38,7 +43,7 @@
                         <button type="search" class="btn nuevo-cliente btn-lg ">Nuevo</button>
                     </div>
                     <div class="col-md-9">
-                        <input id="id_cliente" value="" placeholder="Buscar Cliente" class="typeahead-cliente form-control input-lg" name="cliente">
+                        <input id="id_cliente" value="Cliente General" placeholder="Buscar Cliente" class="typeahead-cliente form-control input-lg" name="cliente">
                     </div>
                 </div>
                 <div class="panel-body  text-center">

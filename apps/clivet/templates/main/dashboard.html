@@ -7,10 +7,10 @@
 <link href="{% static 'clivet/style.css' %}" rel="stylesheet">
 <link href="{% static 'fullcalendar/fullcalendar.min.css' %}" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'bootstrap-3.1.1-dist/css/sb-admin.css' %}">
-<link href="{% static 'clivet/ventas.css' %}" rel="stylesheet">
+
 <style media="screen">
     .clivet-title{
-        color: #212121;
+        color: #5d5c5c;
         font-size: 2em;
     }
 
@@ -48,7 +48,7 @@
 {% endblock extrastyle %}
 {% block contentroot %}
 <!-- Navigation -->
-<nav class="navbar navbar-nefta navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-clivet navbar-fixed-top" role="navigation">
     {% load_menu request 'BACKEND' %}
     {% include "main/partials/header.html" %}
     {% include "main/partials/aside.html" %}
