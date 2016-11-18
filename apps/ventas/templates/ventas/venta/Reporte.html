@@ -8,25 +8,25 @@ Descripcion: Lista Tipo Documento
 <a href="{# url 'accounts:index' #}">
     {% trans 'Home' %}</a> &rsaquo; {{ title }} {% endblock breadcrumbs %} {% block content_title %} {{ opts.verbose_name_plural|capfirst }} | <small>{{ title }}</small> {% endblock content_title %} {% block content %}
 <div id="container-fluid ">
-    <div class="panel panel-info">
+    <div class="panel panel-success">
         <div class="panel-heading ">
             <div class="row container-heading-reporte">
                 <div class="btn-actions col-md-2 ">
-                    <a href="{% url 'ventas:ventaslist' %}" class=" btn btn-success btn-lg text-bold" title="Agregar Departamento">
+                    <a href="{% url 'ventas:ventaslist' %}" class=" btn do-buy btn-lg text-bold" title="Agregar Departamento">
                         <i class="fa fa-plus"></i>
                         <span class="hidden-xs"> Realizar Venta</span>
                     </a>
                 </div>
-                <div class="col-md-8 col-md-offset-0">
+                <div class="col-md-9 col-md-offset-0">
                     <div class="input">
                         <input type="text" class="form-control input-lg input-cliente " value="{{cliente.id}}" placeholder="Ingrese nombre de cliente">
                     </div>
                 </div>
-                <div class="col-md-2 col-md-offset-2">
+                <div class="col-md-3 ">
                     <div class="input-group input-append date">
                         <input type="text" class="form-control datepicker input-lg" value="{{ven.fechav|date:'Y-m-d'}}" data-date-format="yyyy-mm-dd">
                         <span class="input-group-btn">
-                                <button class="btn btn-info btn-lg" type="button"><span class="add-on glyphicon glyphicon-calendar"></span></button>
+                                <button class="btn btn-fecha btn-lg" type="button"><span class="add-on glyphicon glyphicon-calendar"></span></button>
                         </span>
                     </div>
                 </div>
@@ -94,6 +94,9 @@ $(document).ready(function() {
             minLength: 5,
             hint: true,
             highlight: true,
+            templates: {
+                notFound: '<div class="tt-suggestion tt-none">Cliente no encontrado en la Lista</div>',
+            },
             displayKey: 'persona',
             source: cliente.ttAdapter()
         }).on('typeahead:selected', function(event, data) {
@@ -227,6 +230,7 @@ $(document).ready(function() {
 
 
                     console.log(i);
+
                 }
                 subtg = Math.ceil10(totalg - igvg, -2);
                 totales = totales + "<div class='col-md-6'><p class='resumen-fecha'>" + fechav + "</p><p class='resumen-reporte'>RESUMEN TOTAL</p></div><div class='col-md-3'><p class = 'resumen-d text-left'> Igv 18 % : </p><p class='resumen-d text-left'>Sub Total : </p><p class = 'resumen-d text-left'> Total: </p></div><div class = 'col-md-3' >" +
@@ -238,6 +242,12 @@ $(document).ready(function() {
                 console.log(igvg);
                 console.log(subtg);
                 console.log(object);
+                if (Object.keys(object).length === 0) {
+                    console.log('vacio ', object);
+                    list = list + "<td colspan='6' class='td-reporte text-center'>Ninguna Venta encontrada</td>";
+                    $('.datos').html(list);
+                }
+
             }
         });
     }

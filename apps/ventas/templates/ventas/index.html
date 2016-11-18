@@ -89,7 +89,6 @@ $(document).ready(function() {
         prefetch: {
             ttl: 1,
             url: '/producto/search/',
-
         },
     });
     stocks.initialize();
@@ -98,6 +97,9 @@ $(document).ready(function() {
             minLength: 1,
             hint: true,
             highlight: true,
+            templates: {
+                notFound: '<div class="tt-suggestion tt-none">Producto o Servicio no encontrado en Inventario</div>',
+            },
             displayKey: 'nombre',
             source: stocks,
         }).on('typeahead:selected', function(event, data) {
@@ -122,7 +124,6 @@ $(document).ready(function() {
         prefetch: {
             ttl: 1,
             url: '/cliente/search/',
-
         },
     });
     stocks.initialize();
@@ -131,20 +132,19 @@ $(document).ready(function() {
             minLength: 5,
             hint: true,
             highlight: true,
+            templates: {
+                notFound: '<div class="tt-suggestion tt-none">Cliente  no  Encontrado</div>',
+            },
             displayKey: 'persona',
             source: stocks.ttAdapter()
         }).on('typeahead:selected', function(event, data) {
         $('.typeahead-cliente').val(data.id);
         var id_cliente = data.id;
-        console.log(Venta.cliente);
         Venta.cliente = data.id;
-        console.log(Venta.cliente);
         draw();
     });
 });
-
 $('#btn_pagar').attr('disabled', true);
-
 (function() {
     function decimalAdjust(type, value, exp) {
         if (typeof exp === 'undefined' || +exp === 0) {
@@ -209,10 +209,7 @@ $(document).ready(function() {
                         Venta.sub_total = Math.ceil10(Venta.total - Venta.igv, -2);
                         draw();
                         $('.typeahead , #cantidad_producto').val('');
-
                         $('#id' + i).focus();
-
-
                     })
                     .fail(function() {
                         console.log("error");
@@ -223,14 +220,11 @@ $(document).ready(function() {
             }
         }
 
-
         function not_exist(dd) {
             for (i in Venta.productos) {
                 if (Venta.productos[i].id == dd) {
                     $('.typeahead').focus();
                     $('.typeahead , #cantidad_producto').val('');
-                    $('#enviar_producto').attr('disabled', true);
-
                     sms = '';
                     sms = sms + "<strong>Producto o Servicio Ya existe en Carrito</strong>";
                     $('.alerta-ventas').html(sms);
@@ -240,14 +234,11 @@ $(document).ready(function() {
                         $(".typeahead").val('');
                     });
                     return false;
-
                 }
             }
             return true;
         }
-
     });
-
 });
 var d;
 var c;
@@ -268,9 +259,6 @@ function draw() {
             "</td><td class='text-center'><button type='button' onclick='delete_p(" + i + ")'class='btn  btn-danger btn-md'><apan class='glyphicon glyphicon-trash'></span></button></td></tr>";
     }
     $("#tabla_producto").html(h);
-    c = JSON.stringify(Venta);
-    console.log("ssssss", JSON.stringify(Venta));
-
     $("#id_data_venta").val(JSON.stringify(Venta));
 }
 
@@ -284,15 +272,19 @@ function delete_p(d) {
     Venta.sub_total = Math.ceil10(Venta.total - Venta.igv, -2);
     draw();
     $('.typeahead , #cantidad_producto').val('');
-}
+    if ($("#id0").val() === '') {
+        $('#btn_pagar').attr('disabled', false);
+    } else {
 
+        $('#btn_pagar').attr('disabled', true);
+    }
+}
 
 function change_p(d) {
     var i;
     var sms = '';
     Venta.productos[d].cantidad = $("#id" + d).text();
     if (Venta.productos[d].existencia <= 0) {
-        console.log(Venta.productos[d].nombre);
         sms = '';
         sms = sms + "<strong>Stok " + Venta.productos[d].nombre + " Agotado</strong>";
         $('.alerta-ventas').html(sms);
@@ -305,26 +297,8 @@ function change_p(d) {
         $('.typeahead').focus();
         return false;
     }
-
-
-    $('#id' + i).on('change', ActiveButtonCantidad);
-
-    function ActiveButtonCantidad() {
-        console.log("zzzzzzzz", c);
-        if (Venta.productos[d].cantidad === ' ') {
-            $('#btn_pagar').attr('disabled', true);
-
-        } else {
-            $('#btn_pagar').attr('disabled', false);
-
-        }
-
-    }
-
     if (Venta.productos[d].cantidad <= Venta.productos[d].existencia) {
-
         if (Venta.productos[d].cantidad > 0) {
-
             Venta.productos[d].importe = Math.ceil10(Venta.productos[d].cantidad * Venta.productos[d].precioV, -2);
             Venta.productos[d].igvp = Math.ceil10((Venta.productos[d].cantidad * Venta.productos[d].precioV) * 0.18, -2);
             Venta.total = 0.00;
@@ -334,19 +308,10 @@ function change_p(d) {
             Venta.igv = Math.ceil10(Venta.total * 0.18, -2);
             Venta.sub_total = Math.ceil10(Venta.total - Venta.igv, -2);
             draw();
-
             $('.typeahead').focus();
             $('.typeahead , #cantidad_producto').val('');
-
         } else if (Venta.productos[d].cantidad < 0) {
-            sms = '';
-            sms = sms + "Cantidad Incorrecta para <strong>" + Venta.productos[d].nombre + "</strong>";
-            $('.alerta-ventas').html(sms);
-            $("#success-alert").show();
-            $("#success-alert").delay(3000).slideUp(300, function() {
-                $("#success-alert").hide();
-                $(".typeahead").val('');
-            });
+
             Venta.productos[d].cantidad = Venta.productos[d].cantidad * (-1);
             Venta.productos[d].importe = Math.ceil10(Venta.productos[d].cantidad * Venta.productos[d].precioV, -2);
             Venta.productos[d].igvp = Math.ceil10((Venta.productos[d].cantidad * Venta.productos[d].precioV) * 0.18, -2);
@@ -357,7 +322,6 @@ function change_p(d) {
             Venta.igv = Math.ceil10(Venta.total * 0.18, -2);
             Venta.sub_total = Math.ceil10(Venta.total - Venta.igv, -2);
             draw();
-            $('#id' + i).focus();
             $('.typeahead').val('');
         } else if ($('.td-add').val('')) {
             sms = '';
@@ -400,11 +364,17 @@ function change_p(d) {
         Venta.igv = Math.ceil10(Venta.total * 0.18, -2);
         Venta.sub_total = Math.ceil10(Venta.total - Venta.igv, -2);
         draw();
+
         $('#id' + i).focus();
+
     }
+    if ($("#id0").val() === '') {
+        $('#btn_pagar').attr('disabled', false);
+    } else {
 
+        $('#btn_pagar').attr('disabled', true);
+    }
 }
-
 //$('.btn_pagar').on('change',DisableButton);
 </script>
 <!-- /#page-wrapper -->

@@ -28,7 +28,6 @@
     width: auto;
     font-size: 15px;
     line-height: 24px;
-    
     color: #E0EAF1;
 }
 
@@ -37,7 +36,7 @@
     width: auto;
     font-size: 1.2em;
     font-weight: bold;
-    background: rgb(0,150,136) !important;
+    background: rgb(0, 150, 136) !important;
     color: white;
 }
 
@@ -47,14 +46,14 @@
 
 .titulo-busqueda {
     font-size: 1em;
-    letter-spacing: .08em;
+    #B2DFDB letter-spacing: .08em;
     font-style: normal;
     font-weight: bold;
     color: white;
 }
 
 .th-carrito {
-    letter-spacing: .2em;
+    - letter-spacing: .2em;
 }
 
 .typeahead::-webkit-input-placeholder {
@@ -113,12 +112,14 @@
 
 img {
     margin: 0;
+    background-image: red;
 }
 
 .panel-titulo-detalle {
     display: flex;
     align-items: center;
     text-align: center;
+    color: white !important;
 }
 
 .td-producto {
@@ -188,11 +189,11 @@ img {
 }
 
 .panel-footer {
-    background: #CFD8DC;
+    background: #B2DFDB;
 }
 
 .panel-footer:hover {
-    background: #D0E9F5;
+    background: rgba(177, 222, 200, 1);
     color: red !important;
 }
 
@@ -238,7 +239,17 @@ img {
 }
 
 .input-cliente {
-    background: white !important;
+    border: 2px;
+    font-size: 15px;
+    line-height: 30px;
+    outline: none;
+    background: rgb(0, 110, 106)!important;
+    color: white;
+    font-weight: bold;
+}
+
+.input-cliente::-webkit-input-placeholder {
+    color: #E0EAF1;
 }
 
 .typeahead-cliente {
@@ -321,4 +332,78 @@ img {
 
 .td-add {
     letter-spacing: .2em;
+}
+
+.panel-heading {
+    background: #009688 !important;
+}
+
+.do-buy {
+    background: #8BC34A;
+    border: 0;
+    color: white;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.do-buy:hover {
+    color: white;
+    background: rgb(139, 165, 74);
+}
+
+.btn-fecha {
+    font-size: 20px;
+    background: #8BC34A;
+    border: 0;
+    color: white;
+    font-weight: bold;
+}
+
+.btn-fecha:hover {
+    color: white;
+    background: rgb(139, 165, 74);
+}
+
+.datepicker {
+    color: white;
+    border: 2px;
+    width: auto;
+    background: rgb(0, 110, 106)!important;
+    font-weight: bold;
+}
+
+.datepicker-dropdown {
+    box-shadow: 3px 6px 39px -2px rgba(0, 0, 0, 0.76);
+}
+
+.prev:hover,
+.next:hover,
+.day:hover,
+.today:hover,
+.datepicker-switch:hover,
+.month:hover {
+    color: white;
+    background: rgb(139, 165, 74) !important;
+}
+
+.dow,
+.day,
+.today.prev,
+.next,
+.today,
+.datepicker-switch,
+.month {
+    color: white;
+    letter-spacing: .2em;
+}
+
+.img-container {
+    background: rgba(0, 0, 0, .5);
+    padding: 1em;
+    border-radius: .3em;
+}
+
+.btn-success:hover {
+    color: white;
+    background: rgb(139, 165, 74) !important;
 }

@@ -20,7 +20,7 @@ class VentaForm(forms.ModelForm):
     data_venta = forms.CharField(
         required=False,  widget=forms.TextInput(attrs={'type': 'hidden'}))
     producto = forms.CharField(label="", required=False,
-                               widget=forms.TextInput(attrs={'type':'search','class': 'form-control typeahead input-lg', 'placeholder': 'Buscar Producto o Servicio'}))
+                               widget=forms.TextInput(attrs={'type':'search','class': 'form-control typeahead input-lg', 'placeholder': 'Buscar Producto o Servicio','autofocus':'autofocus'}))
 
     class Meta:
 
