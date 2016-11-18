@@ -8,7 +8,6 @@ class Detalle_Venta(models.Model):
     producto = models.ForeignKey(Producto)
     venta = models.ForeignKey(Venta)
     cantidad = models.IntegerField()
-    igv = models.DecimalField(decimal_places=2, max_digits=20)
     importe = models.DecimalField(decimal_places=2, max_digits=20)
 
     class Meta:

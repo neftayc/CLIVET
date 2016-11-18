@@ -1,0 +1,258 @@
+{% extends "main/dashboard.html" %}
+<!--
+@package     ventas
+Descripcion: Lista Tipo Documento
+-->
+{% load i18n staticfiles %} {% load i18n app_security %} {% load l10n humanize %} {% block breadcrumbs %}
+<link rel="stylesheet" type="text/css" href="{% static 'bootstrap-datepicker-1.6.4-dist/css/bootstrap-datepicker3.min.css' %}">
+<a href="{# url 'accounts:index' #}">
+    {% trans 'Home' %}</a> &rsaquo; {{ title }} {% endblock breadcrumbs %} {% block content_title %} {{ opts.verbose_name_plural|capfirst }} | <small>{{ title }}</small> {% endblock content_title %} {% block content %}
+<div id="container-fluid ">
+    <div class="panel panel-success">
+        <div class="panel-heading ">
+            <div class="row container-heading-reporte">
+                <div class="btn-actions col-md-2 ">
+                    <a href="{% url 'ventas:ventaslist' %}" class=" btn do-buy btn-lg text-bold" title="Agregar Departamento">
+                        <i class="fa fa-plus"></i>
+                        <span class="hidden-xs"> Realizar Venta</span>
+                    </a>
+                </div>
+                <div class="col-md-9 col-md-offset-0">
+                    <div class="input">
+                        <input type="text" class="form-control input-lg input-cliente " value="{{cliente.id}}" placeholder="Ingrese nombre de cliente">
+                    </div>
+                </div>
+                <div class="col-md-3 ">
+                    <div class="input-group input-append date">
+                        <input type="text" class="form-control datepicker input-lg" value="{{ven.fechav|date:'Y-m-d'}}" data-date-format="yyyy-mm-dd">
+                        <span class="input-group-btn">
+                                <button class="btn btn-fecha btn-lg" type="button"><span class="add-on glyphicon glyphicon-calendar"></span></button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th width="5%" class="text-center tr-title-reporte">#</th>
+                        <th width="15%" class="text-center tr-title-reporte">Fecha de Venta</th>
+                        <th width="30%" class="text-center tr-title-reporte">Cliente</th>
+                        <th width="20%" class="text-center tr-title-reporte">Igv</th>
+                        <th width="20%" class="text-center tr-title-reporte">Total</th>
+                        <th width="10%" class="text-center tr-title-reporte">Detalle</th>
+                    </tr>
+                </thead>
+                <tbody class="datos">
+                    {% for d in object_list %}
+                    <tr>
+                        <td class="text-center td-reporte">{% if is_paginated %} {{ page_obj.start_index|add:forloop.counter0 }} {% else %} {{ forloop.counter }} {% endif %}
+                        </td>
+                        <td class="text-center td-reporte">{{ d.fechav|date:'Y-m-d'}}</td>
+                        <td class="text-left td-reporte">{{ d.cliente }}</td>
+                        <td class="text-right td-reporte">{{ d.igv }}</td>
+                        <td class="text-right td-reporte">{{ d.total}}</td>
+                        <td class="text-center">
+                            <a href="{% url 'ventas:detalle_go' d.pk %}" class="btn btn-lg btn-success" title="Ver detalle de la Venta" rel="tooltip">
+                                <span class="glyphicon glyphicon-th-list"></span>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="panel-footer">
+            <div class="row totales">
+                {% if is_paginated %} {% load paginator %} {% paginator %} {% else %}
+                <div class="col-md-12">
+                    <ul class="breadcrumbpag">
+                        {{ object_list.count }} {% ifequal object_list.count 1 %}{{ opts.verbose_name|capfirst }}{% else %}{{ opts.verbose_name_plural|capfirst }}{% endifequal %}
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+$(document).ready(function() {
+    var cliente = new Bloodhound({
+        limit: 5,
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('documento', 'persona'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        prefetch: {
+            ttl: 1,
+            url: '/cliente/search/',
+
+        },
+    });
+    cliente.initialize();
+    $('.input-cliente ').typeahead(
+        null, {
+            minLength: 5,
+            hint: true,
+            highlight: true,
+            templates: {
+                notFound: '<div class="tt-suggestion tt-none">Cliente no encontrado en la Lista</div>',
+            },
+            displayKey: 'persona',
+            source: cliente.ttAdapter()
+        }).on('typeahead:selected', function(event, data) {
+        $('.typeahead').val(data.id);
+
+        var id = data.id;
+        console.log(id);
+        $.ajax({
+            data: {
+                'id': id
+            },
+            url: '/cliente/filter/',
+            type: 'get',
+            success: function(data) {
+                var object = JSON.parse(data);
+                console.log(object);
+                var list = "";
+                var totales = "";
+
+                var i;
+                var totalg = 0;
+                var igvg = 0;
+                var subtg = 0;
+                parseInt(i);
+                for (i in object) {
+                    list = list + "<tr>" +
+                        "<td class='text-center td-reporte'>" + (parseInt(+"" + i + "") + 1) +
+                        "</td><td class='text-center td-reporte'>" + object[i].fecha +
+                        "</td><td class='text-left td-reporte'>" + object[i].cliente +
+                        "</td><td class='text-right td-reporte'>" + object[i].igv +
+                        "</td><td class='text-right td-reporte'>" + object[i].total +
+                        "</td><td class='text-center'><a href='/reporte/venta/" + object[i].id + "/' class='btn btn-lg btn-success' title='Ver detalle de la Venta'><span class='glyphicon glyphicon-th-list'></span></a></td></tr>";
+                    $('.datos').html(list);
+                    totalg = Math.ceil10(parseFloat(object[i].total) + totalg, -2);
+                    igvg = Math.ceil10(parseFloat(object[i].igv) + igvg, -2);
+
+
+                    console.log(i);
+                }
+                subtg = Math.ceil10(totalg - igvg, -2);
+                totales = totales + "<div class='col-md-6'><p class='resumen-fecha'> RESUMEN TOTAL </p><p class='resumen-reporte text-center'>Veterinaria PepShop</p></div><div class='col-md-3'><p class = 'resumen-d text-left'> Igv 18 % : </p><p class='resumen-d text-left'>Sub Total : </p><p class = 'resumen-d text-left'> Total: </p></div><div class = 'col-md-3' >" +
+                    "<p class = 'resumen-v text-right'> <span class='soles-reporte'>S/.</span>" + igvg + "</p>" +
+                    "<p class = 'resumen-v text-right'> <span class='soles-reporte'>S/.</span>" + subtg + "</p>" +
+                    "<p class = 'resumen-v total-v text-right'> <span class='soles-reporte'>S/. </span>" + totalg + "</p>";
+                $('.totales').html(totales);
+                console.log(totalg);
+                console.log(igvg);
+                console.log(subtg);
+                console.log(object);
+
+            }
+        });
+    });
+});
+(function() {
+    function decimalAdjust(type, value, exp) {
+        if (typeof exp === 'undefined' || +exp === 0) {
+            return Math[type](value);
+        }
+        value = +value;
+        exp = +exp;
+        // Si el valor no es un número o el exp no es un entero...
+        if (isNaN(value) || !(typeof exp === 'number' && exp % 1 === 0)) {
+            return NaN;
+        }
+        // Shift
+        value = value.toString().split('e');
+        value = Math[type](+(value[0] + 'e' + (value[1] ? (+value[1] - exp) : -exp)));
+        // Shift back
+        value = value.toString().split('e');
+        return +(value[0] + 'e' + (value[1] ? (+value[1] + exp) : exp));
+    }
+    // Decimal round
+    if (!Math.round10) {
+        Math.round10 = function(value, exp) {
+            return decimalAdjust('round', value, exp);
+        };
+    }
+    // Decimal floor
+    if (!Math.floor10) {
+        Math.floor10 = function(value, exp) {
+            return decimalAdjust('floor', value, exp);
+        };
+    }
+    // Decimal ceil
+    if (!Math.ceil10) {
+        Math.ceil10 = function(value, exp) {
+            return decimalAdjust('ceil', value, exp);
+        };
+    }
+})();
+$(document).ready(function() {
+    $('.input-append.date').datepicker({
+        todayBtn: "linked",
+        language: 'es',
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+    });
+    $('.datepicker').on('change', Fecha);
+
+    function Fecha() {
+        var fechav = $(this).val();
+        console.log(fechav);
+        $.ajax({
+            data: {
+                'fechav': fechav
+            },
+            url: '/date/filter/',
+            type: 'get',
+            success: function(data) {
+                var object = JSON.parse(data);
+                var list = "";
+                var totales = "";
+
+                var i;
+                var totalg = 0;
+                var igvg = 0;
+                var subtg = 0;
+                parseInt(i);
+                for (i in object) {
+                    list = list + "<tr>" +
+                        "<td class='text-center td-reporte'>" + (parseInt(+"" + i + "") + 1) +
+                        "</td><td class='text-center td-reporte'>" + object[i].fecha +
+                        "</td><td class='text-left td-reporte'>" + object[i].cliente +
+                        "</td><td class='text-right td-reporte'>" + object[i].igv +
+                        "</td><td class='text-right td-reporte'>" + object[i].total +
+                        "</td><td class='text-center'><a href='/reporte/venta/" + object[i].id + "/' class='btn btn-lg btn-success' title='Ver detalle de la Venta'><span class='glyphicon glyphicon-th-list'></span></a></td></tr>";
+                    $('.datos').html(list);
+                    totalg = Math.ceil10(parseFloat(object[i].total) + totalg, -2);
+                    igvg = Math.ceil10(parseFloat(object[i].igv) + igvg, -2);
+
+
+                    console.log(i);
+
+                }
+                subtg = Math.ceil10(totalg - igvg, -2);
+                totales = totales + "<div class='col-md-6'><p class='resumen-fecha'>" + fechav + "</p><p class='resumen-reporte'>RESUMEN TOTAL</p></div><div class='col-md-3'><p class = 'resumen-d text-left'> Igv 18 % : </p><p class='resumen-d text-left'>Sub Total : </p><p class = 'resumen-d text-left'> Total: </p></div><div class = 'col-md-3' >" +
+                    "<p class = 'resumen-v text-right'> <span class='soles-reporte'> S/. </span>" + igvg + "</p>" +
+                    "<p class = 'resumen-v text-right'> <span class='soles-reporte'> S/. </span>" + subtg + "</p>" +
+                    "<p class = 'resumen-v total-v text-right'> <span class='soles-reporte'>S/.</span>" + totalg + "</p>";
+                $('.totales').html(totales);
+                console.log(totalg);
+                console.log(igvg);
+                console.log(subtg);
+                console.log(object);
+                if (Object.keys(object).length === 0) {
+                    console.log('vacio ', object);
+                    list = list + "<td colspan='6' class='td-reporte text-center'>Ninguna Venta encontrada</td>";
+                    $('.datos').html(list);
+                }
+
+            }
+        });
+    }
+
+});
+</script>
+<script type="text/javascript" src="{% static 'bootstrap-datepicker-1.6.4-dist/js/bootstrap-datepicker.min.js' %}"></script>
+{% endblock content %} {% block extrajs %} {% endblock extrajs %}

@@ -26,6 +26,8 @@ import logging
 log = logging.getLogger(__name__)
 
 # Create your views here.
+
+
 class AtencionListView(ListView):
     model = Atencion
     template_name = "clinica/atencion.html"
@@ -34,7 +36,6 @@ class AtencionListView(ListView):
         #mascota = Mascota.objects.get(nombre='Boby')
         context = super(AtencionListView, self).get_context_data(**kwargs)
         mascota = Mascota.objects.get(id=self.kwargs['pk'])
-
         context['opts'] = self.model._meta
         context['atencion'] = Atencion.objects.filter(colamedica__historia__mascota__nombre=mascota ).order_by('pk')
         context['nombre'] = mascota
@@ -197,7 +198,8 @@ class AtencionUpdateView(UpdateView):
         try:
             self.object = form.save(commit=False)
             try:
-                colamedica = ColaMedica.objects.get(pk=self.object.colamedica.pk)
+                colamedica = ColaMedica.objects.get(
+                    pk=self.object.colamedica.pk)
             except:
                 colamedica = ColaMedica()
                 # person.save()
@@ -285,6 +287,7 @@ class AtencionDeleteView(DeleteView):
     def get(self, request, *args, **kwargs):
         return self.delete(request, *args, **kwargs)
 
+
 class AtencionMedicaView(generic.DetailView):
     model = ColaMedica
     success_url = reverse_lazy('clinica:listar_medica')
@@ -349,6 +352,7 @@ class AtencionMedicaView(generic.DetailView):
         context['form'] = AtencionMascotaDetailForm(initial=initial)
         return context
 
+
 class MainAtencionesView(TemplateView):
 
     template_name = 'clinica/atencion.html'
@@ -356,6 +360,7 @@ class MainAtencionesView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(MainAtencionesView, self).get_context_data(**kwargs)
         context['title'] = _('Add %s') % capfirst(_('atencion'))
-        context['atencion'] = Atencion.objects.filter(colamedica = '0001').order_by('anamnesis')
+        context['atencion'] = Atencion.objects.filter(
+            colamedica='0001').order_by('anamnesis')
         context['cantidad'] = context['atencion'].count()
         return context
