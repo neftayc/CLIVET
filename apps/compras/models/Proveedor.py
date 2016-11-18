@@ -1,12 +1,12 @@
 from django.db import models
 
+Tipo_Documento = (
+    ('RUC', 'Registro Único de Comprobante'),
+    ('DNI', 'Documento nacional de Identidad'),
+)
+
 
 class Proveedor(models.Model):
-
-    Tipo_Documento = (
-        ('RUC', 'Registro Único de Comprobante'),
-        ('DNI', 'Documento nacional de Identidad'),
-    )
     tipodoc = models.CharField('Tipo de Documento', max_length=30,
                                choices=Tipo_Documento,
                                default='Registro Único de Comprobante')

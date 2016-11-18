@@ -19,8 +19,8 @@ class Producto(models.Model):
         'Precio de venta', max_digits=10, decimal_places=2)
     precioC = models.DecimalField(
         'Precio de Compra', max_digits=10, decimal_places=2)
-    existencia = models.PositiveIntegerField(
-        'Cantidad de Productos', default=0)
+    existencia = models.DecimalField(
+        'Cantidad de Productos', default=0, max_digits=10, decimal_places=2)
     MontoReal = models.DecimalField(
         'Monto Real', max_digits=10, decimal_places=2)
     igv = models.DecimalField('IGV', max_digits=10, decimal_places=2)

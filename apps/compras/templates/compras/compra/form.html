@@ -76,11 +76,11 @@
                         </div>
                     </div>
                     <div class="row center-block">
-                        <div class="col-md-6">
+                        <!-- <div class="col-md-6">
                             <p>Comprobante</p>
-                        </div>
+                        </div> -->
                         <div class="col-md-6">
-                            <p><span id="r_comprobante", class="btn btn-default">Examinar</span></p>
+                            {{ form.comprobante|as_crispy_field }}
                         </div>
                     </div>
                     <div class="input-group-btn">
@@ -104,31 +104,36 @@
                 <form action="" method="post">
                     <div class="row center-block">
                         <div class="col-md-6">
-                           <label for="nombre">Tipo de documento:</label>
+                            {{form.tipo_doc|as_crispy_field}}
+                           <label for="nombre">N° de documento:</label>
+                           <input type="number" class="form-control" id="numdoc">
+                           <label for="nombre">Razon social:</label>
+                            <input type="text" class="form-control" id="razon_social">
+                            <label for="nombre">Representante legal:</label>
+                            <input type="text" class="form-control" id="representante_legal">
+                            <label for="nombre">Direccion:</label>
+                            <input type="text" class="form-control" id="direccion">
                         </div>
                         <div class="col-md-6">
-                            <input type="email" class="form-control" id="tipodoc">
+                            <label for="nombre">Telefono:</label>
+                            <input type="number" class="form-control" id="telefono">
+                            <label for="nombre">Email:</label>
+                            <input type="email" class="form-control" id="email">
+                            <label for="nombre">Entidad bancaria:</label>
+                            <input type="text" class="form-control" id="enti_bancaria">
+                            <label for="nombre">N° de cuenta:</label>
+                            <input type="text" class="form-control" id="num_cuenta">
+                            <label for="nombre">Estado:</label>
+                            <input type="text" class="form-control" id="estado">
                         </div>
                     </div>
 
-                    <div class="row center-block">
-                        <div class="col-md-6">
-                           <label for="nombre">N° de documento:</label>
-                        </div>
-                        <div class="col-md-6">
-                            <input type="number" class="form-control" id="numdoc">
-                        </div>
-                    <div class="row center-block">
-                        <div class="col-md-6">
-                           <label for="nombre">Tipo de documento:</label>
-                        </div>
-                        <div class="col-md-6">
-                            <input type="email" class="form-control" id="tipodoc">
-                        </div>
-                    </div>
-                </form>
+                </form>       
             </div>
-        </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary" id="save-proveedor">Guardar</button>
+            </div>
     </div>
 </div>
 

@@ -53,7 +53,7 @@ Descripcion: Create/Update group
                             {{form.MontoReal}}
                         </div>
                     </div>
-                </div>
+                </div> 
             </div>
         </div>
     </div>
@@ -93,9 +93,21 @@ Descripcion: Create/Update group
                 <h4 class="modal-title" id="myModalLabel">{{ title }}</h4>
             </div>
             <div class="modal-body">
-                <form action="" method="post">
-                    {% csrf_token %} {% crispy form %}
+                <form action="" method="post">{% csrf_token %}
+                    <div class="form-group">
+                        <label for="nombre_unidad_medida">Nombre:</label>
+                        <input type="text" class="form-control" id="nombre_unidad_medida" placeholder="Ingrese un nombre">
+                        <label for="simbolo">Simbolo:</label>
+                        <input type="text" class="form-control" id="simbolo" placeholder="Ingrese un nombre">
+                        <label for="cantidad_equivalencia">Cantidad de equivalencia:</label>
+                        <input type="number" class="form-control" id="cantidad_equivalencia" placeholder="Ingrese un nombre">
+                    </div>
+                    {{form.unidadc_ventas|as_crispy_field}}
                 </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary" id="save-categoria">Guardar</button>
             </div>
         </div>
     </div>
