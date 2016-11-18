@@ -22,5 +22,8 @@ class Historial(models.Model):
         verbose_name = "Historia"
         verbose_name_plural = "Historias"
 
+    def _num(self):
+        return "%s" % (self.id)
+
     def __str__(self):
-        return "%s" % (self.mascota)
+        return "%s %s %s %s" % ("La mascota", self.mascota, "con N° Historia", self.num_historia)

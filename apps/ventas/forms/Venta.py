@@ -11,6 +11,7 @@ from django.db.models import Q
 from django.core.exceptions import NON_FIELD_ERRORS
 from ..models.Venta import Venta
 from apps.ventas.models.Producto import Producto
+from apps.sad.models import User
 
 
 class VentaForm(forms.ModelForm):
@@ -19,7 +20,10 @@ class VentaForm(forms.ModelForm):
         queryset=Producto.objects.all(), required=False, label="", help_text="")
     data_venta = forms.CharField(
         required=False, widget=forms.TextInput(attrs={'type': 'hidden'}))
-
+    medico = forms.ModelChoiceField(
+        queryset=User.objects.all(), required=False,)
+    data_cola = forms.CharField(
+        required=False, widget=forms.TextInput(attrs={'type': 'hidden'}))
     class Meta:
 
         model = Venta

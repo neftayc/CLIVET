@@ -3,7 +3,101 @@
 {% load i18n app_security %}
 {% load l10n humanize %}
 
+{% block style %}
+
+<link href="{% static 'bootstrap-chosen-master/bootstrap-chosen.css' %}" rel="stylesheet">
+<style media="screen">
+    .chosen-container {
+        width: 100% !important;
+    }
+
+    #asignar{
+        display: none;
+    }
+    .vacuna{
+        margin-bottom: 0px;
+    }
+    .titlehistoria.active, .titlehistoria.active:hover{
+        background: #B2DFDB;
+        border-color: #83b9b6;
+        color: #212121;
+        text-shadow: 0 -1px 0 #757575;
+    }
+
+    #div_id_mascotas, #div_id_medico, #div_id_descripcion{
+        margin-bottom: 1px;
+    }
+    #div_id_mascotas #id_mascotas, #div_id_medico #id_medico, #div_id_descripcion #id_descripcion{
+        cursor: default;
+        background-color: #fff;
+        -moz-appearance:none;
+        -webkit-appearance:none;
+        -ms-appearance:none;
+        -o-appearance:none;
+        color: #212121;
+        border-color: #83b9b6;
+        text-shadow: 0 -1px 0 #757575;
+    }
+
+    .btn-medica{
+        background: #009688;
+        color: #fff;
+    }
+    .btn-medica:hover{
+        background:#00796B;
+        color: #fff;
+    }
+
+    .btn-medica-add{
+        background: #B2DFDB;
+        border-color: #83b9b6;
+    }
+    .btn-medica-add:hover{
+        background: #009688;
+        border-color: #065f5a;
+        color: #fff;
+        font-size: 1.2em;
+    }
+
+    .panel-medica{
+        border-radius: 2px !important;
+        border-color: #83b9b6;
+    }
+    .medica-table{
+        border-color: #83b9b6;
+        background:#B2DFDB;
+    }
+    .panel-medica>thead>tr>th {
+        vertical-align: bottom;
+        color: #212121;
+        border-bottom: 2px solid #83b9b6;
+    }
+    .click{
+        background:#8BC34A;
+        color: #fff;
+        border-radius: 50%;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.23),0 3px 10px rgba(0,0,0,0.16);
+    }
+    .click:hover{
+        -webkit-transform: scale(1.2) rotate(90deg);
+        transform: scale(1.5) rotate(90deg);
+        color: #fff;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.23),0 3px 10px rgba(0,0,0,0.16);
+    }
+
+</style>
+{% endblock style %}
+
 {% block headjs %}
+
+<script src="{% static 'bootstrap-chosen-master/chosen.jquery.js' %}"></script>
+<script>
+  $(function() {
+	$('.chosen-select').chosen();
+	$('.chosen-select-deselect').chosen({ allow_single_deselect: true });
+  });
+</script>
+
 <script type="text/javascript">
 	$(document).ready(function(){
         $("input[name=nombre]").change(function () {
@@ -14,64 +108,69 @@
 {% endblock headjs %}
 
 {% block breadcrumbs %}
-<a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %} &rsaquo;</a>
+<ol class="breadcrumb">
+  <li><a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %}</a></li>
+  <li  class="active">{{ opts.verbose_name_plural|capfirst }}</li>
+</ol>
 {% endblock breadcrumbs %}
 
-{% block content_title %}
+{% block content_title %}<i class="fa fa-ambulance"></i> {{ title}}
 {% endblock content_title %}
 
 {% block content %}
-<select>
-    <option>Elige un Cliente</option>
-    {% for cliente in clientes %}
-        <option value="{{ cliente.id }}">{{ cliente.persona}}</option>
-    {% endfor %}
 
-</select>
-
-<div>
-    <form class="" name="datos" id="datos" method="post">
-
-    </form>
-</div>
-
+{% crispy form %}
 
 {% endblock content %}
 
 {% block extrajs %}
 <script type="text/javascript">
-    $('select').on('change', inicio);
-    function inicio() {
-        var id = $(this).val();
-        $.ajax({
-            data: {'id': id},
-            url: '/clinica/cliente/busqueda_ajax/',
-            type: 'get',
-            success: function (data) {
-                var html = ""
-                html += '<table class="table"><tdheader><tr><th>#</th><th>Nombre</th><th>Accion</th></tr></tdheader><tdbody>'
-                for(var i = 0; i<data.length; i++){
-                    html += '<tr><td>'+data[i].fields.pk+'</td><td>'+data[i].fields.mascota+'</td><td>'+data[i].fields.num_historia+'</td><td><a href="/clinica/colamedica/crear/{{d.pk|key:"cola_cre"}}/" class="btn btn-warning btn-sm text-bold" title="{% trans "Crear" %} {% trans "Historia" %}" rel="tooltip"><i class="btn-icon-only fa fa-hospital-o"></i></a></td></tr>'
-                    console.log(data[i]);
-                }
-                html += '</tdbody><table>'
-                $('#datos').html(html);
-
-                $("#boton").click(function () {
-        			if( $("#datos input[name='nombre']:radio").is(':checked')) {
-        				var valor = $('input:radio[name=nombre]:checked').val();
-                        alert("Bien!!!, la edad seleccionada es: " + valor);
-                        console.log(valor);
-
-        				} else{
-        					alert("Selecciona la edad por favor!!!");
-        					}
-        		});
+$("#id_cliente option:contains(---------)").remove();
+$("#id_mascotas option:contains(---------)").remove();
+$('#id_cliente').append('<option value selected="selected" diseabled>Buscar..</option>');
+$('#id_mascotas').append('<option value selected="selected" diseabled></option>');
 
 
+$('#id_cliente').on('change', function(){
+    $('#asignar').show()
+    $('#id_historia').hide()
+    var id = $(this).val();
+    $.ajax({
+        data: {'id': id},
+        url: '/clinica/cliente/busqueda_ajax/',
+        type: 'get',
+        success: function (data) {
+            var html = ""
+            for(var i = 0; i<data.length; i++){
+                html += '<tr>'
+                html += '<td>'+data[i].fields.num_historia+'</td>'
+                html += '<td>'+data[i].fields.mascota+'</td>'
+                html += '<td class="text-center"><span class="btn click" data-valor="'+data[i].pk+'" ><i class="fa fa-paw"></i></span></td>'
+                html += '</tr>'
+                console.log(data[i]);
             }
-        });
-    }
+            $('#datos').html(html);
+            $(".click").click(function(){
+                var data = $(this).attr("data-valor");
+                $("#id_historia").val(data);
+                $("#id_mascotas").val(data);
+
+                console.log(data);
+            });
+        }
+    });
+});
+
+$('form').addClass('form-medica');
+
+$(document).ready(function(){
+     $('#submit-id-submit').attr('disabled','disabled');
+     $('input[type="text"]').keypress(function(){
+            if($(this).val() != ''){
+               $('#submit-id-submit').removeAttr('disabled');
+            }
+     });
+ });
 
 </script>
 {% endblock extrajs %}

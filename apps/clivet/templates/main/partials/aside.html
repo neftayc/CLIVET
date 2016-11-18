@@ -1,15 +1,18 @@
 <div class="collapse navbar-collapse navbar-ex1-collapse">
-    <ul class="nav navbar-nav side-nav">
-        <li class="acces-direct center" style="position:relative">
-            <a href="#" style="float:left !important; width:auto;"><i class="fa fa-shopping-cart fa-basic" aria-hidden="true"></i></a>
-            <a href="#" style="float:left !important; width:auto;"><i class="fa fa-users fa-basic" aria-hidden="true"></i></a>
-            <a href="#" style="float:left !important; width:auto;"><i class="fa fa-stethoscope fa-basic" aria-hidden="true"></i></a>
-            <a href="#" style="float:left !important; width:auto;"><i class="fa fa-briefcase fa-basic" aria-hidden="true"></i></a></li>
+    <ul class="nav navbar-nav side-nav side-nefta">
         <li class="active">
             <a href="/clivet/clivet"><i class="fa fa-fw fa-dashboard"></i> Escritorio</a>
         </li>
         <li>
-            <a href="{% url 'ventas:ventaslist' %}"><i class="fa fa-fw fa-bar-chart-o"></i> Recepción</a>
+            <a href="javascript:;" data-toggle="collapse" data-target="#recepcion"><i class="fa fa-fw fa-arrows-v"></i> Recepción <i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="recepcion" class="collapse">
+                <li>
+                    <a href="/ventas/"><i class="fa fa-fw fa-table"></i> Ventas</a>
+                </li>
+                <li>
+                    <a href="{% url 'clinica:crear_medica' %}"><i class="fa fa-fw fa-table"></i> Atencion</a>
+                </li>
+            </ul>
         </li>
         <li>
             <a href="javascript:;" data-toggle="collapse" data-target="#clinica"><i class="fa fa-fw fa-arrows-v"></i> Clinica <i class="fa fa-fw fa-caret-down"></i></a>
@@ -21,15 +24,11 @@
                     <a href="{% url 'clinica:listar_mascotas' %}"><i class="fa fa-fw fa-table"></i> Pacientes</a>
                 </li>
                 <li>
-                    <a href="{% url 'clinica:busqueda_client' %}"><i class="fa fa-fw fa-table"></i> Clientes</a>
-                </li>
-                <li>
                     <a href="{% url 'clinica:listar_historia' %}"><i class="fa fa-fw fa-table"></i> Historias clinicas</a>
                 </li>
             </ul>
         </li>
         <li>
-            <li>
                 <a href="javascript:;" data-toggle="collapse" data-target="#compras"><i class="fa fa-fw fa-arrows-v"></i> Compras <i class="fa fa-fw fa-caret-down"></i></a>
                 <ul id="compras" class="collapse">
                     <li>
@@ -44,9 +43,6 @@
                 </ul>
             </li>
             <li>
-                <a href="{% url 'clivet:persona_list' %}"><i class="fa fa-fw fa-user"></i> Persona</a>
-            </li>
-            <li>
                 <a href="{% url 'clivet:cliente_list' %}"><i class="fa fa-fw fa-users"></i> Clientes</a>
             </li>
             <li>
@@ -57,25 +53,8 @@
                 <a href="{% url 'citas:cita_list' %}"><i class="fa fa-fw fa-calendar"></i>ver Citas</a>
             </li>
             <li>
-                <a href="javascript:;" data-toggle="collapse" data-target="#servicios"><i class="fa fa-fw fa-arrows-v"></i> Servicios <i class="fa fa-fw fa-caret-down"></i></a>
-                <ul id="servicios" class="collapse">
-                    <li>
-                        <a href="{% url 'clinica:crear_consulta' %}"><i class="fa fa-fw fa-wrench"></i> Consultas</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'clinica:listar_notas' %}"><i class="fa fa-fw fa-wrench"></i> Notas</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
                 <a href="{% url 'compras:proveedor_list' %}"><i class="fa fa-fw fa-file"></i> Proveedores</a>
             </li>
-        </li>
-        <li>
-            <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> Reportes</a>
-        </li>
-        <li>
-            <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> Configuración</a>
-        </li>
+
     </ul>
 </div>

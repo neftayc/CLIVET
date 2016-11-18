@@ -16,6 +16,8 @@ from django.views.generic.list import ListView
 from ..forms.colamedicaform import ColaMedicaForm
 
 from ..models.colamedica import ColaMedica
+from apps.clivet.models.cliente import Cliente
+
 import datetime
 import logging
 log = logging.getLogger(__name__)
@@ -103,11 +105,11 @@ class ColaMedicaListView(ListView):
         context['cantidad'] = context['fecha'].count()
         return context
 
-
 class ColaMedicaCreateView(CreateView):
+
     model = ColaMedica
     form_class = ColaMedicaForm
-    template_name = "clinica/form/colamedica.html"
+    template_name = "clinica/busqueda.html"
     success_url = reverse_lazy("clinica:listar_medica")
 
     @method_decorator(permission_resource_required)
@@ -117,10 +119,6 @@ class ColaMedicaCreateView(CreateView):
                      self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        """
-        Tipo Documento Identidad ListView List get context.
-        Funcion con los primeros datos iniciales para la carga del template.
-        """
         context = super(ColaMedicaCreateView,
                         self).get_context_data(**kwargs)
         context['opts'] = self.model._meta

@@ -62,7 +62,6 @@ class AtencionListView(ListView):
         return context
 
 class AtencionCreateView(CreateView):
-    """Tipo Documento Identidad."""
     model = Atencion
     form_class = AtencionForm
     template_name = "clinica/form/atencion.html"
@@ -77,7 +76,7 @@ class AtencionCreateView(CreateView):
             self.medica_pk = SecurityKey.is_valid_key(
                 self.request, key, 'medica_cre')
             if not self.medica_pk:
-                return HttpResponseRedirect(reverse_lazy('sad:user-person_search'))
+                return HttpResponseRedirect(reverse_lazy('clinica: listar_medica'))
         return super(AtencionCreateView, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
@@ -113,11 +112,11 @@ class AtencionCreateView(CreateView):
         sid = transaction.savepoint()
         try:
             try:
-                colamedica = ColaMedica.objects.get(
-                    pk=self.request.POST.get("person_id"))
+                colamedica = ColaMedica.objects.get(pk=self.request.POST.get("person_id"))
             except Exception as e:
                 colamedica = ColaMedica()
                 colamedica.save()
+
             colamedica.estado = form.cleaned_data['estado']
 
             colamedica.save()

@@ -3,7 +3,6 @@ from django.conf.urls import url
 
 from .views.atencionviews import (AtencionListView, AtencionCreateView, AtencionUpdateView, AtencionDeleteView, AtencionMedicaView, MainAtencionesView)
 from .views.colamedicaviews import (ColaMedicaListView, ColaMedicaCreateView, ColaMedicaUpdateView, ColaMedicaDeleteView, ColasMedicasListView)
-from .views.consultaviews import (ConsultaListView, ConsultaCreateView, ConsultaUpdateView, ConsultaDeleteView, lista_doctores1)
 from .views.historiaviews import (HistoriaListView, HistoriaCreateView, HistoriaUpdateView, HistoriaDeleteView, HistoriaMascotaDetailView, HistoriaMascotaCreateView)
 from .views.mascotaviews import (MascotaListView, MascotaCreateView, MascotaUpdateView, MascotaUpdateActiveView)
 from .views.notasviews import (NotasListView, NotasCreateView, NotasUpdateView, NotasDeleteView)
@@ -32,12 +31,7 @@ urlpatterns = [
 
     url(r'^colamedica/detail/(?P<pk>.*)/$', AtencionMedicaView.as_view(), name='colamedica_detail'),
 
-    #CONSULTA
-    url(r'^consulta/listar/$', ConsultaListView.as_view(), name="listar_consulta"),
-    url(r'^consulta/crear/$', ConsultaCreateView.as_view(), name="crear_consulta"),
-    url(r'^consulta/actualizar/(?P<pk>.*)/$', ConsultaUpdateView.as_view(), name="actualizar_consulta"),
-    url(r'^consulta/eliminar/(?P<pk>.*)/$', ConsultaDeleteView.as_view(), name="eliminar_consulta"),
-    url(r'^consulta/solo_url/$', lista_doctores1),
+
     #Historia
     url(r'^historia/listar/$', HistoriaListView.as_view(), name="listar_historia"),
     url(r'^historia/crear/$', HistoriaCreateView.as_view(), name="crear_historia"),

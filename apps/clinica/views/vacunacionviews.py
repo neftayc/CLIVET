@@ -15,6 +15,7 @@ from django.views.generic.list import ListView
 from django.views.generic import TemplateView
 
 from apps.clivet.models.cliente import Cliente
+from ..models.consulta import Diagnostico
 from ..models.historia import Historial
 from ..models.colamedica import ColaMedica
 from ..forms.colamedicaform import ColaMedicaForm
@@ -34,9 +35,9 @@ from django.core import serializers
 
 
 class BusquedaClientAjaxView(TemplateView):
-
     def get(self, request, *args, **kwargs):
         id_cliente = request.GET['id']
         mascotas = Historial.objects.filter(mascota__dueño__id = id_cliente)
+        print(mascotas[0].id)
         data = serializers.serialize('json', mascotas, fields=('id', 'mascota','num_historia'))
         return HttpResponse(data, content_type='application/json')

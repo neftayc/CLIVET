@@ -6,7 +6,7 @@ from django.utils.text import capfirst, get_text_list
 from crispy_forms.helper import FormHelper, Layout
 from crispy_forms.layout import Field, Div, Row, HTML
 from crispy_forms.bootstrap import FormActions, TabHolder, Tab, \
-    PrependedAppendedText, PrependedText
+    PrependedAppendedText, PrependedText, InlineRadios
 
 from django.utils.timezone import get_current_timezone
 from datetime import datetime
@@ -21,7 +21,7 @@ class MascotaForm(forms.ModelForm):
         """Meta."""
         model = Mascota
         exclude = ()
-        fields = ['nombre','dueño','fecha_nacimiento','genero','especie','raza','color','esterelizado','is_active','is_actived','descripcion','historia',]
+        fields = ['nombre','dueño','fecha_nacimiento','genero','especie','raza','color','esterelizado','descripcion',]
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
@@ -43,7 +43,7 @@ class MascotaForm(forms.ModelForm):
                 '%d/%m/%Y', '%d/%m/%y', '%d-%m-%Y', '%d-%m-%y', '%Y-%m-%d',
                 '%Y-%m-%d %H:%M:%S'),
             help_text=u'<small class="help-error"></small> %s' % _(
-                u'Some useful help text.'),
+                u''),
         )
         self.fields['genero'] = forms.ChoiceField(
             label=capfirst(_(u'genero*:')), required=False,
@@ -79,16 +79,7 @@ class MascotaForm(forms.ModelForm):
             help_text=u'<small class="help-error"></small> %s' % _(
                 u' '),
         )
-        self.fields['is_active'] = forms.BooleanField(
-            label=capfirst(_(u'activo')), required=True,
-            help_text=u'<small class="help-error"></small> %s' % _(
-                u' '),
-        )
-        self.fields['is_actived'] = forms.BooleanField(
-            label=capfirst(_(u'inactivo')), required=False,
-            help_text=u'<small class="help-error"></small> %s' % _(
-                u' '),
-        )
+
         self.fields['descripcion'] = forms.CharField(
             label=capfirst(_(u'Descripcion')), required=False,
             widget=forms.Textarea(attrs = {'rows': 4, }),
@@ -100,48 +91,51 @@ class MascotaForm(forms.ModelForm):
         self.helper = FormHelper()
 
         self.helper.form_method = 'post'
-        self.helper.form_class = 'js-validate form-vertical'
-
+        self.helper.form_class = 'js-validate form-vertical form-mascota'
         self.helper.layout = Layout(
             Row(
-                Div(Field('nombre', css_class='input-required'),
-            css_class='col-md-4'),
-                Div(Field('dueño', ),
-            css_class='col-md-4'),
-                Div(Field('fecha_nacimiento', css_class='input-datex'),
-            css_class='col-md-4'),
-            ),
-            Row(
-                Div(Field('especie',),
-            css_class='col-md-3'),
-                Div(Field('raza', css_class='input-required' ),
-            css_class='col-md-3'),
-                Div(Field('color', css_class='input-required'),
-            css_class='col-md-3'),
-                Div(Field('cond_corporal', ),
-            css_class='col-md-3'),
-            ),
-            Row(
-                Div(Field('genero', ),
-            css_class='col-md-4'),
-                Div(Field('esterelizado',),
-            css_class='col-md-2'),
-                Div(Field('is_active', ),
-            css_class='col-md-2'),
-                Div(Field('is_actived',),
-            css_class='col-md-2'),
-                Div(Field('historia',),
-            css_class='col-md-2'),
-            ),
-            Row(
-                Div(Field('descripcion', ),
-            css_class='col-md-12'),
-            ),
-            Row(
-                FormActions(
-                    smtSave(),
-                    btnCancel(),
-                    btnReset(),
+                Div(
+                    Field('nombre', placeholder="Introdusca el nombre de la mascota", css_class='input-required'),
+                css_class="col-md-4"),
+                Div(
+                    Field('dueño', css_class="input-required"),
+                css_class='col-md-4'),
+                Div(
+                    Field('fecha_nacimiento', css_class='input-datex'),
+                css_class="col-md-4"),
                 ),
+            Row(
+                Div(
+                    Field('especie',),
+                css_class="col-md-3"),
+                Div(
+                    Field('raza',placeholder="Introdusca la raza",  css_class='input-required' ),
+                css_class="col-md-3"),
+                Div(
+                    Field('color', placeholder="Introdusca el color", css_class='input-required'),
+                css_class="col-md-3"),
+                Div(
+                    Field('cond_corporal', ),
+                css_class="col-md-3"),
+            ),
+            Row(
+                Div(
+                    Div(
+                        InlineRadios('genero', default="macho"),
+                        Field('esterelizado',),
+                    css_class='mascota-opcion'),
+                css_class='col-md-3'),
+                Div(
+                    Field('descripcion', placeholder="Introdusca una cualidad de la mascota"),
+                css_class='col-md-9'),
+            ),
+            Row(
+                Div(
+                    FormActions(
+                        smtSave(),
+                        btnCancel(),
+                        btnReset(),
+                    ),
+                css_class="col-md-12 btn-controls"),
             ),
         )

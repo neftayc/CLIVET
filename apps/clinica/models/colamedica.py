@@ -11,7 +11,6 @@ from django.core.exceptions import ValidationError
 from ..models.historia import Historial
 from apps.sad.models import User
 
-# Create your models here.
 
 class ColaMedica(models.Model):
     historia = models.ForeignKey(Historial)

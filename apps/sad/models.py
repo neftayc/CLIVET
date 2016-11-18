@@ -424,6 +424,14 @@ class Backup(models.Model):
         return self.file_name
 
 
+'''
+Mantener esto desactivado hasta poner en producción
+Modelos que se usan solo para cambiar el verbose_name de las relaciones.
+Desactivar antes de hacer una migración a sad o un backup
+$python manage.py makemigrations sad
+$python manage.py migrate sad
+
+$python manage.py dumpdata > fixtures/backup_datayyyymmdd.json
 
 
 class GroupPermission(models.Model):
@@ -512,3 +520,5 @@ class ModuleInitialGroup(models.Model):
 
     def __str__(self):
         return '%s-%s' % (self.module, self.group)
+
+'''

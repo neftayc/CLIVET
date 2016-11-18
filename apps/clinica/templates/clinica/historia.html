@@ -3,12 +3,14 @@
 {% load l10n humanize %}
 
 {% block breadcrumbs %}
-<a href="{# url 'accounts:index' #}"><i class="fa fa-home"></i> {% trans 'Home' %} &rsaquo;&rsaquo;</a>
- {{ opts.verbose_name_plural|capfirst }}
+<ol class="breadcrumb">
+  <li><a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %}</a></li>
+  <li class="active">{{ opts.verbose_name_plural|capfirst }}</li>
+</ol>
 {% endblock breadcrumbs %}
 
 {% block content_title %}
-<h3><i class="fa fa-paw"></i> Listado de {{ opts.verbose_name_plural|capfirst }} Clinicas | <small>{{ title }}</small></h3>
+<i class="fa fa-list"></i> {{ title }}
 {% endblock content_title %}
 
 {% block content %}
@@ -26,7 +28,7 @@ $(function() {
 
 <div class="btn-toolbar btn-toolbar-top">
     <div class="row">
-        <div class="btn-actions">
+        <div class="btn-actions col-md-9">
         </div>
     </div>
 </div>
@@ -39,7 +41,7 @@ $(function() {
                 <th class="col-hidden">Veterinario</th>
                 <th class="col-hidden">Mascota</th>
                 <th class="col-hidden">Fecha</th>
-                <th class="btn-actions col-blocked text-center">Acción</th>
+                <th class="btn-actions col-blocked text-center">Mas Detalle</th>
             </tr>
         </thead>
         <tbody>
@@ -58,10 +60,6 @@ $(function() {
                 <td class="text-center">
                     <a href="{% url 'clinica:historia_detail' d.pk|key:'historia_det' %}" class="btn btn-warning btn-sm text-bold" title="{% trans 'Detail' %} {% trans 'historia' %}" rel="tooltip">
                         <i class="btn-icon-only fa fa-eye"></i>
-                    </a>
-
-                    <a href="{% url 'clinica:actualizar_historia' d.pk|key:'doc_upd' %}" class="btn btn-info btn-sm text-bold" title="Ediatar datos de tipo mascota" rel="tooltip">
-                        <i class="btn-icon-only fa fa-edit"></i>
                     </a>
                 </td>
             </tr>

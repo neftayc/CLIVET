@@ -1,44 +1,147 @@
-<div class="btn-group">
-  <button type="button" class="btn btn-danger"><i class="fa fa-md"></i>Nueva Atencion</button>
-  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <span class="caret"></span>
-    <span class="sr-only">Toggle Dropdown</span>
-  </button>
-  <ul class="dropdown-menu">
-    <li><a href="#"  data-toggle="modal" data-target="#consulta">Consulta General</a></li>
-    <li><a href="#">Aplicar Vacuna</a></li>
-    <li><a href="#">Aplicar  Antiparasitario</a></li>
-    <li><a href="#">Aplicar Antipulga</a></li>
-  </ul>
-</div>
-<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-calendar"></i>
-  </button>
-<div class="modal fade" id="consulta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">
-                    <span aria-hidden="true">&times;</span>
-                    <span class="sr-only">Cancelar</span>
-                </button>
-                <h4 class="modal-title" id="myModalLabel">Buscar Producto</h4>
-            </div>
-            <div class="modal-body">
-                <div class="input-group">
-                    <input name="producto" id="producto-id" class="form-control" placeholder="Ingrese nombre del producto" type="text">
-                    <span class="input-group-btn">
-                        <button name="seach" id="p-buscar" class="btn btn-flat"><i class="fa fa-search"></i></button>
-                    </span>
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel pa-consulta panel-info">
+        <div class="panel-heading" role="tab" id="headingOne">
+            <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Consulta</a>
+            </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body">
+                <div id="consultaform">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <ul class="list-group listado">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-home"></i> Anamnesis:</span>
+                                    {{ form.anamnesis }}
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-home"></i> Hallasgos Clinicos:</span>
+                                    {{ form.hallasgos_clinicos }}
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-home"></i> Diagnostico:</span>
+                                    {{ form.diagnostico }}
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon "><i class="fa fa-home"></i> Trauma:</span>
+                                    {{ form.dx }}
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-home"></i> Pronostico:</span>
+                                    {{ form.pronostico}}
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-home"></i> Pruebas Auxiliares:</span>
+                                    {{ form.pruebas_auxiliares }}
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-home"></i> Tratamiento:</span>
+                                    {{ form.tratamiento }}
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-home"></i> Observacion:</span>
+                                    {{ form.observacion }}
+                                </div>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <ul class="list-group listado">
+                                <div class="input-group">
+                                  <span class="input-group-addon"><i class="fa fa-paw"></i> T°</span>
+                                  {{ form.temperatura }}
+                                </div>
+                                <div class="input-group">
+                                  <span class="input-group-addon"><i class="fa fa-paw"></i> FC</span>
+                                  {{ form.fc }}
+                                </div>
+                                <div class="input-group">
+                                  <span class="input-group-addon"><i class="fa fa-paw"></i> FR</span>
+                                  {{ form.fr }}
+                                </div>
+                                <div class="input-group">
+                                  <span class="input-group-addon"><i class="fa fa-paw"></i> Kg</span>
+                                  {{ form.kg }}
+                                </div>
+                                <div class="input-group">
+                                  <span class="input-group-addon"><i class="fa fa-paw"></i> %</span>
+                                  {{ form.porcentaje }}
+                                </div>
+                                <div class="input-group">
+                                  <span class="input-group-addon" ><i class="fa fa-paw"></i> TLC</span>
+                                  {{ form.tlc}}
+                                </div>
+                                <button type="button" class="btn btn-info btn-block mostrarc">Modificar Consulta</button>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                <div id="producto-resultado"></div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">
-                    Cancelar
-                </button>
-                <button type="button" class="btn btn-primary" id="p-seleccionar" disabled>
-                    Seleccionar
-                </button>
+        </div>
+    </div>
+    <div class="panel pa-vacuna panel-danger">
+        <div class="panel-heading" role="tab" id="headingTwo">
+            <h4 class="panel-title">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Vacunacion</a>
+            </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+            <div class="panel-body">
+                <div id="vacunacionform">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <ul class="list-group listado">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i> F. Programada:</span>
+                                    {{ form.fecha_programada}}
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i> F. Aplicada:</span>
+                                    {{ form.fecha_programada}}
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-medkit"></i> Observacion:</span>
+                                    {{ form.vobservacion }}
+                                </div>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <ul class="list-group vacuna">
+                                <li class="list-group-item active  text-center">
+                                  <span><i class="fa fa-ambulance"></i> Vacunas Aplicadas</span>
+                                </li>
+                                <li class="list-group-item">{{ form.vacuna}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel pa-notas panel-success">
+        <div class="panel-heading" role="tab" id="headingThree">
+            <h4 class="panel-title">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Nota</a>
+            </h4>
+        </div>
+        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+            <div class="panel-body">
+                <div id="notasform">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <ul class="list-group listado">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i> Fecha:</span>
+                                    {{ form.fecha_programada }}
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-table"></i> Nota:</span>
+                                    {{ form.ndescripcion }}
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
