@@ -79,7 +79,6 @@ class MascotaListView(generic.ListView):
 
         return context
 
-
 class MascotaCreateView(CreateView):
     """Tipo Documento Identidad."""
 
@@ -103,14 +102,13 @@ class MascotaCreateView(CreateView):
                         self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
         #context['cmi'] = 'mascota'
-        context['title'] = ('Agregar %s') % ('nueva mascota')
-        context['subtitle'] = ('Agregando %s') % ('nueva mascota')
+        context['title'] = ('Agregar %s') % ('mascota')
+        context['subtitle'] = ('Registro %s') % (' de nueva mascota')
         return context
 
     def form_valid(self, form):
         """"Empresa Crete View  form valid."""
         self.object = form.save(commit=True)
-
         msg = _(' %(name)s "%(obj)s" fue creado satisfactoriamente.') % {
             'name': capfirst(force_text(self.model._meta.verbose_name)),
             'obj': force_text(self.object)
@@ -119,7 +117,6 @@ class MascotaCreateView(CreateView):
             messages.success(self.request, msg)
             log.warning(msg, extra=log_params(self.request))
         return super(MascotaCreateView, self).form_valid(form)
-
 
 class MascotaUpdateView(UpdateView):
     """Tipo Documento Update View."""
@@ -170,7 +167,6 @@ class MascotaUpdateView(UpdateView):
             messages.success(self.request, msg)
             log.warning(msg, extra=log_params(self.request))
         return super(MascotaUpdateView, self).form_valid(form)
-
 
 class MascotaUpdateActiveView(ListView):
 

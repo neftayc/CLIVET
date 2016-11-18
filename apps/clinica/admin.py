@@ -6,7 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 # models
 from .models.colamedica import ColaMedica
 from .models.mascota import Mascota
-from .models.consulta import Consulta
+from .models.consulta import HallasgosClinicos, Diagnostico, Pruebas, Tratamiento
 from .models.notas import Notas
 from .models.vacunacion import Vacunacion
 from .models.historia import Historial
@@ -16,7 +16,7 @@ from .models.atencion import Atencion
 class HistoriaAdmin(admin.ModelAdmin):
     model = Historial
     search_fields = ('num_historia',)
-    list_display = ('num_historia','mascota','get_dueño','created_ath', 'usuario', 'get_direccion','get_ciudad', 'get_telefono','get_especie','get_raza', 'get_color','get_sexo', 'get_edad', )
+    list_display = ('num_historia','mascota','get_dueño','created_ath', 'get_direccion','get_ciudad', 'get_telefono','get_especie','get_raza', 'get_color','get_sexo', 'get_edad', )
 
     def get_direccion(self, obj):
         return obj.mascota.dueño.direccion
@@ -67,7 +67,7 @@ class HistoriaAdmin(admin.ModelAdmin):
 class ColaMedicaAdmin(admin.ModelAdmin):
     model = ColaMedica
     search_fields = ('historia',)
-    list_display = ('historia', 'fecha','descripcion',)
+    list_display = ('historia', 'fecha','descripcion','medico',)
 
 class AtencionAdmin(admin.ModelAdmin):
     model = Atencion
@@ -98,7 +98,10 @@ class AtencionAdmin(admin.ModelAdmin):
 admin.site.register(Mascota)
 admin.site.register(ColaMedica, ColaMedicaAdmin)
 admin.site.register(Notas)
-admin.site.register(Consulta)
+admin.site.register(Diagnostico)
+admin.site.register(HallasgosClinicos)
+admin.site.register(Pruebas)
+admin.site.register(Tratamiento)
 admin.site.register(Vacunacion)
 admin.site.register(Historial, HistoriaAdmin)
 admin.site.register(Atencion, AtencionAdmin)

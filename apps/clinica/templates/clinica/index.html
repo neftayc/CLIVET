@@ -1,18 +1,16 @@
 {% extends "main/dashboard.html" %}
-<!--
-@package     conf
-Descripcion: Lista Tipo Documento
--->
 {% load i18n app_security %}
 {% load l10n humanize %}
 
 {% block breadcrumbs %}
-<a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %} &rsaquo;&rsaquo;</a>
- {{ opts.verbose_name_plural|capfirst }}
+<ol class="breadcrumb">
+  <li><a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %}</a></li>
+  <li class="active"> {{ opts.verbose_name_plural|capfirst }}</li>
+</ol>
 {% endblock breadcrumbs %}
 
 {% block content_title %}
-<h3><i class="fa fa-paw"></i> Listado de {{ opts.verbose_name_plural|capfirst }} | <small>{{ title }}</small></h3>
+<i class="fa fa-paw"></i> Listado de {{ opts.verbose_name_plural|capfirst }}
 {% endblock content_title %}
 
 {% block content %}
@@ -30,7 +28,7 @@ $(function() {
 
 <div class="btn-toolbar btn-toolbar-top">
     <div class="row">
-        <div class="btn-actions">
+        <div class="btn-actions col-md-9">
             <a href="{% url 'clinica:crear_mascota' %}" class="btn btn-primary text-bold" title="Agregar Mascota">
                 <i class="fa fa-plus"></i>
                 <span class="hidden-xs"> Agregar</span>
@@ -90,13 +88,18 @@ $(function() {
                 </td>
 
                 <td class="text-center">
-                    <a href="/clinica/atencion/listar/{{d.pk}}/" class="btn btn-danger btn-sm text-bold" title="{% trans 'Ver' %} {% trans 'Atenciones' %}" rel="tooltip"><i class="btn-icon-only fa fa-paw"></i></a>
+                    <a href="/clinica/atencion/listar/{{d.pk}}/" class="btn btn-warning btn-sm text-bold" title="{% trans 'Ver' %} {% trans 'Atenciones' %}" rel="tooltip"><i class="btn-icon-only fa fa-paw"></i></a>
+
+                    {% if d.historia %}
+
+                    <a href="/clinica/historia/mascota_add/{{d.pk|key:'historia_cre'}}/" class="btn btn-warning btn-sm text-bold" disabled title="{% trans 'Crear' %} {% trans 'Historia' %}" rel="tooltip"><i class="btn-icon-only fa fa-hospital-o"></i></a>
+
+                    {% else %}
 
                     <a href="/clinica/historia/mascota_add/{{d.pk|key:'historia_cre'}}/" class="btn btn-warning btn-sm text-bold" title="{% trans 'Crear' %} {% trans 'Historia' %}" rel="tooltip"><i class="btn-icon-only fa fa-hospital-o"></i></a>
 
-                    <a href="{% url 'clinica:actualizar_mascota' d.pk|key:'doc_upd' %}" class="btn btn-info btn-sm text-bold" title="Ediatar datos de la Mascota" rel="tooltip">
-                        <i class="btn-icon-only fa fa-edit"></i>
-                    </a>
+                    {% endif %}
+
                     {% if d.is_active %}
 
                     <a href="/clinica/mascota/state/ina/{{d.pk|key:'mascota_ina'}}/" class="btn btn-success btn-sm text-bold" title="{% trans 'inactivate'|capfirst %} {% trans 'Mascota' %}" rel="tooltip"><i class="btn-icon-only fa fa-flag"></i></a>
@@ -105,8 +108,12 @@ $(function() {
 
                     <a href="/clinica/mascota/state/rea/{{d.pk|key:'mascota_rea'}}/" class="btn btn-info btn-sm text-bold" title="{% trans 'reactivate'|capfirst %} {% trans 'Mascota' %}" rel="tooltip"><i class="btn-icon-only fa fa-flag"></i></a>
 
+
                     {% endif %}
 
+                    <a href="{% url 'clinica:actualizar_mascota' d.pk|key:'doc_upd' %}" class="btn btn-info btn-sm text-bold" title="Ediatar datos de la Mascota" rel="tooltip">
+                        <i class="btn-icon-only fa fa-edit"></i>
+                    </a>
                 </td>
             </tr>
             {% endfor %}
@@ -128,3 +135,6 @@ $(function() {
 </div>
 
 {% endblock content %}
+{% block extrajs %}
+{{ block.super }}
+{% endblock extrajs %}

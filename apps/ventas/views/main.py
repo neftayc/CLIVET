@@ -21,6 +21,7 @@ from ..models.Venta import Venta
 from ..forms.Venta import VentaForm
 from ..models.Venta_Detalle import Detalle_Venta
 from ..forms.VentaDetalle import Detalle_VentaForm
+from apps.clinica.models.colamedica import ColaMedica
 from django.db import transaction
 import logging
 log = logging.getLogger(__name__)
@@ -93,22 +94,32 @@ class MainCreateView(CreateView):
         """"Empresa Crete View  form valid."""
         self.object = form.save(commit=False)
         sid = transaction.savepoint()
+        print("______________0________________")
         try:
-            venta = json.loads(self.request.POST.get('data_venta'))
-            print("______________1_________________")
-            print(venta)
-            print(self.request.POST.get('cliente'))
-            self.object.total = venta['total']
-            self.object.save()
-            for p in venta['productos']:
-                dv = Detalle_Venta(
-                    producto_id=p['id'],
-                    venta=self.object,
-                    cantidad=p['cantidad'],
-                    igv=p['igv'],
-                    importe=p['importe'],
+            if(False):
+                print("______________1_________________")
+                venta = json.loads(self.request.POST.get('data_venta'))
+                self.object.total = venta['total']
+                self.object.save()
+                for p in venta['productos']:
+                    dv = Detalle_Venta(
+                        producto_id=p['id'],
+                        venta=self.object,
+                        cantidad=p['cantidad'],
+                        igv=p['igv'],
+                        importe=p['importe'],
+                    )
+                    dv.save()
+            else:
+                print("______________2_________________")
+                cola = json.loads(self.request.POST.get('data_cola'))
+                print(cola)
+                c = ColaMedica(
+                    medico_id = cola['id_medico'],
+                    historia_id = cola['id_historia'],
+                    descripcion = cola['descripcion'],
                 )
-                dv.save()
+                c.save()
 
             # crearFactura.save()
             # print ("Factura guardado")

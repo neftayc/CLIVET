@@ -12,7 +12,6 @@ from .views import ModuleListView, ModuleCreateView, \
     ModuleUpdateView, ModuleDeleteView, ModuleUpdateActiveView, \
     ModuleSolutionsUpdateView
 
-
 from .views import GroupListView, GroupCreateView, GroupUpdateView,\
     GroupDeleteView, GroupPermissionsUpdateView
 
@@ -39,7 +38,6 @@ urlpatterns = [
         UserCreateView.as_view(), name='user-create'),
     url(r'^user/index/$',
         UserListView.as_view(), name='user-list'),
-
 
     # menu x asullom
     url(r'^menu/state/(?P<state>[\w\d\-]+)/(?P<pk>.*)/$',

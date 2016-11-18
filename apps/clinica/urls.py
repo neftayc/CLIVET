@@ -1,14 +1,18 @@
 from django.conf.urls import url
 
+
 from .views.atencionviews import (AtencionListView, AtencionCreateView, AtencionUpdateView, AtencionDeleteView, AtencionMedicaView, MainAtencionesView)
-from .views.colamedicaviews import (ColaMedicaListView, ColaMedicaCreateView, ColaMedicaUpdateView, ColaMedicaDeleteView)
-from .views.consultaviews import (ConsultaListView, ConsultaCreateView, ConsultaUpdateView, ConsultaDeleteView, lista_doctores1)
+from .views.colamedicaviews import (ColaMedicaListView, ColaMedicaCreateView, ColaMedicaUpdateView, ColaMedicaDeleteView, ColasMedicasListView)
 from .views.historiaviews import (HistoriaListView, HistoriaCreateView, HistoriaUpdateView, HistoriaDeleteView, HistoriaMascotaDetailView, HistoriaMascotaCreateView)
 from .views.mascotaviews import (MascotaListView, MascotaCreateView, MascotaUpdateView, MascotaUpdateActiveView)
 from .views.notasviews import (NotasListView, NotasCreateView, NotasUpdateView, NotasDeleteView)
-from .views.vacunacionviews import (VacunacionListView, VacunacionCreateView, VacunacionUpdateView, VacunacionDeleteView)
+from .views.vacunacionviews import (BusquedaClientView, BusquedaClientAjaxView)
 
 urlpatterns = [
+
+    url(r'^cliente/busqueda/$', BusquedaClientView.as_view(), name="busqueda_client"),
+    url(r'^cliente/busqueda_ajax/$', BusquedaClientAjaxView.as_view()),
+
     #Atencion
     url(r'^atencion/listar/(?P<pk>\d+)/$', AtencionListView.as_view(), name="listar_atencion"),
 
@@ -20,18 +24,14 @@ urlpatterns = [
 
     #Cola Medica
     url(r'^colamedica/listar/$', ColaMedicaListView.as_view(), name="listar_medica"),
+    url(r'^colamedica/lista/$', ColasMedicasListView.as_view(), name="lista_medica"),
     url(r'^colamedica/crear/$', ColaMedicaCreateView.as_view(), name="crear_medica"),
     url(r'^colamedica/actualizar/(?P<pk>.*)/$', ColaMedicaUpdateView.as_view(), name="actualizar_medica"),
     url(r'^colamedica/eliminar/(?P<pk>.*)/$', ColaMedicaDeleteView.as_view(), name="eliminar_medica"),
 
     url(r'^colamedica/detail/(?P<pk>.*)/$', AtencionMedicaView.as_view(), name='colamedica_detail'),
 
-    #CONSULTA
-    url(r'^consulta/listar/$', ConsultaListView.as_view(), name="listar_consulta"),
-    url(r'^consulta/crear/$', ConsultaCreateView.as_view(), name="crear_consulta"),
-    url(r'^consulta/actualizar/(?P<pk>.*)/$', ConsultaUpdateView.as_view(), name="actualizar_consulta"),
-    url(r'^consulta/eliminar/(?P<pk>.*)/$', ConsultaDeleteView.as_view(), name="eliminar_consulta"),
-    url(r'^consulta/solo_url/$', lista_doctores1),
+
     #Historia
     url(r'^historia/listar/$', HistoriaListView.as_view(), name="listar_historia"),
     url(r'^historia/crear/$', HistoriaCreateView.as_view(), name="crear_historia"),
@@ -54,9 +54,4 @@ urlpatterns = [
     url(r'^notas/actualizar/(?P<pk>.*)/$', NotasUpdateView.as_view(), name="actualizar_notas"),
     url(r'^notas/eliminar/(?P<pk>.*)/$', NotasDeleteView.as_view(), name="eliminar_notas"),
 
-    #Vacunacion
-    url(r'^vacunacion/listar/$', VacunacionListView.as_view(), name="listar_vacunacion"),
-    url(r'^vacunacion/crear/$', VacunacionCreateView.as_view(), name="crear_vacunacion"),
-    url(r'^vacunacion/actualizar/(?P<pk>.*)/$', VacunacionUpdateView.as_view(), name="actualizar_vacunacion"),
-    url(r'^vacunacion/eliminar/(?P<pk>.*)/$', VacunacionDeleteView.as_view(), name="eliminar_vacunacion"),
 ]

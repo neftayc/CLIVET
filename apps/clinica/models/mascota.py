@@ -26,11 +26,53 @@ BOOL_GENERO = (
     ('Hembra', "Hembra")
 )
 
+CARACTER = (
+    ('tranquilo', "Tranquilo"),
+    ('agresivo', "Agresivo"),
+    ('nervioso', "Nervioso")
+)
+
+ACTIVIDAD = (
+    ('alta', "Alta"),
+    ('normal', "Normal"),
+    ('baja', "Baja")
+)
+
+HABITAT = (
+    ('casa', "Casa"),
+    ('azotea', "Azotea"),
+    ('campo', "Campo"),
+    ('patio', "Patio"),
+    ('criadero', "Criadero"),
+    ('jardin', "Jardin"),
+    ('calle', "Calle")
+)
+
+ALIMENTACION = (
+    ('balanceada', "Balanceada seca"),
+    ('lata', "Lata"),
+    ('casera', "Casera"),
+    ('huevos', "Huevos"),
+    ('huevos', "Otros")
+)
+
+APTITUP = (
+    ('compañia', "Compañia"),
+    ('guardia', "Guardia"),
+    ('trabajo', "Trabajo"),
+    ('deporte', "Deporte"),
+    ('casa', "Casa")
+)
+
+CONVIVE = (
+    ('Si', "Sí"),
+    ('No', "No")
+)
 
 class Mascota(models.Model):
 
     nombre = models.CharField(max_length=100)
-    dueño = models.ForeignKey(Cliente, default='1')
+    dueño = models.ForeignKey(Cliente)
     fecha_nacimiento = models.DateTimeField(
         capfirst(_('Fecha Nacimiento')), null=True, blank=True)
     genero = models.CharField(
@@ -47,6 +89,14 @@ class Mascota(models.Model):
     is_active = models.BooleanField(capfirst(_('active')), default=True)
     is_actived = models.BooleanField(_('Actived'), default=False)
     descripcion = models.CharField(max_length=200)
+
+#reseña de la amscota
+    caracter = models.CharField(max_length=100, choices=CARACTER ,null=True, blank=True)
+    actividad = models.CharField(max_length=100, choices=ACTIVIDAD ,null=True, blank=True)
+    habitar = models.CharField(max_length=100, choices=HABITAT ,null=True, blank=True)
+    alimentacion = models.CharField(max_length=100, choices=ALIMENTACION , null=True, blank=True)
+    aptitup = models.CharField(max_length=100, choices=APTITUP ,null=True, blank=True)
+    convive = models.CharField(max_length=100, choices=CONVIVE ,null=True, blank=True)
 
     class Meta:
         verbose_name = "Mascota"

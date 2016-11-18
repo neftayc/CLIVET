@@ -1,33 +1,38 @@
 {% extends "main/dashboard.html" %}
+
 {% load i18n app_security %}
 {% load l10n humanize %}
 
 {% block breadcrumbs %}
-<a href="{# url 'accounts:index' #}"><i class="fa fa-home"></i> {% trans 'Home' %} &rsaquo;&rsaquo;</a>
- {{ opts.verbose_name_plural|capfirst }}
+<ol class="breadcrumb">
+  <li><a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %}</a></li>
+  <li class="active">{{ opts.verbose_name_plural|capfirst }}</li>
+</ol>
 {% endblock breadcrumbs %}
 
 {% block content_title %}
-<h3><i class="fa fa-paw"></i> Listado de {{ opts.verbose_name_plural|capfirst }} | <small>{{ title }}</small></h3>
+<i class="fa fa-paw"></i> {{ title }}
 {% endblock content_title %}
 
 {% block content %}
-<script type="text/javascript">
-$(function() {
-    $('table').kgrid({
-        form_data : ['{{f}}', '{{q}}'],
-        form_to   : '/clinica/colamedica/listar/?f={{f}}&q={{q}}',
-        order_attr: 'class=""',
-        order_to  : '/clinica/colamedica/listar/?f={{f}}&q={{q}}',
-    });
-});
-</script>
+
 <div class="btn-toolbar btn-toolbar-top">
     <div class="row">
-        <div class="btn-actions">
-            <a href="{% url 'clinica:crear_medica' %}" class="btn btn-primary text-bold" title="Agregar Tipo Documento Identidad">
-                <i class="fa fa-plus"></i>
-                <span class="hidden-xs"> Agregar</span>
+        <div class="col-md-3">
+            <div class="form-group">
+              <select id="disabledSelect" class="form-control">
+                  <option>Cualquier Medico</option>
+              </select>
+            </div>
+        </div>
+        <div class="col-md-2 col-md-offset-5">
+            <a href="{% url 'clinica:lista_medica' %}" class="btn btn-info btn-block text-bold" title="Ver toda las colas medicas">
+                <span class="hidden-xs">Mostra Todo<span>
+            </a>
+        </div>
+        <div class="col-md-2 ">
+            <a href="{% url 'clinica:listar_historia' %}" class="btn btn-info btn-block text-bold" title="Ver toda las colas medicas">
+                <span class="hidden-xs"> Ir a Historias<span>
             </a>
         </div>
     </div>
@@ -38,14 +43,16 @@ $(function() {
             <tr>
                 <th>#</th>
                 <th class="col-hidden" data-search="fecha" data-order="fecha">Hora</th>
+                <th class="col-hidden">Paciente</th>
                 <th class="col-hidden">N° Historia</th>
+                <th class="col-hidden">Propietario</th>
                 <th class="col-hidden">Descripcion</th>
-                <th class="col-hidden col-blocked text-center">Estado</th>
+                <th class="col-hidden text-center">Estado</th>
                 <th class="btn-actions col-blocked text-center">Acción</th>
             </tr>
         </thead>
         <tbody>
-            {% for d in object_list %}
+            {% for d in fecha %}
             <tr>
                 <td>{% if is_paginated %}
                     {{ page_obj.start_index|add:forloop.counter0 }}
@@ -53,51 +60,90 @@ $(function() {
                     {{ forloop.counter }}
                     {% endif %}
                 </td>
-                <td>{{ d.fecha|time }}</td>
-                <td>{{ d.historia }}</td>
+                <td>{{ d.fecha|date }}</td>
+                <td>{{ d.historia.mascota }} - {{ d.historia.mascota.raza}}</td>
+                <td>{{ d.historia.num_historia }}</td>
+                <td>{{ d.historia.mascota.dueño }}</td>
                 <td>{{ d.descripcion }}</td>
                 <td class="text-center">
                     <span class="label label-{{ d.estado|yesno:'success,danger' }}">
-                        {%  if d.estado %}{% trans 'Atendido ' %}
-                        {% else %}{% trans 'En espera ' %}
+                        {%  if d.estado %}{% trans 'A ' %}
+                        {% else %}{% trans 'E ' %}
                         {% endif %}
                     </span>
                 </td>
                 <td class="text-center">
-                    <a href="{% url 'clinica:colamedica_detail' d.pk|key:'aten_det' %}" class="btn btn-info btn-sm text-bold" title="Atencion mascota" rel="tooltip">
-                        <i class="btn-icon-only fa fa-paw"></i>
-                    </a>
-                    <a href="/clinica/atencion/crear/{{d.pk|key:'medica_cre'}}/" class="btn btn-warning btn-sm text-bold" title="{% trans 'Crear' %} {% trans 'Historia' %}" rel="tooltip"><i class="btn-icon-only fa fa-hospital-o"></i></a>
+                    <button class="btn btn-info btn-sm text-bold" data-container="body" data-toggle="popover" data-content="Medico asignado {{d.medico}}"><i class="btn-icon-only fa fa-user-md"></i></button>
+                    <a href="/clinica/atencion/crear/{{d.pk|key:'medica_cre'}}/" class="btn btn-warning btn-sm text-bold" title="{% trans 'Iniciar' %} {% trans 'Atencion' %}" rel="tooltip"><i class="btn-icon-only fa fa-stethoscope"></i></a>
 
-                    <a href="{% url 'clinica:actualizar_medica' d.pk|key:'doc_upd' %}" class="btn btn-info btn-sm text-bold" title="Ediatar datos de tipo mascota" rel="tooltip">
-                        <i class="btn-icon-only fa fa-edit"></i>
+                    <a href="#" class="btn btn-success btn-sm up"><i class="fa fa-upload"></i></a>
+                    <a href="#" class="btn btn-success btn-sm down"><i class="fa fa-download"></i></a>
+
+                    <a href="{% url 'clinica:eliminar_medica' d.pk|key:'doc_del' %}" class="btn btn-danger btn-sm js-confirm text-bold" msg-title="Se le esta eliminando de la cola de espera" msg="Esta Seguro <br/>Recuerde esta operación no puede revertirse"  title="Eliminar de la cola de espera" rel="tooltip">
+                        <i class="btn-icon-only fa fa-minus"></i>
                     </a>
                 </td>
             </tr>
             {% endfor %}
         </tbody>
-
     </table>
 </div>
-<div  class="row" >
-    {% if is_paginated %}
-    {% load paginator %}
-    {% paginator %}
-    {% else %}
-    <div class="col-md-12" >
-        <ul class="breadcrumbpag" >
-            {{ object_list.count }} {% ifequal object_list.count 1 %}{{ opts.verbose_name|capfirst }}{% else %}{{ opts.verbose_name_plural|capfirst }}{% endifequal %}
-        </ul>
-    </div>
-    {% endif %}
-</div>
 {% endblock content %}
+
 {% block extrajs %}
 {{ block.super }}
-
 <script type="text/javascript">
-$('#myModal').modal({
-  keyboard: false
-})
+
+
+$(function () {
+   var $popoverInbox = $('[data-toggle="popover"]').popover({
+        placement: 'top',
+        trigger:'manual',
+    });
+
+  var timerPopover, popover_parent;
+
+   function hidePopover(elem) {
+  	$(elem).popover('hide');
+	}
+
+   $('[data-toggle="popover"]').hover(
+		function() {
+			var self = this;
+			clearTimeout(timerPopover);
+			$('.popover-all').hide(); //Hide any open popovers on other elements.
+			popover_parent = self;
+			$(self).popover('show');
+		},
+		function() {
+			var self = this;
+			timerPopover = setTimeout(function(){hidePopover(self);},100);
+		}
+	);
+
+	$(document).on({
+		mouseenter: function() {
+			clearTimeout(timerPopover);
+		},
+		mouseleave: function() {
+			var self = this;
+			timerPopover = setTimeout(function(){hidePopover(popover_parent);},100);
+		}
+	}, '.popover-all');
+
+
+});
+
+
+    $(document).ready(function(){
+        $(".up, .down").click(function(){
+            var row = $(this).parents("tr:first");
+            if ($(this).is(".up")) {
+                row.insertBefore(row.prev());
+            } else {
+                row.insertAfter(row.next());
+            }
+        });
+    });
 </script>
 {% endblock extrajs %}

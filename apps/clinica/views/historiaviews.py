@@ -63,8 +63,8 @@ class HistoriaListView(ListView):
                         self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
         # context['cmi'] = 'menu' #  Validacion de manual del menu
-        context['title'] = ('Seleccione %s para cambiar'
-                            ) % capfirst('Tipo Documento')
+        context['title'] = ('Seleccione %s para mas detalle'
+                            ) % capfirst(' una historia')
 
         context['o'] = self.o
         context['f'] = self.f
@@ -229,7 +229,7 @@ class HistoriaMascotaCreateView(CreateView):
     model = Historial
     form_class = HistoriaMascotaForm
     template_name = "clinica/form/historia.html"
-    success_url = reverse_lazy("clinica:listar_historia")
+    success_url = reverse_lazy("clinica:crear_medica")
 
     @method_decorator(permission_resource_required)
     def dispatch(self, request, *args, **kwargs):
@@ -247,6 +247,7 @@ class HistoriaMascotaCreateView(CreateView):
         context['opts'] = self.model._meta
         context['cmi'] = 'historia'
         context['title'] = _('Add %s') % capfirst(_('historia'))
+        context['subtitle'] = _('Registro de %s') % capfirst(_('historia clinica'))
         return context
 
     def get_form_kwargs(self):
@@ -261,23 +262,21 @@ class HistoriaMascotaCreateView(CreateView):
             d = Mascota.objects.get(pk=self.mascota_pk)
             if d:
                 initial['nombre'] = d.nombre
-                initial['dueño'] = d.dueño.persona
+                initial['dueño'] = d.dueño
                 initial['fecha_nacimiento'] = d.fecha_nacimiento
-                initial['genero'] = d.genero
-                initial['especie'] = d.especie
-                initial['raza'] = d.raza
-                initial['color'] = d.color
-                initial['cond_corporal'] = d.cond_corporal
-                initial['esterelizado'] = d.esterelizado
                 initial['historia'] = d.historia
-                initial['is_active'] = d.is_active
-                initial['is_actived'] = d.is_actived
-                initial['descripcion'] = d.descripcion
+                initial['caracter'] = d.caracter
+                initial['actividad'] = d.actividad
+                initial['habitar'] = d.habitar
+                initial['alimentacion'] = d.alimentacion
+                initial['aptitup'] = d.aptitup
+                initial['convive'] = d.convive
                 initial['person_id'] = d.pk
         return initial
 
     @transaction.atomic
     def form_valid(self, form):
+        form.instance.veterinario = self.request.user
         sid = transaction.savepoint()
         try:
             try:
@@ -288,17 +287,15 @@ class HistoriaMascotaCreateView(CreateView):
                 mascota.save()
                 pass
             mascota.nombre = form.cleaned_data['nombre']
+            mascota.dueño = form.cleaned_data['dueño']
             mascota.fecha_nacimiento = form.cleaned_data['fecha_nacimiento']
-            mascota.genero = form.cleaned_data['genero']
-            mascota.especie = form.cleaned_data['especie']
-            mascota.raza = form.cleaned_data['raza']
-            mascota.color = form.cleaned_data['color']
-            mascota.cond_corporal = form.cleaned_data['cond_corporal']
-            mascota.esterelizado = form.cleaned_data['esterelizado']
             mascota.historia = form.cleaned_data['historia']
-            mascota.is_active = form.cleaned_data['is_active']
-            mascota.is_actived = form.cleaned_data['is_actived']
-            mascota.descripcion = form.cleaned_data['descripcion']
+            mascota.caracter = form.cleaned_data['alimentacion']
+            mascota.actividad = form.cleaned_data['caracter']
+            mascota.habitar = form.cleaned_data['actividad']
+            mascota.alimentacion = form.cleaned_data['habitar']
+            mascota.Aptitup = form.cleaned_data['aptitup']
+            mascota.convive = form.cleaned_data['convive']
 
             mascota.save()
             self.object = form.save(commit=False)
@@ -321,7 +318,6 @@ class HistoriaMascotaCreateView(CreateView):
             messages.success(self.request, e)
             log.warning(force_text(e), extra=log_params(self.request))
             return super(HistoriaMascotaCreateView, self).form_invalid(form)
-
 
 
 class HistoriaMascotaDetailView(generic.DetailView):

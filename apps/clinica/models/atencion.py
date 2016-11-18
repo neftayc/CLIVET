@@ -7,37 +7,45 @@ from django.db.models import signals
 from unicodedata import normalize
 from django.core.exceptions import ValidationError
 from ..models.colamedica import ColaMedica
-from ..models.consulta import Consulta
 from ..models.notas import Notas
-from ..models.vacunacion import Vacunacion
+from apps.ventas.models.Producto import Producto
 from ..models.mascota import Mascota
+from ..models.consulta import Diagnostico, Tratamiento, Pruebas, HallasgosClinicos
 
 
-VACUNA = (
-    ('VACUNA1', "Vacuna1"),
-    ('VACUNA2', "Vacuna2"),
-    ('VACUNA3', "Vacuna3"),
-    ('VACUNA4', "Vacuna4")
+ATENCIONES = (
+    ('consulta', "Consulta General"),
+    ('vacuna', "Aplicar Vacuna"),
+    ('antiparasitario', "Aplicar Antiparasitario"),
+    ('antipulgas', "Aplicar Antipulga")
 )
+
 
 # Create your models here.
 class Atencion(models.Model):
-    colamedica = models.ForeignKey(ColaMedica, blank=True, unique=True  )
+    colamedica = models.OneToOneField(ColaMedica, blank=True, unique=True  )
 #Consulta
-    anamnesis = models.CharField(max_length=200)
-    diagnostico = models.CharField(max_length=300)
-    dx = models.CharField(max_length=300)
-    hallasgos_clinicos = models.CharField(max_length=100)
+
     motivo_atencion = models.CharField(max_length=300)
-    observacion = models.CharField(max_length=300)
+    temperatura = models.CharField(max_length=50)
+    fc = models.CharField(max_length=50)
+    fr = models.CharField(max_length=50)
+    kg = models.CharField(max_length=50)
+    porcentaje = models.CharField(max_length=50)
+    tlc = models.CharField(max_length=50)
+    anamnesis = models.CharField(max_length=200)
+    hallasgos_clinicos = models.ManyToManyField(HallasgosClinicos, max_length=300)
+    diagnostico = models.ManyToManyField(Diagnostico, max_length=300)
+    dx = models.CharField(max_length=300)
     pronostico = models.CharField(max_length=300)
-    pruebas_auxiliares = models.CharField(max_length=300)
-    tratamiento = models.CharField(max_length=300)
+    pruebas_auxiliares = models.ManyToManyField(Pruebas, max_length=300)
+    tratamiento = models.ManyToManyField(Tratamiento, max_length=300)
+    observacion = models.CharField(max_length=300)
 
 #vacunacion
     fecha_programada = models.DateTimeField(null=True, blank=True)
     vobservacion = models.CharField(max_length=100,null=True, blank=True)
-    vacuna = models.CharField(max_length=100,choices=VACUNA, null=True, blank=True)
+    vacuna = models.ManyToManyField(Producto, max_length=100, null=True, blank=True)
 
 #notas
     ndescripcion = models.CharField(max_length=200, default='Mascota en buen estado',null=True, blank=True)

@@ -6,7 +6,6 @@
 
 Descripcion: Implementacion de los formularios de la app sad
 """
-
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 from django.utils.text import capfirst, get_text_list
@@ -100,7 +99,7 @@ class UserDetailForm(forms.ModelForm):
         )
 
         self.helper = FormHelper()
-        self.helper.layout = Layout(
+        self. helper.layout = Layout(
 
             TabHolder(
                 Tab(
@@ -507,7 +506,6 @@ class UserForm(forms.ModelForm):
             help_text=u'<small class="help-error"></small> %s' % _(
                 u' '),
         )
-        
         self.fields['identity_num'] = forms.CharField(
             label=capfirst(_(u'number')), required=False,
             help_text=u'<small class="help-error"></small> %s' % _(

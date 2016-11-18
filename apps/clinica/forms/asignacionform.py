@@ -2,7 +2,7 @@
 from django import forms
 from ..models.vacunacion import Vacunacion
 
-class VacunacionForm(forms.ModelForm):
+class AsignacionForm(forms.ModelForm):
     """Tipo Documeto Form."""
     class Meta:
         """Meta."""

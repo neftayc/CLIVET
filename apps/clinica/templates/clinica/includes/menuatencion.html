@@ -1,0 +1,148 @@
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel pa-consulta panel-info">
+        <div class="panel-heading" role="tab" id="headingOne">
+            <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Consulta</a>
+            </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body">
+                <div id="consultaform">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <ul class="list-group listado">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-home"></i> Anamnesis:</span>
+                                    {{ form.anamnesis }}
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-home"></i> Hallasgos Clinicos:</span>
+                                    {{ form.hallasgos_clinicos }}
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-home"></i> Diagnostico:</span>
+                                    {{ form.diagnostico }}
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon "><i class="fa fa-home"></i> Trauma:</span>
+                                    {{ form.dx }}
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-home"></i> Pronostico:</span>
+                                    {{ form.pronostico}}
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-home"></i> Pruebas Auxiliares:</span>
+                                    {{ form.pruebas_auxiliares }}
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-home"></i> Tratamiento:</span>
+                                    {{ form.tratamiento }}
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-home"></i> Observacion:</span>
+                                    {{ form.observacion }}
+                                </div>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <ul class="list-group listado">
+                                <div class="input-group">
+                                  <span class="input-group-addon"><i class="fa fa-paw"></i> T°</span>
+                                  {{ form.temperatura }}
+                                </div>
+                                <div class="input-group">
+                                  <span class="input-group-addon"><i class="fa fa-paw"></i> FC</span>
+                                  {{ form.fc }}
+                                </div>
+                                <div class="input-group">
+                                  <span class="input-group-addon"><i class="fa fa-paw"></i> FR</span>
+                                  {{ form.fr }}
+                                </div>
+                                <div class="input-group">
+                                  <span class="input-group-addon"><i class="fa fa-paw"></i> Kg</span>
+                                  {{ form.kg }}
+                                </div>
+                                <div class="input-group">
+                                  <span class="input-group-addon"><i class="fa fa-paw"></i> %</span>
+                                  {{ form.porcentaje }}
+                                </div>
+                                <div class="input-group">
+                                  <span class="input-group-addon" ><i class="fa fa-paw"></i> TLC</span>
+                                  {{ form.tlc}}
+                                </div>
+                                <button type="button" class="btn btn-info btn-block mostrarc">Modificar Consulta</button>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel pa-vacuna panel-danger">
+        <div class="panel-heading" role="tab" id="headingTwo">
+            <h4 class="panel-title">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Vacunacion</a>
+            </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+            <div class="panel-body">
+                <div id="vacunacionform">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <ul class="list-group listado">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i> F. Programada:</span>
+                                    {{ form.fecha_programada}}
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i> F. Aplicada:</span>
+                                    {{ form.fecha_programada}}
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-medkit"></i> Observacion:</span>
+                                    {{ form.vobservacion }}
+                                </div>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <ul class="list-group vacuna">
+                                <li class="list-group-item active  text-center">
+                                  <span><i class="fa fa-ambulance"></i> Vacunas Aplicadas</span>
+                                </li>
+                                <li class="list-group-item">{{ form.vacuna}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel pa-notas panel-success">
+        <div class="panel-heading" role="tab" id="headingThree">
+            <h4 class="panel-title">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Nota</a>
+            </h4>
+        </div>
+        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+            <div class="panel-body">
+                <div id="notasform">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <ul class="list-group listado">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i> Fecha:</span>
+                                    {{ form.fecha_programada }}
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-table"></i> Nota:</span>
+                                    {{ form.ndescripcion }}
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

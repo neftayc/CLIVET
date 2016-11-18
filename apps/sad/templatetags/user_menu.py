@@ -28,10 +28,10 @@ register = template.Library()
 @register.simple_tag
 def get_info(request):
     """
-    Obtiene
+    Obtiene 
 
     """
-    info = "Ventas"
+    info = "Backend"
     if UserToken.get_headquar_id(request.session):
         try:
             sede = Headquar.objects.get(
@@ -48,14 +48,21 @@ def get_info(request):
 def load_menu(request, module):
     """
     Interfáz del Método para cargar en variables los menús que se mostrará al usuario
+
     Usage::
+
             {% load_menu request 'MODULE_KEY' %}
+
     Definition::
+
     ('WEB', 'Web informativa'),
     ('VENTAS', 'Ventas'),
     ('BACKEND', 'Backend Manager'),
+
     Examples::
+
             {% load_menu request 'BACKEND' %}
+
     """
 
     return Menus.load(request, module)
@@ -65,10 +72,15 @@ def load_menu(request, module):
 def view_menu(request):
     """
     Interfáz del Método para renderizar el menú
+
     Usage::
+
             {% view_menu request %}
+
     Examples::
+
             {% view_menu request %}
+
     """
 
     return mark_safe(Menus.view(request))

@@ -50,7 +50,6 @@ class Person(models.Model):
         _('Photo'), upload_to='persons', default='persons/default.png',
         null=True, blank=True)
 
-  
 
     class Meta:
         verbose_name = _('Person')
