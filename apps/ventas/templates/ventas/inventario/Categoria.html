@@ -6,6 +6,17 @@ Descripcion: Lista Tipo Documento
 {% load i18n app_security %} {% load l10n humanize %} {% block breadcrumbs %}
 <a href="{# url 'accounts:index' #}">{% trans 'Home' %}</a> &rsaquo; {{ title }} {% endblock breadcrumbs %} {% block content_title %} {{ opts.verbose_name_plural|capfirst }} | <small>{{ title }}</small> {% endblock content_title %} {% block content %}
 
+<script type="text/javascript">
+$(function() {
+    $('table').kgrid({
+        form_data : ['{{f}}', '{{q}}'],
+        form_to   : '/ventas/categoria/invetario/listar/?f={{f}}&q={{q}}',
+        order_attr: 'class=""',
+        order_to  : '/ventas/categoria/listar/?f={{f}}&q={{q}}',
+    });
+});
+</script>
+
 <div class="btn-toolbar btn-toolbar-top">
     <div class="row">
         <div class="btn-actions">
@@ -17,15 +28,15 @@ Descripcion: Lista Tipo Documento
     </div>
 </div>
 <div class="container-overflow">
-    <table class="table table-bordered table-hover table-striped table-condensed table-responsive">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th class="col-hidden" data-search="descripcion" data-order="descripcion">Descripción</th>
-                <th class="col-hidden" data-search="departamento" data-order="departamento">Departamento</th>
-                <th class="btn-actions col-blocked text-center">Acción</th>
-            </tr>
-        </thead>
+        <table class="table table-bordered table-hover table-striped table-condensed table-responsive">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th class="col-hidden" data-search="descripcion" data-order="descripcion">Nombre</th>
+                    <th class="col-hidden" data-search="departamento" data-order="departamento">Departamento</th>
+                    <th class="btn-actions col-blocked text-center">Acción</th>
+                </tr>
+            </thead>
         <tbody>
             {% for d in object_list %}
             <tr>
