@@ -1,5 +1,11 @@
 from django import forms
 from ..models.UnidadMedida import UnidadMedidaC
+from django.utils.translation import ugettext_lazy as _
+from crispy_forms.layout import Field, Div, Row, HTML
+from crispy_forms.bootstrap import FormActions, TabHolder, Tab, StrictButton, FieldWithButtons
+from crispy_forms.helper import FormHelper, Layout
+from apps.utils.forms import smtSave, btnCancel, btnReset
+from django.utils.text import capfirst, get_text_list
 
 
 class UnidadMedidaForm(forms.ModelForm):
@@ -10,4 +16,32 @@ class UnidadMedidaForm(forms.ModelForm):
 
         model = UnidadMedidaC
         exclude = ()
-        # widgets = {
+        Field = ('nombre', 'simbolo', 'cant_equivalencia',
+                 'unidad_medida_venta')
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        self.object = kwargs.pop('object', None)
+        super(UnidadMedidaForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Div(
+                Div(
+                    Row(
+                        Div(Field('nombre', css_class='col-md-3')),
+                        Div(Field('simbolo', css_class='col-md-3')),
+                        Div(Field('cant_equivalencia', css_class='col-md-3')),
+                        Div(Field('unidad_medida_venta',
+                                  css_class='col-md-3')),
+                    ),
+                    css_class='modal-body'
+                ),
+                Div(Row(
+                    FormActions(
+                        smtSave(),
+                        btnCancel(),
+                        btnReset(),
+                    ),
+                ), css_class='modal-footer',),
+            ),
+        )

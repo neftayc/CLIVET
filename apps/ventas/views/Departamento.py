@@ -81,24 +81,19 @@ class DepartamentoListView(ListView):
             **{column_contains: self.q}).order_by(self.o)
 
     def get_context_data(self, **kwargs):
-        """
-        Tipo Documento Identidad ListView List get context.
 
-        Funcion con los primeros datos iniciales para la carga del template.
-        """
         context = super(DepartamentoListView,
                         self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
         # context['cmi'] = 'menu' #  Validacion de manual del menu
         context['title'] = ('Seleccione %s para cambiar'
-                            ) % capfirst('Tipo Departamento')
+                            ) % capfirst('Departamento')
 
         context['o'] = self.o
         context['f'] = self.f
         context['q'] = self.q.replace('/', '-')
 
         return context
-
 
 def buscarDep(request):
     if request.is_ajax:

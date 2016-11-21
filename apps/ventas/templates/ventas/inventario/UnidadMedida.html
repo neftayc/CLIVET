@@ -6,6 +6,7 @@ Descripcion: Lista Tipo Documento
 {% load i18n app_security %} {% load l10n humanize %} {% block breadcrumbs %}
 <a href="{# url 'accounts:index' #}">{% trans 'Home' %}</a> &rsaquo; {{ title }} {% endblock breadcrumbs %} {% block content_title %} {{ opts.verbose_name_plural|capfirst }} | <small>{{ title }}</small> {% endblock content_title %} {% block content %}
 
+
 <div class="container"> 
 <div class="btn-toolbar btn-toolbar-top">
     <div class="row">
