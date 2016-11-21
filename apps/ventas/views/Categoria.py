@@ -24,14 +24,23 @@ log = logging.getLogger(__name__)
 from django.shortcuts import render, HttpResponse
 import json
 
-def post_ajax_categoria(request):
-    if request.method == 'POST':
-        if request.is_ajax():
-            print("_______________________________________________")
-            mydata = [{'foo': 1, 'baz': 2}]
-# return HttpResponse(json.dumps(mydata), mimetype="application/json")
 
-    return render(request)
+def PostCategoriaAjax(request):
+    if request.method == 'POST' and request.is_ajax():
+        c = Categoria()
+        c.descripcion = request.POST.get('des')
+        c.departamento_id = request.POST.get('dep')
+        c.save()
+        cat = Categoria.objects.last()
+        categoria_json = {}
+        categoria_json['pk'] = cat.id
+        categoria_json['name'] = cat.descripcion
+        data_json = json.dumps(categoria_json)
+
+    else:
+        data_json = '{"data":"fail"}'
+    return HttpResponse(data_json, content_type='application/json')
+
 
 class CategoriaListView(ListView):
     u"""Tipo Documento Identidad."""

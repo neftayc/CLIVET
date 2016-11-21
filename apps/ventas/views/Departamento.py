@@ -34,6 +34,23 @@ import logging
 log = logging.getLogger(__name__)
 
 
+def PostDepartamentoAjax(request):
+    if request.method == 'POST' and request.is_ajax():
+        d = Departamento()
+        d.descripcion = request.POST.get('des')
+        d.save()
+
+        obj = Departamento.objects.last()
+        departamento_json = {}
+        departamento_json['pk'] = obj.id
+        departamento_json['name'] = obj.descripcion
+        data_json = json.dumps(departamento_json)
+
+    else:
+        data_json = '{"data":"fail"}'
+    return HttpResponse(data_json, content_type='application/json')
+
+
 class DepartamentoListView(ListView):
     u"""Tipo Documento Identidad."""
 

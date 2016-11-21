@@ -168,6 +168,14 @@ class ProductoUpdateView(UpdateView):
             log.warning(msg, extra=log_params(self.request))
         return super(ProductoUpdateView, self).form_valid(form)
 
+    def get_initial(self):
+        context = super(ProductoUpdateView, self).get_initial()
+        context = context.copy()
+        context['fechaVencimiento'] = self.object.fechaVencimiento.strftime(
+            "%Y-%m-%d")
+
+        return context
+
 
 class ProductoDeleteView(DeleteView):
     """Empresa Delete View."""

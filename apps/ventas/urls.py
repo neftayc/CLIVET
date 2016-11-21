@@ -21,6 +21,8 @@ urlpatterns = [
         name="departamento_upd"),
     url(r'^departamento/eliminar/(?P<pk>.*)/$', DepartamentoDeleteView.as_view(),
         name="departamento_del"),
+    url(r'^departamento/crear/ajax/$', PostDepartamentoAjax,
+        name="post_departamento_ajax"),
     # categoria
     url(r'^categoria/listar/$', CategoriaListView.as_view(),
         name="categoria_list"),
@@ -30,7 +32,7 @@ urlpatterns = [
         name="categoria_upd"),
     url(r'^categoria/eliminar/(?P<pk>.*)/$', CategoriaDeleteView.as_view(),
         name="categoria_del"),
-    url(r'^categoria/crear/ajax/$', post_ajax_categoria, name="categoria_post_ajax"),
+    url(r'^categoria/crear/ajax/$', PostCategoriaAjax, name="post_categoria_ajax"),
     # categoria
     url(r'^producto/listar/$', ProductoListView.as_view(),
         name="producto_list"),
@@ -49,6 +51,9 @@ urlpatterns = [
         name="unidad_medida_upd"),
     url(r'^uni/eliminar/(?P<pk>.*)/$', UnidadMedidaDeleteView.as_view(),
         name="unidad_medida_del"),
+    url(r'^uni/crear/ajax/$', PostUnidadAjax, name="post_unidad_ajax"),
+    url(r'^univ/crear/ajax/$', PostUnidadVentasAjax,
+        name="post_unidad_ventas_ajax"),
     url(r'^uni/cargarcarro/$', CrearCarroTemplateView,
         name="carro"),
     url(r'^uni/vendercarr/$', VenderCarro,

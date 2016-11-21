@@ -195,7 +195,8 @@ class ClienteUpdateView(UpdateView):
             context['apellidos'] = self.object.persona.last_name
             context['tipo_documento'] = self.object.persona.identity_type
             context['numero'] = self.object.persona.identity_num
-            context['fecha_de_nacimiento'] = self.object.persona.birth_date
+            context['fecha_de_nacimiento'] = self.object.persona.birth_date.strftime(
+                "%Y-%m-%d")
             context['foto_perfil'] = self.object.persona.photo
 
         return context
