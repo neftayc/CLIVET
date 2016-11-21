@@ -246,6 +246,8 @@ class HistoriaMascotaCreateView(CreateView):
         context = super(HistoriaMascotaCreateView, self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
         context['cmi'] = 'historia'
+        context['datos']= Historial.objects.all()
+        context['cantidad']=context['datos'].count()+1
         context['title'] = _('Add %s') % capfirst(_('historia'))
         context['subtitle'] = _('Registro de %s') % capfirst(_('historia clinica'))
         return context
