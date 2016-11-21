@@ -140,7 +140,7 @@ class CitaDeleteView(DeleteView):
     """Cita Delete View."""
 
     model = Cita
-    success_url = reverse_lazy('cita:cita_add')
+    success_url = reverse_lazy('citas:cita_add')
 
     def delete(self, request, *args, **kwargs):
         u"""
@@ -221,3 +221,20 @@ def GetEventsAjax(request):
     else:
         data = 'fail'
     return HttpResponse(data, content_type='application/json')
+
+
+def PostEventsAjax(request):
+    if request.method == 'POST' and request.is_ajax():
+        e = Evento()
+        e.title = request.POST.get('t')
+        e.color = request.POST.get('c')
+        e.save()
+        evento = Evento.objects.last()
+        evento_json = {}
+        evento_json['pk'] = evento.id
+        evento_json['title'] = evento.title
+        data_json = json.dumps(evento_json)
+
+    else:
+        data_json = '{"data":"fail"}'
+    return HttpResponse(data_json, content_type='application/json')

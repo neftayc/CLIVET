@@ -4,7 +4,7 @@ from django import forms
 from ..models.cita import Cita
 from django.utils.translation import ugettext_lazy as _
 from crispy_forms.layout import Field, Div, Row, HTML
-from crispy_forms.bootstrap import FormActions, TabHolder, Tab
+from crispy_forms.bootstrap import FormActions, TabHolder, Tab, StrictButton,FieldWithButtons
 from crispy_forms.helper import FormHelper, Layout
 from apps.utils.forms import smtSave, btnCancel, btnReset
 from django.utils.text import capfirst, get_text_list
@@ -36,7 +36,8 @@ class CitaForm(forms.ModelForm):
                 Div(Field('veterinario', ), css_class='col-md-6'),
             ),
             Row(
-                Div(Field('evento',), css_class='col-md-6'),
+                Div(FieldWithButtons('evento', StrictButton(
+                    "Agregar", id='addEvent')), css_class='col-md-6'),
                 Div(Field('date',), css_class='col-md-6'),
             ),
             Row(
