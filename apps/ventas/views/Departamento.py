@@ -93,8 +93,8 @@ def buscarDep(request):
         results = []
         for departamento in departamentos:
             departamento_json = {}
-            departamento_json['label'] = departamento.descripcion
-            departamento_json['value'] = departamento.descripcion
+            departamento_json['id'] = departamento.id
+            departamento_json['descripcion'] = departamento.descripcion
             results.append(departamento_json)
 
         data_json = json.dumps(results)

@@ -6,8 +6,6 @@
 https://docs.djangoproject.com/en/1.6/topics/forms/modelforms/
 Descripcion: Implementacion de los controladores de la app sad
 """
-
-
 import logging
 log = logging.getLogger(__name__)
 from django.utils.translation import ugettext as _  # , ungettext
@@ -85,7 +83,9 @@ class PersonListView(generic.ListView):
 
 
 class UserDetailView(generic.DetailView):
+
     model = User
+
     success_url = reverse_lazy('sad:user-list')
 
     @method_decorator(permission_resource_required)

@@ -13,7 +13,7 @@ urlpatterns = [
     # departamento
     url(r'^departamento/listar/$', DepartamentoListView.as_view(),
         name="departamento_list"),
-    url(r'^departamento/listar/search/$', buscarDep),
+
 
     url(r'^departamento/crear/$', DepartamentoCreateView.as_view(),
         name="departamento_add"),
@@ -49,7 +49,10 @@ urlpatterns = [
     url(r'^uni/eliminar/(?P<pk>.*)/$', UnidadMedidaDeleteView.as_view(),
         name="unidad_medida_del"),
 
-
+    url(r'^reporte/venta/$', VentaListView.as_view(),
+        name="reporte_ventas"),
+    url(r'^reporte/venta/(?P<pk>\d+)/$', DetalleVentaListView.as_view(),
+        name="detalle_go"),
 
 
     url(r'^uni/cargarcarro/$', CrearCarroTemplateView,
@@ -57,6 +60,10 @@ urlpatterns = [
 
     url(r'^uni/vendercarr/$', VenderCarro,
         name="vender_carro"),
+    url(r'^cliente/filter/$', VentaAjaxCliente,
+        name="detalle_ajax"),
+    url(r'^date/filter/$', VentaAjaxDate,
+        name="detalle_ajax_date"),
 
 
 
@@ -66,21 +73,20 @@ urlpatterns = [
     url(r'^venta/listar/$', VentaListView.as_view(),
         name="venta_list"),
     #   name="venta_add"),
-    url(r'^venta/actualizar/(?P<pk>.*)/$', VentaUpdateView.as_view(),
-        name="venta_upd"),
-    url(r'^venta/eliminar/(?P<pk>.*)/$', VentaDeleteView.as_view(),
-        name="venta_del"),
+
 
     # Detallaventa
     url(r'^ventadetalle/listar/$', DetalleVentaListView.as_view(),
         name="ventadetalle_list"),
     # url(r'^ventadetalle/crear/$', DetalleVentaCreateView.as_view(),
     #  name="ventadetalle_add"),
-    url(r'^ventadetalle/actualizar/(?P<pk>.*)/$', DetalleVentaUpdateView.as_view(),
-        name="ventadetalle_upd"),
-    url(r'^ventadetalle/eliminar/(?P<pk>.*)/$', DetalleVentaDeleteView.as_view(),
-        name="ventadetalle_del"),
 
     url(r'^producto/listar/ajax/$', ProductoGetAjax),
+
+    # buscadores
+    url(r'^departamento/listar/search/$', buscarDep),
+    url(r'^producto/search/$', BuscarProducto, name='producto_s'),
+    url(r'^cliente/search/$', BuscarCliente, name='cliente_s'),
+
 
 ]

@@ -63,7 +63,7 @@ class Submit(BaseButton):
     .. note:: The first argument is also slugified and turned into the id for the submit button.
     """
     input_type = 'submit'
-    field_classes = 'submit submitButton' if TEMPLATE_PACK == 'uni_form' else 'btn btn-primary'
+    field_classes = 'submit submitButton' if TEMPLATE_PACK == 'uni_form' else 'btn btn-guardar'
 
 
 class Button(BaseButton):
@@ -102,7 +102,7 @@ def smtSave():
         'submit',
         '<i class="btn-icon-onlyx fa fa-save"></i> <span class="hidden-xsx"> %s</span>' %
         ugettext('Save'),
-        css_class='text-bold',  title='%s' % ugettext('Save'))
+        css_class='text-bold btn-lg',  title='%s' % ugettext('Save'))
 
 
 def btnCancel():
@@ -110,7 +110,7 @@ def btnCancel():
         'cancel',
         '<i class="btn-icon-onlyx fa fa-ban"></i> <span class="hidden-xs"> %s</span>' %
         ugettext('Cancel'),
-        css_class='btn btn-danger btn-back text-bold', title='%s' % ugettext('Cancel'))
+        css_class='btn btn-cancelar btn-back btn-lg text-bold', title='%s' % ugettext('Cancel'))
 
 
 def btnReset():
@@ -118,4 +118,4 @@ def btnReset():
         'reset',
         '<i class="btn-icon-onlyx fa fa-undo"></i> <span class="hidden-xs"> %s</span>' %
         ugettext('Reset'),
-        css_class='btn btn-default text-bold', title='%s' % ugettext('Reset'))
+        css_class='btn btn-default btn-lg text-bold', title='%s' % ugettext('Reset'))

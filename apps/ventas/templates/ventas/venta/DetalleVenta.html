@@ -1,65 +1,73 @@
-{% extends "main/dashboard.html" %}
-<!--
-@package     ventas
-Descripcion: Lista Tipo Documento
--->
-{% load i18n app_security %} {% load l10n humanize %} {% block breadcrumbs %}
-<a href="{# url 'accounts:index' #}">{% trans 'Home' %}</a> &rsaquo; {{ title }} {% endblock breadcrumbs %} {% block content_title %} {{ opts.verbose_name_plural|capfirst }} | <small>{{ title }}</small> {% endblock content_title %} {% block content %}
-
-<div class="btn-toolbar btn-toolbar-top">
-    <div class="row">
-        <div class="btn-actions">
-            <a href="{% url 'ventas:ventadetalle_add' %}" class="btn btn-primary text-bold" title="Agregar Venta detalle">
-                <i class="fa fa-plus"></i>
-                <span class="hidden-xs"> Agregar</span>
-            </a>
+{% extends "main/dashboard.html" %} {% load i18n app_security staticfiles%} {% load i18n crispy_forms_tags %} {% load l10n humanize %} {% block style %}
+<link href="{% static 'clivet/ventas.css' %}" rel="stylesheet"> {% endblock style %} {% block breadcrumbs %}
+<ol class="breadcrumb">
+    <li><a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %}</a></li>
+    <li class="active"> {{ opts.verbose_name_plural|capfirst }}</li>
+</ol>
+{% endblock breadcrumbs %} {% block content_title %} {{title}}{% endblock content_title %} {% block content %}
+</div> -->
+<div class="container-fluid ">
+    <div class="panel container-main">
+        <div class="panel-heading   panel-titulo-detalle">
+            <div class="col-md-5 img-container col-xs-12 col-sm-12">
+                <img class="" width="100%" src='{% static "clivet/img/DogShop.png" %}'>
+            </div>
+            <div class="col-md-7 text-center  col-xs-12 col-sm-12 row">
+                <p class="detalle-titulo col-md-12">DETALLE DE VENTA</p>
+                <p class="label-d text-left col-md-7">Señor(a) :<span class="cliente-show">{{venta.cliente}}</span></p>
+                <p class="label-d text-left col-md-5 hidden-xs">Celular : <span class="cliente-show">{{venta.cliente.telefono}}</span></p>
+                <p class="label-d text-left col-md-7  hidden-sm hidden-xs">Ciudad : <span class="cliente-show">{{venta.cliente.ciudad}}</span></p>
+                <p class="label-d text-left col-md-5  hidden-sm hidden-xs">Dirección :<span class="cliente-show">{{venta.cliente.direccion}}</span></p>
+                <p class="label-d text-center col-md-10">FECHA DE VENTA : <span class="fehca-show">{{venta.fechav|date:"d-m-Y"}}</span></p>
+            </div>
+        </div>
+        <div class="panel-body">
+            <table class="table table-condensed ">
+                <thead>
+                    <tr>
+                        <th width="3%" class="text-center title-th-d">#</th>
+                        <th width="7%" class=" text-center title-th-d">Cantidad</th>
+                        <th width="40%" class=" text-center title-th-d th-descripcion">Descripcion</th>
+                        <th width="15%" class=" text-center title-th-d">Precio Unitario</th>
+                        <th width="15%" class=" text-center title-th-d">Importe</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                </tfoot>
+                <tbody>
+                    {% for d in detalle %}
+                    <tr>
+                        <td class="text-center">{% if is_paginated %} {{ page_obj.start_index|add:forloop.counter0 }} {% else %} {{ forloop.counter }} {% endif %}
+                        </td class="text-center">
+                        <td class="text-center cantidades-table">{{ d.cantidad }} {{unidadv}}</td>
+                        <td class="text-left td-producto">{{ d.producto.nombre }}</td>
+                        <td class="text-right cantidades-table"><span class="soles">S/.  </span>{{ d.producto.precioV }}</td>
+                        <td class="text-right cantidades-table"><span class="soles">S/.   </span> {{ d.importe }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="panel panel-footer">
+            <div class="row container-footer-detalle">
+                <div class="col-md-8 container-cancelelado">
+                    <p class="cancelado">CANCELADO</p>
+                    <span class="trabajador">Clinica Vererinaria Pep-Shop- {{venta.user}}</span>
+                </div>
+                <div class="col-md-4 row">
+                    <div class="col-md-6">
+                        <p class="resumen-d text-left">Igv 18% :</p>
+                        <p class="resumen-d text-left">Sub Total : </p>
+                        <p class="resumen-d text-left">Total : </p>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="resumen-v text-right"><span>S/.</span>{{venta.igv}}</p>
+                        <p class="resumen-v text-right"><span>S/.</span>{{sub}}</p>
+                        <p class="resumen-v total-v text-right"><span>S/.</span>{{venta.total}}</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-<div class="container-overflow">
-    <table class="table table-bordered table-hover table-striped table-condensed table-responsive">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th class="col-hidden" data-search="producto" data-order="producto">producto</th>
-                <th class="col-hidden" data-search="cliente" data-order="cliente">cliente</th>
-                <th class="col-hidden" data-search="cantidad" data-order="cantidad">cantidad</th>
-                <th class="col-hidden" data-search="igv" data-order="igv">igv</th>
-                <th class="col-hidden" data-search="importe" data-order="importe">importe</th>
-                <th class="btn-actions col-blocked text-center">Acción</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for d in object_list %}
-            <tr>
-                <td>{% if is_paginated %} {{ page_obj.start_index|add:forloop.counter0 }} {% else %} {{ forloop.counter }} {% endif %}
-                </td>
-                <td>{{ d.producto__nombre }}</td>
-                <td>{{ d.venta__cliente__persona__nombre }}</td>
-                <td>{{ d.cantidad }}</td>
-                <td>{{ d.igv }}</td>
-                <td>{{ d.importe }}</td>
-                <td class="text-center">
-                    <a href="{% url 'ventas:ventadetalle_upd' d.pk|key:'cat_upd' %}" class="btn btn-info btn-sm text-bold" title="editar" rel="tooltip">
-                        <i class="btn-icon-only fa fa-edit"></i>
-                    </a>
-                    <a href="{% url 'ventas:ventadetalle_del' d.pk|key:'cat_del' %}" class="btn btn-danger btn-sm js-confirm text-bold" msg-title="Eliminar Documento Identidad?." msg="Esta Seguro
-                            <br/>Recuerde esta operación no puede revertirse" title="Eliminar detalle" rel="tooltip">
-                        <i class="btn-icon-only fa fa-trash-o"></i>
-                    </a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
-<div class="row">
-    {% if is_paginated %} {% load paginator %} {% paginator %} {% else %}
-    <div class="col-md-12">
-        <ul class="breadcrumbpag">
-            {{ object_list.count }} {% ifequal object_list.count 1 %}{{ opts.verbose_name|capfirst }}{% else %}{{ opts.verbose_name_plural|capfirst }}{% endifequal %}
-        </ul>
-    </div>
-    {% endif %}
 </div>
 {% endblock content %}

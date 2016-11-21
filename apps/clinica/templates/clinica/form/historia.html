@@ -2,14 +2,42 @@
 {% load i18n crispy_forms_tags %}
 {% load l10n %}
 
+{% block style %}
+<style media="screen">
+	.form-control-mascota{
+		border-color: #00796b;
+	    background: #009688;
+	    color: #fff;
+	    font-size: 1.1em;
+	}
+	.subtitle-mascota{
+		margin-top: 5px;
+		font-size: 1.6em;
+		color: #212121;
+	}
+	#div_id_num_historia{
+		margin-bottom: 5px;
+	}
+	.div-mascota-forms{
+		box-shadow:  1px 1px 1px 1px #009688;
+		margin-bottom: 15px;
+	}
+	.page-clivet{
+		margin-top: 0px;
+		margin-bottom: 7px;
+	}
+</style>
+{% endblock style %}
 {% block breadcrumbs %}
-<a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %} &rsaquo;&rsaquo;</a>
-<a href="/clinica/historia/listar/">{{ opts.verbose_name_plural|capfirst }}</a>
-&rsaquo; {{ title }}
+<ol class="breadcrumb">
+  <li><a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %}</a></li>
+  <li><a href="/clinica/historia/listar/">{{ opts.verbose_name_plural|capfirst }}</a></li>
+  <li class="active">{{ title }}</li>
+</ol>
 {% endblock breadcrumbs %}
 
 {% block content_title %}
-<h3><i class="fa fa-paw"></i> {{ opts.verbose_name_plural|capfirst }} | <small>{{ subtitle }}</small></h3>
+<i class="fa fa-list-alt"></i> {{ subtitle }}
 {% endblock content_title %}
 
 {% block content %}
@@ -21,17 +49,8 @@
 {{ block.super }}
 
 <script type="text/javascript">
-$('#id_test_image').fileinput({
-	showUpload: false,
-	showRemove: false,
-	initialCaption: '{{ form.test_image.value }}',
-	initialPreview: ['<img src="{{ MEDIA_URL }}{{ form.test_image.value }}">',],
-	browseClass: 'btn btn-warning',
-	browseLabel: '<span class="hidden-xs">{% trans "Pick image" %}</span>',
-	browseIcon: '<i class="btn-icon-only glyphicon glyphicon-picture"></i>',
-});
-
-$('#id_test_date').datetimepicker({
+$('#id_caracter, #id_actividad,#id_habitar,#id_alimentacion,#id_aptitup').append('<option value selected="selected" diseabled>Elige una opcion..</option>');
+$('#id_fecha_nacimiento').datetimepicker({
 	format: 'YYYY-MM-DD',
 		//format: 'YYYY-MM-DD hh:mm:ss', //pata datatimes
 		language: '{{ LANGUAGE_CODE }}',

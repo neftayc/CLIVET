@@ -1,0 +1,83 @@
+{% load i18n app_security %}
+{% load l10n humanize %}
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default"  id="global">
+            {% for d in atencion %}
+            <div class="panel-body">
+                <p class="label label-default" style="font-size: 1.2em;">{{ d.created_ath|date }}</p>
+                <div class="panel panel-default" style=" margin-top:1em;">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                Consulta Medica
+                            </div>
+                            <div class="col-xs-6 text-right">
+                                <i class="fa fa-home"></i>
+                                <span>{{d.created_ath|time}}</span>
+                                <div class="btn-group" >
+                                    <button type="button" class="btn btn-default dropdown-toggle"
+                                    data-toggle="dropdown">
+                                        <i class="fa fa-home"></i>
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-right text-left" role="menu">
+                                        <li><a href="#"><i class="fa fa-home"></i> Facturar</a></li>
+                                        <li><a href="{% url 'clinica:actualizar_atencion' d.pk|key:'doc_upd' %}"
+                                           class="text-bold"
+                                           title="Actualizar atencion"
+                                           rel="tooltip">
+                                            <i class="btn-icon-only fa fa-edit"> Editar</i>
+                                        </a></li>
+                                        <li  class="divider"></li>
+                                        <li><a href="{% url 'clinica:eliminar_atencion' d.pk|key:'doc_del' %}"
+                                           class="js-confirm text-bold"
+                                           msg-title="Desea eliminar esta atencion?."
+                                           msg="Esta Seguro
+                                           <br/>Recuerde esta operación no puede revertirse"
+                                           title="Eliminar Atencion" rel="tooltip">
+                                            <i class="btn-icon-only fa fa-trash-o"> Eliminar</i>
+                                        </a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-xs-6">
+                        <p>
+                            <label class="">Amnesia y/o Descripción:</label>
+                            <li>{{d.anamnesis}}</li>
+                        </p>
+                        <p>
+                            <label>Dx:</label>
+                            <li>{{ d.dx}}</li>
+                        </p>
+                        <p>
+                            <label>Hallasgos Clinicos:</label>
+                            <li>{{ d.hallasgos_clinicos}}</li>
+                        </p>
+                        <p>
+                            <label>Diagnostico:</label>
+                            <li><span>T°: </span>259 <span> FCT: </span> 1221</li>
+                        </p>
+                    </div>
+                    <div class="col-xs-6">
+                        <p>
+                            <label>Tratamientos</label>
+                            <li>{{ d.tratamiento}}</li>
+                        </p>
+                        <p>
+                            <img src="/media/clivet/images1.jpg" class="" style="width:250px"alt="Imagen de la consulta" />
+                        </p>
+
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+        </div>
+    </div>
+</div>

@@ -1,25 +1,71 @@
-{% extends "base.html" %} {% load i18n staticfiles user_menu %} {% block title %}{{ title }} | {{ site_title|default:_('Backend site admin') }} {% endblock title %} {% block extrastyle %}
+{% extends "base.html" %} {% load i18n staticfiles user_menu %} {% block title %}{{ title }} | {{ site_title|default:_('Backend site admin') }} {% endblock title %}
+{% block extrastyle %}
 <link href="{% static 'jasny-bootstrap/css/jasny-bootstrap.css' %}" rel="stylesheet">
 <link href="{% static 'custom/css/base.css' %}" rel="stylesheet">
 <link href="{% static 'custom/css/style.css' %}" rel="stylesheet">
 <link href="{% static 'bootstrap-fileinput/css/fileinput.css' %}" rel="stylesheet">
 <link href="{% static 'clivet/style.css' %}" rel="stylesheet">
-<link href="{% static 'fullcalendar/fullcalendar.min.css' %}" rel="stylesheet"> {% endblock extrastyle %} {% block contentroot %}
+<link href="{% static 'fullcalendar/fullcalendar.min.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'bootstrap-3.1.1-dist/css/sb-admin.css' %}">
+
+<style media="screen">
+    .clivet-title{
+        color: #5d5c5c;
+        font-size: 2em;
+    }
+
+    .btn-guardar{
+        background-image: -webkit-linear-gradient(top,#047568 0,#019e8c 100%);
+        background-image: linear-gradient(to bottom,#047568 0,#019e8c 100%);
+        background-repeat: repeat-x;
+        color: #fff;
+        border-color: #02584e;
+    }
+    .btn-guardar:hover{
+        color: #fff;
+        background: #028474;
+        border-color: #02584e;
+    }
+    .btn-cancelar{
+        background-image: -webkit-linear-gradient(top,#940804 0,#bd0905 100%);
+        background-image: linear-gradient(to bottom,#940804 0,#bd0905 100%);
+        background-repeat: repeat-x;
+        border-color: #5f0101;
+        color: #fff;
+    }
+    .btn-cancelar:hover{
+        border-color: #5f0101;
+        color: #fff;
+        background: #9e0b08;
+    }
+    .controls .btn+.btn {
+        margin-bottom: 0;
+        margin-left: 5px;
+    }
+</style>
+{% block style %}
+{% endblock style %}
+{% endblock extrastyle %}
+{% block contentroot %}
 <!-- Navigation -->
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    {% load_menu request 'BACKEND' %} {% include "main/partials/header.html" %} {% include "main/partials/aside.html" %}
+<nav class="navbar navbar-clivet navbar-fixed-top" role="navigation">
+    {% load_menu request 'BACKEND' %}
+    {% include "main/partials/header.html" %}
+    {% include "main/partials/aside.html" %}
 </nav>
 <div id="page-wrapper">
     <div class="container-fluid">
-        <div class="page-header page-clivet">
-            <nav class="breadcrumb">
-                {% block breadcrumbs %}
-                <a href="{# url 'accounts:index' #}" class="breadcrumb-item"><i class="fa fa-home"></i> {% trans 'Home' %}&rsaquo;&rsaquo;</a> </p>
-                {% endblock breadcrumbs %}
-            </nav>           
-        </div>
-        {% block content_title %}
-        <p class="escritorio btn-su">Escritorio</p> {% endblock content_title %} {% block messages %} {% load notify %} {% get_notify request %} {% endblock messages %} {% block content %}
+        {% block breadcrumbs %}
+        <ol class="breadcrumb">
+          <li class="active"><i class="fa fa-home"></i> {% trans 'Home' %}</li>
+        </ol>
+        {% endblock breadcrumbs %}
+        <div class="page-header page-clivet"><h1 class="clivet-title">{% block content_title %}Escritorio{% endblock content_title %}</h1> </div>
+        {% block messages %}
+            {% load notify %}
+            {% get_notify request %}
+        {% endblock messages %}
+        {% block content %}
         <div class="row">
             <div class="col-xs-4 col-md-2 col-md-offset-2">
                 <a href="#" class="thumbnail text-center">
@@ -94,4 +140,7 @@
 <script src="{% static 'fullcalendar/jquery-ui.min.js' %}"></script>
 <script src="{% static 'fullcalendar/fullcalendar.min.js' %}"></script>
 <script src="{% static 'fullcalendar/es.js' %}"></script>
+<script type="text/javascript">
+    $('.btn-controls .controls').addClass('pull-right');
+</script>
 {% endblock extrajs %}

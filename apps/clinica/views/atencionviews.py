@@ -17,7 +17,7 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 from django.views.generic import TemplateView
 
-from ..forms.atencionform import AtencionForm, AtencionMascotaForm
+from ..forms.atencionform import AtencionForm, AtencionMascotaDetailForm
 
 from ..models.atencion import Atencion
 from ..models.colamedica import ColaMedica
@@ -26,6 +26,8 @@ import logging
 log = logging.getLogger(__name__)
 
 # Create your views here.
+
+
 class AtencionListView(ListView):
     model = Atencion
     template_name = "clinica/atencion.html"
@@ -34,14 +36,33 @@ class AtencionListView(ListView):
         #mascota = Mascota.objects.get(nombre='Boby')
         context = super(AtencionListView, self).get_context_data(**kwargs)
         mascota = Mascota.objects.get(id=self.kwargs['pk'])
-
+        context['opts'] = self.model._meta
         context['atencion'] = Atencion.objects.filter(colamedica__historia__mascota__nombre=mascota ).order_by('pk')
+        context['nombre'] = mascota
+        context['dueño'] = mascota.dueño
+        context['raza'] = mascota.raza
+        context['fecha'] = mascota.fecha_nacimiento
+        context['especie'] = mascota.especie
+        context['genero'] = mascota.genero
+        context['esterelizado'] = mascota.esterelizado
+        context['peso'] = '20kg'
+        context['color'] = mascota.color
         context['cantidad'] = context['atencion'].count()
+
+        if mascota:
+            initial = {
+                'nombre': mascota.nombre,
+                'dueño': mascota.dueño.persona,
+                'edad': mascota.fecha_nacimiento,
+                'genero': mascota.genero,
+                'especie': mascota.especie,
+                'raza': mascota.raza,
+                'color': mascota.color,
+            }
+        context['form'] = AtencionMascotaDetailForm(initial=initial)
         return context
 
-
 class AtencionCreateView(CreateView):
-    """Tipo Documento Identidad."""
     model = Atencion
     form_class = AtencionForm
     template_name = "clinica/form/atencion.html"
@@ -56,14 +77,15 @@ class AtencionCreateView(CreateView):
             self.medica_pk = SecurityKey.is_valid_key(
                 self.request, key, 'medica_cre')
             if not self.medica_pk:
-                return HttpResponseRedirect(reverse_lazy('sad:user-person_search'))
+                return HttpResponseRedirect(reverse_lazy('clinica: listar_medica'))
         return super(AtencionCreateView, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(AtencionCreateView, self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
-        context['cmi'] = 'atencion'
-        context['title'] = _('Add %s') % capfirst(_('atencion'))
+        #context['cmi'] = 'atencion'
+        context['nombre'] = self.medica_pk
+        context['title'] = _('%s') % capfirst(_('atencion'))
         return context
 
     def get_form_kwargs(self):
@@ -77,6 +99,9 @@ class AtencionCreateView(CreateView):
         if self.medica_pk:
             d = ColaMedica.objects.get(pk=self.medica_pk)
             if d:
+                initial['nombre'] = d.historia.mascota.nombre
+                initial['raza'] = d.historia.mascota.raza
+                initial['dueño'] = d.historia.mascota.dueño
                 initial['historia'] = d.historia.num_historia
                 initial['descripcion'] = d.descripcion
                 initial['estado'] = d.estado
@@ -88,12 +113,11 @@ class AtencionCreateView(CreateView):
         sid = transaction.savepoint()
         try:
             try:
-                colamedica = ColaMedica.objects.get(
-                    pk=self.request.POST.get("person_id"))
+                colamedica = ColaMedica.objects.get(pk=self.request.POST.get("person_id"))
             except Exception as e:
                 colamedica = ColaMedica()
                 colamedica.save()
-            colamedica.descripcion = form.cleaned_data['descripcion']
+
             colamedica.estado = form.cleaned_data['estado']
 
             colamedica.save()
@@ -174,7 +198,8 @@ class AtencionUpdateView(UpdateView):
         try:
             self.object = form.save(commit=False)
             try:
-                colamedica = ColaMedica.objects.get(pk=self.object.colamedica.pk)
+                colamedica = ColaMedica.objects.get(
+                    pk=self.object.colamedica.pk)
             except:
                 colamedica = ColaMedica()
                 # person.save()
@@ -205,7 +230,6 @@ class AtencionUpdateView(UpdateView):
             messages.success(self.request, e)
             log.warning(force_text(e), extra=log_params(self.request))
             return super(AtencionUpdateView, self).form_invalid(form)
-
 
 class AtencionDeleteView(DeleteView):
     """Empresa Delete View."""
@@ -262,6 +286,7 @@ class AtencionDeleteView(DeleteView):
 
     def get(self, request, *args, **kwargs):
         return self.delete(request, *args, **kwargs)
+
 
 class AtencionMedicaView(generic.DetailView):
     model = ColaMedica
@@ -324,8 +349,9 @@ class AtencionMedicaView(generic.DetailView):
                 'agroups': UserAssociation.objects.filter(user=self.object).order_by('association'),
                 'status': UserStatus.objects.filter(user=self.object).order_by('-created_at'),
             }
-        context['form'] = AtencionMascotaForm(initial=initial)
+        context['form'] = AtencionMascotaDetailForm(initial=initial)
         return context
+
 
 class MainAtencionesView(TemplateView):
 
@@ -334,6 +360,7 @@ class MainAtencionesView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(MainAtencionesView, self).get_context_data(**kwargs)
         context['title'] = _('Add %s') % capfirst(_('atencion'))
-        context['atencion'] = Atencion.objects.filter(colamedica = '0001').order_by('anamnesis')
+        context['atencion'] = Atencion.objects.filter(
+            colamedica='0001').order_by('anamnesis')
         context['cantidad'] = context['atencion'].count()
         return context

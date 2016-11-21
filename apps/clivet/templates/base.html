@@ -11,7 +11,6 @@
         <link href="{% static 'bootstrap-3.1.1-dist/css/bootstrap.min.css' %}" rel="stylesheet">
         <link href="{% static 'bootstrap-3.1.1-dist/css/bootstrap-theme.min.css' %}" rel="stylesheet">
 
-        <link rel="stylesheet" href="{% static 'bootstrap-3.1.1-dist/css/sb-admin.css' %}">
 
         <link href="{% static 'datetimepicker/css/bootstrap-datetimepicker.min.css' %}" rel="stylesheet">
         <link href="{% static 'typehead/typehead.css' %}" rel="stylesheet">
@@ -21,6 +20,11 @@
         <link href="{% static 'font-awesome-4.2.0/css/font-awesome.min.css' %}" rel="stylesheet">
 
         {% block extrastyle %}
+
+        {% block style %}
+
+        {% endblock style %}
+
         {% endblock extrastyle %}
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="{% static 'jquery/jquery.min.js' %}"></script>
@@ -42,7 +46,13 @@
         <script src="{% static 'moment/moment-with-locales.min.js' %}"></script>
         <script src="{% static 'moment/moment.min.js' %}"></script>
         <script src="{% static 'datetimepicker/js/bootstrap-datetimepicker.min.js' %}"></script>
-        <script src="{% static 'typehead/bootstrap.typehead.min.js' %}"></script>
+        
+        <script src="{% static 'typehead/typeahead.jquery.js' %}"></script>
+        <script src="{% static 'typehead/typeahead.bundle.min.js' %}"></script>
+        <script src="{% static 'typehead/typeahead.bundle.js' %}"></script>
+        <script src="{% static 'typehead/twitter.typehead.js' %}"></script>
+        <script src="{% static 'typehead/bloodhound.js' %}"></script>
+        <script src="{% static 'typehead/bloodhound.js' %}"></script>
         {% block extrajs %}
         {% endblock extrajs %}
     </body>

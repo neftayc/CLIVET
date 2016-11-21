@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.text import capfirst, get_text_list
 from crispy_forms.helper import FormHelper, Layout
 from crispy_forms.layout import Field, Div, Row, HTML
-from crispy_forms.bootstrap import FormActions, TabHolder, Tab
+from crispy_forms.bootstrap import FormActions, TabHolder, Tab, InlineRadios, InlineCheckboxes
 
 
 from apps.utils.forms import smtSave, btnCancel, btnReset
@@ -15,7 +15,7 @@ from django.utils.timezone import get_current_timezone
 from datetime import datetime
 
 from ..models.historia import Historial
-from ..models.mascota import Mascota, BOOL_GENERO, TIPO_MASCOTA, CONDICION, Cliente
+from ..models.mascota import Mascota, BOOL_GENERO, TIPO_MASCOTA, CONDICION, CARACTER, ACTIVIDAD, HABITAT, ALIMENTACION, APTITUP, CONVIVE, Cliente
 
 class HistoriaForm(forms.ModelForm):
     """Tipo Documeto Form."""
@@ -23,7 +23,7 @@ class HistoriaForm(forms.ModelForm):
         """Meta."""
         model = Historial
         exclude = ()
-        fields = ['num_historia','usuario','mascota',]
+        fields = ['num_historia','veterinario',]
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
@@ -43,12 +43,9 @@ class HistoriaForm(forms.ModelForm):
                 Div(
                     Row(
                         Div(Field('num_historia', css_class='input-required'),
-                        css_class='col-md-4'),
-                        Div(Field('usuario', ),
-                        css_class='col-md-4'),
-
-                        Div(Field('mascota',),
-                        css_class='col-md-4'),
+                        css_class='col-md-6'),
+                        Div(Field('veterinario', ),
+                        css_class='col-md-6'),
                         ),
                     css_class='modal-body'
                     ),
@@ -70,10 +67,9 @@ class HistoriaMascotaForm(forms.ModelForm):
 
     """ """
     person_id = forms.CharField(widget=forms.HiddenInput(), required=False,)
-    dueño = forms.CharField(widget=forms.HiddenInput(), required=False,)
     class Meta:
         model = Historial
-        fields = ['num_historia','mascota','usuario',]
+        fields = ['num_historia',]
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
@@ -86,6 +82,14 @@ class HistoriaMascotaForm(forms.ModelForm):
             help_text=u'<small class="help-error"></small> %s' % _(
             u' '),
         )
+        self.fields['num_historia'] = forms.CharField(
+            label=capfirst(_(u'N° Historia')),
+            required=True,
+            help_text=u'<small class="help-error"></small> %s' % _(
+            u' '),
+        )
+        self.fields['dueño'] =  forms.ModelChoiceField(queryset=Cliente.objects.all())
+
         self.fields['fecha_nacimiento'] = forms.DateTimeField(
             label=_(u'Fecha Nacimiento'), required=False,
             initial=datetime.now().replace(tzinfo=get_current_timezone()),
@@ -93,45 +97,40 @@ class HistoriaMascotaForm(forms.ModelForm):
             input_formats=(
                 '%d/%m/%Y', '%d/%m/%y', '%d-%m-%Y', '%d-%m-%y', '%Y-%m-%d',
                 '%Y-%m-%d %H:%M:%S'),
-            help_text=u'<small class="help-error"></small> %s' % _(
-                u'Some useful help text.'),
         )
-        self.fields['genero'] = forms.ChoiceField(
-            label=capfirst(_(u'genero*:')), required=False,
-            choices=BOOL_GENERO,
-            widget=forms.RadioSelect(attrs={'default':'macho',}),
+        self.fields['caracter'] = forms.ChoiceField(
+            label=capfirst(_(u'caracter')), required=True,
+            choices=CARACTER,
             help_text=u'<small class="help-error"></small> %s' % _(
                 u' '),
         )
-        self.fields['especie'] = forms.ChoiceField(
-            label=capfirst(_(u'tipo Mascota')), required=False,
-            choices=TIPO_MASCOTA,
+        self.fields['actividad'] = forms.ChoiceField(
+            label=capfirst(_(u'actividad')), required=True,
+            choices=ACTIVIDAD,
             help_text=u'<small class="help-error"></small> %s' % _(
                 u' '),
         )
-        self.fields['raza'] = forms.CharField(
-            label=capfirst(_(u'raza')), required=True,
+        self.fields['habitar'] = forms.ChoiceField(
+            label=capfirst(_(u'habitar')), required=True,
+            choices=HABITAT,
             help_text=u'<small class="help-error"></small> %s' % _(
                 u' '),
         )
-        self.fields['color'] = forms.CharField(
-            label=capfirst(_(u'color')), required=True,
+        self.fields['alimentacion'] = forms.ChoiceField(
+            label=capfirst(_(u'alimentacion')), required=True,
+            choices=ALIMENTACION,
             help_text=u'<small class="help-error"></small> %s' % _(
                 u' '),
         )
-        self.fields['cond_corporal'] = forms.ChoiceField(
-            label=capfirst(_(u'C. Corporal')), required=False,
-            choices=CONDICION,
+        self.fields['aptitup'] = forms.ChoiceField(
+            label=capfirst(_(u'aptitup')), required=True,
+            choices=APTITUP,
             help_text=u'<small class="help-error"></small> %s' % _(
                 u' '),
         )
-        self.fields['esterelizado'] = forms.BooleanField(
-            label=capfirst(_(u'¿Esterelizado?')), required=False,
-            help_text=u'<small class="help-error"></small> %s' % _(
-                u' '),
-        )
-        self.fields['is_active'] = forms.BooleanField(
-            label=capfirst(_(u'activo')), required=True,
+        self.fields['convive'] = forms.ChoiceField(
+            label=capfirst(_(u'convive')), required=True,
+            choices=CONVIVE,
             help_text=u'<small class="help-error"></small> %s' % _(
                 u' '),
         )
@@ -140,83 +139,65 @@ class HistoriaMascotaForm(forms.ModelForm):
             help_text=u'<small class="help-error"></small> %s' % _(
                 u' '),
         )
-        self.fields['is_actived'] = forms.BooleanField(
-            label=capfirst(_(u'inactivo')), required=False,
-            help_text=u'<small class="help-error"></small> %s' % _(
-                u' '),
-        )
-        self.fields['descripcion'] = forms.CharField(
-            label=capfirst(_(u'Descripcion')), required=False,
-            widget=forms.Textarea(attrs = {'rows': 4, }),
-            help_text=u'<small class="help-error"></small> %s' % _(
-                u' '),
-        )
+
         self.helper = FormHelper()
+        self.helper.form_method = 'post'
+        self.helper.form_class = 'js-validate form-vertical form-mascota'
         self. helper.layout = Layout(
             Field('person_id',),
-            TabHolder(
-                Tab(_('Mascota Info'),
                     Row(
-                        Div(Field('nombre', css_class='input-required'),
-                    css_class='col-md-4'),
-                        Div(Field('fecha_nacimiento', css_class='input-datex'),
-                    css_class='col-md-4'),
-                    ),
-                    Row(
-                        Div(Field('especie',),
-                    css_class='col-md-3'),
-                        Div(Field('raza', css_class='input-required' ),
-                    css_class='col-md-3'),
-                        Div(Field('color', css_class='input-required'),
-                    css_class='col-md-3'),
-                        Div(Field('cond_corporal', ),
-                    css_class='col-md-3'),
+                        Div(HTML('''<h2 class="subtitle-mascota">*Datos Personales:</h2>'''),
+                        css_class="col-xs-12"),
+                        Div(
+                            Div(Field('nombre', css_class='input-required form-control-mascota'),
+                            css_class='col-md-4'),
+                            Div(Field('dueño', css_class='input-required form-control-mascota'),
+                            css_class='col-md-4'),
+                            Div(Field('fecha_nacimiento', css_class='input-required form-control-mascota'),
+                            css_class='col-md-4'),
+                            Div(Field('num_historia', css_class='input-required', placeholder="Ingrese el numero de Historia del paciente"),
+                            css_class="col-md-12"),
+                        css_class='col-md-12 div-mascota-forms'),
                     ),
                     Row(
-                        Div(Field('genero', ),
-                    css_class='col-md-4'),
-                        Div(Field('esterelizado',),
-                    css_class='col-md-2'),
-                        Div(Field('is_active', ),
-                    css_class='col-md-2'),
-                        Div(Field('is_actived',),
-                    css_class='col-md-2'),
-                        Div(Field('historia',),
-                    css_class='col-md-2'),
+                        Div(HTML('''<h2 class="subtitle-mascota">*Reseña del Paciente:</h2>'''),
+                        css_class="col-xs-12"),
+                        Div(
+                            Div(Field('caracter', css_class='input-required'),
+                            css_class='col-md-4'),
+                            Div(Field('actividad', css_class='input-required'),
+                            css_class='col-md-4'),
+                            Div(Field('habitar', css_class='input-required'),
+                            css_class='col-md-4'),
+                            Row(
+                                Div(
+                                    Div(Field('alimentacion', css_class='input-required'),
+                                    css_class='col-md-4'),
+                                    Div(Field('aptitup', css_class='input-required'),
+                                    css_class='col-md-4'),
+                                    Div(InlineRadios('convive'),
+                                    css_class='col-md-2'),
+                                    Div(Field('historia', css_class='input-required'),
+                                    css_class='col-md-2'),
+                                css_class="col-md-12"),
+                            ),
+                        css_class="col-md-12 div-mascota-forms"),
                     ),
-                    Row(
-                        Div(Field('descripcion', ),
-                    css_class='col-md-12'),
-                    ),
-                    ),
-                Tab(_('Account Info'),
-                    Div(Field('num_historia', css_class='input-required'),
-                    css_class='col-md-4'),
-                    Div(Field('usuario', ),
-                    css_class='col-md-4'),
-
-                    Div(Field('mascota',),
-                    css_class='col-md-4'),
-                    ),
-            ),
             Row(
-                FormActions(
-                    smtSave(),
-                    btnCancel(),
-                    btnReset(),
-                ),
+                Div(
+                    FormActions(
+                        smtSave(),
+                        btnCancel(),
+                        btnReset(),
+                    ),
+                css_class="col-md-12 btn-controls"),
             ),
         )
 
-
-
 class MascotaHistoriDetailForm(forms.ModelForm):
-
-    """ """
     class Meta:
         model = Historial
         fields = []
-
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
         self.object = kwargs.pop('object', None)
@@ -280,6 +261,7 @@ class MascotaHistoriDetailForm(forms.ModelForm):
             help_text=u'<small class="help-error"></small> %s' % _(
                 u' '),
         )
+
         self.fields['genero'] = forms.CharField(
             label=capfirst(_(u'genero')), required=False,
             help_text=u'<small class="help-error"></small> %s' % _(
@@ -295,6 +277,7 @@ class MascotaHistoriDetailForm(forms.ModelForm):
             help_text=u'<small class="help-error"></small> %s' % _(
                 u' '),
         )
+
         self.fields['color'] = forms.CharField(
             label=capfirst(_(u'color')), required=False,
             help_text=u'<small class="help-error"></small> %s' % _(
