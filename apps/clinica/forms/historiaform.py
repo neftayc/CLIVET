@@ -150,13 +150,13 @@ class HistoriaMascotaForm(forms.ModelForm):
                         css_class="col-xs-12"),
                         Div(
                             Div(Field('nombre', css_class='input-required form-control-mascota'),
-                            css_class='col-md-4'),
+                            css_class='col-md-3'),
                             Div(Field('dueño', css_class='input-required form-control-mascota'),
-                            css_class='col-md-4'),
+                            css_class='col-md-3'),
                             Div(Field('fecha_nacimiento', css_class='input-required form-control-mascota'),
-                            css_class='col-md-4'),
-                            Div(Field('num_historia', css_class='input-required', placeholder="Ingrese el numero de Historia del paciente"),
-                            css_class="col-md-12"),
+                            css_class='col-md-3'),
+                            Div(Field('num_historia', css_class='input-required form-control-mascota', placeholder="Ingrese el numero de Historia del paciente"),
+                            css_class="col-md-3"),
                         css_class='col-md-12 div-mascota-forms'),
                     ),
                     Row(
@@ -176,9 +176,9 @@ class HistoriaMascotaForm(forms.ModelForm):
                                     Div(Field('aptitup', css_class='input-required'),
                                     css_class='col-md-4'),
                                     Div(InlineRadios('convive'),
-                                    css_class='col-md-2'),
+                                    css_class='col-md-4'),
                                     Div(Field('historia', css_class='input-required'),
-                                    css_class='col-md-2'),
+                                    css_class='estado-historia '),
                                 css_class="col-md-12"),
                             ),
                         css_class="col-md-12 div-mascota-forms"),
@@ -280,6 +280,16 @@ class MascotaHistoriDetailForm(forms.ModelForm):
 
         self.fields['color'] = forms.CharField(
             label=capfirst(_(u'color')), required=False,
+            help_text=u'<small class="help-error"></small> %s' % _(
+                u' '),
+        )
+        self.fields['actividad'] = forms.CharField(
+            label=capfirst(_(u'actividad')), required=False,
+            help_text=u'<small class="help-error"></small> %s' % _(
+                u' '),
+        )
+        self.fields['alimentacion'] = forms.CharField(
+            label=capfirst(_(u'alimentacion')), required=False,
             help_text=u'<small class="help-error"></small> %s' % _(
                 u' '),
         )

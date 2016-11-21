@@ -6,12 +6,13 @@
 <style media="screen">
 	.form-control-mascota{
 		border-color: #00796b;
-	    background: #009688;
+	    background: #02a290 !important;
 	    color: #fff;
 	    font-size: 1.1em;
+		cursor: pointer !important;
 	}
 	.subtitle-mascota{
-		margin-top: 5px;
+		margin-top: 9px;
 		font-size: 1.6em;
 		color: #212121;
 	}
@@ -20,11 +21,13 @@
 	}
 	.div-mascota-forms{
 		box-shadow:  1px 1px 1px 1px #009688;
-		margin-bottom: 15px;
+		margin-bottom: 20px;
+		padding: 20px 5px;
+		border-radius: 10px;
 	}
-	.page-clivet{
-		margin-top: 0px;
-		margin-bottom: 7px;
+
+	.estado-historia{
+		display: none;
 	}
 </style>
 {% endblock style %}
@@ -37,10 +40,11 @@
 {% endblock breadcrumbs %}
 
 {% block content_title %}
-<i class="fa fa-list-alt"></i> {{ subtitle }}
+<i class="fa fa-list-alt"></i> {{ subtitle }} {{cantidad}}
 {% endblock content_title %}
 
 {% block content %}
+
 {% crispy form %}
 
 {% endblock %}
@@ -49,6 +53,29 @@
 {{ block.super }}
 
 <script type="text/javascript">
+$('#id_num_historia').attr('readonly', true);
+$('#id_nombre').attr('readonly', true);
+$('#id_dueño option:not(:selected)').attr('disabled',true);
+$('#id_fecha_nacimiento option:not(:selected)').attr('disabled',true);
+
+if('{{cantidad}}'<=9){
+	$("#id_num_historia").val('0000{{cantidad}}');
+}
+else if ('{{cantidad}}'<=99) {
+	$("#id_num_historia").val('000{{cantidad}}');
+}
+else if('{{cantidad}}'<=999) {
+	$("#id_num_historia").val('00{{cantidad}}');
+}
+else if('{{cantidad}}'<=9999){
+	$("#id_num_historia").val('0{{cantidad}}');
+}
+else{
+	$("#id_num_historia").val('{{cantidad}}');
+}
+
+$("#id_historia").attr('checked', true);
+
 $('#id_caracter, #id_actividad,#id_habitar,#id_alimentacion,#id_aptitup').append('<option value selected="selected" diseabled>Elige una opcion..</option>');
 $('#id_fecha_nacimiento').datetimepicker({
 	format: 'YYYY-MM-DD',
