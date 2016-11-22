@@ -12,14 +12,6 @@ from apps.ventas.models.UnidadMedida import UnidadMedidaV
 
 class ProductoForm(forms.ModelForm):
     u"""Tipo Documeto Form."""
-    precioV = forms.DecimalField(widget=forms.TextInput(
-        attrs={'type': 'number', 'class': 'form-control text-right'}))
-    precioC = forms.DecimalField(widget=forms.TextInput(
-        attrs={'type': 'number', 'class': 'form-control text-right'}))
-    igv = forms.DecimalField(initial=0.00, widget=forms.TextInput(
-        attrs={'class': 'form-control text-right'}))
-    MontoReal = forms.DecimalField(initial=0.00, widget=forms.TextInput(
-        attrs={'class': 'form-control text-right'}))
     # =====================modal==========================
     categoria_departamento = forms.ModelChoiceField(
         queryset=Departamento.objects.all(),
@@ -55,9 +47,9 @@ class ProductoForm(forms.ModelForm):
     class Meta:
         """Meta."""
         model = Producto
-        exclude = ('existencia',)
+        exclude = ('existencia', 'MontoReal', 'igv')
         fields = ('nombre', 'codigo', 'categoria',
-                  'fechaVencimiento', 'unidad_medida')
+                  'fechaVencimiento', 'unidad_medida', 'precioV', 'precioC')
     #         nombre = models.CharField('Nombre', max_length=50, unique=True)
     # codigo = models.CharField('Código', max_length=50, unique=True)
     # categoria = models.ForeignKey('Categoria', Categoria)
@@ -89,9 +81,11 @@ class ProductoForm(forms.ModelForm):
             ),
             Row(
                 Div(FieldWithButtons('categoria', StrictButton(
-                    "Agregar", id='addCategoria')), css_class='col-md-6'),
+                    "Agregar", id='addCategoria')), css_class='col-md-4'),
                 Div(FieldWithButtons('unidad_medida', StrictButton(
-                    "Agregar", id='addUnidad')), css_class='col-md-6'),
+                    "Agregar", id='addUnidad')), css_class='col-md-4'),
+                Div(Field('precioC', placeholder="username"), css_class='col-md-2'),
+                Div(Field('precioV', placeholder="username"), css_class='col-md-2'),
             ),
             Div(Row(
                 FormActions(

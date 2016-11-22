@@ -11,52 +11,7 @@ Descripcion: Create/Update group
 <a href="{% url 'ventas:producto_list' %}">{{opts.verbose_name_plural|capfirst}}</a> &rsaquo; {{ title }} {% endblock breadcrumbs %} {% block content_title %} {{ opts.verbose_name|capfirst }} | <small>{{ title }}</small> {% endblock content_title %} {% block content %}
 <form action="" method="post">
     {% csrf_token %}
-    <div class="row">
-        <div class="col-md-8 panel panel-default">
-            <div class="panel-body">{% crispy form %}</div>
-        </div>
-        <div class="col-md-4">
-            <div class="panel panel-primary">
-                <div class="panel-heading">Resumen</div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-6 text-center">
-                            <b>Precio de compra: </b>
-                        </div>
-                        <div class="col-md-6">
-                            {{form.precioC}}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 text-center">
-                            <b>Precio de venta: </b>
-                        </div>
-                        <div class="col-md-6">
-                            {{form.precioV}}
-                        </div>
-                    </div>
-                </div>
-                <div class="panel-footer">
-                    <div class="row">
-                        <div class="col-md-6 text-center">
-                            <b>IGV: </b>
-                        </div>
-                        <div class="col-md-6">
-                            {{form.igv}}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 text-center">
-                            <b>Total: </b>
-                        </div>
-                        <div class="col-md-6">
-                            {{form.MontoReal}}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    {% crispy form %}
 </form>
 <div id="add-new-categoria" class="modal fade" role="dialog" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
@@ -100,6 +55,7 @@ Descripcion: Create/Update group
         </div>
     </div>
 </div>
+
 <div id="add-new-departamento" class="modal fade" role="dialog" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -154,7 +110,7 @@ Descripcion: Create/Update group
                                 <label for="simbolo_unidad">Símbolo
                                     <span class="required">*</span>
                                 </label>
-                                <input name="simbolo_unidad" type="text" class="form-control" id="simbolo_unidad" required="true">
+                                <input name="simbolo_unidad" type="text" class="form-control" id="simbolo_unidad" required="true" placeholder="Ejem. Kg.">
                             </div>
                         </div>
                     </div>
@@ -267,15 +223,6 @@ $.ajaxSetup({
             xhr.setRequestHeader("X-CSRFToken", csrftoken);
         }
     }
-});
-
-$('#id_precioC').keyup(function() {
-    $('#id_igv').val($('#id_precioC').val() * $('#id_precioV').val() * 0.18)
-    $('#id_MontoReal').val($('#id_precioC').val() * $('#id_precioV').val())
-});
-$('#id_precioV').keyup(function() {
-    $('#id_igv').val($('#id_precioC').val() * $('#id_precioV').val() * 0.18)
-    $('#id_MontoReal').val($('#id_precioC').val() * $('#id_precioV').val())
 });
 $('#id_fechaVencimiento').datetimepicker({
     format: 'YYYY-MM-DD',
