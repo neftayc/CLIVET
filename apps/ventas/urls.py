@@ -10,17 +10,17 @@ from apps.ventas.views.VentaDetalle import *
 
 urlpatterns = [
     url(r'^ventas/$', MainCreateView.as_view(), name="ventaslist"),
+
     # departamento
     url(r'^departamento/listar/$', DepartamentoListView.as_view(),
         name="departamento_list"),
-    url(r'^departamento/listar/search/$', buscarDep),
-
     url(r'^departamento/crear/$', DepartamentoCreateView.as_view(),
         name="departamento_add"),
     url(r'^departamento/actualizar/(?P<pk>.*)/$', DepartamentoUpdateView.as_view(),
         name="departamento_upd"),
     url(r'^departamento/eliminar/(?P<pk>.*)/$', DepartamentoDeleteView.as_view(),
         name="departamento_del"),
+
     # categoria
     url(r'^categoria/listar/$', CategoriaListView.as_view(),
         name="categoria_list"),
@@ -31,6 +31,7 @@ urlpatterns = [
     url(r'^categoria/eliminar/(?P<pk>.*)/$', CategoriaDeleteView.as_view(),
         name="categoria_del"),
     url(r'^categoria/crear/ajax/$', post_ajax_categoria, name="categoria_post_ajax"),
+
     # categoria
     url(r'^producto/listar/$', ProductoListView.as_view(),
         name="producto_list"),
@@ -40,7 +41,8 @@ urlpatterns = [
         name="producto_upd"),
     url(r'^producto/eliminar/(?P<pk>.*)/$', ProductoDeleteView.as_view(),
         name="producto_del"),
-    # categoria
+
+    # Unidad de medida
     url(r'^uni/listar/$', UnidadMedidaListView.as_view(),
         name="unidad_medida_list"),
     url(r'^uni/crear/$', UnidadMedidaCreateView.as_view(),
@@ -53,6 +55,7 @@ urlpatterns = [
         name="carro"),
     url(r'^uni/vendercarr/$', VenderCarro,
         name="vender_carro"),
+
     # venta
     url(r'^venta/listar/$', VentaListView.as_view(),
         name="venta_list"),

@@ -10,7 +10,7 @@ Descripcion: Lista Tipo Documento
 $(function() {
     $('table').kgrid({
         form_data : ['{{f}}', '{{q}}'],
-        form_to   : '/ventas/categoria/invetario/listar/?f={{f}}&q={{q}}',
+        form_to   : '/ventas/categoria/listar/?f={{f}}&q={{q}}',
         order_attr: 'class=""',
         order_to  : '/ventas/categoria/listar/?f={{f}}&q={{q}}',
     });
@@ -45,11 +45,11 @@ $(function() {
                 <td>{{ d.descripcion }}</td>
                 <td>{{ d.departamento }}</td>
                 <td class="text-center">
-                    <a href="{% url 'ventas:categoria_upd' d.pk|key:'cat_upd' %}" class="btn btn-info btn-sm text-bold" title="Cambiar Tipo Documento" rel="tooltip">
+                    <a href="{% url 'ventas:categoria_upd' d.pk|key:'cat_upd' %}" class="btn btn-info btn-sm text-bold" title="Cambiar Categoria" rel="tooltip">
                         <i class="btn-icon-only fa fa-edit"></i>
                     </a>
-                    <a href="{% url 'ventas:categoria_del' d.pk|key:'cat_del' %}" class="btn btn-danger btn-sm js-confirm text-bold" msg-title="Eliminar Documento Identidad?." msg="Esta Seguro
-                            <br/>Recuerde esta operación no puede revertirse" title="Eliminar Tipo Documento" rel="tooltip">
+                    <a href="{% url 'ventas:categoria_del' d.pk|key:'cat_del' %}" class="btn btn-danger btn-sm js-confirm text-bold" msg-title="Eliminar Categoria" msg="¿Esta Seguro de continuar con la opracion?
+                            <br/>Recuerde esta operación no puede revertirse" title="Eliminar Categoria" rel="tooltip">
                         <i class="btn-icon-only fa fa-trash-o"></i>
                     </a>
                 </td>

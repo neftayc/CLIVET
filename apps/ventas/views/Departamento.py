@@ -78,27 +78,6 @@ class DepartamentoListView(ListView):
 
         return context
 
-def buscarDep(request):
-    if request.is_ajax:
-        search = request.GET.get('term', '')
-
-        departamentos = Departamento.objects.filter(
-            descripcion__icontains=search)[:5]
-
-        results = []
-        for departamento in departamentos:
-            departamento_json = {}
-            departamento_json['label'] = departamento.descripcion
-            departamento_json['value'] = departamento.descripcion
-            results.append(departamento_json)
-
-        data_json = json.dumps(results)
-
-    else:
-        data_json = 'fail'
-    mimetype = "application/json"
-    return HttpResponse(data_json, mimetype)
-
 
 class DepartamentoCreateView(CreateView):
     u"""Tipo Documento Identidad."""

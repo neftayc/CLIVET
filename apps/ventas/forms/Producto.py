@@ -9,6 +9,7 @@ from django.utils.text import capfirst, get_text_list
 from apps.ventas.models.Departamento import Departamento
 from apps.ventas.models.UnidadMedida import UnidadMedidaV
 
+
 class ProductoForm(forms.ModelForm):
     u"""Tipo Documeto Form."""
     precioV = forms.DecimalField(widget=forms.TextInput(
@@ -19,11 +20,12 @@ class ProductoForm(forms.ModelForm):
         attrs={'class': 'form-control text-right'}))
     MontoReal = forms.DecimalField(initial=0.00, widget=forms.TextInput(
         attrs={'class': 'form-control text-right'}))
-        # =====================modal==========================
+
+    # =====================modal==========================
     categoria_departamento = forms.ModelChoiceField(
-        queryset=Departamento.objects.all(), required=False,label='Departamento')
+        queryset=Departamento.objects.all(), required=False, label='Departamento')
     unidadc_ventas = forms.ModelChoiceField(
-        queryset=UnidadMedidaV.objects.all(), required=False,label='Unidad de medida de ventas')
+        queryset=UnidadMedidaV.objects.all(), required=False, label='Unidad de medida de ventas')
     # nombre = forms.CharField(max_length=100)
     # apellidos = forms.CharField(max_length=100, required=False)
     # numero = forms.IntegerField(required=False)
@@ -49,7 +51,8 @@ class ProductoForm(forms.ModelForm):
         """Meta."""
         model = Producto
         exclude = ('existencia',)
-        fields = ('nombre', 'codigo', 'categoria', 'fechaVencimiento', 'unidad_medida')
+        fields = ('nombre', 'codigo', 'categoria',
+                  'fechaVencimiento', 'unidad_medida')
     #         nombre = models.CharField('Nombre', max_length=50, unique=True)
     # codigo = models.CharField('Código', max_length=50, unique=True)
     # categoria = models.ForeignKey('Categoria', Categoria)
@@ -74,7 +77,7 @@ class ProductoForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Row(
-                Div(Field('nombre',placeholder="username"), css_class='col-md-6'),
+                Div(Field('nombre', placeholder="username"), css_class='col-md-6'),
                 Div(Field('codigo', placeholder="username"), css_class='col-md-3'),
                 Div(Field('fechaVencimiento', placeholder="YYYY-MM-DD"),
                     css_class='col-md-3'),

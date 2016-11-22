@@ -10,7 +10,7 @@ Descripcion: Lista Tipo Documento
 $(function() {
     $('table').kgrid({
         form_data : ['{{f}}', '{{q}}'],
-        form_to   : '/vetas/departamento/listar/?f={{f}}&q={{q}}',
+        form_to   : '/ventas/departamento/listar/?f={{f}}&q={{q}}',
         order_attr: 'class=""',
         order_to  : '/ventas/departamento/listar/?f={{f}}&q={{q}}',
     });
@@ -43,11 +43,11 @@ $(function() {
                 </td>
                 <td>{{ d.descripcion }}</td>
                 <td class="text-center">
-                    <a href="{% url 'ventas:departamento_upd' d.pk|key:'dep_upd' %}" class="btn btn-info btn-sm text-bold" title="Cambiar Tipo Documento" rel="tooltip">
+                    <a href="{% url 'ventas:departamento_upd' d.pk|key:'dep_upd' %}" class="btn btn-info btn-sm text-bold" title="Cambiar Departamento" rel="tooltip">
                         <i class="btn-icon-only fa fa-edit"></i>
                     </a>
-                    <a href="{% url 'ventas:departamento_del' d.pk|key:'dep_del' %}" class="btn btn-danger btn-sm js-confirm text-bold" msg-title="Eliminar Documento Identidad?." msg="Esta Seguro
-                            <br/>Recuerde esta operación no puede revertirse" title="Eliminar departamento" rel="tooltip">
+                    <a href="{% url 'ventas:departamento_del' d.pk|key:'dep_del' %}" class="btn btn-danger btn-sm js-confirm text-bold" msg-title="Eliminar Departamento" msg="¿Esta Seguro de continuar con la operación?
+                            <br/>Recuerde esta operación no puede revertirse" title="Eliminar Departamento" rel="tooltip">
                         <i class="btn-icon-only fa fa-trash-o"></i>
                     </a>
                 </td>
@@ -68,12 +68,4 @@ $(function() {
 {% endblock content %}
 {% block extrajs %}
 {{ block.super }}
-<script type="text/javascript">
-$(function() {
-    $("#search_input").autocomplete({
-        minLength: 1,
-        source: "search/"
-    });
-});
-</script>
 {% endblock extrajs %}
