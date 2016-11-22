@@ -1,5 +1,13 @@
-{% extends "main/dashboard.html" %} {% load i18n app_security %}{% load i18n crispy_forms_tags %} {% load l10n humanize %} {% block breadcrumbs %}
+{% extends "main/dashboard.html" %} {% load i18n app_security%}{% load i18n crispy_forms_tags %} {% load l10n humanize %} {% block breadcrumbs %}
 <a href="{# url 'accounts:index' #}">{% trans 'Home' %}</a> &rsaquo; {{ title }} {% endblock breadcrumbs %} {% block content_title %} {{ opts.verbose_name_plural|capfirst }} | <small>{{ title }}</small> {% endblock content_title %} {% block content %}
+<script>
+$(function() {
+    $('.chosen-select').chosen();
+    $('.chosen-select-deselect').chosen({
+        allow_single_deselect: true
+    });
+});
+</script>
 <div class="container-fluid">
     <form rule="" action="" method="post">{% csrf_token %}
         <div class="panel panel-default">
@@ -21,7 +29,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-
+                <p id="proveedor-text"></p>
                 </div>
             </div>
         </div>
@@ -35,7 +43,7 @@
                             <div class="input-group-addon">
                                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                             </div>
-                            {{ form.producto|as_crispy_field }}
+                            {{ form.producto}}
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -231,6 +239,86 @@
     }
     $('#addProveedor').click(function() {
         $('#myModal').modal('show');
+    });
+    $('#id_proveedor').change(function() {
+        $.ajax({
+                url: "{% url 'compras:get_proveedor_ajax' %}",
+                type: 'get',
+                data: {
+                    pk: $('#id_proveedor').val()
+                },
+            })
+            .done(function(data) {
+                $('#proveedor-text').text(JSON.stringify(data));
+            })
+            .fail(function() {
+                console.log("error");
+            })
+            .always(function() {
+                console.log("complete");
+            });
+    });
+$('#submit-unidad').click(function() {
+    var formArray = $("#new-form-unidad").serializeArray();
+    var formJson = JSON.stringify(formArray);
+    if (formArray[1].value.trim().length > 0 && formArray[2].value.trim().length > 0 && formArray[3].value.trim().length > 0 && formArray[4].value.trim().length > 0 ) {
+        $.ajax({
+                url: '{% url "compras:post_proveedor_ajax" %}',
+                type: 'POST',
+                dataType: 'json',
+                data:{
+                    td: formArray[1].value,
+                    nd: formArray[2].value,
+                    rs: formArray[3].value,
+                    rl: formArray[4].value,
+                    d: formArray[5].value,
+                    t: formArray[6].value,
+                    e: formArray[7].value,
+                },
+            })
+            .done(function(d) {
+                var select = $("#id_proveedor");
+                select.append('<option value="' + d.pk + '">' + d.name + '</option>');
+                select.val(d.pk);
+                $('#add-new-unidad').modal('hide');
+            })
+            .fail(function() {
+                console.log("error");
+            })
+            .always(function() {
+                console.log("complete");
+            });
+    } else {
+        $('#success_message_unidades').attr('class', 'alert alert-danger').text("Revise los datos ingresados nuevamente.");
+    }
+});
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    var csrftoken = getCookie('csrftoken');
+
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
     });
     </script>
     <!-- /#page-wrapper -->

@@ -29,4 +29,4 @@ class Proveedor(models.Model):
         verbose_name_plural = "Proveedores"
 
     def __str__(self):
-        return "%s" % (self.razon_social)
+        return "%s %s" % (self.numdoc, self.razon_social)
