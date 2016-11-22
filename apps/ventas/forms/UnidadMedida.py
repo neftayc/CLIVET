@@ -28,11 +28,21 @@ class UnidadMedidaForm(forms.ModelForm):
             Div(
                 Div(
                     Row(
-                        Div(Field('nombre', css_class='col-md-3')),
-                        Div(Field('simbolo', css_class='col-md-3')),
-                        Div(Field('cant_equivalencia', css_class='col-md-3')),
-                        Div(Field('unidad_medida_venta',
-                                  css_class='col-md-3')),
+                        Div(Field('nombre', placeholder="Ingrese un nombre"),
+                            css_class='col-md-8'),
+                        Div(Field('simbolo', placeholder="Ejem. Kg."),
+                            css_class='col-md-4'),
+                    ),
+                    Row(
+                        Div(Field(
+                            'cant_equivalencia',
+                            placeholder="Cant. de conversión"),
+                            css_class='col-md-4'),
+                        Div(FieldWithButtons('unidad_medida_venta',
+                                             StrictButton(
+                                                 "Agregar",
+                                                 id='addUnidadV')),
+                            css_class='col-md-8'),
                     ),
                     css_class='modal-body'
                 ),

@@ -22,8 +22,9 @@ class Producto(models.Model):
     existencia = models.DecimalField(
         'Cantidad de Productos', default=0, max_digits=10, decimal_places=2)
     MontoReal = models.DecimalField(
-        'Monto Real', max_digits=10, decimal_places=2)
-    igv = models.DecimalField('IGV', max_digits=10, decimal_places=2)
+        'Monto Real', max_digits=10, decimal_places=2, default=0.00)
+    igv = models.DecimalField('IGV', max_digits=10,
+                              decimal_places=2, default=0.00)
 
     class Meta:
         verbose_name = "Producto"

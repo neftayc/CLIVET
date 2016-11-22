@@ -27,8 +27,10 @@ class CategoriaForm(forms.ModelForm):
             Div(
                 Div(
                     Row(
-                        Div(Field('descripcion', css_class='col-md-6')),
-                        Div(Field('departamento', css_class='col-md-6')),
+                        Div(Field('descripcion', placeholder="Ingrese un nombre"), css_class='col-md-6'),
+                        Div(FieldWithButtons('departamento', StrictButton(
+                            "Agregar", id='addDepartamento')),
+                            css_class='col-md-6'),
                     ),
                     css_class='modal-body'
                 ),
