@@ -17,21 +17,19 @@ Descripcion: Lista Tipo Documento
 {% endblock content_title %}
 
 {% block content %}
-    <h1>Proveedores</h1>
 <script type="text/javascript">
 $(function() {
     $('table').kgrid({
         form_data : ['{{f}}', '{{q}}'],
-        form_to   : '{% url 'compras:proveedor_list' %}?f={{f}}&q={{q}}',
+        form_to   : '/compras/proveedor/listar/?f={{f}}&q={{q}}',
         order_attr: 'class=""',
-        order_to  : '{% url 'compras:proveedor_list' %}?f={{f}}&q={{q}}',
+        order_to  : '/compras/proveedor/listar/?f={{f}}&q={{q}}',
     });
 });
 </script>
-
 <div class="btn-toolbar btn-toolbar-top">
     <div class="row">
-        <div class="btn-actions">
+        <div class="btn-actions", >
             <a href="{% url 'compras:proveedor_add' %}"
                class="btn btn-primary text-bold"
                title="Agregar Proveedor">

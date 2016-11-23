@@ -19,7 +19,6 @@ from django.http import HttpResponse
 from ..models.Producto import Producto
 from ..forms.Producto import ProductoForm
 from django.core import serializers
-
 import logging
 log = logging.getLogger(__name__)
 
@@ -102,7 +101,10 @@ class ProductoCreateView(CreateView):
 
     def form_valid(self, form):
         """"Empresa Crete View  form valid."""
-        self.object = form.save(commit=True)
+        self.object = form.save(commit=False)
+        self.object.precioV = self.request.POST.get("precioV")
+        self.object.precioC = self.request.POST.get("precioC")
+        self.object.save()
 
         msg = _(' %(name)s "%(obj)s" fue creado satisfactoriamente.') % {
             'name': capfirst(force_text(self.model._meta.verbose_name)),
@@ -163,6 +165,14 @@ class ProductoUpdateView(UpdateView):
             messages.success(self.request, msg)
             log.warning(msg, extra=log_params(self.request))
         return super(ProductoUpdateView, self).form_valid(form)
+
+    def get_initial(self):
+        context = super(ProductoUpdateView, self).get_initial()
+        context = context.copy()
+        context['fechaVencimiento'] = self.object.fechaVencimiento.strftime(
+            "%Y-%m-%d")
+
+        return context
 
 
 class ProductoDeleteView(DeleteView):

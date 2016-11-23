@@ -8,6 +8,18 @@
 
 {% block content %}
 
+<script type="text/javascript">
+$(function() {
+    $('table').kgrid({
+        form_data : ['{{f}}', '{{q}}'],
+        form_to   : '/clivet/cliente/listar/?f={{f}}&q={{q}}',
+        order_attr: 'class=""',
+        order_to  : '/clivet/cliente/listar/?f={{f}}&q={{q}}',
+    });
+});
+</script>
+
+
 <div class="btn-toolbar btn-toolbar-top">
     <div class="row">
         <div class="btn-actions">
