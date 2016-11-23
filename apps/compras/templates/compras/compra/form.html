@@ -3,9 +3,6 @@
 <script>
 $(function() {
     $('.chosen-select').chosen();
-    $('.chosen-select-deselect').chosen({
-        allow_single_deselect: true
-    });
 });
 </script>
 <div class="container-fluid">
@@ -29,7 +26,8 @@ $(function() {
                     </div>
                 </div>
                 <div class="col-md-6">
-                <p id="proveedor-text"></p>
+                    <table class="table table-condensed" id="proveedor-info">
+                    </table>
                 </div>
             </div>
         </div>
@@ -118,40 +116,112 @@ $(function() {
                 <h4 class="modal-title" id="myModalLabel">Agregar Proveedor</h4>
             </div>
             <div class="modal-body">
-                <form action="" method="post">
-                    <div class="row center-block">
-                        <div class="col-md-6">
-                            {{form.tipo_doc|as_crispy_field}}
-                            <label for="nombre">N° de documento:</label>
-                            <input type="number" class="form-control" id="numdoc">
-                            <label for="nombre">Razon social:</label>
-                            <input type="text" class="form-control" id="razon_social">
-                            <label for="nombre">Representante legal:</label>
-                            <input type="text" class="form-control" id="representante_legal">
-                            <label for="nombre">Direccion:</label>
-                            <input type="text" class="form-control" id="direccion">
+                <form action="" method="post" name="proveedor-form" id="proveedor-form">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="div_id_razon_social" class="form-group">
+                                <label for="id_razon_social" class="control-label  requiredField">
+                                    Razon social<span class="asteriskField">*</span> </label>
+                                <div class="controls ">
+                                    <input class="textinput textInput form-control" id="id_razon_social" maxlength="50" name="razon_social" placeholder="Ingrese el nombre de la empresa" type="text"> </div>
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                            <label for="nombre">Telefono:</label>
-                            <input type="number" class="form-control" id="telefono">
-                            <label for="nombre">Email:</label>
-                            <input type="email" class="form-control" id="email">
-                            <label for="nombre">Entidad bancaria:</label>
-                            <input type="text" class="form-control" id="enti_bancaria">
-                            <label for="nombre">N° de cuenta:</label>
-                            <input type="text" class="form-control" id="num_cuenta">
-                            <label for="nombre">Estado:</label>
-                            <input type="text" class="form-control" id="estado">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            {{form.tipo_doc|as_crispy_field}}
+                        </div>
+                        <div class="col-md-4">
+                            <div id="div_id_numdoc" class="form-group">
+                                <label for="id_numdoc" class="control-label  requiredField">
+                                    Número de documento<span class="asteriskField">*</span> </label>
+                                <div class="controls ">
+                                    <input class="numberinput form-control" id="id_numdoc" name="numdoc" placeholder="Ingrese un número" type="number" min="0" maxlength="11"> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="div_id_representante_legal" class="form-group">
+                                <label for="id_representante_legal" class="control-label  requiredField">
+                                    Representante legal<span class="asteriskField">*</span> </label>
+                                <div class="controls ">
+                                    <input class="textinput textInput form-control" id="id_representante_legal" maxlength="50" name="representante_legal" placeholder="Ingrese el nombre completo" type="text"> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div id="div_id_direccion" class="form-group">
+                                <label for="id_direccion" class="control-label  requiredField">
+                                    Direccion<span class="asteriskField">*</span> </label>
+                                <div class="controls ">
+                                    <input class="textinput textInput form-control" id="id_direccion" maxlength="30" name="direccion" placeholder="Ingrese un dirección" type="text"> </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div id="div_id_telefono" class="form-group">
+                                <label for="id_telefono" class="control-label ">
+                                    Telefono
+                                </label>
+                                <div class="controls ">
+                                    <input class="numberinput form-control" id="id_telefono" name="telefono" placeholder="Ingrese un número" type="number" min="0"> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="div_id_email" class="form-group">
+                                <label for="id_email" class="control-label ">
+                                    Email
+                                </label>
+                                <div class="controls ">
+                                    <input class="emailinput form-control" id="id_email" maxlength="30" name="email" placeholder="Ingrese un correo" type="email"> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div id="div_id_enti_bancaria" class="form-group">
+                                <label for="id_enti_bancaria" class="control-label ">
+                                    Entidad bancaria
+                                </label>
+                                <div class="controls ">
+                                    <input class="textinput textInput form-control" id="id_enti_bancaria" maxlength="30" name="enti_bancaria" placeholder="Ingrese el nombre" type="text"> </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div id="div_id_num_cuenta" class="form-group">
+                                <label for="id_num_cuenta" class="control-label ">
+                                    Número de cuenta
+                                </label>
+                                <div class="controls ">
+                                    <input class="numberinput form-control" id="id_num_cuenta" name="num_cuenta" min="0" placeholder="Ingrese un número" type="number"> </div>
+                            </div>
                         </div>
                     </div>
                 </form>
+                <div class="alert alert-danger hide" role="alert" id="success_message_proveedor"></div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-primary" id="save-proveedor">Guardar</button>
+                <div class="form-group">
+                    <div class="controls ">
+                        <button type="submit" name="submit" class="btn btn-primary text-bold" id="save-proveedor" title="Grabar">
+                            <i class="btn-icon-onlyx fa fa-save"></i> <span class="hidden-xsx"> Grabar</span>
+                        </button>
+                        <button type="button" name="cancel" class="btn btn btn-danger btn-back text-bold" id="button-id-cancel" title="Cancel">
+                            <i class="btn-icon-onlyx fa fa-ban"></i> <span class="hidden-xs"> Cancelar</span>
+                        </button>
+                        <button type="reset" name="reset" class="btn btn btn-default text-bold" id="reset-id-reset" title="Reset">
+                            <i class="btn-icon-onlyx fa fa-undo"></i> <span class="hidden-xs"> Limpiar</span>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+</div>
     <script type="text/javascript">
     $(document).ready(function() {
         //"use strict";
@@ -240,7 +310,11 @@ $(function() {
     $('#addProveedor').click(function() {
         $('#myModal').modal('show');
     });
-    $('#id_proveedor').change(function() {
+    $('#id_proveedor').change(function(){
+        getProveedor();
+    });
+    getProveedor();
+    function getProveedor() {
         $.ajax({
                 url: "{% url 'compras:get_proveedor_ajax' %}",
                 type: 'get',
@@ -249,7 +323,7 @@ $(function() {
                 },
             })
             .done(function(data) {
-                $('#proveedor-text').text(JSON.stringify(data));
+                $('#proveedor-info').html('<tr><td><h6>Razón Social:</h6></td><td><i class="icon-home"></i>' + data.razon_social + '</td></tr><tr><td><h6>N° de ' + data.tipodoc + ':</h6></td><td><i class="icon-headphones"></i>' + data.numdoc + '</td></tr><tr><td><h6>Representante legal:</h6></td><td><i class="icon-envelope"></i>' + data.representante_legal + '</td></tr>');
             })
             .fail(function() {
                 console.log("error");
@@ -257,41 +331,50 @@ $(function() {
             .always(function() {
                 console.log("complete");
             });
-    });
-$('#submit-unidad').click(function() {
-    var formArray = $("#new-form-unidad").serializeArray();
-    var formJson = JSON.stringify(formArray);
-    if (formArray[1].value.trim().length > 0 && formArray[2].value.trim().length > 0 && formArray[3].value.trim().length > 0 && formArray[4].value.trim().length > 0 ) {
-        $.ajax({
-                url: '{% url "compras:post_proveedor_ajax" %}',
-                type: 'POST',
-                dataType: 'json',
-                data:{
-                    td: formArray[1].value,
-                    nd: formArray[2].value,
-                    rs: formArray[3].value,
-                    rl: formArray[4].value,
-                    d: formArray[5].value,
-                    t: formArray[6].value,
-                    e: formArray[7].value,
-                },
-            })
-            .done(function(d) {
-                var select = $("#id_proveedor");
-                select.append('<option value="' + d.pk + '">' + d.name + '</option>');
-                select.val(d.pk);
-                $('#add-new-unidad').modal('hide');
-            })
-            .fail(function() {
-                console.log("error");
-            })
-            .always(function() {
-                console.log("complete");
-            });
-    } else {
-        $('#success_message_unidades').attr('class', 'alert alert-danger').text("Revise los datos ingresados nuevamente.");
     }
-});
+    $('#save-proveedor').click(function() {
+        var formArray = $("#proveedor-form").serializeArray();
+        var formJson = JSON.stringify(formArray);
+        console.log(formArray);
+        if (formArray[1].value.trim().length > 0 &&
+            formArray[3].value.trim().length > 0 &&
+            formArray[4].value.trim().length > 0 &&
+            formArray[5].value.trim().length > 0) {
+            $.ajax({
+                    url: '{% url "compras:post_proveedor_ajax" %}',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        rs: formArray[1].value,
+                        td: formArray[2].value,
+                        nd: formArray[3].value,
+                        rl: formArray[4].value,
+                        d: formArray[5].value,
+                        t: formArray[6].value,
+                        e: formArray[7].value,
+                        c: formArray[8].value,
+                        nc: formArray[9].value,
+                    },
+                })
+                .done(function(d) {
+                    var select = $("#id_proveedor");
+                    select.append('<option value="' + d.pk + '">' + d.name + '</option>');
+                    select.val(d.pk);
+                    select.trigger("chosen:updated");
+                    $('#myModal').modal('hide');
+                    getProveedor();
+                })
+                .fail(function() {
+                    console.log("error");
+                })
+                .always(function() {
+                    console.log("complete");
+                });
+        } else {
+            $('#success_message_proveedor').attr('class', 'alert alert-danger').text("Revise los datos ingresados nuevamente.");
+        }
+    });
+
     function getCookie(name) {
         var cookieValue = null;
         if (document.cookie && document.cookie !== '') {

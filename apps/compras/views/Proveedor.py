@@ -45,22 +45,30 @@ def GetProveedorAjax(request):
 
 def PostProveedorAjax(request):
     if request.method == 'POST' and request.is_ajax():
-        d = Proveedor()
-        d.tipodoc = request.POST.get('td')
-        d.numdoc = request.POST.get('nd')
-        d.razon_social = request.POST.get('rs')
-        d.representante_legal = request.POST.get('rl')
-        d.direccion = request.POST.get('d')
-        d.telefono = request.POST.get('t')
-        d.email = request.POST.get('e')
-        d.save()
-
-        obj = Proveedor.objects.last()
-        unidad_json = {}
-        unidad_json['pk'] = obj.id
-        unidad_json['name'] = '%s %s' % (obj.numdoc, obj.razon_social)
-        data_json = json.dumps(unidad_json)
-
+        try:
+            d = Proveedor()
+            d.razon_social = request.POST.get('rs')
+            d.tipodoc = request.POST.get('td')
+            d.numdoc = request.POST.get('nd')
+            d.representante_legal = request.POST.get('rl')
+            d.direccion = request.POST.get('d')
+            if request.GET.get('t'):
+                d.telefono = request.POST.get('t')
+            if request.GET.get('q'):
+                d.email = request.POST.get('e')
+            if request.GET.get('q'):
+                d.enti_bancaria = request.POST.get('c')
+            if request.GET.get('q'):
+                d.num_cuenta = request.POST.get('nc')
+            d.save()
+            obj = Proveedor.objects.last()
+            unidad_json = {}
+            unidad_json['pk'] = obj.id
+            unidad_json['name'] = '%s %s' % (obj.numdoc, obj.razon_social)
+            data_json = json.dumps(unidad_json)
+        except Exception as e:
+            data_json = '{"data":"fail"}'
+            print(e)
     else:
         data_json = '{"data":"fail"}'
     return HttpResponse(data_json, content_type='application/json')

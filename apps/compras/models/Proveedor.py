@@ -13,13 +13,13 @@ class Proveedor(models.Model):
     numdoc = models.IntegerField('Número de documento', max_length=30)
     razon_social = models.CharField('Razon social', max_length=50)
     representante_legal = models.CharField(
-        'Representante legal', max_length=50,
-        help_text='Ingrese el nombre completo.')
+        'Representante legal', max_length=50)
     direccion = models.CharField('Direccion', max_length=30)
-    telefono = models.IntegerField('Telefono', max_length=9, blank=True)
-    email = models.EmailField('Email', max_length=30, blank=True)
+    telefono = models.IntegerField(
+        'Telefono', max_length=9, blank=True, null=True)
+    email = models.EmailField('Email', max_length=30, blank=True, null=True)
     enti_bancaria = models.CharField(
-        'Entidad bancaria', max_length=30, blank=True)
+        'Entidad bancaria', max_length=30, blank=True, null=True)
     num_cuenta = models.IntegerField(
         'Número de cuenta', max_length=30, blank=True, null=True)
     estado = models.BooleanField(default=True)
