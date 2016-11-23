@@ -23,6 +23,7 @@ $(function() {
 });
 </script>
 
+<div class="container"> 
 <div class="btn-toolbar btn-toolbar-top">
     <div class="row">
         <div class="btn-actions">
@@ -41,11 +42,11 @@ $(function() {
         <thead>
             <tr>
                 <th>#</th>
-                <th class="col-hidden" data-search="fe_compra" data-order="fe_compra">Fecha de compra</th>
-                <th class="panel panel-default" data-search="total" data-order="total">Total</th>
                 <th class= "panel-body" data-search="proveedor" data-order="proveedor">Proveedor</th>
+                <th class="col-hidden" data-search="fe_compra" data-order="fe_compra">Fecha de compra</th>
                 <th class="col-hidden" data-search="trabajador" data-order="trabajador">Trabajador</th>
-                 <th class="col-hidden" data-search="comprobante" data-order="comprobante">Comprobante</th>
+                <th class="col-hidden" data-search="comprobante" data-order="comprobante">Comprobante</th>
+                <th class="panel panel-default" data-search="total" data-order="total">Total</th>
                 <th class="btn-actions col-blocked text-center">Acción</th>
             </tr>
         </thead>
@@ -59,11 +60,11 @@ $(function() {
                     {% endif %}
                 </td>
 
+                <td> {{ d.proveedor.razon_social}} ({{ d.proveedor.representante_legal}})</td>
                 <td>{{ d.fe_compra }}</td>
-                <td>{{ d.total}}</td>
-                <td>{{ d.proveedor}}</td>
                 <td>{{ d.usuario}}</td>
                 <td>{{ d.comprobante }}</td>
+                <td>{{ d.total}}</td>
                 
                 <td class="text-center">
                     <a href="/compras/detalle-compra/listar/{{d.pk}}/">Ver detalle</a>
@@ -86,5 +87,5 @@ $(function() {
     </div>
     {% endif %}
 </div>
-
+</div>
 {% endblock content %}
