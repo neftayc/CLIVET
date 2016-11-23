@@ -3,10 +3,17 @@
 @package     ventas
 Descripcion: Lista Tipo Documento
 -->
-{% load i18n app_security %} {% load l10n humanize %} {% block breadcrumbs %}
-<a href="{# url 'accounts:index' #}">{% trans 'Home' %}</a> &rsaquo; {{ title }} {% endblock breadcrumbs %} {% block content_title %} {{ opts.verbose_name_plural|capfirst }} | <small>{{ title }}</small> {% endblock content_title %} {% block content %}
-
-
+{% load i18n app_security %} {% load l10n humanize %} 
+{% block breadcrumbs %}
+<ol class="breadcrumb">
+  <li><a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %}</a></li>
+  <li class="active">{{ opts.verbose_name_plural|capfirst }}</li>
+</ol>
+{% endblock breadcrumbs %}
+{% block content_title %}
+<i class="fa fa-tags"></i> Lista de {{opts.verbose_name_plural}}
+{% endblock content_title %}
+{% block content %}
 <div class="container"> 
 <div class="btn-toolbar btn-toolbar-top">
     <div class="row">

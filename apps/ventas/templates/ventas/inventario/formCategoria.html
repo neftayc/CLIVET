@@ -6,9 +6,19 @@
 
 Descripcion: Create/Update group
 -->
-{% load i18n crispy_forms_tags %}{% load l10n %}{% block breadcrumbs %}
-<a href="{% url 'accounts:index' %}">Home</a> &rsaquo;
-<a href="{% url 'ventas:categoria_list' %}">{{opts.verbose_name_plural|capfirst}}</a> &rsaquo; {{ title }}{% endblock breadcrumbs %}{% block content_title %}{{ opts.verbose_name|capfirst }} | <small>{{ title }}</small>{% endblock content_title %}{% block content %}
+{% load i18n crispy_forms_tags %}{% load l10n %}
+{% block breadcrumbs %}
+<ol class="breadcrumb">
+  <li><a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %}</a></li>
+  <li><a href="{% url 'ventas:categoria_list' %}">{{ opts.verbose_name_plural|capfirst }}</a></li>
+  <li class="active">{{ title }}</li>
+</ol>
+{% endblock breadcrumbs %}
+
+{% block content_title %}
+<i class="fa fa-tag"></i> {{ title }}
+{% endblock content_title %}
+{% block content %}
 
 <div class="container panel panel-defaul">
     <form action="" method="post">

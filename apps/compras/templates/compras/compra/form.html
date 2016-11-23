@@ -1,5 +1,17 @@
-{% extends "main/dashboard.html" %} {% load i18n app_security%}{% load i18n crispy_forms_tags %} {% load l10n humanize %} {% block breadcrumbs %}
-<a href="{# url 'accounts:index' #}">{% trans 'Home' %}</a> &rsaquo; {{ title }} {% endblock breadcrumbs %} {% block content_title %} {{ opts.verbose_name_plural|capfirst }} | <small>{{ title }}</small> {% endblock content_title %} {% block content %}
+{% extends "main/dashboard.html" %} {% load i18n app_security%}{% load i18n crispy_forms_tags %} {% load l10n humanize %} 
+
+{% block breadcrumbs %}
+<ol class="breadcrumb">
+  <li><a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %}</a></li>
+  <li><a href="{% url 'compras:compra_list' %}">{{ opts.verbose_name_plural|capfirst }}</a></li>
+  <li class="active">{{ title }}</li>
+</ol>
+{% endblock breadcrumbs %}
+
+{% block content_title %}
+<i class="fa fa-shopping-cart"></i> {{ title }}
+{% endblock content_title %}
+{% block content %}
 <script>
 $(function() {
     $('.chosen-select').chosen();
