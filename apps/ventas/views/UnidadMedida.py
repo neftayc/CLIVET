@@ -7,7 +7,7 @@ from apps.utils.security import get_dep_objects, log_params, SecurityKey
 from django.conf import settings
 from django.contrib import messages
 from django.core.urlresolvers import reverse_lazy
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.utils.decorators import method_decorator
 from django.utils.encoding import force_text
 from django.utils.text import capfirst
@@ -16,17 +16,55 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 
 
-from ..models.UnidadMedida import UnidadMedida
+from ..models.UnidadMedida import UnidadMedidaC, UnidadMedidaV
 from ..forms.UnidadMedida import UnidadMedidaForm
-
+import json
 import logging
 log = logging.getLogger(__name__)
+
+
+def PostUnidadAjax(request):
+    if request.method == 'POST' and request.is_ajax():
+        d = UnidadMedidaC()
+        d.nombre = request.POST.get('n')
+        d.simbolo = request.POST.get('s')
+        d.cant_equivalencia = request.POST.get('c')
+        d.unidad_medida_venta_id = request.POST.get('v')
+        d.save()
+
+        obj = UnidadMedidaC.objects.last()
+        unidad_json = {}
+        unidad_json['pk'] = obj.id
+        unidad_json['name'] = obj.nombre
+        data_json = json.dumps(unidad_json)
+
+    else:
+        data_json = '{"data":"fail"}'
+    return HttpResponse(data_json, content_type='application/json')
+
+
+def PostUnidadVentasAjax(request):
+    if request.method == 'POST' and request.is_ajax():
+        d = UnidadMedidaV()
+        d.nombre = request.POST.get('n')
+        d.simbolo = request.POST.get('s')
+        d.save()
+
+        obj = UnidadMedidaV.objects.last()
+        unidad_json = {}
+        unidad_json['pk'] = obj.id
+        unidad_json['name'] = obj.nombre
+        data_json = json.dumps(unidad_json)
+
+    else:
+        data_json = '{"data":"fail"}'
+    return HttpResponse(data_json, content_type='application/json')
 
 
 class UnidadMedidaListView(ListView):
     u"""Tipo Documento Identidad."""
 
-    model = UnidadMedida
+    model = UnidadMedidaC
     paginate_by = settings.PER_PAGE
     template_name = "ventas/inventario/UnidadMedida.html"
 
@@ -75,7 +113,7 @@ class UnidadMedidaListView(ListView):
 class UnidadMedidaCreateView(CreateView):
     u"""Tipo Documento Identidad."""
 
-    model = UnidadMedida
+    model = UnidadMedidaC
     form_class = UnidadMedidaForm
     template_name = "ventas/inventario/formUnidadMedida.html"
     success_url = reverse_lazy("ventas:unidad_medida_list")
@@ -116,7 +154,7 @@ class UnidadMedidaCreateView(CreateView):
 class UnidadMedidaUpdateView(UpdateView):
     """Tipo Documento Update View."""
 
-    model = UnidadMedida
+    model = UnidadMedidaC
     form_class = UnidadMedidaForm
     template_name = "ventas/inventario/formUnidadMedida.html"
     success_url = reverse_lazy("ventas:unidad_medida_list")
@@ -167,7 +205,7 @@ class UnidadMedidaUpdateView(UpdateView):
 class UnidadMedidaDeleteView(DeleteView):
     """Empresa Delete View."""
 
-    model = UnidadMedida
+    model = UnidadMedidaC
     success_url = reverse_lazy('ventas:unidad_medida_list')
 
     @method_decorator(permission_resource_required)

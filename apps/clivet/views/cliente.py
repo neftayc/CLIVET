@@ -7,7 +7,7 @@ from apps.params.models import Person
 from django.conf import settings
 from django.contrib import messages
 from django.core.urlresolvers import reverse_lazy
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.utils.decorators import method_decorator
 from django.utils.encoding import force_text
 from django.utils.text import capfirst
@@ -17,9 +17,54 @@ from django.views.generic.list import ListView
 
 from ..models.cliente import Cliente
 from ..forms.cliente import ClienteForm
-
+import json
 import logging
+from apps.params.models import Person
 log = logging.getLogger(__name__)
+
+
+def PostClienteAjax(request):
+    if request.method == 'POST' and request.is_ajax():
+        try:
+            persona = Person()
+            persona.first_name = request.POST.get('nombre')
+            if request.GET.get('apellidos'):
+                persona.last_name = request.POST.get('apellidos')
+            else:
+                persona.last_name = ""
+            if request.GET.get('fecha_de_nacimiento'):
+                persona.birth_date = request.POST.get('fecha_de_nacimiento')
+            if request.GET.get('tipo_doc'):
+                print(request.GET.get('tipo_doc'))
+                persona.identity_type = request.POST.get('tipo_doc')
+            if request.GET.get('numero'):
+                print(request.GET.get('numero'))
+                persona.identity_num = request.POST.get('numero')
+            persona.save()
+            d = Cliente()
+            d.persona = Person.objects.last()
+            if request.GET.get('direccion'):
+                d.direccion = request.POST.get('direccion')
+            if request.GET.get('ciudad'):
+                d.ciudad = request.POST.get('ciudad')
+            if request.GET.get('email'):
+                d.email = request.POST.get('email')
+            if request.GET.get('telefono'):
+                d.telefono = request.POST.get('telefono')
+            d.save()
+            obj = Cliente.objects.last()
+            unidad_json = {}
+            unidad_json['pk'] = obj.id
+            unidad_json['name'] = obj.persona.first_name
+            data_json = json.dumps(unidad_json)
+            # else:
+            #     data_json = '{"error":"true"}'
+
+        except Exception as e:
+            data_json = '{"error":true,"detail":"%s"}' % e
+    else:
+        data_json = '{"error":"true"}'
+    return HttpResponse(data_json, content_type='application/json')
 
 
 class ClienteListView(ListView):
@@ -195,7 +240,8 @@ class ClienteUpdateView(UpdateView):
             context['apellidos'] = self.object.persona.last_name
             context['tipo_documento'] = self.object.persona.identity_type
             context['numero'] = self.object.persona.identity_num
-            context['fecha_de_nacimiento'] = self.object.persona.birth_date
+            context['fecha_de_nacimiento'] = self.object.persona.birth_date and self.object.persona.birth_date.strftime(
+                "%Y-%m-%d") or ""
             context['foto_perfil'] = self.object.persona.photo
 
         return context

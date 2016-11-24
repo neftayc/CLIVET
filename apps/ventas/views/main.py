@@ -101,7 +101,7 @@ class MainCreateView(CreateView):
                     # igv=p['igv'],
                     importe=p['importe'],
                 )
-                c.save()
+                dv.save()
 
         #  self.object = form.save(commit=False)
         # sid = transaction.savepoint()
@@ -272,7 +272,7 @@ def BuscarProducto(request):
         for producto in productos:
             producto_json = {}
             producto_json['nombre'] = producto.nombre
-            producto_json['cantidad'] = producto.existencia
+            producto_json['cantidad'] = str(producto.existencia)
             producto_json['id'] = producto.id
             results.append(producto_json)
 

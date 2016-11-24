@@ -20,9 +20,6 @@ class ClienteForm(forms.ModelForm):
     fecha_de_nacimiento = forms.DateField(
         widget=forms.DateInput(attrs={'class': 'datepicker', }),
         required=False)
-    foto_perfil = forms.ImageField(label='Selecione una foto',
-                                   help_text='max. 2 megabytes',
-                                   required=False)
     # apellido = forms.CharField(max_length=100,widget=forms.Textarea)
     # sender = forms.EmailField()
     # cc_myself = forms.BooleanField(required=False)
@@ -45,23 +42,29 @@ class ClienteForm(forms.ModelForm):
         self.object = kwargs.pop('object', None)
         super(ClienteForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
+        self.helper.form_class = 'form-horizontal'
         self.helper.layout = Layout(
             Row(
-                Div(Field('nombre', css_class='input-required'),
+                Div(Field('nombre',  placeholder='Ingrese un nombre',
+                          css_class='input-required'),
                     css_class='col-md-3'),
-                Div(Field('apellidos', ), css_class='col-md-4'),
+                Div(Field('apellidos', placeholder='Ingrese sus apellidos'),
+                    css_class='col-md-4'),
                 Div(Field('tipo_documento',), css_class='col-md-2'),
-                Div(Field('numero',), css_class='col-md-3'),
+                Div(Field('numero', placeholder='Ingrese un número'),
+                    css_class='col-md-3'),
             ),
             Row(
-                Div(Field('fecha_de_nacimiento',), css_class='col-md-2'),
-                Div(Field('ciudad',), css_class='col-md-2'),
-                Div(Field('direccion',), css_class='col-md-3'),
-                Div(Field('email',), css_class='col-md-3'),
-                Div(Field('telefono',), css_class='col-md-2'),
-            ),
-            Row(
-                Div(Field('foto_perfil',), css_class='col-md-6'),
+                Div(Field('fecha_de_nacimiento', placeholder='YYYY-MM-DD'),
+                    css_class='col-md-2'),
+                Div(Field('ciudad', placeholder='Ingrese el nombre'),
+                    css_class='col-md-2'),
+                Div(Field('direccion', placeholder='Ingrese una dirección'),
+                    css_class='col-md-3'),
+                Div(Field('email', placeholder='example@gmail.com'),
+                    css_class='col-md-3'),
+                Div(Field('telefono', placeholder='Ingrese el número'),
+                    css_class='col-md-2'),
             ),
             Div(Row(
                 FormActions(

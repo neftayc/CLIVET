@@ -1,10 +1,15 @@
 {% extends "main/dashboard.html" %}
-<!--
-@package     ventas
-producto: Lista Productos
--->
-{% load i18n app_security %} {% load l10n humanize %} {% block breadcrumbs %}
-<a href="{# url 'accounts:index' #}">{% trans 'Home' %}</a> &rsaquo; {{ title }} {% endblock breadcrumbs %} {% block content_title %} {{ opts.verbose_name_plural|capfirst }} | <small>{{ title }}</small> {% endblock content_title %} {% block content %}
+{% load i18n app_security %} {% load l10n humanize %} 
+{% block breadcrumbs %}
+<ol class="breadcrumb">
+  <li><a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %}</a></li>
+  <li class="active">{{ opts.verbose_name_plural|capfirst }}</li>
+</ol>
+{% endblock breadcrumbs %}
+{% block content_title %}
+<i class="fa fa-tags"></i> Lista de {{opts.verbose_name_plural}}
+{% endblock content_title %}
+{% block content %}
 <div class="btn-toolbar btn-toolbar-top">
     <div class="row">
         <div class="btn-actions">
@@ -24,9 +29,9 @@ producto: Lista Productos
                 <th class="col-hidden" data-search="codigo" data-order="codigo">Código</th>
                 <th class="col-hidden" data-search="fechaVencimiento" data-order="fechaVencimiento">Fecha de Vencimiento</th>
                 <th class="col-hidden" data-search="categoria" data-order="categoria">Categoria</th>
-                <th class="col-hidden" data-search="unidadMedidaC" data-order="unidadMedidaC">Unidad de medida de compras</th>
+                <th class="col-hidden" data-search="unidadMedidaC" data-order="unidadMedidaC">U. Medida Compras</th>
                 <th class="col-hidden" data-search="precioC" data-order="precioC">Precio de compras</th>
-                <th class="col-hidden" data-search="unidadMedidaV" data-order="unidadMedidaV">Unidad de medida de Ventas</th>
+                <th class="col-hidden" data-search="unidadMedidaV" data-order="unidadMedidaV">U. Medida Ventas</th>
                 <th class="col-hidden" data-search="precioV" data-order="precioV">Precio de Venta</th>
                 <th class="col-hidden" data-search="existencia" data-order="existencia">Cantidad</th>
                 <th class="col-hidden" data-search="igv" data-order="igv">IGV</th>

@@ -2,15 +2,21 @@
 {% load i18n app_security %}
 {% load l10n humanize %}
 {% block breadcrumbs %}
-<a href="{# url 'accounts:index' #}">{% trans 'Home' %}</a>
-&rsaquo; {{ title }}
+<ol class="breadcrumb">
+  <li><a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %}</a></li>
+  <li class="active">{{ opts.verbose_name_plural|capfirst }}</li>
+</ol>
 {% endblock breadcrumbs %}
 {% block content_title %}
-{{ opts.verbose_name_plural|capfirst }} | <small>{{ title }}</small>
+<i class="fa fa-calendar"></i> Lista de {{opts.verbose_name_plural}}
 {% endblock content_title %}
 {% block content %}
 <div class="container-overflow">
-    <table class="table table-bordered table-hover table-striped table-condensed table-responsive">
+    <div>
+        <p>Cantidad de Producto</p>
+        {{from.compra.id}}
+    </div> 
+    <table class="table table-hover table-striped table-condensed table-responsive">
         <thead>
             <tr>
                 <th>#</th>
