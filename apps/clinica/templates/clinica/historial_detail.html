@@ -8,17 +8,19 @@
         display: none;
     }
     .detail-cabecera{
-        padding: 15px 15px 0;
+        padding: 10px 10px 0;
     }
 
     .detail-title{
+        margin-top: 0;
         color: #00796B;
         font-weight: 900;
+        font-size: 2.4em;
     }
 
     .detail-form-title, .detail-label-title{
         color: #212121;
-        font-size: 1.3em;
+        font-size: 1.2em;
         padding-top: 5px !important;
         text-align: center;
     }
@@ -28,7 +30,7 @@
     }
     .detail-form, .detail-label{
         color: #212121;
-        font-size: 1.3em;
+        font-size: 1.2em;
         padding-top: 5px !important;
         margin-bottom: 15px;
         text-align: left;
@@ -42,17 +44,22 @@
         border-radius: 3px;
     }
     .detail-subtitle{
-        border: 2px solid #B2DFDB;
-        font-size: 1.7em;
+        border-top: 1px solid #B2DFDB;
+        border-bottom: 1px solid #B2DFDB;
+        font-size: 1.5em;
         color: #00796B;
         font-weight: 700;
+        margin-top: 10px;
+    }
+    .panel{
+        border-color: #B2DFDB;
     }
 </style>
 {% endblock style %}
 {% block breadcrumbs %}
 <ol class="breadcrumb">
   <li><a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %}</a></li>
-  <li><a href="{% url 'clivet:clivet' %}">{{ opts.verbose_name_plural|capfirst }}</a></li>
+  <li><a href="{% url 'clinica:listar_historia' %}">{{ opts.verbose_name_plural|capfirst }}</a></li>
 <li class="active">{{ title }}</li>
 </ol>
 {% endblock breadcrumbs %}
@@ -70,8 +77,8 @@
                 <h1 class="detail-title">HISTORIA CLINICA</h1>
                 <div class="row">
                     <div class="form-group col-md-7 col-md-offset-5 form-horizontal">
-                        <label class="col-sm-4 control-label detail-label-title">H.C. N°</label>
-                        <div class="col-sm-8">
+                        <label class="col-sm-5 control-label detail-label-title">H.C. N°</label>
+                        <div class="col-sm-7">
                             <div class="form-control-static detail-form-title">{{ form.num_historia.value }}</div>
                       </div>
                     </div>

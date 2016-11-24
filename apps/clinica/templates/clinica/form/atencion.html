@@ -6,6 +6,12 @@
 {% block style %}
 <link href="{% static 'bootstrap-chosen-master/bootstrap-chosen.css' %}" rel="stylesheet">
 <style media="screen">
+    .hola{
+        margin-bottom: 100px;
+    }
+    #div_id_vacuna .chosen-container-multi .chosen-choices{
+        border: 1px solid #e6aab4 !important;
+    }
     .page-clivet{
         display: none;
     }
@@ -30,12 +36,13 @@
     }
     .detail-form, .detail-label{
         color: #212121;
-        font-size: 1.3em;
+        font-size: 1em;
         padding-top: 5px !important;
         margin-bottom: 15px;
         text-align: left;
     }
     .detail-label{
+        font-size: 1.2em;
     }
     .detail-form{
         padding-left: 15px;
@@ -43,7 +50,7 @@
         border-radius: 3px;
     }
     .detail-subtitle{
-        border-bottom: 2px solid #B2DFDB;
+        border-bottom: 1px solid #B2DFDB;
         font-size: 1.7em;
         color: #212121;
         font-weight: 700;
@@ -284,6 +291,25 @@ $('#id_fecha_programada').datetimepicker({
 		autoclose: true,
 		todayHighlight: true,
 	});
+
+    $(document).ready(function(){
+        if(this){
+            $("#id_pruebas_auxiliares_chosen .default, #id_tratamiento_chosen .default").focus(function(){
+                $(".hola-hola").addClass('hola');
+            });
+        }else {
+            $(".hola-hola").removeAttr('hola');
+        }
+    });
+$('#id_hallasgos_clinicos_chosen').on('focus', function() {
+    alert("hola")
+    if($(this)){
+        alert("dsds");
+        $(".chocen-container").addClass('hola');
+    }else {
+        alert("sssssssssssssssssssssss");
+    }
+});
 
 </script>
 {% endblock extrajs %}
