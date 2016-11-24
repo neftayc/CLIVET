@@ -302,7 +302,7 @@ function change_p(d) {
         $('.typeahead').focus();
         return false;
     }
-    if (Venta.productos[d].cantidad <= Venta.productos[d].existencia) {
+    if (Venta.productos[d].cantidad <= parseFloat(Venta.productos[d].existencia)) {
         if (Venta.productos[d].cantidad > 0) {
             Venta.productos[d].importe = Math.ceil10(Venta.productos[d].cantidad * Venta.productos[d].precioV, -2);
             Venta.productos[d].igvp = Math.ceil10((Venta.productos[d].cantidad * Venta.productos[d].precioV) * 0.18, -2);

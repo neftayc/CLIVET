@@ -6,18 +6,10 @@ from apps.compras.models.Proveedor import Tipo_Documento
 
 class CompraForm(forms.ModelForm):
     u"""Tipo Documeto Form."""
-    producto = forms.ModelChoiceField(
-        queryset=Producto.objects.all(),
-        required=False,
-        label="",
-        help_text="",
-        empty_label=None,
-        widget=forms.Select(
-            attrs={'class': 'chosen-select',
-                   'data-placeholder': 'Eliga el producto'})
-    )
+    producto = forms.CharField(label="", required=False,
+                               widget=forms.TextInput(attrs={'type': 'search', 'class': 'form-control typeahead input-lg', 'placeholder': 'Buscar Producto o Servicio', 'autofocus': 'autofocus'}))
     data_compra = forms.CharField(
-        required=False, widget=forms.TextInput(attrs={'type': 'hidden'}))
+        required=False, widget=forms.TextInput(attrs={'type': ''}))
 
     comprobante = forms.ImageField(required=False)
     # =====================modal==========================

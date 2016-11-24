@@ -12,39 +12,25 @@ $(function() {
 </script>
 <div class="row container-fluid panel panel-default">
     <form rule="" action="" method="post">{% csrf_token %}
-        <div class="panel row panel-heading ">
+        <div class="panel row panel-heading panel-titulo-detalle">
             <div class="col-md-1 ">
-                <p class="titulo-busqueda"><span class="glyphicon glyphicon-shopping-cart"></span>Proveedor</p>
+                <p class="titulo-busqueda"><span class="glyphicon glyphicon-user"></span>Proveedor</p>
             </div>
-            <div class="col-md-5">
-                {{ form.proveedor}} {{ form.proveedor.errors}} {{ form.data_compra}}
+            <div class="col-md-4 proveedor-buscar">
+                {{ form.proveedor}} {{ form.proveedor.errors}} 
             </div>
-            <div class="col-md-5 panel-titulo-detalle " id="proveedor-info">
+            <div class="col-md-6 panel-titulo-detalle " id="proveedor-info">
             </div>
             <div class="col-md-1" id='addProveedor'>
                 <a type="search" class="btn nuevo-cliente btn-lg ">Nuevo</a>
             </div>
         </div>
-        <div class="row panel panel-info ">
+        <div class="row panel">
             <div class="col-md-8 ">
-                <div class="panel-heading row panel-titulo">
-                    <p><span class="glyphicon glyphicon-shopping-cart btn-lg" aria-hidden="true"></span>Añadir productos</p>
-                    <div class="form-group col-lg-8">
-                        <label class="sr-only" for="producto"></label>
-                        <div class="input-group">
-                            <div class="input-group-addon">
-                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                            </div>
-                            {{ form.producto}}
-                        </div>
-                    </div>
+                <div class="panel-heading row panel-titulo-detalle">
+                    <span class="glyphicon glyphicon-shopping-cart icon-producto titulo-busqueda label-add-producto col-md-1" aria-hidden="true"></span> {{ form.producto}}
                     <div class="col-md-2">
-                        <div class="">
-                            <input type="number" name="cantidad" class="form-control" id="cantidad_producto" min="0" max="1000">
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <button id="enviar_producto" class="btn btn-primary">Enviar</button>
+                        <button id="enviar_producto" class="btn btn-lg nuevo-cliente ">Nuevo</button>
                     </div>
                 </div>
                 <div class="panel-body ">
@@ -65,39 +51,35 @@ $(function() {
                     </table>
                 </div>
             </div>
-            <div class="col-md-4 panel panel-warning">
-                <div class="panel-body  text-center">
-                    <p><span class="glyphicon glyphicon-shopping-cart btn-lg" aria-hidden="true"></span>Resumen de Compra Realizada</p>
-                    <div class="row center-block">
-                        <div class="col-md-8">
-                            <p>Cantidad de Producto</p>
-                        </div>
-                        <div class="col-md-4">
-                            <p><span id="r_cantidad_total">0</span></p>
-                        </div>
+            <div class="col-md-4 panel panel-body  container-resumen">
+                <p><span class="glyphicon glyphicon-shopping-cart btn-lg" aria-hidden="true"></span>Resumen de Compra Realizada</p>
+                <div class="row center-block">
+                    <div class="col-md-8">
+                        <p>Cantidad de Producto</p>
                     </div>
-                    <div class="row center-block">
-                        <div class="col-md-8">
-                            <p>Total</p>
-                        </div>
-                        <div class="col-md-4">
-                            <p>S/.<span id="r_total">00.00</span></p>
-                        </div>
+                    <div class="col-md-4">
+                        <p class="text-center"><span id="r_cantidad_total">0</span></p>
                     </div>
-                    <div class="row center-block">
-                        <!-- <div class="col-md-6">
-                            <p>Comprobante</p>
-                        </div> -->
-                        <div class="col-md-6">
-                            {{ form.comprobante|as_crispy_field }}
-                        </div>
+                </div>
+                <div class="row center-block">
+                    <div class="col-md-8">
+                        <p>Total</p>
                     </div>
-                    <div class="input-group-btn">
-                        <button id="btn_pagar" type="submit" name='form' class="col-md-12 col-md-offset-4  btn btn-success "> Realizar Compra</button>
+                    <div class="col-md-4">
+                        <p class="text-right">S/.<span id="r_total">00.00</span></p>
                     </div>
+                </div>
+                <div class="row center-block">
+                    <div class="col-md-6">
+                        {{ form.comprobante|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="center-block">
+                    <button id="btn_pagar" type="submit" name='form' class="col-md-12 pagar-button btn-lg"> Realizar Compra</button>
                 </div>
             </div>
         </div>
+        {{ form.data_compra}}
     </form>
 </div>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -218,55 +200,89 @@ $(function() {
 </div>
 <script type="text/javascript">
 $(document).ready(function() {
-    //"use strict";
-    $("#enviar_producto").click(function(e) {
-        e.preventDefault();
+    var stocks = new Bloodhound({
+        limit: 10,
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('nombre'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        prefetch: {
+            ttl: 1,
+            url: '/producto/search/',
+        },
+    });
+    stocks.initialize();
+    $('.typeahead ').typeahead(
+        null, {
+            minLength: 1,
+            hint: true,
+            highlight: true,
+            templates: {
+                notFound: '<div class="tt-suggestion tt-none">Producto o Servicio no encontrado en Inventario</div>',
+            },
+            displayKey: 'nombre',
+            source: stocks,
+        }).on('typeahead:selected', function(event, data) {
+        $('.typeahead').val(data.id);
 
-        function not_exist(dd) {
-            for (var i in Compra.productos) {
-                if (Compra.productos[i].id == dd) {
-                    return false;
-                    //mensaje error
-                }
-            }
-            return true;
-        }
-        if (not_exist($('#id_producto').val())) {
-            $.ajax({
-                    url: "{% url 'ventas:carro' %}",
-                    type: 'get',
-                    data: {
-                        p: $('#id_producto').val()
-                    },
-                })
-                .done(function(data) {
-                    data[0].fields.cantidad = $('#cantidad_producto').val();
-                    data[0].fields.importe = data[0].fields.precioC * data[0].fields.cantidad;
-                    data[0].fields.id = data[0].pk;
-                    Compra.productos.push(data[0].fields);
-                    $('#cantidad_producto').val("1");
-                    Compra.total = Compra.total + data[0].fields.importe;
-                    Compra.cantidad_total = Compra.cantidad_total + parseInt(data[0].fields.cantidad);
-                    draw();
-                })
-                .fail(function() {
-                    console.log("error");
-                })
-                .always(function() {
-                    console.log("complete");
-                });
-        }
-
+        Compra.temp = data.id;
     });
 });
 var Compra = {
     productos: [],
     total: 0.00,
     cantidad_total: 0,
+    temp: -1,
 };
 
+$(document).ready(function() {
+    $(".typeahead").keypress(function(event) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if (keycode == '13') {
+            function not_exist(dd) {
+                for (var i in Compra.productos) {
+                    if (Compra.productos[i].id == dd) {
+                        return false;
+                        //mensaje error
+                    }
+                }
+                return true;
+            }
+
+            console.log("hola")
+
+            if (not_exist(Compra.temp)) {
+                $.ajax({
+                        url: "{% url 'ventas:carro' %}",
+                        type: 'get',
+                        data: {
+                            p:Compra.temp
+                        },
+                    })
+                    .done(function(data) {
+                        data[0].fields.cantidad = 1;
+                        data[0].fields.importe = data[0].fields.precioC * data[0].fields.cantidad;
+                        data[0].fields.id = data[0].pk;
+                        Compra.productos.push(data[0].fields);
+                        Compra.total = Compra.total + data[0].fields.importe;
+                        Compra.cantidad_total = Compra.cantidad_total + parseInt(data[0].fields.cantidad);
+                        draw();
+                    })
+                    .fail(function() {
+                        console.log("error");
+                    })
+                    .always(function() {
+                        console.log("complete");
+                    });
+            }
+            return false;
+        }
+
+    });
+
+
+});
+
+
 function draw() {
-    $("#r_cantidad_total").text(Compra.cantidad_total);
     $("#r_total").text(Compra.total);
     var h = "";
     for (var i in Compra.productos) {
@@ -281,6 +297,8 @@ function draw() {
     $("#tabla_producto").html(h);
 
     $("#id_data_compra").val(JSON.stringify(Compra));
+    console.log(Compra);
+
 }
 
 function delete_p(d) {
@@ -320,7 +338,7 @@ function getProveedor() {
 
     .done(function(data) {
             console.log(data);
-            $('#proveedor-info').html('<div class="col-md-4"><p>Razón Social:<span>' + data.razon_social + '</pan></p></div ><div class="col-md-4"><p>N° de ' + data.tipodoc + ':<span>' + data.numdoc + '</span></div><div class="col-md-4"><p>Representante legal:<span>' + data.representante_legal + '</span></p></div>');
+            $('#proveedor-info').html('<div class="col-md-4  contenedor-proveedor"><p class="label-proveedor">Razón Social:<span class="span-proveedor">' + data.razon_social + '</pan></p></div ><div class="col-md-4 contenedor-proveedor"><p class="label-proveedor">N° de ' + data.tipodoc + ':<span class="span-proveedor">' + data.numdoc + '</span></div><div class="col-md-4 contenedor-proveedor"><p class="label-proveedor">Representante legal:<span class="span-proveedor">' + data.representante_legal + '</span></p></div>');
         })
         .fail(function() {
             console.log("error");

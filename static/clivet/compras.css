@@ -123,6 +123,40 @@ img {
     color: white !important;
 }
 
+.proveedor-buscar {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    color: black;
+}
+.contenedor-proveedor{
+	padding: 0;
+}
+.chosen-single{
+	width: 100%;
+}
+.label-proveedor {
+	font-weight: 700;
+    margin: .5em;
+    text-transform: capitalize;
+    letter-spacing: .1em;
+
+}
+.icon-producto{
+	padding: 0;
+	font-size: 2.5em;
+}
+.label-add-producto{
+	padding: 0;
+	margin: 0;
+}
+.span-proveedor {
+    font-weight: normal;
+    margin: .5em;
+    text-transform: capitalize;
+    letter-spacing: .1em;
+}
+
 .td-producto {
     letter-spacing: .3em;
     font-weight: bold;
@@ -311,7 +345,9 @@ img {
 }
 
 .container-resumen {
+
     padding: 0em 2em 1em 2em;
+    margin: 0;
     letter-spacing: .2em;
 }
 
@@ -392,14 +428,14 @@ img {
 
 .dow,
 .day,
-.today,.prev,
+.today,
+.prev,
 .next,
 .datepicker-switch,
 .month {
     text-align: center;
     color: rgba(0, 0, 0, .7);
     letter-spacing: .2em;
-
 }
 
 .img-container {
