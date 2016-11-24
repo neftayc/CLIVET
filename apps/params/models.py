@@ -1,3 +1,4 @@
+# _*_ coding: utf-8 _*_
 """
 @copyright   Copyright (c) 2014 Submit Consulting
 @author      Angel Sullon (@asullom)
@@ -53,35 +54,35 @@ class Person(models.Model):
     class Meta:
         verbose_name = _('Person')
         verbose_name_plural = _('Persons')
-        unique_together = (
-            ('first_name', 'last_name', 'identity_type', 'identity_num'),
-            ('identity_type', 'identity_num'),
-        )
+        # unique_together = (
+        #     ('first_name', 'last_name', 'identity_type', 'identity_num'),
+        #     ('identity_type', 'identity_num'),
+        # )
 
     def __str__(self):
-        return '%s %s' % (self.first_name, self.last_name)
+        return '%s %s %s' % (self.first_name, self.last_name, self.identity_num)
 
     # para el transaction, es necesario poner el
     # transaction.savepoint_rollback(sid)
-    def save(self, *args, **kwargs):
+    # def save(self, *args, **kwargs):
         # TODO Mandar con Exception no con ValidationError
-        if normalize('NFKD', u'%s %s' % (self.first_name, self.last_name)).encode('ascii', 'ignore').lower() in list(
-                normalize('NFKD', u'%s %s' % (c['first_name'], c['last_name'])).encode(
-                    'ascii', 'ignore').lower()
-                for c in Person.objects.values('first_name', 'last_name').exclude(pk=self.pk).filter(identity_type=self.identity_type, identity_num=self.identity_num)
-        ):
-            raise Exception(_(u'%(model_name)s with this %(field_label)s already exists.') % {
-                'model_name': _('Person'),
-                'field_label': get_text_list((capfirst(_('first name')),capfirst(_('last name')),capfirst(_('number')), capfirst(_('Type'))), _('and')),
-            })
+        # if normalize('NFKD', u'%s %s' % (self.first_name, self.last_name)).encode('ascii', 'ignore').lower() in list(
+        #         normalize('NFKD', u'%s %s' % (c['first_name'], c['last_name'])).encode(
+        #             'ascii', 'ignore').lower()
+        #         for c in Person.objects.values('first_name', 'last_name').exclude(pk=self.pk).filter(identity_type=self.identity_type, identity_num=self.identity_num)
+        # ):
+        #     raise Exception(_(u'%(model_name)s with this %(field_label)s already exists.') % {
+        #         'model_name': _('Person'),
+        #         'field_label': get_text_list((capfirst(_('first name')),capfirst(_('last name')),capfirst(_('number')), capfirst(_('Type'))), _('and')),
+        #     })
 
 
-        if Person.objects.exclude(id=self.id).filter(identity_type=self.identity_type, identity_num=self.identity_num).count() > 0:
-            raise Exception(_(u'%(model_name)s with this %(field_label)s already exists.') % {
-                'model_name': _('Person'),
-                'field_label': get_text_list((capfirst(_('number')), capfirst(_('Type'))), _('and')),
-            })
-        super(Person, self).save(*args, **kwargs)
+        # if Person.objects.exclude(id=self.id).filter(identity_type=self.identity_type, identity_num=self.identity_num).count() > 0:
+        #     raise Exception(_(u'%(model_name)s with this %(field_label)s already exists.') % {
+        #         'model_name': _('Person'),
+        #         'field_label': get_text_list((capfirst(_('number')), capfirst(_('Type'))), _('and')),
+        #     })
+        # super(Person, self).save(*args, **kwargs)
     '''
     # funciona cunado está con su form, pero Person siempre será llamado desde otro form
     def clean(self):

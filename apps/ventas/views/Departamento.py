@@ -34,6 +34,23 @@ import logging
 log = logging.getLogger(__name__)
 
 
+def PostDepartamentoAjax(request):
+    if request.method == 'POST' and request.is_ajax():
+        d = Departamento()
+        d.descripcion = request.POST.get('des')
+        d.save()
+
+        obj = Departamento.objects.last()
+        departamento_json = {}
+        departamento_json['pk'] = obj.id
+        departamento_json['name'] = obj.descripcion
+        data_json = json.dumps(departamento_json)
+
+    else:
+        data_json = '{"data":"fail"}'
+    return HttpResponse(data_json, content_type='application/json')
+
+
 class DepartamentoListView(ListView):
     u"""Tipo Documento Identidad."""
 
@@ -64,46 +81,19 @@ class DepartamentoListView(ListView):
             **{column_contains: self.q}).order_by(self.o)
 
     def get_context_data(self, **kwargs):
-        """
-        Tipo Documento Identidad ListView List get context.
 
-        Funcion con los primeros datos iniciales para la carga del template.
-        """
         context = super(DepartamentoListView,
                         self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
         # context['cmi'] = 'menu' #  Validacion de manual del menu
         context['title'] = ('Seleccione %s para cambiar'
-                            ) % capfirst('Tipo Departamento')
+                            ) % capfirst('Departamento')
 
         context['o'] = self.o
         context['f'] = self.f
         context['q'] = self.q.replace('/', '-')
 
         return context
-
-
-def buscarDep(request):
-    if request.is_ajax:
-        search = request.GET.get('term', '')
-
-        departamentos = Departamento.objects.filter(
-            descripcion__icontains=search)[:5]
-
-        results = []
-        for departamento in departamentos:
-            departamento_json = {}
-            departamento_json['id'] = departamento.id
-            departamento_json['descripcion'] = departamento.descripcion
-            results.append(departamento_json)
-
-        data_json = json.dumps(results)
-
-    else:
-        data_json = 'fail'
-    mimetype = "application/json"
-    return HttpResponse(data_json, mimetype)
-
 
 class DepartamentoCreateView(CreateView):
     u"""Tipo Documento Identidad."""

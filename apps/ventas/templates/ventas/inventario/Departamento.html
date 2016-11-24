@@ -3,15 +3,31 @@
 @package     ventas
 Descripcion: Lista Tipo Documento
 -->
-{% load i18n app_security %} {% load l10n humanize %} {% block breadcrumbs %}
-<a href="{# url 'accounts:index' #}">{% trans 'Home' %}</a> &rsaquo; {{ title }} {% endblock breadcrumbs %} {% block content_title %} {{ opts.verbose_name_plural|capfirst }} | <small>{{ title }}</small> {% endblock content_title %} {% block content %}
-<div id="container">
-    <div class="search">
-        <div class="searchbox">
-            <input value="" class="form-control input-lg" id="search_input" type="text" name="q"> {% csrf_token %}
-        </div>
-    </div>
-</div>
+{% load i18n app_security %} {% load l10n humanize %} 
+{% block breadcrumbs %}
+<ol class="breadcrumb">
+  <li><a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %}</a></li>
+  <li class="active">{{ opts.verbose_name_plural|capfirst }}</li>
+</ol>
+{% endblock breadcrumbs %}
+
+
+{% block content_title %}
+<i class="fa fa-tags"></i> Lista de {{opts.verbose_name_plural}}
+{% endblock content_title %}
+{% block content %}
+
+<script type="text/javascript">
+$(function() {
+    $('table').kgrid({
+        form_data : ['{{f}}', '{{q}}'],
+        form_to   : '/ventas/departamento/listar/?f={{f}}&q={{q}}',
+        order_attr: 'class=""',
+        order_to  : '/ventas/departamento/listar/?f={{f}}&q={{q}}',
+    });
+});
+</script>
+<div class="container"> 
 <div class="btn-toolbar btn-toolbar-top">
     <div class="row">
         <div class="btn-actions">
@@ -27,7 +43,7 @@ Descripcion: Lista Tipo Documento
         <thead>
             <tr>
                 <th>#</th>
-                <th class="col-hidden" data-search="descripcion" data-order="descripcion">Descripción</th>
+                <th class="col-hidden" data-search="descripcion" data-order="descripcion">Nombre</th>
                 <th class="btn-actions col-blocked text-center">Acción</th>
             </tr>
         </thead>
@@ -38,11 +54,11 @@ Descripcion: Lista Tipo Documento
                 </td>
                 <td>{{ d.descripcion }}</td>
                 <td class="text-center">
-                    <a href="{% url 'ventas:departamento_upd' d.pk|key:'dep_upd' %}" class="btn btn-info btn-sm text-bold" title="Cambiar Tipo Documento" rel="tooltip">
+                    <a href="{% url 'ventas:departamento_upd' d.pk|key:'dep_upd' %}" class="btn btn-info btn-sm text-bold" title="Cambiar Departamento" rel="tooltip">
                         <i class="btn-icon-only fa fa-edit"></i>
                     </a>
-                    <a href="{% url 'ventas:departamento_del' d.pk|key:'dep_del' %}" class="btn btn-danger btn-sm js-confirm text-bold" msg-title="Eliminar Documento Identidad?." msg="Esta Seguro
-                            <br/>Recuerde esta operación no puede revertirse" title="Eliminar Tipo Documento" rel="tooltip">
+                    <a href="{% url 'ventas:departamento_del' d.pk|key:'dep_del' %}" class="btn btn-danger btn-sm js-confirm text-bold" msg-title="Eliminar Departamento" msg="¿Esta Seguro de continuar con la operación?
+                            <br/>Recuerde esta operación no puede revertirse" title="Eliminar Departamento" rel="tooltip">
                         <i class="btn-icon-only fa fa-trash-o"></i>
                     </a>
                 </td>
@@ -60,18 +76,8 @@ Descripcion: Lista Tipo Documento
     </div>
     {% endif %}
 </div>
-{% endblock content %} {% block extrajs %}
-<script type="text/javascript">
-$(function() {
-    $("#search_input").autocomplete({
-        minLength: 1,
-        source: "search/"
-    });
-});
-
-
-</script>
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
+</div>
+{% endblock content %}
+{% block extrajs %}
+{{ block.super }}
 {% endblock extrajs %}

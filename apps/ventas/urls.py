@@ -10,17 +10,20 @@ from apps.ventas.views.VentaDetalle import *
 
 urlpatterns = [
     url(r'^ventas/$', MainCreateView.as_view(), name="ventaslist"),
+
     # departamento
     url(r'^departamento/listar/$', DepartamentoListView.as_view(),
         name="departamento_list"),
-
-
     url(r'^departamento/crear/$', DepartamentoCreateView.as_view(),
         name="departamento_add"),
-    url(r'^departamento/actualizar/(?P<pk>.*)/$', DepartamentoUpdateView.as_view(),
+    url(r'^departamento/actualizar/(?P<pk>.*)/$',
+        DepartamentoUpdateView.as_view(),
         name="departamento_upd"),
-    url(r'^departamento/eliminar/(?P<pk>.*)/$', DepartamentoDeleteView.as_view(),
+    url(r'^departamento/eliminar/(?P<pk>.*)/$',
+        DepartamentoDeleteView.as_view(),
         name="departamento_del"),
+    url(r'^departamento/crear/ajax/$', PostDepartamentoAjax,
+        name="post_departamento_ajax"),
     # categoria
     url(r'^categoria/listar/$', CategoriaListView.as_view(),
         name="categoria_list"),
@@ -30,6 +33,8 @@ urlpatterns = [
         name="categoria_upd"),
     url(r'^categoria/eliminar/(?P<pk>.*)/$', CategoriaDeleteView.as_view(),
         name="categoria_del"),
+    url(r'^categoria/crear/ajax/$', PostCategoriaAjax,
+        name="post_categoria_ajax"),
     # categoria
     url(r'^producto/listar/$', ProductoListView.as_view(),
         name="producto_list"),
@@ -39,7 +44,8 @@ urlpatterns = [
         name="producto_upd"),
     url(r'^producto/eliminar/(?P<pk>.*)/$', ProductoDeleteView.as_view(),
         name="producto_del"),
-    # categoria
+
+    # Unidad de medida
     url(r'^uni/listar/$', UnidadMedidaListView.as_view(),
         name="unidad_medida_list"),
     url(r'^uni/crear/$', UnidadMedidaCreateView.as_view(),
@@ -53,21 +59,17 @@ urlpatterns = [
         name="reporte_ventas"),
     url(r'^reporte/venta/(?P<pk>\d+)/$', DetalleVentaListView.as_view(),
         name="detalle_go"),
-
-
+    url(r'^uni/crear/ajax/$', PostUnidadAjax, name="post_unidad_ajax"),
+    url(r'^univ/crear/ajax/$', PostUnidadVentasAjax,
+        name="post_unidad_ventas_ajax"),
     url(r'^uni/cargarcarro/$', CrearCarroTemplateView,
         name="carro"),
-
     url(r'^uni/vendercarr/$', VenderCarro,
         name="vender_carro"),
     url(r'^cliente/filter/$', VentaAjaxCliente,
         name="detalle_ajax"),
     url(r'^date/filter/$', VentaAjaxDate,
         name="detalle_ajax_date"),
-
-
-
-
 
     # venta
     url(r'^venta/listar/$', VentaListView.as_view(),
@@ -80,11 +82,9 @@ urlpatterns = [
         name="ventadetalle_list"),
     # url(r'^ventadetalle/crear/$', DetalleVentaCreateView.as_view(),
     #  name="ventadetalle_add"),
-
     url(r'^producto/listar/ajax/$', ProductoGetAjax),
 
     # buscadores
-    url(r'^departamento/listar/search/$', buscarDep),
     url(r'^producto/search/$', BuscarProducto, name='producto_s'),
     url(r'^cliente/search/$', BuscarCliente, name='cliente_s'),
 
