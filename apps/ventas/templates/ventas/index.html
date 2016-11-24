@@ -40,7 +40,7 @@
                 <div class="panel-heading row cliente-container">
                     <p><span class="glyphicon glyphicon-user btn-lg" aria-hidden="true"></span>Seleccionar Cliente (Opcional)</p>
                     <div class="col-md-3">
-                        <button type="search" class="btn nuevo-cliente btn-lg ">Nuevo</button>
+                        <button type="search" class="btn nuevo-cliente btn-lg " id="addCliente">Nuevo</button>
                     </div>
                     <div class="col-md-9">
                         <input id="id_cliente" value="Cliente General" placeholder="Buscar Cliente" class="typeahead-cliente form-control input-lg" name="cliente">
@@ -66,7 +66,7 @@
                             </div>
                         </div>
                         <div class="row ">
-                            <div class="col-md-6 text-left">
+                            <div class="col-md-6 text-left">    
                                 <p>Monto a pagar</p>
                             </div>
                             <div class="col-md-6 text-right">
@@ -84,6 +84,121 @@
     </div>
 </div>
 </div>
+<div id="add-new-cliente" class="modal fade" role="dialog" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Agregar cliente</h4>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post" id="new-form-cliente" name="new-form-cliente">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div id="div_id_nombre" class="form-group">
+                                <label for="id_nombre" class="control-label  requiredField">
+                                    Nombre<span class="asteriskField">*</span> </label>
+                                <div class="controls ">
+                                    <input class="input-required textinput textInput form-control" id="id_nombre" maxlength="100" name="nombre" placeholder="Ingrese un nombre" type="text"> </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div id="div_id_apellidos" class="form-group">
+                                <label for="id_apellidos" class="control-label ">
+                                    Apellidos
+                                </label>
+                                <div class="controls ">
+                                    <input class="textinput textInput form-control" id="id_apellidos" maxlength="100" name="apellidos" placeholder="Ingrese sus apellidos" type="text"> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{form.tipo_doc|as_crispy_field}}
+                        </div>
+                        <div class="col-md-6">
+                            <div id="div_id_numero" class="form-group">
+                                <label for="id_numero" class="control-label ">
+                                    Número
+                                </label>
+                                <div class="controls ">
+                                    <input class="numberinput form-control" id="id_numero" name="numero" placeholder="Ingrese un número" type="number"> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div id="div_id_fecha_de_nacimiento" class="form-group">
+                                <label for="id_fecha_de_nacimiento" class="control-label ">
+                                    Fecha de Nac.
+                                </label>
+                                <div class="controls ">
+                                    <input class="datepicker dateinput form-control" id="id_fecha_de_nacimiento" name="fecha_de_nacimiento" placeholder="YYYY-MM-DD" type="text"> </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div id="div_id_ciudad" class="form-group">
+                                <label for="id_ciudad" class="control-label ">
+                                    Ciudad
+                                </label>
+                                <div class="controls ">
+                                    <input class="textinput textInput form-control" id="id_ciudad" maxlength="50" name="ciudad" placeholder="Ingrese el nombre" type="text"> </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div id="div_id_direccion" class="form-group">
+                                <label for="id_direccion" class="control-label ">
+                                    Dirección
+                                </label>
+                                <div class="controls ">
+                                    <input class="textinput textInput form-control" id="id_direccion" maxlength="50" name="direccion" placeholder="Ingrese una dirección" type="text"> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div id="div_id_email" class="form-group">
+                                <label for="id_email" class="control-label ">
+                                    E-mail
+                                </label>
+                                <div class="controls ">
+                                    <input class="emailinput form-control" id="id_email" maxlength="254" name="email" placeholder="example@gmail.com" type="email"> </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div id="div_id_telefono" class="form-group">
+                                <label for="id_telefono" class="control-label ">
+                                    Teléfono
+                                </label>
+                                <div class="controls ">
+                                    <input class="numberinput form-control" id="id_telefono" name="telefono" placeholder="Ingrese el número" type="number"> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="alert alert-danger hide" role="alert" id="success_message_cliente"></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="form-group">
+                    <div class="controls ">
+                        <button type="submit" name="submit" class="btn btn-guardar text-bold" id="save-cliente" title="Grabar">
+                            <i class="btn-icon-onlyx fa fa-save"></i> <span class="hidden-xsx"> Grabar</span>
+                        </button>
+                        <button type="button" name="cancel" class="btn btn btn-cancelar btn-back text-bold" id="button-id-cancel" title="Cancel">
+                            <i class="btn-icon-onlyx fa fa-ban"></i> <span class="hidden-xs"> Cancelar</span>
+                        </button>
+                        <button type="reset" name="reset" class="btn btn btn-default text-bold" id="reset-id-reset" title="Reset">
+                            <i class="btn-icon-onlyx fa fa-undo"></i> <span class="hidden-xs"> Limpiar</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+{% block extrajs %}
 <script type="text/javascript">
 $("#success-alert").hide();
 $(document).ready(function() {
@@ -189,7 +304,7 @@ $('#btn_pagar').attr('disabled', true);
 })();
 var i;
 $(document).ready(function() {
-    $(".typeahead,.cantidad-input").keypress(function(event) {
+    $(".typeahead").keypress(function(event) {
         var keycode = (event.keyCode ? event.keyCode : event.which);
         if (keycode == '13') {
             not_exist();
@@ -213,8 +328,8 @@ $(document).ready(function() {
                         Venta.total = Math.ceil10(Venta.total + data[0].fields.importe, -2);
                         Venta.sub_total = Math.ceil10(Venta.total - Venta.igv, -2);
                         draw();
-                        $('.typeahead , #cantidad_producto').val('');
                         $('#id' + i).focus();
+                        $('.typeahead').val('');
                     })
                     .fail(function() {
                         console.log("error");
@@ -229,7 +344,7 @@ $(document).ready(function() {
             for (i in Venta.productos) {
                 if (Venta.productos[i].id == dd) {
                     $('.typeahead').focus();
-                    $('.typeahead , #cantidad_producto').val('');
+                    $('.typeahead ').val('');
                     sms = '';
                     sms = sms + "<strong>Producto o Servicio Ya existe en Carrito</strong>";
                     $('.alerta-ventas').html(sms);
@@ -286,7 +401,7 @@ function delete_p(d) {
 }
 
 function change_p(d) {
-    var i;
+    
     var sms = '';
     Venta.productos[d].cantidad = $("#id" + d).text();
     if (Venta.productos[d].existencia <= 0) {
@@ -380,6 +495,93 @@ function change_p(d) {
         $('#btn_pagar').attr('disabled', true);
     }
 }
+$('#id_fecha_de_nacimiento').datetimepicker({
+    format: 'YYYY-MM-DD',
+        //format: 'YYYY-MM-DD hh:mm:ss', //pata datatimes
+        language: 'es',
+        pickTime: false,
+        //showMeridian: true,
+        autoclose: true,
+        todayHighlight: true,
+    });
+$('#addCliente').click(function(event) {
+    event.preventDefault();
+    $('#add-new-cliente').modal({
+        backdrop: 'static',
+        keyboard: false
+    });
+});
+$('#save-cliente').click(function() {
+    var formArray = $("#new-form-cliente").serializeArray();
+    var formJson = JSON.stringify(formArray);
+    if (formArray[1].value.trim().length > 0) {
+        var data={};
+        data[formArray[1].name]=formArray[1].value;
+        data[formArray[2].name]=formArray[2].value;
+        data[formArray[3].name]=formArray[3].value;
+        data[formArray[4].name]=formArray[4].value;
+        data[formArray[5].name]=formArray[5].value;
+        data[formArray[6].name]=formArray[6].value;
+        data[formArray[7].name]=formArray[7].value;
+        data[formArray[8].name]=formArray[8].value;
+        data[formArray[9].name]=formArray[9].value;
+        $.ajax({
+                url: '{% url "clivet:post_cliente_ajax" %}',
+                type: 'POST',
+                dataType: 'json',
+                data: data,
+            })
+            .done(function(d) {
+                if(d.error){
+                    $('#success_message_cliente').attr('class', 'alert alert-danger').text(d.detail);
+                }else{
+                    var select = $("#id_proveedor");
+                select.append('<option value="' + d.pk + '">' + d.name + '</option>');
+                select.val(d.pk);
+                //select.trigger("chosen:updated");
+                $('#add-new-cliente').modal('hide');
+                }
+            })
+            .fail(function() {
+                console.log("error");
+            })
+            .always(function() {
+                console.log("complete");
+            });
+    } else {
+        $('#success_message_cliente').attr('class', 'alert alert-danger').text("Revise los datos ingresados nuevamente.");
+    }
+});
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');
+
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
 </script>
 <!-- /#page-wrapper -->
-{% endblock content %}
+
+{% endblock extrajs %}

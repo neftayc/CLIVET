@@ -1,17 +1,15 @@
 from django import forms
 from ..models.compra import Compra
-from apps.ventas.models.Producto import Producto
 from apps.compras.models.Proveedor import Tipo_Documento
 
 
 class CompraForm(forms.ModelForm):
     u"""Tipo Documeto Form."""
     producto = forms.CharField(label="", required=False,
-                               widget=forms.TextInput(attrs={'type': 'search', 'class': 'form-control typeahead input-lg', 'placeholder': 'Buscar Producto o Servicio', 'autofocus': 'autofocus'}))
+                               widget=forms.TextInput(attrs={'type': 'search', 'class': 'form-control typeahead input-lg', 'placeholder': 'Buscar Producto ', 'autofocus': 'autofocus'}))
     data_compra = forms.CharField(
-        required=False, widget=forms.TextInput(attrs={'type': ''}))
+        required=False, widget=forms.TextInput(attrs={'type': 'hidden'}))
 
-    comprobante = forms.ImageField(required=False)
     # =====================modal==========================
     tipo_doc = forms.ChoiceField(
         choices=Tipo_Documento, required=False,
@@ -20,13 +18,13 @@ class CompraForm(forms.ModelForm):
     class Meta:
 
         model = Compra
-        fields = ('total', 'proveedor',)
+        fields = ('total', 'proveedor', 'comprobante',)
         exclude = ()
         widgets = {
             'proveedor': forms.Select(
                 attrs={'class': 'chosen-select',
                        'data-placeholder': 'Choose a Country'}),
-            'total': forms.TextInput(attrs={'class': 'form-control'}), }
+            'total': forms.TextInput(attrs={'class': 'form-control text-left'}), }
 
     def __init__(self, *args, **kwargs):
         super(CompraForm, self).__init__(*args, **kwargs)

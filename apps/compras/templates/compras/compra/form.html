@@ -1,10 +1,12 @@
-{% extends "main/dashboard.html" %} {% load i18n app_security staticfiles%} {% load i18n crispy_forms_tags %} {% load l10n humanize %} {% block style %}
+{% extends "main/dashboard.html" %} {% load staticfiles i18n app_security%}{% load i18n crispy_forms_tags %} {% load l10n humanize %} {% block style %}
 <link href="{% static 'clivet/compras.css' %}" rel="stylesheet"> {% endblock style %} {% block breadcrumbs %}
 <ol class="breadcrumb">
     <li><a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %}</a></li>
-    <li class="active"> {{ opts.verbose_name_plural|capfirst }}</li>
+    <li><a href="{% url 'compras:compra_list' %}">{{ opts.verbose_name_plural|capfirst }}</a></li>
+    <li class="active">{{ title }}</li>
 </ol>
-{% endblock breadcrumbs %} {% block content_title %} {{title}}{% endblock content_title %} {% block content %}
+{% endblock breadcrumbs %} {% block content_title %}
+<i class="fa fa-shopping-cart"></i> {{ title }} {% endblock content_title %} {% block content %}
 <script>
 $(function() {
     $('.chosen-select').chosen();
@@ -17,20 +19,22 @@ $(function() {
                 <p class="titulo-busqueda"><span class="glyphicon glyphicon-user"></span>Proveedor</p>
             </div>
             <div class="col-md-4 proveedor-buscar">
-                {{ form.proveedor}} {{ form.proveedor.errors}} 
+                {{ form.proveedor}} {{ form.proveedor.errors}}
             </div>
             <div class="col-md-6 panel-titulo-detalle " id="proveedor-info">
             </div>
-            <div class="col-md-1" id='addProveedor'>
+            <div class="col-md-1 addProveedor" id='addProveedor'>
                 <a type="search" class="btn nuevo-cliente btn-lg ">Nuevo</a>
             </div>
         </div>
         <div class="row panel">
             <div class="col-md-8 ">
                 <div class="panel-heading row panel-titulo-detalle">
+                    <div class="alert col-md-7 col-md-push-7 alerta-ventas" id="success-alert">
+                    </div>
                     <span class="glyphicon glyphicon-shopping-cart icon-producto titulo-busqueda label-add-producto col-md-1" aria-hidden="true"></span> {{ form.producto}}
                     <div class="col-md-2">
-                        <button id="enviar_producto" class="btn btn-lg nuevo-cliente ">Nuevo</button>
+                        <button id="addProducto" class="btn btn-lg nuevo-cliente ">Nuevo</button>
                     </div>
                 </div>
                 <div class="panel-body ">
@@ -52,21 +56,13 @@ $(function() {
                 </div>
             </div>
             <div class="col-md-4 panel panel-body  container-resumen">
-                <p><span class="glyphicon glyphicon-shopping-cart btn-lg" aria-hidden="true"></span>Resumen de Compra Realizada</p>
+                <p class="text-center"><span class="glyphicon glyphicon-shopping-cart btn-lg" aria-hidden="true"></span>Resumen de Compra Realizada</p>
                 <div class="row center-block">
-                    <div class="col-md-8">
-                        <p>Cantidad de Producto</p>
-                    </div>
                     <div class="col-md-4">
-                        <p class="text-center"><span id="r_cantidad_total">0</span></p>
+                        <p class="label-resumen-compras">Total</p>
                     </div>
-                </div>
-                <div class="row center-block">
                     <div class="col-md-8">
-                        <p>Total</p>
-                    </div>
-                    <div class="col-md-4">
-                        <p class="text-right">S/.<span id="r_total">00.00</span></p>
+                        <p class="text-right label-resumen-compras">S/.<span id="r_total">00.00</span></p>
                     </div>
                 </div>
                 <div class="row center-block">
@@ -75,7 +71,7 @@ $(function() {
                     </div>
                 </div>
                 <div class="center-block">
-                    <button id="btn_pagar" type="submit" name='form' class="col-md-12 pagar-button btn-lg"> Realizar Compra</button>
+                    <button id="btn_pagar" type="submit" name='form' class="col-md-12 pagar-button btn-lg"> Comprar</button>
                 </div>
             </div>
         </div>
@@ -199,6 +195,7 @@ $(function() {
     </div>
 </div>
 <script type="text/javascript">
+$("#success-alert").hide();
 $(document).ready(function() {
     var stocks = new Bloodhound({
         limit: 10,
@@ -226,35 +223,63 @@ $(document).ready(function() {
         Compra.temp = data.id;
     });
 });
+$('#btn_pagar').attr('disabled', true);
+(function() {
+    function decimalAdjust(type, value, exp) {
+        if (typeof exp === 'undefined' || +exp === 0) {
+            return Math[type](value);
+        }
+        value = +value;
+        exp = +exp;
+        // Si el valor no es un número o el exp no es un entero...
+        if (isNaN(value) || !(typeof exp === 'number' && exp % 1 === 0)) {
+            return NaN;
+        }
+        // Shift
+        value = value.toString().split('e');
+        value = Math[type](+(value[0] + 'e' + (value[1] ? (+value[1] - exp) : -exp)));
+        // Shift back
+        value = value.toString().split('e');
+        return +(value[0] + 'e' + (value[1] ? (+value[1] + exp) : exp));
+    }
+    // Decimal round
+    if (!Math.round10) {
+        Math.round10 = function(value, exp) {
+            return decimalAdjust('round', value, exp);
+        };
+    }
+    // Decimal floor
+    if (!Math.floor10) {
+        Math.floor10 = function(value, exp) {
+            return decimalAdjust('floor', value, exp);
+        };
+    }
+    // Decimal ceil
+    if (!Math.ceil10) {
+        Math.ceil10 = function(value, exp) {
+            return decimalAdjust('ceil', value, exp);
+        };
+    }
+})();
 var Compra = {
     productos: [],
     total: 0.00,
     cantidad_total: 0,
     temp: -1,
 };
-
+var i;
 $(document).ready(function() {
     $(".typeahead").keypress(function(event) {
         var keycode = (event.keyCode ? event.keyCode : event.which);
         if (keycode == '13') {
-            function not_exist(dd) {
-                for (var i in Compra.productos) {
-                    if (Compra.productos[i].id == dd) {
-                        return false;
-                        //mensaje error
-                    }
-                }
-                return true;
-            }
 
-            console.log("hola")
-
+            not_exist();
             if (not_exist(Compra.temp)) {
                 $.ajax({
                         url: "{% url 'ventas:carro' %}",
                         type: 'get',
                         data: {
-                            p:Compra.temp
+                            p: Compra.temp
                         },
                     })
                     .done(function(data) {
@@ -265,15 +290,30 @@ $(document).ready(function() {
                         Compra.total = Compra.total + data[0].fields.importe;
                         Compra.cantidad_total = Compra.cantidad_total + parseInt(data[0].fields.cantidad);
                         draw();
+
+                        $('#id' + i).focus();
+                        $('.typeahead').val('');
                     })
                     .fail(function() {
                         console.log("error");
+                        $('.typeahead').focus();
+                        $('.typeahead ').val('');
                     })
                     .always(function() {
                         console.log("complete");
                     });
             }
             return false;
+        }
+
+        function not_exist(dd) {
+            for (i in Compra.productos) {
+                if (Compra.productos[i].id == dd) {
+                    return false;
+                    //mensaje error
+                }
+            }
+            return true;
         }
 
     });
@@ -285,13 +325,13 @@ $(document).ready(function() {
 function draw() {
     $("#r_total").text(Compra.total);
     var h = "";
-    for (var i in Compra.productos) {
+    for (i in Compra.productos) {
         h = h + "<tr>" +
             "<td contenteditable='true' class='text-center' id='id" + i + "' onblur='change_p(" + i + ")'>" + Compra.productos[i].cantidad +
-            "</td><td>" + Compra.productos[i].nombre +
-            "</td><td>" + Compra.productos[i].precioC +
-            "</td><td>" + Compra.productos[i].importe +
-            "</td><td><button type='button' onclick='delete_p(" + i + ")'class='btn btn-default btn-md'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span>Quitar</button></td></tr>";
+            "</td><td class='text-center'>" + Compra.productos[i].nombre +
+            "</td><td class='text-center'>" + Compra.productos[i].precioC +
+            "</td><td class='text-center'>" + Compra.productos[i].importe +
+            "</td><td class='text-center'><button type='button' onclick='delete_p(" + i + ")'class='btn btn-danger btn-md'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span></button></td></tr>";
 
     }
     $("#tabla_producto").html(h);
@@ -303,21 +343,84 @@ function draw() {
 
 function delete_p(d) {
     var deleted_product = Compra.productos.splice(d, 1);
-    Compra.total = Compra.total - deleted_product[0].importe;
-    Compra.cantidad_total = Compra.cantidad_total - deleted_product[0].cantidad;
+    Compra.total =Math.ceil10( Compra.total - deleted_product[0].importe,-2);
     draw();
+    $('.typeahead').val('');
+    if ($("#id0").val() === '') {
+        $('#btn_pagar').attr('disabled', false);
+    } else {
+
+        $('#btn_pagar').attr('disabled', true);
+    }
 }
 
+$('#addProducto,#addProveedor').click(function(event) {
+    event.preventDefault();
+    $('#add-new-cliente').modal({
+        backdrop: 'static',
+        keyboard: false
+    });
+});
 function change_p(d) {
     Compra.productos[d].cantidad = $("#id" + d).text();
-    Compra.productos[d].importe = Compra.productos[d].cantidad * Compra.productos[d].precioC;
-    Compra.total = 0.00;
-    Compra.cantidad_total = 0;
-    for (var i in Compra.productos) {
-        Compra.total = Compra.total + Compra.productos[i].importe;
-        Compra.cantidad_total = Compra.cantidad_total + Compra.productos[i].cantidad;
+    if (Compra.productos[d].cantidad < 0) {
+        Compra.productos[d].cantidad = Math.ceil10(Compra.productos[d].cantidad * (-1),-2);
+        Compra.productos[d].importe = Math.ceil10(Compra.productos[d].cantidad * Compra.productos[d].precioC,-2);
+        Compra.total = 0.00;
+        for (i in Compra.productos) {
+            Compra.total = Math.ceil10(Compra.total + Compra.productos[i].importe,-2);
+        }
+        draw();
+        $('.typeahead').val('');
+        $('.typeahead').focus();
+
+    } else if (Compra.productos[d].cantidad === 0) {
+        Compra.productos[d].cantidad = '';
+        Compra.productos[d].importe = Compra.productos[d].cantidad * Compra.productos[d].precioC;
+        Compra.total = 0.00;
+        for (i in Compra.productos) {
+            Compra.total = Compra.total + Compra.productos[i].importe;
+        }
+        draw();
+        $('.typeahead').val('');
+        console.log('positive');
+    } else if (Compra.productos[d].cantidad > 0) {
+        Compra.productos[d].cantidad = Compra.productos[d].cantidad;
+        Compra.productos[d].importe = Compra.productos[d].cantidad * Compra.productos[d].precioC;
+        Compra.total = 0.00;
+        for (i in Compra.productos) {
+            Compra.total = Compra.total + Compra.productos[i].importe;
+        }
+        draw();
+        $('.typeahead').val('');
+        $('.typeahead').focus();
+    } else {
+        sms = '';
+        sms = sms + "<strong>Cantidad  " + Compra.productos[d].nombre + " Incorrecta</strong>";
+        $('.alerta-ventas').html(sms);
+        $("#success-alert").show();
+        $("#success-alert").delay(3000).slideUp(300, function() {
+            $("#success-alert").hide();
+        });
+        Compra.productos[d].cantidad = '';
+        Compra.productos[d].importe = Compra.productos[d].cantidad * Compra.productos[d].precioC;
+        Compra.total = 0.00;
+        for (i in Compra.productos) {
+            Compra.total = Compra.total + Compra.productos[i].importe;
+        }
+        draw();
+        $('#id' + i).val('');
+        $('#id' + i).focus();
+
     }
-    draw();
+    if ($("#id0").val() === '') {
+        $('#btn_pagar').attr('disabled', false);
+    } else {
+
+        $('#btn_pagar').attr('disabled', true);
+    }
+
+
 }
 $('#addProveedor').click(function() {
     $('#myModal').modal('show');
@@ -387,35 +490,6 @@ $('#save-proveedor').click(function() {
             });
     } else {
         $('#success_message_proveedor').attr('class', 'alert alert-danger').text("Revise los datos ingresados nuevamente.");
-    }
-});
-
-function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = jQuery.trim(cookies[i]);
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
-var csrftoken = getCookie('csrftoken');
-
-function csrfSafeMethod(method) {
-    // these HTTP methods do not require CSRF protection
-    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-}
-$.ajaxSetup({
-    beforeSend: function(xhr, settings) {
-        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-            xhr.setRequestHeader("X-CSRFToken", csrftoken);
-        }
     }
 });
 </script>

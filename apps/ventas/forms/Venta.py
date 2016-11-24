@@ -12,6 +12,7 @@ from django.core.exceptions import NON_FIELD_ERRORS
 from ..models.Venta import Venta
 from apps.ventas.models.Producto import Producto
 from apps.sad.models import User
+from apps.params.models import IDENTITY_TYPE_CHOICES
 
 
 class VentaForm(forms.ModelForm):
@@ -21,7 +22,11 @@ class VentaForm(forms.ModelForm):
     data_venta = forms.CharField(
         required=False,  widget=forms.TextInput(attrs={'type': 'hidden'}))
     producto = forms.CharField(label="", required=False,
-                               widget=forms.TextInput(attrs={'type':'search','class': 'form-control typeahead input-lg', 'placeholder': 'Buscar Producto o Servicio','autofocus':'autofocus'}))
+                               widget=forms.TextInput(attrs={'type': 'search', 'class': 'form-control typeahead input-lg', 'placeholder': 'Buscar Producto o Servicio', 'autofocus': 'autofocus'}))
+
+    tipo_doc = forms.ChoiceField(
+        choices=IDENTITY_TYPE_CHOICES, required=False,
+        label='Tipo de documento')
 
     class Meta:
 
