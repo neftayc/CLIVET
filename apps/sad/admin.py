@@ -46,7 +46,7 @@ class MyUserAdmin(UserAdmin):
         (None, {'fields': ('username', 'password')}),
         (_('Personal info'),
          {'fields': ('person', 'email')}),
-        (_('Permissions'), {'fields': ('is_active', 'description', 'is_staff',
+        (_('Permissions'), {'fields': ('is_active', 'is_veterinario', 'description', 'is_staff',
                                        'is_superuser', 'groups',
                                        'user_permissions')}),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),

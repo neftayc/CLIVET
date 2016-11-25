@@ -12,6 +12,10 @@ urlpatterns = [
         ProveedorUpdateView.as_view(), name="proveedor_upd"),
     url(r'^proveedor/eliminar/(?P<pk>.*)/$',
         ProveedorDeleteView.as_view(), name="proveedor_del"),
+    url(r'^proveedor/get/ajax/$', GetProveedorAjax,
+        name="get_proveedor_ajax"),
+    url(r'^proveedor/crear/ajax/$', PostProveedorAjax,
+        name="post_proveedor_ajax"),
 
     # Compra
     url(r'^compra/listar/$', CompraListView.as_view(),  name="compra_list"),

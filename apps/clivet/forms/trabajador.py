@@ -11,26 +11,8 @@ from apps.utils.forms import smtSave, btnCancel, btnReset
 from django.utils.text import capfirst, get_text_list
 
 
-class ClienteForm(forms.ModelForm):
+class TrabajadorForm(forms.ModelForm):
     u"""Cliente Form."""
-    nombre = forms.CharField(max_length=100)
-    apellidos = forms.CharField(max_length=100)
-    numero = forms.IntegerField(required=False)
-    tipo_documento = forms.ChoiceField(choices=IDENTITY_TYPE_CHOICES)
-    fecha_de_nacimiento = forms.DateField(
-        widget=forms.DateInput(attrs={'class': 'datepicker', }),
-        required=False)
-    # apellido = forms.CharField(max_length=100,widget=forms.Textarea)
-    # sender = forms.EmailField()
-    # cc_myself = forms.BooleanField(required=False)
-    # producto = forms.ModelChoiceField(
-    #     queryset=Producto.objects.all(),
-    #     required=False, label="", help_text="")
-    # data_venta = forms.CharField(
-    #     required=False, widget=forms.TextInput(attrs={'type': 'hidden'}))
-    #  hoice_field = forms.ChoiceField(widget=forms.RadioSelect,
-    #                                 choices=CHOICES)
-
     class Meta:
         """Meta."""
         model = Cliente
@@ -40,8 +22,9 @@ class ClienteForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
         self.object = kwargs.pop('object', None)
-        super(ClienteForm, self).__init__(*args, **kwargs)
+        super(TrabajadorForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
+        self.helper.form_class = 'form-horizontal'
         self.helper.layout = Layout(
             Row(
                 Div(Field('nombre',  placeholder='Ingrese un nombre',

@@ -1,4 +1,11 @@
-{% extends "main/dashboard.html" %} {% load i18n app_security %} {% load l10n humanize %} {% block content_title %}{% endblock content_title %} {% block content %} {% load crispy_forms_tags %}
+{% extends "main/dashboard.html" %} {% load i18n app_security %} {% load l10n humanize %} {% load crispy_forms_tags %} {% block breadcrumbs %}
+<ol class="breadcrumb">
+    <li><a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %}</a></li>
+    <li><a href="{% url 'citas:cita_list' %}">{{ opts.verbose_name_plural|capfirst }}</a></li>
+    <li class="active">{{ title }}</li>
+</ol>
+{% endblock breadcrumbs %} {% block content_title %}
+<i class="fa fa-calendar"></i> {{ title }} {% endblock content_title %} {% block content %}
 <style>
 #external-events .fc-event {
     color: #fff;
@@ -14,12 +21,21 @@
     border: 1px solid transparent;
     border-radius: 4px;
 }
+
+.chosen-container {
+    width: 100% !important;
+}
 </style>
+<script>
+$(function() {
+    $('.chosen-select').chosen();
+});
+</script>
 <div class="row">
-    <div class="col-md-10">
+    <div class="col-md-9">
         <div id='calendar'></div>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-3">
         <div class="panel panel-primary">
             <div class="panel-heading">Eventos Frecuentes</div>
             <div class="panel-body" id='external-events'>Panel Content</div>
@@ -36,16 +52,16 @@
                 <h4 class="modal-title" id="myModalLabel">{{ title }}</h4>
             </div>
             <div class="modal-body">
-                <form action="" method="post">
+                <form action="" method="post" name="citas-form" id="citas-form">
                     {% csrf_token %} {% crispy form %}
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal" title="Cerrar modal">
-                    <i class="btn-icon-onlyx fa fa-ban"></i> <span class="hidden-xsx"> Cerrar</span>
-                </button>
                 <button type="submit" name="submit" class="btn btn-primary text-bold" id="submit-id-submit" title="Grabar cita">
                     <i class="btn-icon-onlyx fa fa-save"></i> <span class="hidden-xsx"> Guardar</span>
+                </button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" title="Cerrar modal">
+                    <i class="btn-icon-onlyx fa fa-ban"></i> <span class="hidden-xsx"> Cerrar</span>
                 </button>
             </div>
         </div>
@@ -65,9 +81,9 @@
             </div>
             <div class="modal-footer" id="detail_controls">
                 <button type="submit" class="btn btn-success btn-block" title="Editar cita" id="cita_edit"><span class="glyphicon glyphicon-edit"></span> Editar</button>
-                <a href="#" class="btn btn-danger btn-block js-confirm" msg-title="Eliminar Cliente?." msg="Esta Seguro
+                <a href="#" class="btn btn-danger btn-block js-confirm" id="eliminar-cita" msg-title="Eliminar Cliente?." msg="Esta Seguro
                        <br/>Recuerde esta operación no puede revertirse" title="Eliminar cita" rel="tooltip">
-                    <i class="btn-icon-only fa fa-trash-o"></i>Eliminar
+                    <i class="btn-icon-only fa fa-trash-o"></i> Eliminar
                 </a>
             </div>
         </div>
@@ -98,7 +114,7 @@
                             <input name="event-color" type="color" class="form-control" id="event-color" required="true">
                         </div>
                     </div>
-                    <div class="alert alert-danger hide" role="alert" id="success_message_events" ></div>
+                    <div class="alert alert-danger hide" role="alert" id="success_message_events"></div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -113,12 +129,18 @@
     </div>
 </div>
 <script>
+$("#submit-id-submit").click(function() {
+    var form = $("#citas-form");
+    if (selectCita) {
+        form.attr('action', '/cita/actualizar/' + selectCita.pke + '/');
+        form.submit();
+    } else {
+        form.attr('action', '');
+        form.submit();
+    }
+});
+var selectCita = {};
 $(document).ready(function() {
-    var todayDate = moment().startOf('day');
-    var YM = todayDate.format('YYYY-MM');
-    var YESTERDAY = todayDate.clone().subtract(1, 'day').format('YYYY-MM-DD');
-    var TODAY = todayDate.format('YYYY-MM-DD');
-    var TOMORROW = todayDate.clone().add(1, 'day').format('YYYY-MM-DD');
     $('#calendar').fullCalendar({
         //height: 650,
         locale: 'es',
@@ -141,6 +163,7 @@ $(document).ready(function() {
             listYear: 'Lista por año',
         },
         eventClick: function(calEvent, jsEvent, view) {
+            selectCita = calEvent;
             calEvent.estado = calEvent.sin_atender ? "Por Atender" : "Atendido";
             var h = '<li class="list-group-item" style="background:' + calEvent.color + '"><strong><span class="glyphicon glyphicon-tags"></span> Titulo: </strong>' + calEvent.title + '</li>' +
                 '<li class="list-group-item"><strong><span class="glyphicon glyphicon-question-sign"></span> Descripcion: </strong>' + calEvent.descripcion + '</li>' +
@@ -149,6 +172,7 @@ $(document).ready(function() {
                 '<li class="list-group-item"><strong><span class="glyphicon glyphicon-user"></span> Veterinario: </strong>' + calEvent.veterinario_nombre + '</li>' +
                 '<li class="list-group-item"><strong><span class="glyphicon glyphicon-user"></span> Cliente: </strong>' + calEvent.cliente_nombre + '</li>';
             $('#detailCita').html(h);
+            $("#eliminar-cita").attr("href", "/cita/eliminar/"+calEvent.pkd+"/");
             $('#myModalOptions').modal('show');
         },
         // header: {
@@ -171,6 +195,7 @@ $(document).ready(function() {
         weekends: false, //si incluye fin de semanas or //hiddenDays: [ 1, 3, 5 ]
         droppable: true, // this allows things to be dropped onto the calendar
         drop: function(date, data) {
+            selectCita = {};
             $('#myModal').modal({
                 backdrop: 'static',
                 keyboard: false
@@ -179,6 +204,7 @@ $(document).ready(function() {
             $('#id_date').val(moment(date).format("YYYY-MM-DD HH:mm:ss"));
         },
         select: function(start, end, date) {
+            selectCita = {};
             $('#myModal').modal({
                 backdrop: 'static',
                 keyboard: false
@@ -254,47 +280,65 @@ $(document).ready(function() {
 
     });
 });
-    listarEventos();
-    function listarEventos() {
-        $.ajax({
-                url: '/cita/eventos/listar/',
-                type: 'get',
-                dataType: 'json',
-                //data: {param1: 'value1'},
-            })
-            .done(function(dat) {
-                console.log("success", dat);
-                var html = "";
-                for (var i in dat) {
-                    html = html +
-                        "<div data-event='" +
-                        dat[i].pk + "'class='fc-event row' style='background-color:" +
-                        dat[i].fields.color + "'><div class='col-md-2 ext-left'><span class='glyphicon glyphicon-move'></span></div><div class='col-md-10 text-center'>" + dat[i].fields.title + "</div></div>";
-                }
-                $("#external-events").html(html);
-                $('#external-events .fc-event').each(function() {
+listarEventos();
 
-                    // store data so the calendar knows to render an event upon drop
-                    $(this).data('event', {
-                        title: $.trim($(this).text()), // use the element's text as the event title
-                        stick: true // maintain when user navigates (see docs on the renderEvent method)
-                    });
-
-                    // make the event draggable using jQuery UI
-                    $(this).draggable({
-                        zIndex: 999,
-                        revert: true, // will cause the event to go back to its
-                        revertDuration: 0 //  original position after the drag
-                    });
+function listarEventos() {
+    $.ajax({
+            url: '/cita/eventos/listar/',
+            type: 'get',
+            dataType: 'json',
+            //data: {param1: 'value1'},
+        })
+        .done(function(dat) {
+            console.log("success", dat);
+            var html = "";
+            for (var i in dat) {
+                html = html +
+                    "<div data-event='" +
+                    dat[i].pk + "'class='fc-event text-center' style='background-color:" +
+                    dat[i].fields.color + "'><span class='glyphicon glyphicon-move pull-left'></span>" + dat[i].fields.title + "</div>";
+            }
+            $("#external-events").html(html);
+            $('#external-events .fc-event').each(function() {
+                // store data so the calendar knows to render an event upon drop
+                $(this).data('event', {
+                    title: $.trim($(this).text()), // use the element's text as the event title
+                    stick: true // maintain when user navigates (see docs on the renderEvent method)
                 });
-            })
-            .fail(function() {
-                console.log("error");
-            })
-            .always(function() {
-                console.log("complete");
+
+                // make the event draggable using jQuery UI
+                $(this).draggable({
+                    zIndex: 999,
+                    revert: true, // will cause the event to go back to its
+                    revertDuration: 0 //  original position after the drag
+                });
             });
-    }
+        })
+        .fail(function() {
+            console.log("error");
+        })
+        .always(function() {
+            console.log("complete");
+        });
+}
+$('#cita_edit').click(function() {
+    $('#myModalOptions').modal('hide');
+    $('#myModal').modal({
+        backdrop: 'static',
+        keyboard: false
+    });
+    var select = $('#id_cliente');
+    select.val(selectCita.cliente);
+    select.trigger("chosen:updated");
+    $('#id_veterinario').val(selectCita.veterinario);
+    $('#id_evento').val(selectCita.evento_id);
+    $('#id_date').val(moment(selectCita.start).format("YYYY-MM-DD HH:mm:ss"));
+    $('#id_descripcion').val(selectCita.descripcion);
+
+});
+
+// actualizar/
+// citas-form
 //========================================================================
 function getCookie(name) {
     var cookieValue = null;
@@ -328,35 +372,35 @@ $('#addEvent').click(function(event) {
     $('#add-events-modal').modal('show');
 });
 $('#submit-event').click(function() {
-    var formArray=$("#new-form-event").serializeArray();
+    var formArray = $("#new-form-event").serializeArray();
     var formJson = JSON.stringify(formArray);
-    if(formArray[1].value.length>4){
+    if (formArray[1].value.length > 4) {
         $.ajax({
-            url: '{% url "citas:evets_post" %}',
-            type: 'POST',
-            dataType: 'json',
-            data: {
-                t: formArray[1].value,
-                c: formArray[2].value
-            },
-        })
-        .done(function(d) {
-            var select =$("#id_evento");
-            select.append('<option value="'+d.pk+'">'+d.title+'</option>');
-            select.val(d.pk);
-            $('#add-events-modal').modal('hide');
-            listarEventos();
-        })
-        .fail(function() {
-            console.log("error");
-        })
-        .always(function() {
-            console.log("complete");
-        });
-    }else{
+                url: '{% url "citas:evets_post" %}',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    t: formArray[1].value,
+                    c: formArray[2].value
+                },
+            })
+            .done(function(d) {
+                var select = $("#id_evento");
+                select.append('<option value="' + d.pk + '">' + d.title + '</option>');
+                select.val(d.pk);
+                $('#add-events-modal').modal('hide');
+                listarEventos();
+            })
+            .fail(function() {
+                console.log("error");
+            })
+            .always(function() {
+                console.log("complete");
+            });
+    } else {
         $('#success_message_events').attr('class', 'alert alert-danger').text("Ingrese un nombre.");
     }
-    
+
 });
 </script>
 {% endblock content %}

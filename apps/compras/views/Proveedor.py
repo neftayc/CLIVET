@@ -7,19 +7,71 @@ from apps.utils.security import get_dep_objects, log_params, SecurityKey
 from django.conf import settings
 from django.contrib import messages
 from django.core.urlresolvers import reverse_lazy
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.utils.decorators import method_decorator
 from django.utils.encoding import force_text
 from django.utils.text import capfirst
 from django.utils.translation import ugettext as _
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
+import json
 
-from ..models.Proveedor  import Proveedor
+from ..models.Proveedor import Proveedor
 from ..forms.Proveedor import ProveedorForm
 
 import logging
 log = logging.getLogger(__name__)
+
+
+def GetProveedorAjax(request):
+    if request.method == 'GET' and request.is_ajax():
+        cat = Proveedor.objects.get(id=request.GET.get('pk'))
+        proveedor_json = {}
+        proveedor_json['pk'] = cat.id
+        proveedor_json['tipodoc'] = cat.tipodoc
+        proveedor_json['numdoc'] = cat.numdoc
+        proveedor_json['razon_social'] = cat.razon_social
+        proveedor_json['representante_legal'] = cat.representante_legal
+        proveedor_json['direccion'] = cat.direccion
+        proveedor_json['telefono'] = cat.telefono
+        proveedor_json['email'] = cat.email
+        proveedor_json['estado'] = cat.estado
+        data_json = json.dumps(proveedor_json)
+
+    else:
+        data_json = '{"data":"fail"}'
+    return HttpResponse(data_json, content_type='application/json')
+
+
+def PostProveedorAjax(request):
+    if request.method == 'POST' and request.is_ajax():
+        try:
+            d = Proveedor()
+            d.razon_social = request.POST.get('rs')
+            d.tipodoc = request.POST.get('td')
+            d.numdoc = request.POST.get('nd')
+            d.representante_legal = request.POST.get('rl')
+            d.direccion = request.POST.get('d')
+            if request.GET.get('t'):
+                d.telefono = request.POST.get('t')
+            if request.GET.get('q'):
+                d.email = request.POST.get('e')
+            if request.GET.get('q'):
+                d.enti_bancaria = request.POST.get('c')
+            if request.GET.get('q'):
+                d.num_cuenta = request.POST.get('nc')
+            d.save()
+            obj = Proveedor.objects.last()
+            unidad_json = {}
+            unidad_json['pk'] = obj.id
+            unidad_json['name'] = '%s %s' % (obj.numdoc, obj.razon_social)
+            data_json = json.dumps(unidad_json)
+        except Exception as e:
+            data_json = '{"data":"fail"}'
+            print(e)
+    else:
+        data_json = '{"data":"fail"}'
+    return HttpResponse(data_json, content_type='application/json')
 
 
 class ProveedorListView(ListView):

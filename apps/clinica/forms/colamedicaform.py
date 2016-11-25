@@ -16,6 +16,7 @@ from datetime import datetime
 from ..models.colamedica import ColaMedica
 from ..models.mascota import Mascota
 from apps.clivet.models.cliente import Cliente
+from apps.sad.models import User
 
 class ColaMedicaForm(forms.ModelForm):
     """Tipo Documeto Form."""
@@ -39,6 +40,9 @@ class ColaMedicaForm(forms.ModelForm):
             label=capfirst(_(u'Descripcion:')), required=True,
             help_text=u'<small class="help-error"></small> %s' % _(
                 u' '),
+        )
+        self.fields['medico'] = forms.ModelChoiceField(
+            queryset=User.objects.filter(is_veterinario=True),
         )
         self.helper = FormHelper()
         self.helper.form_show_labels = False

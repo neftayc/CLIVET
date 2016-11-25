@@ -8,30 +8,28 @@ Descripcion: Lista Tipo Documento
 {% load l10n humanize %}
 
 {% block breadcrumbs %}
-<a href="{# url 'accounts:index' #}">{% trans 'Home' %}</a>
-&rsaquo; {{ title }}
+<ol class="breadcrumb">
+  <li><a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %}</a></li>
+  <li class="active">{{ opts.verbose_name_plural|capfirst }}</li>
+</ol>
 {% endblock breadcrumbs %}
-
 {% block content_title %}
-{{ opts.verbose_name_plural|capfirst }} | <small>{{ title }}</small>
+<i class="fa fa-users"></i> Lista de {{opts.verbose_name_plural}}
 {% endblock content_title %}
-
 {% block content %}
-    <h1>Proveedores</h1>
 <script type="text/javascript">
 $(function() {
     $('table').kgrid({
         form_data : ['{{f}}', '{{q}}'],
-        form_to   : '{% url 'compras:proveedor_list' %}?f={{f}}&q={{q}}',
+        form_to   : '/compras/proveedor/listar/?f={{f}}&q={{q}}',
         order_attr: 'class=""',
-        order_to  : '{% url 'compras:proveedor_list' %}?f={{f}}&q={{q}}',
+        order_to  : '/compras/proveedor/listar/?f={{f}}&q={{q}}',
     });
 });
 </script>
-
 <div class="btn-toolbar btn-toolbar-top">
     <div class="row">
-        <div class="btn-actions">
+        <div class="btn-actions col-md-9", >
             <a href="{% url 'compras:proveedor_add' %}"
                class="btn btn-primary text-bold"
                title="Agregar Proveedor">
@@ -47,17 +45,14 @@ $(function() {
         <thead>
             <tr>
                 <th>#</th>
-                <th class="col-hidden" data-search="tipodoc" data-order="tipodoc">Tipo de documento</th>
-                <th class="col-hidden" data-search="numdoc" data-order="numdoc">N° de documento</th>
                 <th class="col-hidden" data-search="razon_social" data-order="razon_social">Razon social</th>
-                <th class="col-hidden" data-search="representante_legal" data-order="representante_legal">Representante</th>
-                <th class="col-hidden" data-search="apellidos" data-order="apellidos">Apellidos</th>
+                <th class="col-hidden" data-search="numdoc" data-order="numdoc">N° de documento</th>
+                <th class="col-hidden" data-search="representante_legal" data-order="representante_legal">Representante legal</th>
                 <th class="col-hidden" data-search="direccion" data-order="direccion">Direccion</th>
                 <th class="col-hidden" data-search="telefono" data-order="telefono">Telefono</th>
                 <th class="col-hidden" data-search="email" data-order="email">Email</th>
-                <th class="col-hidden">Entidad bancaria</th>
-                <th class="col-hidden">N° de cuenta</th>
-                <th class="col-hidden">Estado</th>
+                <th class="col-hidden" data-search="enti_bancaria" data-order="enti_bancaria">Entidad bancaria</th>
+                <th class="col-hidden" data-search="num_cuenta" data-order="num_cuenta">N° de cuenta</th>
                 <th class="btn-actions col-blocked text-center">Acción</th>
             </tr>
         </thead>
@@ -71,17 +66,14 @@ $(function() {
                     {% endif %}
                 </td>
 
-                <td>{{ d.tipodoc }}</td>
+                <td>{{ d.razon_social}}</td>               
                 <td>{{ d.numdoc }}</td>
-                <td>{{ d.razon_social}}</td>
                 <td>{{ d.representante_legal}}</td>
-                <td>{{ d.apellidos}}</td>
                 <td>{{ d.direccion}}</td>
                 <td>{{ d.telefono}}</td>
                 <td>{{ d.email}}</td>
                 <td>{{ d.enti_bancaria}}</td>
                 <td>{{ d.num_cuenta}}</td>
-                <td>{{ d.estado}}</td>
 
                 <td class="text-center">
 

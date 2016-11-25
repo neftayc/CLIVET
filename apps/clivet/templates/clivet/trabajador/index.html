@@ -41,9 +41,9 @@ $(function() {
             <tr>
                 <td>{% if is_paginated %} {{ page_obj.start_index|add:forloop.counter0 }} {% else %} {{ forloop.counter }} {% endif %}
                 </td>
-                <td>{{ d.persona.first_name }} {{d.persona.last_name}}</td>
-                <td>{{ d.persona.identity_type }}</td>
-                <td>{{ d.persona.identity_num }}</td>
+                <td>{{ d.person.first_name }} {{d.person.last_name}}</td>
+                <td>{{ d.person.identity_type }}</td>
+                <td>{{ d.person.identity_num }}</td>
                 <td class="text-center">
                     <a href="{% url 'clivet:cliente_upd' d.pk|key:'doc_upd' %}" class="btn btn-info btn-sm text-bold" title="Cambiar Cliente" rel="tooltip">
                         <i class="btn-icon-only fa fa-edit"></i>

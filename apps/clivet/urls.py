@@ -1,9 +1,7 @@
 from django.conf.urls import url
 from apps.clivet.views.main import clivet
-from .views.cliente import (
-    ClienteListView, ClienteCreateView, ClienteUpdateView,
-    ClienteDeleteView
-)
+from .views.cliente import *
+from .views.trabajador import *
 
 urlpatterns = [
     url(r'^clivet', clivet, name='clivet'),
@@ -16,4 +14,15 @@ urlpatterns = [
         name="cliente_upd"),
     url(r'^cliente/eliminar/(?P<pk>.*)/$', ClienteDeleteView.as_view(),
         name="cliente_del"),
+    url(r'^cliente/crear/ajax$', PostClienteAjax,
+        name="post_cliente_ajax"),
+    # ===================TRABAJADOR==========================
+    url(r'^trabajador/listar/$', TrabajadorListView.as_view(),
+        name="trabajador_list"),
+    url(r'^trabajador/crear/$', TrabajadorCreateView.as_view(),
+        name="trabajador_add"),
+    url(r'^trabajador/actualizar/(?P<pk>.*)/$', TrabajadorUpdateView.as_view(),
+        name="trabajador_upd"),
+    url(r'^trabajador/eliminar/(?P<pk>.*)/$', TrabajadorDeleteView.as_view(),
+        name="trabajador_del"),
 ]
