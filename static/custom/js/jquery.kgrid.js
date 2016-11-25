@@ -75,7 +75,7 @@
                             }
                             value = (opt.form_data[1] != undefined) ? opt.form_data[1] : '';
                             containerForm = '<div class="row"><div class="form-search-container '+visible+'"><form action="'+opt.form_to+'" method="get" '+opt.form_attr+' data-to="'+opt.form_container+'" class="form-inline" role="form">'+
-                            '<div class="row">'+
+                            '<div class="row col-md-12">'+
                             '<div class="col-xs-12 col-sm-3"><label class="sr-only" for="form_search_field">Campo</label><select id="form_search_field" class="form-control" required="required" name="f">'+select+'</select>'+
                             '</div>'+
 
