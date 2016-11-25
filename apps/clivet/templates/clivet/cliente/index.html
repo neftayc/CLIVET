@@ -29,10 +29,16 @@ $(function() {
     <table class="table table-bordered table-hover table-striped table-condensed table-responsive">
         <thead>
             <tr>
-                <th>#</th>
-                <th class="col-hidden" data-search="nombre" data-order="nombre">Nombres y Apellidos</th>
-                <th class="col-hidden" data-search="identity_tipe" data-order="identity_tipe">Tipo de Doc de identidad</th>
-                <th class="col-hidden" data-search="identity_num" data-order="identity_num">Número</th>
+                <th data-order="id">#</th>
+                <th class="col-hidden" data-search="persona__first_name" data-order="persona__first_name">Nombres</th>
+                <th class="col-hidden" data-search="persona__last_name" data-order="persona__last_name">Apellidos</th>
+                <th class="col-hidden" data-order="persona__identity_type">T. Doc.</th>
+                <th class="col-hidden" data-search="persona__identity_num" data-order="persona__identity_num">Número</th>
+                <th class="col-hidden" >Fecha de Nac.</th>
+                <th class="col-hidden" data-order="ciudad">Ciudad</th>
+                <th class="col-hidden" data-order="direccion">Dirección</th>
+                <th class="col-hidden">E-mail</th>
+                <th class="col-hidden" data-order="telefono">Teléfono</th>
                 <th class="btn-actions col-blocked text-center">Acción</th>
             </tr>
         </thead>
@@ -41,9 +47,20 @@ $(function() {
             <tr>
                 <td>{% if is_paginated %} {{ page_obj.start_index|add:forloop.counter0 }} {% else %} {{ forloop.counter }} {% endif %}
                 </td>
-                <td>{{ d.persona.first_name }} {{d.persona.last_name}}</td>
+                <td>{{ d.persona.first_name }}</td>
+                <td>{{d.persona.last_name}}</td>
                 <td>{{ d.persona.identity_type }}</td>
                 <td>{{ d.persona.identity_num }}</td>
+                <td>{{ d.persona.birth_date|date:'Y-m-d' }}</td>
+                <td>{{ d.ciudad }}</td>
+                <td>{{ d.direccion }}</td>
+                <td>{{ d.email }}</td>
+                {% if d.telefono %}
+                <td>{{ d.telefono }}</td>
+                {% else %}
+                <td></td>
+                {% endif %}
+                
                 <td class="text-center">
                     <a href="{% url 'clivet:cliente_upd' d.pk|key:'doc_upd' %}" class="btn btn-info btn-sm text-bold" title="Cambiar Cliente" rel="tooltip">
                         <i class="btn-icon-only fa fa-edit"></i>

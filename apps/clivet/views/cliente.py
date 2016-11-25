@@ -151,7 +151,9 @@ class ClienteCreateView(CreateView):
             # print(form.cleaned_data.get("numero"))
             persona.first_name = self.request.POST.get("nombre")
             persona.last_name = self.request.POST.get("apellidos")
-            persona.birth_date = self.request.POST.get("fecha_de_nacimiento")
+            if len(self.request.POST.get("fecha_de_nacimiento")) > 0:
+                persona.birth_date = self.request.POST.get(
+                    "fecha_de_nacimiento")
             persona.photo = self.request.POST.get("apellido")
             persona.identity_num = self.request.POST.get("numero")
             persona.identity_type = self.request.POST.get("tipo_documento")
@@ -212,8 +214,9 @@ class ClienteUpdateView(UpdateView):
                     "nombre")
                 self.object.persona.last_name = self.request.POST.get(
                     "apellidos")
-                self.object.persona.birth_date = self.request.POST.get(
-                    "fecha_de_nacimiento")
+                if len(self.request.POST.get("fecha_de_nacimiento")) > 0:
+                    self.object.persona.birth_date = self.request.POST.get(
+                        "fecha_de_nacimiento")
                 self.object.persona.identity_num = self.request.POST.get(
                     "numero")
                 self.object.persona.identity_type = self.request.POST.get(
