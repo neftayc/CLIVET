@@ -1,5 +1,4 @@
 from django.db import models
-from django.core.files import File
 
 from apps.compras.models.Proveedor import Proveedor
 from apps.sad.models import User
@@ -9,10 +8,11 @@ class Compra(models.Model):
 
     fe_compra = models.DateTimeField('Fecha de compra',
                                      auto_now_add=True)
-    #comprobante = models.ImageField('Comprobante', upload_to='/tmp')
+    # comprobante = models.ImageField(
+    #     upload_to='comprobante_compra',
+    #     verbose_name='Seleccione el archivo', blank=False, null=False)
     comprobante = models.ImageField(
-        upload_to='comprobante_compra',
-        verbose_name='Seleccione el archivo', blank=False, null=False)
+        upload_to='persons')
     total = models.DecimalField(
         'Total', max_digits=20, decimal_places=2, blank=True, null=True)
     proveedor = models.ForeignKey(Proveedor)

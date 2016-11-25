@@ -102,11 +102,7 @@ class CompraCreateView(CreateView):
         return context
 
     def form_valid(self, form):
-        """"Empresa Crete View  form valid."""
-        print("daskjhdkahskdhasjkhdkjashkjdhaksjhdkjashkjdhaksjh")
         self.object = form.save(commit=False)
-        ##sid = transaction.savepoint()
-        print("daskjhdkahskdhasjkhdkjashkjdhaksjhdkjashkjdhaksjh")
         try:
             compra = json.loads(self.request.POST.get('data_compra'))
             print(compra)

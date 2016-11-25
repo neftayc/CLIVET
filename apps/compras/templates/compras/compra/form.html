@@ -67,7 +67,7 @@ $(function() {
                 </div>
                 <div class="row center-block">
                     <div class="col-md-6">
-                        {{ form.comprobante|as_crispy_field }}
+                        {{ form.comprobante}}
                     </div>
                 </div>
                 <div class="center-block">
@@ -76,6 +76,7 @@ $(function() {
             </div>
         </div>
         {{ form.data_compra}}
+        {{form.errors}}
     </form>
 </div>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -490,6 +491,34 @@ $('#save-proveedor').click(function() {
             });
     } else {
         $('#success_message_proveedor').attr('class', 'alert alert-danger').text("Revise los datos ingresados nuevamente.");
+    }
+});
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');
+
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
     }
 });
 </script>
