@@ -12,7 +12,7 @@ class Compra(models.Model):
     #     upload_to='comprobante_compra',
     #     verbose_name='Seleccione el archivo', blank=False, null=False)
     comprobante = models.ImageField(
-        upload_to='persons')
+        upload_to='persons', blank=True, null=True)
     total = models.DecimalField(
         'Total', max_digits=20, decimal_places=2, blank=True, null=True)
     proveedor = models.ForeignKey(Proveedor)

@@ -47,7 +47,7 @@ class CompraListView(ListView):
     def get_queryset(self):
         """Tipo Doc List Queryset."""
         self.o = empty(self.request, 'o', '-id')
-        self.f = empty(self.request, 'f', 'total')
+        self.f = empty(self.request, 'f', 'proveedor__razon_social')
         self.q = empty(self.request, 'q', '')
         column_contains = u'%s__%s' % (self.f, 'contains')
 

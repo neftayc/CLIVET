@@ -75,17 +75,17 @@
                             }
                             value = (opt.form_data[1] != undefined) ? opt.form_data[1] : '';
                             containerForm = '<div class="row"><div class="form-search-container '+visible+'"><form action="'+opt.form_to+'" method="get" '+opt.form_attr+' data-to="'+opt.form_container+'" class="form-inline" role="form">'+
-                            '<div class="row">'+
+                            '<div class="busqueda-container">'+
                             '<div class="col-xs-12 col-sm-3"><label class="sr-only" for="form_search_field">Campo</label><select id="form_search_field" class="form-control" required="required" name="f">'+select+'</select>'+
                             '</div>'+
 
                                 '<div class="col-lg-6 col-xs-12 col-sm-3">'+
                                 '<div class="input-group">'+
 
-                                '<input id="form_search_value" name="q" type="text" value="'+value+'" class="form-control" placeholder="'+gettext('Word or text')+'" />'+
+                                '<input id="form_search_value" type="search" name="q" type="text" value="'+value+'" class="form-control" placeholder="'+gettext('Word or text')+'" />'+
                                 ''+
                                 '<span class="input-group-btn">'+
-                                '<button type="submit" class="btn btn-info"><i class="fa fa-search"></i></button>'+
+                                '<button type="submit" class="btn btn-success"><i class="fa fa-search"></i></button>'+
                                 ''+
                                 '</span>'+
 
@@ -119,9 +119,8 @@
                             //container.append('<hr class="divider">');
 
                             if(opt.form_show) {
-                                container.find('.btn-actions').append('<button class="btn btn-info text-bold btn-form-search"><i class="fa fa-search"></i> <span class="hidden-xs">'+gettext('Search')+'</span></button>');
+                                container.find('.btn-actions').append('<button class="btn btn-info buscarde_talle_compras text-bold btn-form-search"><i class="fa fa-search"></i> <span class="hidden-xs">'+gettext('Search')+'</span></button>');
                                 container.append(containerForm);
-                                container.append('<hr class="divider '+visible+'">');
                             }
 
                         }

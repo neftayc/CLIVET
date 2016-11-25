@@ -26,8 +26,8 @@ class CompraForm(forms.ModelForm):
                 attrs={'class': 'chosen-select',
                        'data-placeholder': 'Choose a Country'}),
             'total': forms.TextInput(attrs={'class': 'form-control text-left'}),
-            'comprobante': forms.ClearableFileInput(), }
+            'comprobante': forms.ClearableFileInput()}
 
     def __init__(self, *args, **kwargs):
         super(CompraForm, self).__init__(*args, **kwargs)
-        self.fields['proveedor'].empty_label = None
+        self.fields['proveedor'].empty_label = 'Buscar...'

@@ -1,5 +1,4 @@
-{% extends "main/dashboard.html" %} {% load i18n app_security staticfiles %} {% load l10n humanize %} {% block breadcrumbs %}
-{% block style %}
+{% extends "main/dashboard.html" %} {% load i18n app_security staticfiles %} {% load l10n humanize %} {% block breadcrumbs %} {% block style %}
 <link href="{% static 'clivet/compras.css' %}" rel="stylesheet"> {% endblock style %}
 <ol class="breadcrumb">
     <li><a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %}</a></li>
@@ -10,10 +9,10 @@
 <script type="text/javascript">
 $(function() {
     $('table').kgrid({
-        form_data : ['{{f}}', '{{q}}'],
-        form_to   : '{% url 'compras:compra_list' %}?f={{f}}&q={{q}}',
+        form_data: ['{{f}}', '{{q}}'],
+        form_to: '{% url "compras:compra_list" %}?f={{f}}&q={{q}}',
         order_attr: 'class=""',
-        order_to  : '{% url 'compras:compra_list' %}?f={{f}}&q={{q}}',
+        order_to: '{% url "compras:compra_list" %}?f={{f}}&q={{q}}',
     });
 });
 </script>
@@ -32,13 +31,13 @@ $(function() {
         <table class="table table-condensed">
             <thead>
                 <tr>
-                    <th  width="5%"  class="tr-title-reporte text-center" data-search="#">#</th>
-                    <th  width="35%" class="tr-title-reporte text-left" data-search="proveedor" >Proveedor</th>
-                    <th  width="20%" class="tr-title-reporte text-center" data-search="fe_compra" >Fecha de compra</th>
-                    <th  width="5%" class="tr-title-reporte text-center" data-search="trabajador" >Trabajador</th>
-                    <th  width="5%" class="tr-title-reporte text-center" data-search="comprobante" >Comprobante</th>
-                    <th width="10%"  class="tr-title-reporte text-center" data-search="total">Total</th>
-                    <th width="5%"  class="btn-actions col-blocked text-center tr-title-reporte text-center">Acción</th>
+                    <th width="5%" class="tr-title-reporte text-center">#</th>
+                    <th width="35%" class="tr-title-reporte text-left" data-search="proveedor__razon_social">Proveedor</th>
+                    <th width="20%" class="tr-title-reporte text-center">Fecha de compra</th>
+                    <th width="5%" class="tr-title-reporte text-center "data-search="usuario__username">Trabajador</th>
+                    <th width="5%" class="tr-title-reporte text-center">Comprobante</th>
+                    <th width="10%" class="tr-title-reporte text-center">Total</th>
+                    <th width="5%" class="btn-actions col-blocked text-center tr-title-reporte text-center">Acción</th>
                 </tr>
             </thead>
             <tbody>
@@ -46,11 +45,11 @@ $(function() {
                 <tr>
                     <td class="td-reporte text-center">{% if is_paginated %} {{ page_obj.start_index|add:forloop.counter0 }} {% else %} {{ forloop.counter }} {% endif %}
                     </td>
-                    <td  class="td-reporte text-left"> {{ d.proveedor.razon_social}} ({{ d.proveedor.representante_legal}})</td>
-                    <td  class="td-reporte text-center">{{ d.fe_compra|date:'Y-m-d' }}</td>
-                    <td  class="td-reporte text-center">{{ d.usuario}}</td>
-                    <td  class="td-reporte text-center">{{ d.comprobante }}</td>
-                    <td  class="td-reporte text-right">{{ d.total}}</td>
+                    <td class="td-reporte text-left"> {{ d.proveedor.razon_social}} ({{ d.proveedor.representante_legal}})</td>
+                    <td class="td-reporte text-center">{{ d.fe_compra|date:'Y-m-d' }}</td>
+                    <td class="td-reporte text-center">{{ d.usuario}}</td>
+                    <td class="td-reporte text-center">{{ d.comprobante }}</td>
+                    <td class="td-reporte text-right">{{ d.total}}</td>
                     <td class="text-center">
                         <a href="/compras/detalle-compra/listar/{{d.pk}}/" class="btn btn-lg btn-success"><span class="glyphicon glyphicon-th-list"></span></a>
                     </td>
