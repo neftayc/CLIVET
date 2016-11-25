@@ -40,7 +40,7 @@
                             container = table.prev().hasClass('btn-toolbar') ? table.prev() : $('<div class="btn-toolbar btn-toolbar-top"></div>');
                         }
 
-                        var hiddenCol = $('<div class="pull-right"><div class="btn-group"><button class="btn btn-default btn-only dropdown-toggle" data-toggle="dropdown"><span class="hidden-xs"> '+gettext('COLUMNS')+' <i class="caret"></i></span><span class="visible-xs"><i class="fa fa-th"></i></span></button><ul class="dropdown-menu pull-right" /></div></div>');
+                        var hiddenCol = $('<div class="pull-right col-md-3"><div class="btn-group pull-right"><button class="btn btn-default btn-only dropdown-toggle" data-toggle="dropdown"><span class="hidden-xs"> '+gettext('COLUMNS')+' <i class="caret"></i></span><span class="visible-xs"><i class="fa fa-th"></i></span></button><ul class="dropdown-menu pull-right" /></div></div>');
 
                         //Variable para almacenar las columnas responsivas
                         var th_responsive = [];

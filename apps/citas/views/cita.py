@@ -90,7 +90,7 @@ class CitaUpdateView(UpdateView):
 
     model = Cita
     form_class = CitaForm
-    template_name = "cita/form.html"
+    template_name = "cita/empty.html"
     success_url = reverse_lazy("citas:cita_add")
 
     @method_decorator(permission_resource_required)
@@ -115,25 +115,27 @@ class CitaUpdateView(UpdateView):
         """Cita Update View context data."""
         context = super(CitaUpdateView,
                         self).get_context_data(**kwargs)
-        context['opts'] = self.model._meta
-        # context['cmi'] = 'Cita'
-        context['title'] = ('Actualizar %s') % ('Cita')
         return context
 
     def form_valid(self, form):
         """Cita Update View form_valid."""
-        self.object = form.save(commit=False)
+        self.object = form.save(commit=True)
 
-        self.object.usuario = self.request.user
-
-        msg = ('%(name)s "%(obj)s" fue cambiado satisfacoriamente.') % {
+        msg = _(' %(name)s "%(obj)s" fue actualizado satisfactoriamente.') % {
             'name': capfirst(force_text(self.model._meta.verbose_name)),
             'obj': force_text(self.object)
         }
-        if self.object.id:
-            messages.success(self.request, msg)
-            log.warning(msg, extra=log_params(self.request))
+
+        messages.success(self.request, msg)
+        log.warning(msg, extra=log_params(self.request))
         return super(CitaUpdateView, self).form_valid(form)
+
+    def get_initial(self):
+        context = super(CitaUpdateView, self).get_initial()
+        context = context.copy()
+        context['date'] = self.object.date.strftime("%Y-%m-%d %H:%M:%S")
+
+        return context
 
 
 class CitaDeleteView(DeleteView):
@@ -142,11 +144,28 @@ class CitaDeleteView(DeleteView):
     model = Cita
     success_url = reverse_lazy('citas:cita_add')
 
+    @method_decorator(permission_resource_required)
+    def dispatch(self, request, *args, **kwargs):
+        """Empresa Delete View dispatch."""
+        key = self.kwargs['pk']
+        pk = SecurityKey.is_valid_key(request, key, 'doc_del')
+        if not pk:
+            return HttpResponseRedirect(self.success_url)
+        self.kwargs['pk'] = pk
+        try:
+            self.get_object()
+        except Exception as e:
+            messages.error(self.request, e)
+            log.warning(force_text(e), extra=log_params(self.request))
+            return HttpResponseRedirect(self.success_url)
+        return super(CitaDeleteView,
+                     self).dispatch(request, *args, **kwargs)
+
     def delete(self, request, *args, **kwargs):
         u"""
-        Cita Delete View delte.
+        Empresa Delete View delte.
 
-        Función para eliminar la Cita sobre un metodo que verifica las
+        Función para eliminar la empresa sobre un metodo que verifica las
         dependencias de que tiene la tabla mostrando un mensaje de validacion.
         """
         try:
@@ -166,7 +185,7 @@ class CitaDeleteView(DeleteView):
 
             d.delete()
             msg = _(
-                ' %(name)s "%(obj)s" fue eliminado satisfactorialmente.') % {
+                ' %(name)s "%(obj)s" fuel eliminado satisfactorialmente.') % {
                 'name': capfirst(force_text(self.model._meta.verbose_name)),
                 'obj': force_text(d)
             }
@@ -179,7 +198,7 @@ class CitaDeleteView(DeleteView):
         return HttpResponseRedirect(self.success_url)
 
     def get(self, request, *args, **kwargs):
-        """Cita Delete View get."""
+        """Empresa Delete View get."""
         return self.delete(request, *args, **kwargs)
 
 
@@ -200,6 +219,8 @@ def GetCitaAjax(request):
                 cita_json['veterinario'] = cita.veterinario.id
                 cita_json['cliente'] = cita.cliente.id
                 cita_json['cliente_nombre'] = cita.cliente.persona.first_name
+                cita_json['pke'] = SecurityKey.get_key(cita.pk, 'doc_upd')
+                cita_json['pkd'] = SecurityKey.get_key(cita.pk, 'doc_del')
                 if cita.veterinario.person:
                     cita_json['veterinario_nombre'] = "%s %s" % (cita.veterinario.person.first_name,
                                                                  cita.veterinario.person.last_name)

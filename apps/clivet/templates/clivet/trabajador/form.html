@@ -1,0 +1,38 @@
+{% extends "main/dashboard.html" %}
+{% load l10n i18n%}
+{% load crispy_forms_tags %}
+{% block breadcrumbs %}
+<ol class="breadcrumb">
+  <li><a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %}</a></li>
+  <li><a href="{% url 'clivet:cliente_list' %}">{{ opts.verbose_name_plural|capfirst }}</a></li>
+  <li class="active">{{ title }}</li>
+</ol>
+{% endblock breadcrumbs %}
+
+{% block content_title %}
+<i class="fa fa-user"></i> {{ title }}
+{% endblock content_title %}
+{% block content %}
+
+ <form action="" method="post">
+    {% csrf_token %}
+    {% crispy form %}
+    </form>
+
+{% endblock %}
+
+{% block extrajs %}
+{{ block.super }}
+<script type="text/javascript">
+$('#id_fecha_de_nacimiento').datetimepicker({
+	format: 'YYYY-MM-DD',
+		//format: 'YYYY-MM-DD hh:mm:ss', //pata datatimes
+		language: 'es',
+		pickTime: false,
+		//showMeridian: true,
+		autoclose: true,
+		todayHighlight: true,
+	});
+
+</script>
+{% endblock extrajs %}

@@ -15,12 +15,11 @@ from django.core.exceptions import ValidationError
 from django.core.exceptions import NON_FIELD_ERRORS
 import datetime
 # models
-from django.contrib.auth.models import AbstractUser# managers
+from django.contrib.auth.models import AbstractUser  # managers
 from .managers import UserManager
 from apps.params.models import Person
 from django.contrib.auth.models import Group, Permission
 from apps.space.models import Solution, Association, Enterprise, Headquar
-
 
 
 # others
@@ -56,6 +55,7 @@ class User(AbstractUser):
     # comentar desde aqui
     last_headquar_id = models.CharField(max_length=50, null=True, blank=True)
     last_module_id = models.CharField(max_length=50, null=True, blank=True)
+    is_veterinario = models.BooleanField(default=False)
     person = models.OneToOneField(
         Person, verbose_name=_('Person'), null=True, blank=True,
         # unique=True OneToOneField ya es unico
@@ -68,7 +68,7 @@ class User(AbstractUser):
     objects = UserManager()  # override the default manager
 
     def __str__(self):
-        return self.username
+        return '%s %s' % (self.first_name, self.last_name)
 
     '''
     def validate_unique(self, exclude=None):
