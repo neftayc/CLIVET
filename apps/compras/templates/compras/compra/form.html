@@ -12,66 +12,86 @@ $(function() {
     $('.chosen-select').chosen();
 });
 </script>
-<div class=" container-fluid panel panel-default">
+<div>
     <form rule="" action="" method="post">{% csrf_token %}
-        <div class="panel row panel-heading panel-titulo-detalle">
-            <div class="col-md-1 ">
-                <p class="titulo-busqueda"><span class="glyphicon glyphicon-user"></span>Proveedor</p>
-            </div>
-            <div class="col-md-4 proveedor-buscar">
-                {{ form.proveedor}} {{ form.proveedor.errors}}
-            </div>
-            <div class="col-md-6 panel-titulo-detalle " id="proveedor-info">
-            </div>
-            <div class="col-md-1 addProveedor" id='addProveedor'>
-                <a type="search" class="btn nuevo-cliente btn-lg ">Nuevo</a>
+        <div class="panel">
+            <div class="panel-heading panel-titulo-detalle">
+                <div class="row">
+                    <div class="col-md-1 ">
+                        <span class="titulo-busqueda"><i class="fa fa-user"></i>Proveedor</span>
+                    </div>
+                    <div class="col-md-4 proveedor-buscar">
+                        {{ form.proveedor}}
+                        <span class="text-danger"> {{ form.proveedor.errors}}</span>
+                    </div>
+                    <div class="col-md-6 panel-titulo-detalle " id="proveedor-info">
+                    </div>
+                    <div class="col-md-1 addProveedor" id='addProveedor'>
+                        <a type="search" class="btn nuevo-cliente btn-lg ">Nuevo</a>
+                    </div>       
+                </div>
+                
             </div>
         </div>
-        <div class="row panel">
-            <div class="col-md-8 ">
-                <div class="panel-heading row panel-titulo-detalle">
-                    <div class="alert col-md-7 col-md-push-7 alerta-ventas" id="success-alert">
-                    </div>
-                    <span class="glyphicon glyphicon-shopping-cart icon-producto titulo-busqueda label-add-producto col-md-1" aria-hidden="true"></span> {{ form.producto}}
-                    <div class="col-md-2">
-                        <button id="addProducto" class="btn btn-lg nuevo-cliente ">Nuevo</button>
-                    </div>
-                </div>
-                <div class="panel-body ">
-                    <table class="table table-condensed">
-                        <thead>
-                            <tr>
-                                <th class="text-center th-carrito">Cantidad</th>
-                                <th class="text-center th-carrito">Producto</th>
-                                <th class="text-center th-carrito">Precio unitario</th>
-                                <th class="text-center th-carrito">Precio total</th>
-                                <th class="text-center th-carrito">Opciones</th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                        </tfoot>
-                        <tbody id="tabla_producto">
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="col-md-4 panel panel-body  container-resumen">
-                <p class="text-center"><span class="glyphicon glyphicon-shopping-cart btn-lg" aria-hidden="true"></span>Resumen de Compra Realizada</p>
-                <div class="row center-block">
-                    <div class="col-md-4">
-                        <p class="label-resumen-compras">Total</p>
-                    </div>
-                    <div class="col-md-8">
-                        <p class="text-right label-resumen-compras">S/.<span id="r_total">00.00</span></p>
-                    </div>
-                </div>
-                <div class="row center-block">
-                    <div class="col-md-6">
-                        {{ form.comprobante}}
+        <div class="">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="panel">
+                        <div class="panel-heading">
+                             <div class="panel-heading row panel-titulo-detalle">
+                                <div class="alert col-md-7 col-md-push-7 alerta-ventas" id="success-alert">
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <span class="glyphicon glyphicon-shopping-cart icon-producto titulo-busqueda label-add-producto col-md-1" aria-hidden="true"></span> <span class="col-md-11">{{ form.producto}}</span>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button id="addProducto" class="btn btn-lg nuevo-cliente "><i class="fa fa-plus"></i> Nuevo P.</button>
+                                    </div>
+                                </div>
+                            </div>                           
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center th-carrito">Cantidad</th>
+                                        <th class="text-center th-carrito">Producto</th>
+                                        <th class="text-center th-carrito">Precio unitario</th>
+                                        <th class="text-center th-carrito">Precio total</th>
+                                        <th class="text-center th-carrito">Opciones</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                </tfoot>
+                                <tbody id="tabla_producto">
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-                <div class="center-block">
-                    <button id="btn_pagar" type="submit" name='form' class="col-md-12 pagar-button btn-lg"> Comprar</button>
+                <div class="col-md-4">
+                    <div class="panel">
+                        <div class="panel-body  container-resumen">
+                            <p class="text-center"><span class="glyphicon glyphicon-shopping-cart btn-lg" aria-hidden="true"></span>Resumen de Compra Realizada</p>
+                            <div class="row center-block">
+                                <div class="col-md-4">
+                                    <p class="label-resumen-compras">Total</p>
+                                </div>
+                                <div class="col-md-8">
+                                    <p class="text-right label-resumen-compras">S/.<span id="r_total">00.00</span></p>
+                                </div>
+                            </div>
+                            <div class="row center-block">
+                                <div class="col-md-6">
+                                    {{ form.comprobante}}
+                                </div>
+                            </div>
+                            <div class="center-block">
+                                <button id="btn_pagar" type="submit" name='form' class="col-md-12 pagar-button btn-lg"> Comprar</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -179,7 +199,7 @@ $(function() {
             </div>
             <div class="modal-footer">
                 <div class="form-group">
-                    <div class="controls ">
+                    <div class="controls">
                         <button type="submit" name="submit" class="btn btn-primary text-bold" id="save-proveedor" title="Grabar">
                             <i class="btn-icon-onlyx fa fa-save"></i> <span class="hidden-xsx"> Grabar</span>
                         </button>
