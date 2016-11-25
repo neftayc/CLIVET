@@ -15,7 +15,7 @@ from django.utils.translation import ugettext as _
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 
-from ..forms.historiaform import HistoriaForm, MascotaHistoriDetailForm, HistoriaMascotaForm
+from ..forms.historiaform import MascotaHistoriDetailForm, HistoriaMascotaForm
 
 from ..models.historia import Historial
 from ..models.mascota import Mascota
@@ -72,158 +72,6 @@ class HistoriaListView(ListView):
 
         return context
 
-class HistoriaCreateView(CreateView):
-    """Tipo Documento Identidad."""
-
-    model = Historial
-    form_class = HistoriaForm
-    template_name = "clinica/form/historia.html"
-    success_url = reverse_lazy("clinica:listar_historia")
-
-    @method_decorator(permission_resource_required)
-    def dispatch(self, request, *args, **kwargs):
-        """dispatch."""
-        return super(HistoriaCreateView,
-                     self).dispatch(request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context = super(HistoriaCreateView,
-                        self).get_context_data(**kwargs)
-        context['opts'] = self.model._meta
-        # context['cmi'] = 'tipodoc'
-        context['title'] = ('Registro %s') % ('de historias clinicas')
-        context['subtitle'] = ('Registrando %s') % ('nueva historia')
-        return context
-
-    def form_valid(self, form):
-        """"Empresa Crete View  form valid."""
-        self.object = form.save(commit=True)
-
-        msg = _(' %(name)s "%(obj)s" fue creado satisfactoriamente.') % {
-            'name': capfirst(force_text(self.model._meta.verbose_name)),
-            'obj': force_text(self.object)
-        }
-
-        messages.success(self.request, msg)
-        log.warning(msg, extra=log_params(self.request))
-        return super(HistoriaCreateView, self).form_valid(form)
-
-
-class HistoriaUpdateView(UpdateView):
-    """Tipo Documento Update View."""
-
-    model = Historial
-    form_class = HistoriaForm
-    template_name = "clinica/model.html"
-    success_url = reverse_lazy("clinica:listar_historia")
-
-    @method_decorator(permission_resource_required)
-    def dispatch(self, request, *args, **kwargs):
-        """Tipo Documento Create View dispatch."""
-        key = self.kwargs.get(self.pk_url_kwarg, None)
-        pk = SecurityKey.is_valid_key(request, key, 'doc_upd')
-        if not pk:
-            return HttpResponseRedirect(self.success_url)
-        self.kwargs['pk'] = pk
-        try:
-            self.get_object()
-        except Exception as e:
-            messages.error(self.request, e)
-            log.warning(force_text(e), extra=log_params(self.request))
-            return HttpResponseRedirect(self.success_url)
-
-        return super(HistoriaUpdateView,
-                     self).dispatch(request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        """Tipo Documento Update View context data."""
-        context = super(HistoriaUpdateView,
-                        self).get_context_data(**kwargs)
-        context['opts'] = self.model._meta
-        # context['cmi'] = 'empresa'
-        context['title'] = ('Actualizar %s') % ('Tipo Documento')
-        return context
-
-    def form_valid(self, form):
-        """Tipo Documento Update View form_valid."""
-        self.object = form.save(commit=False)
-
-        self.object.usuario = self.request.user
-
-        msg = ('%(name)s "%(obj)s" fue cambiado satisfacoriamente.') % {
-            'name': capfirst(force_text(self.model._meta.verbose_name)),
-            'obj': force_text(self.object)
-        }
-        if self.object.id:
-            messages.success(self.request, msg)
-            log.warning(msg, extra=log_params(self.request))
-        return super(HistoriaUpdateView, self).form_valid(form)
-
-
-class HistoriaDeleteView(DeleteView):
-    """Empresa Delete View."""
-
-    model = Historial
-    success_url = reverse_lazy('clinica:listar_historia')
-
-    @method_decorator(permission_resource_required)
-    def dispatch(self, request, *args, **kwargs):
-        """Empresa Delete View dispatch."""
-        key = self.kwargs['pk']
-        pk = SecurityKey.is_valid_key(request, key, 'doc_del')
-        if not pk:
-            return HttpResponseRedirect(self.success_url)
-        self.kwargs['pk'] = pk
-        try:
-            self.get_object()
-        except Exception as e:
-            messages.error(self.request, e)
-            log.warning(force_text(e), extra=log_params(self.request))
-            return HttpResponseRedirect(self.success_url)
-        return super(HistoriaDeleteView,
-                     self).dispatch(request, *args, **kwargs)
-
-    def delete(self, request, *args, **kwargs):
-        """
-        Empresa Delete View delte.
-        Función para eliminar la empresa sobre un metodo que verifica las
-        dependencias de que tiene la tabla mostrando un mensaje de validacion.
-        """
-        try:
-            d = self.get_object()
-            deps, msg = get_dep_objects(d)
-            print(deps)
-            if deps:
-                messages.warning(
-                    self.request,
-                    ('No se puede Eliminar %(name)s') %
-                    {
-                        "name": capfirst(force_text(
-                            self.model._meta.verbose_name)
-                        ) + ' "' + force_text(d) + '"'
-                    })
-                raise Exception(msg)
-
-            d.delete()
-            msg = _(
-                ' %(name)s "%(obj)s" fuel eliminado satisfactorialmente.') % {
-                'name': capfirst(force_text(self.model._meta.verbose_name)),
-                'obj': force_text(d)
-            }
-            if not d.id:
-                messages.success(self.request, msg)
-                log.warning(msg, extra=log_params(self.request))
-        except Exception as e:
-            messages.error(request, e)
-            log.warning(force_text(e), extra=log_params(self.request))
-        return HttpResponseRedirect(self.success_url)
-
-    def get(self, request, *args, **kwargs):
-        """Empresa Delete View get."""
-        return self.delete(request, *args, **kwargs)
-
-
-
 class HistoriaMascotaCreateView(CreateView):
     """  """
     model = Historial
@@ -246,6 +94,8 @@ class HistoriaMascotaCreateView(CreateView):
         context = super(HistoriaMascotaCreateView, self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
         context['cmi'] = 'historia'
+        context['datos']= Historial.objects.all()
+        context['cantidad']=context['datos'].count()+1
         context['title'] = _('Add %s') % capfirst(_('historia'))
         context['subtitle'] = _('Registro de %s') % capfirst(_('historia clinica'))
         return context
@@ -318,7 +168,6 @@ class HistoriaMascotaCreateView(CreateView):
             messages.success(self.request, e)
             log.warning(force_text(e), extra=log_params(self.request))
             return super(HistoriaMascotaCreateView, self).form_invalid(form)
-
 
 class HistoriaMascotaDetailView(generic.DetailView):
     model = Historial

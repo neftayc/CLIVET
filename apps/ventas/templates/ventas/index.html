@@ -5,6 +5,7 @@
     <li class="active"> {{ opts.verbose_name_plural|capfirst }}</li>
 </ol>
 {% endblock breadcrumbs %} {% block content_title %} {{title}}{% endblock content_title %} {% block content %}
+
 <div class="container-fluid  ">
     <div class="row panel panel-default">
         <div class="panel panel-info col-md-8">
@@ -105,8 +106,8 @@
                         </div>
                         <div class="col-md-8">
                             <div id="div_id_apellidos" class="form-group">
-                                <label for="id_apellidos" class="control-label ">
-                                    Apellidos
+                                <label for="id_apellidos" class="control-label requiredField">
+                                    Apellidos <span class="asteriskField">*</span> 
                                 </label>
                                 <div class="controls ">
                                     <input class="textinput textInput form-control" id="id_apellidos" maxlength="100" name="apellidos" placeholder="Ingrese sus apellidos" type="text"> </div>
@@ -514,7 +515,7 @@ $('#addCliente').click(function(event) {
 $('#save-cliente').click(function() {
     var formArray = $("#new-form-cliente").serializeArray();
     var formJson = JSON.stringify(formArray);
-    if (formArray[1].value.trim().length > 0) {
+    if (formArray[1].value.trim().length > 0&&formArray[2].value.trim().length > 0) {
         var data={};
         data[formArray[1].name]=formArray[1].value;
         data[formArray[2].name]=formArray[2].value;
@@ -540,6 +541,9 @@ $('#save-cliente').click(function() {
                 select.val(d.pk);
                 //select.trigger("chosen:updated");
                 $('#add-new-cliente').modal('hide');
+                $('#id_cliente').val(d.name);
+                Venta.cliente=d.pk;
+                $("#id_data_venta").val(JSON.stringify(Venta));
                 }
             })
             .fail(function() {

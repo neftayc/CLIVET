@@ -98,7 +98,7 @@ class MascotaForm(forms.ModelForm):
                     Field('nombre', placeholder="Introdusca el nombre de la mascota", css_class='input-required'),
                 css_class="col-md-4"),
                 Div(
-                    Field('dueño', css_class="input-required"),
+                    Field('dueño', css_class="chosen-select select-medica", tabindex="6"),
                 css_class='col-md-4'),
                 Div(
                     Field('fecha_nacimiento', css_class='input-datex'),

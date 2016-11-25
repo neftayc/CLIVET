@@ -12,6 +12,6 @@ urlpatterns = [
         name="cita_add"),
     url(r'^actualizar/(?P<pk>.*)/$', CitaUpdateView.as_view(),
         name="cita_upd"),
-    url(r'^eliminar/(?P<pk>)/$', CitaDeleteView.as_view(),
+    url(r'^eliminar/(?P<pk>.*)/$', CitaDeleteView.as_view(),
         name="cita_del"),
 ]

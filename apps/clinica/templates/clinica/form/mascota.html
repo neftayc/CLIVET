@@ -3,6 +3,7 @@
 {% load l10n  %}
 
 {% block style %}
+<link href="{% static 'bootstrap-chosen-master/bootstrap-chosen.css' %}" rel="stylesheet">
 <style media="screen">
 	.form-mascota input, .form-mascota select, .form-mascota textarea{
 		border: solid 1px #afd2ce;
@@ -41,7 +42,16 @@
 {% block content_title %}
 <i class="fa fa-paw"></i> {{ subtitle }}
 {% endblock content_title %}
+{% block headjs %}
 
+<script src="{% static 'bootstrap-chosen-master/chosen.jquery.js' %}"></script>
+<script>
+  $(function() {
+	$('.chosen-select').chosen();
+	$('.chosen-select-deselect').chosen({ allow_single_deselect: true });
+  });
+</script>
+{% endblock headjs %}
 {% block content %}
 
 {% crispy form %}
@@ -54,6 +64,8 @@
 
 
 <script type="text/javascript">
+$("#id_dueño option:contains(---------)").remove();
+$('#id_dueño').append('<option value selected="selected" diseabled>Buscar..</option>');
 
 $('#id_nombre').on('change', function(){
 	var id = $(this).val();

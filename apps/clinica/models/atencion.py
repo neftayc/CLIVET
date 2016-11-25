@@ -6,20 +6,11 @@ from django.dispatch import receiver
 from django.db.models import signals
 from unicodedata import normalize
 from django.core.exceptions import ValidationError
+#Impors  Models
 from ..models.colamedica import ColaMedica
-from ..models.notas import Notas
 from apps.ventas.models.Producto import Producto
 from ..models.mascota import Mascota
 from ..models.consulta import Diagnostico, Tratamiento, Pruebas, HallasgosClinicos
-
-
-ATENCIONES = (
-    ('consulta', "Consulta General"),
-    ('vacuna', "Aplicar Vacuna"),
-    ('antiparasitario', "Aplicar Antiparasitario"),
-    ('antipulgas', "Aplicar Antipulga")
-)
-
 
 # Create your models here.
 class Atencion(models.Model):

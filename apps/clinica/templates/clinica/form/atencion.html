@@ -6,14 +6,76 @@
 {% block style %}
 <link href="{% static 'bootstrap-chosen-master/bootstrap-chosen.css' %}" rel="stylesheet">
 <style media="screen">
+    .hola{
+        margin-bottom: 100px;
+    }
+    #div_id_vacuna .chosen-container-multi .chosen-choices{
+        border: 1px solid #e6aab4 !important;
+    }
+    .page-clivet{
+        display: none;
+    }
+    .detail-cabecera{
+        padding: 15px 15px 0;
+    }
+
+    .detail-title{
+        color: #00796B;
+        font-weight: 900;
+    }
+
+    .detail-form-title, .detail-label-title{
+        color: #212121;
+        font-size: 1.3em;
+        padding-top: 5px !important;
+        text-align: center;
+    }
+    .detail-form-title{
+        border: 1px solid #B2DFDB;
+        border-radius: 3px;
+    }
+    .detail-form, .detail-label{
+        color: #212121;
+        font-size: 1em;
+        padding-top: 5px !important;
+        margin-bottom: 15px;
+        text-align: left;
+    }
+    .detail-label{
+        font-size: 1.2em;
+    }
+    .detail-form{
+        padding-left: 15px;
+        border: 1px solid #B2DFDB;
+        border-radius: 3px;
+    }
+    .detail-subtitle{
+        border-bottom: 1px solid #B2DFDB;
+        font-size: 1.7em;
+        color: #212121;
+        font-weight: 700;
+        margin-top: 0px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .panel-cabecera{
+        background: #009688;
+        border-top-right-radius: 5px;
+        border-top-left-radius: 5px;
+    }
+    #accordion{
+        border: 1px solid #009688;
+        border-bottom-right-radius: 5px;
+        border-bottom-left-radius: 5px;
+    }
+    .pa-consulta>.panel-heading{
+        background-image: -webkit-linear-gradient(top,#B2DFDB 0,#B2DFDB 100%);
+        background-image: linear-gradient(to bottom,#B2DFDB 0,#B2DFDB 100%);
+    }
     .chosen-container {
         width: 100% !important;
     }
-	.page-clivet{
-		padding-bottom: 1px;
-    	margin: 10px 0 10px;
-    	border-bottom: 1px solid #eee;
-	}
+
 
 	.controls .btn+.btn {
 	    margin-bottom: 0;
@@ -39,24 +101,37 @@
 		color: #fff;
 		font-size: 1.4em;
 	}
-	.panel-cabecera{
-		padding: 0 15px;
-	}
 
 	.pa-consulta .panel-title a:before{
 		content: "\e137";
 		padding: 10px;
-		background-color: #34495e;
+		background-color: #00796b;
 		margin-right: 10px;
 		color: #fff;
 		font-family: 'Glyphicons Halflings';
 		border-top-right-radius: 10px;
 		border-bottom-right-radius: 10px;
 	}
+
+    .buscar-consulta .active, .buscar-consulta .active:hover{
+        text-shadow: none;
+        color: #757575;
+        background-image:linear-gradient(to bottom,#94dad4 0,#d3f1ee 100%);
+       border-color: #69d0c7;
+        font-weight: 900;
+    }
+    .chosen-container-multi .chosen-choices {
+        border: 1px solid #69d0c7;
+        border-top-right-radius: 0px;
+        border-top-left-radius: 0px;
+    }
+    .chosen-choices {
+        color: #212121;
+    }
 	.pa-vacuna .panel-title a:before{
 		content: "\e041";
 		padding: 10px;
-		background-color: #34495e;
+		background-color: #00796b;
 		margin-right: 10px;
 		color: #fff;
 		font-family: 'Glyphicons Halflings';
@@ -66,7 +141,7 @@
 	.pa-notas .panel-title a:before{
 		content: "\e032";
 		padding: 10px;
-		background-color: #34495e;
+		background-color: #00796b;
 		margin-right: 10px;
 		color: #fff;
 		font-family: 'Glyphicons Halflings';
@@ -115,17 +190,18 @@
 
 	}
 	.listado .input-group span{
-		color: #31708f;
-		background-color: #d9edf7;
-		border-color: #bce8f1;
+		color: #757575;
+		background-color: #b0e5e0;
+		border-color: #69d0c7;
 		font-weight: 900;
 	}
 	.listado .input-group input, .listado .input-group textarea{
-		background-color: rgba(217, 237, 247, 0.39);
-		color: #08121b;
-		border-color: #bce8f1;
+		background-color: rgba(217, 237, 247, 0.10);
+		color: #212121;
+		border-color: #69d0c7;
 		font-size: 1em;
 	}
+
 	#vacunacionform .listado .input-group span{
 		color: #b54442;
 		background-color: #ecd0d0;
@@ -167,11 +243,14 @@
 		 border: none;
 		box-shadow: none;
 	 }
+     .estado-oculto{
+         display: none;
+     }
 </style>
 {% endblock style %}
 
 {% block headjs %}
-<script src="http://harvesthq.github.io/chosen/chosen.jquery.js"></script>
+<script src="{% static 'bootstrap-chosen-master/chosen.jquery.js' %}"></script>
 <script>
   $(function() {
 	$('.chosen-select').chosen();
@@ -202,7 +281,7 @@
 
 <script type="text/javascript">
 
-
+$("#id_estado").attr('checked', true);
 $('#id_fecha_programada').datetimepicker({
 	format: 'YYYY-MM-DD',
 		//format: 'YYYY-MM-DD hh:mm:ss', //pata datatimes
@@ -212,6 +291,25 @@ $('#id_fecha_programada').datetimepicker({
 		autoclose: true,
 		todayHighlight: true,
 	});
+
+    $(document).ready(function(){
+        if(this){
+            $("#id_pruebas_auxiliares_chosen .default, #id_tratamiento_chosen .default").focus(function(){
+                $(".hola-hola").addClass('hola');
+            });
+        }else {
+            $(".hola-hola").removeAttr('hola');
+        }
+    });
+$('#id_hallasgos_clinicos_chosen').on('focus', function() {
+    alert("hola")
+    if($(this)){
+        alert("dsds");
+        $(".chocen-container").addClass('hola');
+    }else {
+        alert("sssssssssssssssssssssss");
+    }
+});
 
 </script>
 {% endblock extrajs %}

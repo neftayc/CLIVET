@@ -17,8 +17,6 @@ from apps.params.models import IDENTITY_TYPE_CHOICES
 
 class VentaForm(forms.ModelForm):
     u"""Tipo Documeto Form."""
-    producto = forms.ModelChoiceField(
-        queryset=Producto.objects.all(), label="", help_text="")
     data_venta = forms.CharField(
         required=False,  widget=forms.TextInput(attrs={'type': 'hidden'}))
     producto = forms.CharField(label="", required=False,

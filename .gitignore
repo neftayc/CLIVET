@@ -1,12 +1,9 @@
-db.sqlite
 *temp/
 *.pyc
 *~
 ~*
 ve_*
 ve_*
-db.sqlite3
 temp
 ve_*
 *.json
-ventas

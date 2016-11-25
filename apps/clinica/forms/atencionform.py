@@ -11,7 +11,7 @@ from apps.utils.forms import smtSave, btnCancel, btnReset
 from django.utils.timezone import get_current_timezone
 from datetime import datetime
 
-from ..models.atencion import Atencion, ATENCIONES
+from ..models.atencion import Atencion
 from ..models.colamedica import ColaMedica
 
 class AtencionForm(forms.ModelForm):
@@ -66,8 +66,8 @@ class AtencionForm(forms.ModelForm):
             help_text=u'<small class="help-error"></small> %s' % _(
                 u' '),
         )
-        self.fields['observacion'] = forms.CharField(
-            label=capfirst(_(u'observacion:')), required=True,
+        self.fields['vobservacion'] = forms.CharField(
+            label=capfirst(_(u'observacion:')), required=False,
             help_text=u'<small class="help-error"></small> %s' % _(
                 u' '),
         )
@@ -99,75 +99,134 @@ class AtencionForm(forms.ModelForm):
                 u' '),
         )
         self.helper = FormHelper()
-        self.helper.form_show_labels = True
+        self.helper.form_show_labels = False
         self.helper.layout = Layout(
             Field('person_id',),
             Div(
                 Div(
+                    HTML('''
+                    <div class="row">
+                    <div class="col-md-12"><h1 class="text-center detail-subtitle">Registro de Atencion</h1></div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label detail-label">Mascota:</label>
+                                <div class="col-sm-9">
+                                    <p class="form-control-static detail-form"> Atendiendo al paciente {{ form.nombre.value}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label detail-label"> {{ form.dueño.label }}: </label>
+                                <div class="col-sm-9">
+                                    <p class="form-control-static detail-form"> {{ form.dueño.value }} </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label detail-label"> {{ form.raza.label }}: </label>
+                                <div class="col-sm-9">
+                                    <p class="form-control-static detail-form"> {{ form.raza.value }} </p>
+                                </div>
+                            </div>
+                        </div>'''),
+                css_class="panel-cabecera"),
+            ),
+            Div(
+                Div(
                     Div(
                         HTML('''
-                        {% block content_title %}
-                            <div class="box-header row">
-                                <div class="a-title col-md-3"><i class="fa fa-paw"></i> Atendiendo al paciente {{ form.nombre.value}}</div>
-                                <div class="a-title col-md-3"> <strong>Especie:</strong> {{ form.raza.value}}</div>
-                                <div class="a-title col-md-4 text-center"><strong>Propietario:</strong> {{ form.dueño.value}}</div>
-                            </div>
-                        {% endblock content_title %}'''),
-                    css_class="panel-heading panel-cabecera"),
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Iniciar Consulta</a>
+                            </h4>
+                        '''),
+                    css_class="panel-heading", role="tab", css_id="headingOne"),
                     Div(
                         Div(
                             Div(
-                                Div(
-                                    HTML('''
-                                        <h4 class="panel-title">
-                                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Iniciar Consulta</a>
-                                        </h4>
-                                    '''),
-                                css_class="panel-heading", role="tab", css_id="headingOne"),
-                                Div(
+                                Row(
                                     Div(
+                                        Div(Field('estado', ), css_class='col-md-12'),
+                                    css_class="estado-oculto"),
+                                    Div(
+                                        PrependedText('fecha_programada', '<i class="fa fa-calendar"></i>  Fecha', disabled='true'),
+                                            css_class="col-md-4"),
+                                    Div(
+                                        PrependedText('motivo_atencion', 'Motivo Atencion:', placeholder="motivo atencion"),
+                                    css_class="col-md-8"),
+                                css_class="listado"),
+                                Row(
+                                    Div(PrependedText('temperatura', 'T°', placeholder="temperatura"),css_class="col-md-2"),
+                                    Div(PrependedText('fc', ' FC', placeholder="fc"),css_class="col-md-2"),
+                                    Div(PrependedText('fr', ' FR', placeholder="fr"),css_class="col-md-2"),
+                                    Div(PrependedText('kg', ' Kg', placeholder="kilogramos"),css_class="col-md-2"),
+                                    Div(PrependedText('porcentaje', ' %', placeholder="porcentaje"),css_class="col-md-2"),
+                                    Div(PrependedText('tlc', ' TLC', placeholder="tlc"),css_class="col-md-2"),
+                                css_class="listado"),
+                                Row(
                                         Div(
-                                            Row(
+                                            Div(
                                                 Div(
-                                                    PrependedText('fecha_programada', '<i class="fa fa-calendar"></i>  Fecha', disabled='true'),
-                                                css_class="col-md-4"),
-                                                Div(
-                                                    PrependedText('motivo_atencion', 'Motivo Atencion:', placeholder="motivo atencion"),
-                                                css_class="col-md-8"),
-                                            css_class="listado"),
-                                            Row(
-                                                Div(PrependedText('temperatura', 'T°', placeholder="temperatura"),css_class="col-md-2"),
-                                                Div(PrependedText('fc', ' FC', placeholder="fc"),css_class="col-md-2"),
-                                                Div(PrependedText('fr', ' FR', placeholder="fr"),css_class="col-md-2"),
-                                                Div(PrependedText('kg', ' Kg', placeholder="kilogramos"),css_class="col-md-2"),
-                                                Div(PrependedText('porcentaje', ' %', placeholder="porcentaje"),css_class="col-md-2"),
-                                                Div(PrependedText('tlc', ' TLC', placeholder="tlc"),css_class="col-md-2"),
-                                            css_class="listado"),
-                                            Row(
-                                                Div(
-                                                    Div(
-                                                        Div(Field('estado', ), css_class='col-md-12'),
-                                                    css_class="list-group listado"),
-                                                css_class="col-md-4"),
-                                                Div(
-                                                    Div(
-                                                        PrependedText('anamnesis', ' Anamnesis:', placeholder="Ingrese una breve descripcion del estado actual del paciente", rows="2"),
-                                                        Field('diagnostico', data_placeholder="Your Favorite Football Teams", css_class="chosen-select", multiple="true", tabindex="6"),
-                                                        PrependedText('dx', 'Trauma:', placeholder="Trauma"),
-                                                        Field('hallasgos_clinicos', data_placeholder="Hallasgos Clinicos", css_class="chosen-select", multiple="true", tabindex="6"),
-                                                        PrependedText('observacion', 'Observacion:', placeholder="observacion"),
-                                                        PrependedText('pronostico', 'Pronostico:', placeholder="pronostico"),
-                                                        Field('pruebas_auxiliares', data_placeholder="Pruebas Auxiliares", css_class="chosen-select", multiple="true", tabindex="6"),
-                                                        Field('tratamiento', data_placeholder="Tratamiento", css_class="chosen-select", multiple="true", tabindex="6"),
-                                                    css_class="list-group listado"),
+                                                    PrependedText('anamnesis', ' Anamnesis:', placeholder="Ingrese una breve descripcion del estado actual del paciente", rows="3"),
                                                 css_class="col-md-12"),
-                                            ),
-                                        css_id="consultaform"),
-                                    css_class="panel-body"
+                                                Div(
+                                                Div(
+                                                HTML('''
+                                                <li class="list-group-item active  text-center">
+                                                <span><i class="fa fa-ambulance"></i> Hallasgos Clinicos</span>
+                                                </li>
+                                                '''),
+                                                Field('hallasgos_clinicos', data_placeholder="Buscar...", css_class="chosen-select", multiple="true", tabindex="6"),
+                                                css_class="list-group buscar-consulta"),
+                                                css_class="col-md-6"),
+                                                Div(
+                                                    Div(
+                                                        HTML('''
+                                                            <li class="list-group-item active  text-center">
+                                                                 <span><i class="fa fa-ambulance"></i> Diagnostico</span>
+                                                            </li>
+                                                        '''),
+                                                        Field('diagnostico', data_placeholder="Buscar...", css_class="chosen-select", multiple="true", tabindex="6"),
+                                                    css_class="list-group buscar-consulta"),
+                                                css_class="col-md-6"),
+                                                Div(
+                                                PrependedText('dx', 'Trauma:', placeholder="Trauma"),
+                                                css_class="col-md-6"),
+                                                Div(
+                                                PrependedText('pronostico', 'Pronostico:', placeholder="pronostico"),
+                                                css_class="col-md-6"),
+                                                Div(
+                                                    Div(
+                                                        HTML('''
+                                                            <li class="list-group-item active  text-center">
+                                                                 <span><i class="fa fa-ambulance"></i> Pruebas Auxiliares</span>
+                                                            </li>
+                                                        '''),
+                                                        Field('pruebas_auxiliares', data_placeholder="Buscar...", css_class="chosen-select", multiple="true", tabindex="6"),
+                                                    css_class="list-group buscar-consulta"),
+                                                css_class="col-md-6"),
+                                                Div(
+                                                    Div(
+                                                        HTML('''
+                                                            <li class="list-group-item active  text-center">
+                                                                 <span><i class="fa fa-ambulance"></i> Tratamiento</span>
+                                                            </li>
+                                                        '''),
+                                                        Field('tratamiento', data_placeholder="Buscar...", css_class="chosen-select", multiple="true", tabindex="6"),
+                                                    css_class="list-group buscar-consulta"),
+                                                css_class="col-md-6"),
+                                                Div(
+                                                    PrependedText('observacion', 'Observacion:', placeholder="observacion"),
+                                                css_class="col-md-12 hola-hola"),
+                                            css_class="row list-group listado"),
+                                        css_class="col-md-12"),
                                     ),
-                                css_id="collapseOne", css_class="panel-collapse collapse", role="tabpanel", labelledby="headingOne"),
-                            css_class="panel pa-consulta panel-info"),
-                            Div(
+                            css_id="consultaform"),
+                        css_class="panel-body"),
+                    css_id="collapseOne", css_class="panel-collapse collapse", role="tabpanel", labelledby="headingOne"),
+                css_class="panel pa-consulta"),
+                Div(
                                 Div(
                                     HTML('''
                                         <h4 class="panel-title">
@@ -181,9 +240,8 @@ class AtencionForm(forms.ModelForm):
                                             Row(
                                                 Div(
                                                     Div(
-                                                        PrependedText('fecha_programada', 'F. Programada'),
                                                         PrependedText('fecha_programada', 'F. Aplicada'),
-                                                        PrependedText('observacion', 'Observacion', placeholder="observacion"),
+                                                        PrependedText('vobservacion', 'Comentario', placeholder="Ingrese un comentario si hubiera"),
                                                     css_class="list-group listado"),
                                                 css_class="col-md-8"),
                                                 Div(
@@ -214,11 +272,8 @@ class AtencionForm(forms.ModelForm):
                                         Div(
                                             Row(
                                                 Div(
-                                                    Div(
-                                                        PrependedText('vobservacion', 'vobservacion', placeholder="Observacion"),
-                                                        PrependedText('ndescripcion', 'ndescripcion', placeholder="ndescripcion"),
-                                                    css_class="list-group listado"),
-                                                css_class="col-md-8 col-md-offset-2"),
+                                                    PrependedText('ndescripcion', '<i class="fa fa-plus"></i> Nota', placeholder="Escribir una nota "),
+                                                css_class="col-md-6 listado"),
                                             ),
                                         css_id="notasform"),
                                     css_class="panel-body"),
@@ -235,9 +290,6 @@ class AtencionForm(forms.ModelForm):
                                 css_class="col-xs-12"),
                             ),
                         ),
-                    css_class="panel-body"),
-                css_class="panel panel-info"),
-            css_class="col-md-12"),
         )
 class AtencionMascotaDetailForm(forms.ModelForm):
     """ """
@@ -321,7 +373,7 @@ class AtencionMascotaDetailForm(forms.ModelForm):
                                     ),
                                 css_class='caption text-center'),
                                 css_class='thumbnail'),
-                            css_class='col-sm-6 col-md-3 '),
+                            css_class='col-md-6 col-md-3 '),
                         Div(HTML('''
                                 {% include "clinica/includes/tablaperfil.html" %}
                                 '''),
