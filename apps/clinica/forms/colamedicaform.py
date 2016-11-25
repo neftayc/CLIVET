@@ -41,11 +41,12 @@ class ColaMedicaForm(forms.ModelForm):
             help_text=u'<small class="help-error"></small> %s' % _(
                 u' '),
         )
-        self.fields['medico'] = forms.ModelChoiceField(
-            queryset=User.objects.filter(is_veterinario=True),
-        )
+
         self.helper = FormHelper()
         self.helper.form_show_labels = False
+
+        self.helper.form_method = 'post'
+        self.helper.form_class = 'js-validate form-vertical'
         self.helper.layout = Layout(
             Div(
                 Div(
@@ -87,7 +88,7 @@ class ColaMedicaForm(forms.ModelForm):
                                         <span><i class="fa fa-github"></i> Elige a una mascota en la tabla</span>
                                         </li>
                                     '''),
-                                    Field('mascotas',disabled="true"),
+                                    Div(Field('mascotas',disabled="true"),),
                                 css_class="list-group vacuna"),
                             css_class="col-md-6"),
                             Div(
@@ -97,7 +98,7 @@ class ColaMedicaForm(forms.ModelForm):
                                         <span><i class="fa fa-github"></i> Elija el Doctor encargado </span>
                                         </li>
                                     '''),
-                                    Field('medico'),
+                                    Field('medico', css_class="input-required"),
                                 css_class="list-group vacuna"),
                             css_class="col-md-6"),
                             Div(Field('historia', css_class='input-required'),

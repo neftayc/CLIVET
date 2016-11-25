@@ -7,8 +7,6 @@ from django.utils.translation import ugettext_lazy as _
 from .models.colamedica import ColaMedica
 from .models.mascota import Mascota
 from .models.consulta import HallasgosClinicos, Diagnostico, Pruebas, Tratamiento
-from .models.notas import Notas
-from .models.vacunacion import Vacunacion
 from .models.historia import Historial
 from .models.atencion import Atencion
 
@@ -97,11 +95,9 @@ class AtencionAdmin(admin.ModelAdmin):
 
 admin.site.register(Mascota)
 admin.site.register(ColaMedica, ColaMedicaAdmin)
-admin.site.register(Notas)
 admin.site.register(Diagnostico)
 admin.site.register(HallasgosClinicos)
 admin.site.register(Pruebas)
 admin.site.register(Tratamiento)
-admin.site.register(Vacunacion)
 admin.site.register(Historial, HistoriaAdmin)
 admin.site.register(Atencion, AtencionAdmin)

@@ -11,7 +11,7 @@ from apps.utils.forms import smtSave, btnCancel, btnReset
 from django.utils.timezone import get_current_timezone
 from datetime import datetime
 
-from ..models.atencion import Atencion, ATENCIONES
+from ..models.atencion import Atencion
 from ..models.colamedica import ColaMedica
 
 class AtencionForm(forms.ModelForm):
@@ -66,8 +66,8 @@ class AtencionForm(forms.ModelForm):
             help_text=u'<small class="help-error"></small> %s' % _(
                 u' '),
         )
-        self.fields['observacion'] = forms.CharField(
-            label=capfirst(_(u'observacion:')), required=True,
+        self.fields['vobservacion'] = forms.CharField(
+            label=capfirst(_(u'observacion:')), required=False,
             help_text=u'<small class="help-error"></small> %s' % _(
                 u' '),
         )
@@ -218,7 +218,7 @@ class AtencionForm(forms.ModelForm):
                                                 css_class="col-md-6"),
                                                 Div(
                                                     PrependedText('observacion', 'Observacion:', placeholder="observacion"),
-                                                css_class="col-md-12"),
+                                                css_class="col-md-12 hola-hola"),
                                             css_class="row list-group listado"),
                                         css_class="col-md-12"),
                                     ),
@@ -240,9 +240,8 @@ class AtencionForm(forms.ModelForm):
                                             Row(
                                                 Div(
                                                     Div(
-                                                        PrependedText('fecha_programada', 'F. Programada'),
                                                         PrependedText('fecha_programada', 'F. Aplicada'),
-                                                        PrependedText('observacion', 'Observacion', placeholder="observacion"),
+                                                        PrependedText('vobservacion', 'Comentario', placeholder="Ingrese un comentario si hubiera"),
                                                     css_class="list-group listado"),
                                                 css_class="col-md-8"),
                                                 Div(
@@ -273,11 +272,8 @@ class AtencionForm(forms.ModelForm):
                                         Div(
                                             Row(
                                                 Div(
-                                                    Div(
-                                                        PrependedText('vobservacion', 'vobservacion', placeholder="Observacion"),
-                                                        PrependedText('ndescripcion', 'ndescripcion', placeholder="ndescripcion"),
-                                                    css_class="list-group listado"),
-                                                css_class="col-md-8 col-md-offset-2"),
+                                                    PrependedText('ndescripcion', '<i class="fa fa-plus"></i> Nota', placeholder="Escribir una nota "),
+                                                css_class="col-md-6 listado"),
                                             ),
                                         css_id="notasform"),
                                     css_class="panel-body"),

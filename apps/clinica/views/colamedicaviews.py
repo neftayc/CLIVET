@@ -139,7 +139,6 @@ class ColaMedicaCreateView(CreateView):
         log.warning(msg, extra=log_params(self.request))
         return super(ColaMedicaCreateView, self).form_valid(form)
 
-
 class ColaMedicaUpdateView(UpdateView):
     """Tipo Documento Update View."""
 
@@ -189,7 +188,6 @@ class ColaMedicaUpdateView(UpdateView):
             messages.success(self.request, msg)
             log.warning(msg, extra=log_params(self.request))
         return super(ColaMedicaUpdateView, self).form_valid(form)
-
 
 class ColaMedicaDeleteView(DeleteView):
     """Empresa Delete View."""
