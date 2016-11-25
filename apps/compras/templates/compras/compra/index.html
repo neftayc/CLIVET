@@ -1,19 +1,12 @@
-{% extends "main/dashboard.html" %}
-{% load i18n app_security %}
-{% load l10n humanize %}
-
-{% block breadcrumbs %}
+{% extends "main/dashboard.html" %} {% load i18n app_security staticfiles %} {% load l10n humanize %} {% block breadcrumbs %}
+{% block style %}
+<link href="{% static 'clivet/compras.css' %}" rel="stylesheet"> {% endblock style %}
 <ol class="breadcrumb">
-  <li><a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %}</a></li>
-  <li class="active">{{ opts.verbose_name_plural|capfirst }}</li>
+    <li><a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %}</a></li>
+    <li class="active">{{ opts.verbose_name_plural|capfirst }}</li>
 </ol>
-{% endblock breadcrumbs %}
-
-
-{% block content_title %}
-<i class="fa fa-shopping-cart"></i> Lista de {{opts.verbose_name_plural}}
-{% endblock content_title %}
-{% block content %}
+{% endblock breadcrumbs %} {% block content_title %}
+<i class="fa fa-shopping-cart"></i> Lista de {{opts.verbose_name_plural}} {% endblock content_title %} {% block content %}
 <script type="text/javascript">
 $(function() {
     $('table').kgrid({
@@ -24,70 +17,56 @@ $(function() {
     });
 });
 </script>
-
-<div class="container"> 
-<div class="btn-toolbar btn-toolbar-top">
+<div class="panel panel-success">
+    <div class="btn-toolbar btn-toolbar-top panel panel-heading row ">
+        <div class="row container-heading-reporte">
+            <div class="btn-actions col-md-4 ">
+                <a href="{% url 'compras:compra_add' %}" class="btn do-buy btn-lg text-bold" title="Agregar Compra">
+                    <i class="fa fa-plus"></i>
+                    <span class="hidden-xs">Comprar </span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="container-overflow panel-body row">
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th  width="5%"  class="tr-title-reporte text-center" data-search="#">#</th>
+                    <th  width="35%" class="tr-title-reporte text-left" data-search="proveedor" >Proveedor</th>
+                    <th  width="20%" class="tr-title-reporte text-center" data-search="fe_compra" >Fecha de compra</th>
+                    <th  width="5%" class="tr-title-reporte text-center" data-search="trabajador" >Trabajador</th>
+                    <th  width="5%" class="tr-title-reporte text-center" data-search="comprobante" >Comprobante</th>
+                    <th width="10%"  class="tr-title-reporte text-center" data-search="total">Total</th>
+                    <th width="5%"  class="btn-actions col-blocked text-center tr-title-reporte text-center">Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for d in object_list %}
+                <tr>
+                    <td class="td-reporte text-center">{% if is_paginated %} {{ page_obj.start_index|add:forloop.counter0 }} {% else %} {{ forloop.counter }} {% endif %}
+                    </td>
+                    <td  class="td-reporte text-left"> {{ d.proveedor.razon_social}} ({{ d.proveedor.representante_legal}})</td>
+                    <td  class="td-reporte text-center">{{ d.fe_compra|date:'Y-m-d' }}</td>
+                    <td  class="td-reporte text-center">{{ d.usuario}}</td>
+                    <td  class="td-reporte text-center">{{ d.comprobante }}</td>
+                    <td  class="td-reporte text-right">{{ d.total}}</td>
+                    <td class="text-center">
+                        <a href="/compras/detalle-compra/listar/{{d.pk}}/" class="btn btn-lg btn-success"><span class="glyphicon glyphicon-th-list"></span></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
     <div class="row">
-        <div class="btn-actions col-md-9">
-            <a href="{% url 'compras:compra_add' %}"
-               class="btn btn-primary text-bold"
-               title="Agregar Compra">
-                <i class="fa fa-plus"></i>
-                <span class="hidden-xs"> Agregar</span>
-            </a>
-        </div>            
+        {% if is_paginated %} {% load paginator %} {% paginator %} {% else %}
+        <div class="col-md-12">
+            <ul class="breadcrumbpag">
+                {{ object_list.count }} {% ifequal object_list.count 1 %}{{ opts.verbose_name|capfirst }}{% else %}{{ opts.verbose_name_plural|capfirst }}{% endifequal %}
+            </ul>
+        </div>
+        {% endif %}
     </div>
-</div>
-<div class="container-overflow">
-
-    <table class="table table-bordered table-hover table-striped table-condensed table-responsive">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th class= "panel-body" data-search="proveedor" data-order="proveedor">Proveedor</th>
-                <th class="col-hidden" data-search="fe_compra" data-order="fe_compra">Fecha de compra</th>
-                <th class="col-hidden" data-search="trabajador" data-order="trabajador">Trabajador</th>
-                <th class="col-hidden" data-search="comprobante" data-order="comprobante">Comprobante</th>
-                <th class="panel panel-default" data-search="total" data-order="total">Total</th>
-                <th class="btn-actions col-blocked text-center">Acción</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for d in object_list %}       
-            <tr>
-                <td>{% if is_paginated %}
-                    {{ page_obj.start_index|add:forloop.counter0 }}
-                    {% else %}
-                    {{ forloop.counter }}
-                    {% endif %}
-                </td>
-
-                <td> {{ d.proveedor.razon_social}} ({{ d.proveedor.representante_legal}})</td>
-                <td>{{ d.fe_compra }}</td>
-                <td>{{ d.usuario}}</td>
-                <td>{{ d.comprobante }}</td>
-                <td>{{ d.total}}</td>
-                
-                <td class="text-center">
-                    <a href="/compras/detalle-compra/listar/{{d.pk}}/">Ver detalle</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-
-    </table>
-</div>
-<div  class="row" >
-    {% if is_paginated %}
-    {% load paginator %}
-    {% paginator %}
-    {% else %}
-    <div class="col-md-12" >
-        <ul class="breadcrumbpag" >
-            {{ object_list.count }} {% ifequal object_list.count 1 %}{{ opts.verbose_name|capfirst }}{% else %}{{ opts.verbose_name_plural|capfirst }}{% endifequal %}
-        </ul>
-    </div>
-    {% endif %}
-</div>
 </div>
 {% endblock content %}

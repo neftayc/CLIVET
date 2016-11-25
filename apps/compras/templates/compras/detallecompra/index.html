@@ -1,50 +1,51 @@
-{% extends "main/dashboard.html" %}
-{% load i18n app_security %}
-{% load l10n humanize %}
-{% block breadcrumbs %}
+{% extends "main/dashboard.html" %} {% load i18n app_security staticfiles %} {% load l10n humanize %} {% block breadcrumbs %} {% block style %}
+<link href="{% static 'clivet/compras.css' %}" rel="stylesheet"> {% endblock style %}
 <ol class="breadcrumb">
-  <li><a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %}</a></li>
-  <li class="active">{{ opts.verbose_name_plural|capfirst }}</li>
+    <li><a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %}</a></li>
+    <li class="active">{{ opts.verbose_name_plural|capfirst }}</li>
 </ol>
-{% endblock breadcrumbs %}
-{% block content_title %}
-<i class="fa fa-calendar"></i> Lista de {{opts.verbose_name_plural}}
-{% endblock content_title %}
-{% block content %}
-<div class="container-overflow">
-    <div>
-        <p>Cantidad de Producto</p>
-        {{from.compra.id}}
-    </div> 
-    <table class="table table-hover table-striped table-condensed table-responsive">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th class="col-hidden" data-search="compra" data-order="compra">Compra</th>
-                <th class="col-hidden" data-search="producto" data-order="producto">Producto</th>
-                <th class="col-hidden" data-search="cantidad" data-order="cantidad">Cantidad</th>
-                <th class="col-hidden" data-search="precio_total" data-order="precio_total">Importe</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for d in lista %}       
-            <tr>
-                <td>{% if is_paginated %}
-                    {{ page_obj.start_index|add:forloop.counter0 }}
-                    {% else %}
-                    {{ forloop.counter }}
-                    {% endif %}
-                </td>
-
-                <td>{{ d.compra.id}}</td>
-                <td>{{ d.producto.nombre }}</td>
-                <td>{{ d.cantidad }}</td>
-                <td>{{ d.precio_total}}</td>
-                
-            </tr>
-            {% endfor %}
-        </tbody>
-
-    </table>
+{% endblock breadcrumbs %} {% block content_title %}
+<i class="fa fa-calendar"></i> Lista de {{opts.verbose_name_plural}} {% endblock content_title %} {% block content %}
+<div class="container-fluid panel panel-success row">
+    <div class="row">
+        <div class="panel-heading panel-titulo-detalle">
+            <div class="col-md-5 img-container col-xs-12 col-sm-12">
+                <img class="" width="100%" src='{% static "clivet/img/DogShop.png" %}'>
+            </div>
+            <div class="col-md-7 text-center  col-xs-12 col-sm-12 row">
+                <p class="detalle-titulo col-md-12">DETALLE DE COMPRA</p>
+                <p class="label-d text-left col-md-7">Tipo Doc<span class="cliente-show">{{compras.proveedor.tipodoc}}</span></p>
+                <p class="label-d text-left col-md-5 hidden-xs">N° Documento : <span class="cliente-show">{{compras.proveedor.numdoc}}</span></p>
+                <p class="label-d text-left col-md-7  hidden-sm hidden-xs">Razon Social : <span class="cliente-show">{{compras.proveedor.razon_social}}</span></p>
+                <p class="label-d text-left col-md-5  hidden-sm hidden-xs">Representante Legal :<span class="cliente-show">{{compras.proveedor.representante_legal}}</span></p>
+                <p class="label-d text-center col-md-10">FECHA DE COMPRA : <span class="fehca-show">{{compras.fe_compra|date:'Y-m-d'}}</span></p>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table table-hover table-striped table-condensed table-responsive">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th class="col-hidden" data-search="compra" data-order="compra">Compra</th>
+                    <th class="col-hidden" data-search="producto" data-order="producto">Producto</th>
+                    <th class="col-hidden" data-search="cantidad" data-order="cantidad">Cantidad</th>
+                    <th class="col-hidden" data-search="precio_total" data-order="precio_total">Importe</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for d in lista %}
+                <tr>
+                    <td>{% if is_paginated %} {{ page_obj.start_index|add:forloop.counter0 }} {% else %} {{ forloop.counter }} {% endif %}
+                    </td>
+                    <td>{{ d.compra.id}}</td>
+                    <td>{{ d.producto.nombre }}</td>
+                    <td>{{ d.cantidad }}</td>
+                    <td>{{ d.precio_total}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 {% endblock content %}

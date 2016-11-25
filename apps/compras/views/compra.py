@@ -102,18 +102,20 @@ class CompraCreateView(CreateView):
         return context
 
     def form_valid(self, form):
-        """"Empresa Crete View  form valid."""
         self.object = form.save(commit=False)
-        sid = transaction.savepoint()
         try:
-            compra = json.loads(self.request.POST.get("data_compra"))
+            compra = json.loads(self.request.POST.get('data_compra'))
+            print(compra)
             self.object.total = compra['total']
+            print("asdkashkjdhksajhdkjahskjh")
             self.object.usuario = self.request.user
             self.object.save()
             for p in compra['productos']:
                 productos = Producto.objects.get(pk=p["id"])
 
-                productos.existencia = productos.existencia +(int(p['cantidad']) *(productos.unidad_medida.cant_equivalencia))
+                productos.existencia = productos.existencia + \
+                    (int(p['cantidad']) *
+                     (productos.unidad_medida.cant_equivalencia))
                 productos.MontoReal = productos.precioV * productos.existencia
                 productos.igv = productos.MontoReal * Decimal(0.18)
 
@@ -126,10 +128,7 @@ class CompraCreateView(CreateView):
                 )
                 dv.save()
         except Exception as e:
-            try:
-                transaction.savepoint_rollback(sid)
-            except:
-                pass
+            print(e)
             messages.error(self.request, e)
 
         msg = _(' %(name)s "%(obj)s" fue creado satisfactoriamente.') % {

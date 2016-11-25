@@ -66,7 +66,7 @@
                             </div>
                         </div>
                         <div class="row ">
-                            <div class="col-md-6 text-left">
+                            <div class="col-md-6 text-left">    
                                 <p>Monto a pagar</p>
                             </div>
                             <div class="col-md-6 text-right">
@@ -304,7 +304,7 @@ $('#btn_pagar').attr('disabled', true);
 })();
 var i;
 $(document).ready(function() {
-    $(".typeahead,.cantidad-input").keypress(function(event) {
+    $(".typeahead").keypress(function(event) {
         var keycode = (event.keyCode ? event.keyCode : event.which);
         if (keycode == '13') {
             not_exist();
@@ -328,8 +328,8 @@ $(document).ready(function() {
                         Venta.total = Math.ceil10(Venta.total + data[0].fields.importe, -2);
                         Venta.sub_total = Math.ceil10(Venta.total - Venta.igv, -2);
                         draw();
-                        $('.typeahead , #cantidad_producto').val('');
                         $('#id' + i).focus();
+                        $('.typeahead').val('');
                     })
                     .fail(function() {
                         console.log("error");
@@ -344,7 +344,7 @@ $(document).ready(function() {
             for (i in Venta.productos) {
                 if (Venta.productos[i].id == dd) {
                     $('.typeahead').focus();
-                    $('.typeahead , #cantidad_producto').val('');
+                    $('.typeahead ').val('');
                     sms = '';
                     sms = sms + "<strong>Producto o Servicio Ya existe en Carrito</strong>";
                     $('.alerta-ventas').html(sms);
@@ -401,7 +401,7 @@ function delete_p(d) {
 }
 
 function change_p(d) {
-    var i;
+    
     var sms = '';
     Venta.productos[d].cantidad = $("#id" + d).text();
     if (Venta.productos[d].existencia <= 0) {
@@ -417,7 +417,7 @@ function change_p(d) {
         $('.typeahead').focus();
         return false;
     }
-    if (Venta.productos[d].cantidad <= Venta.productos[d].existencia) {
+    if (Venta.productos[d].cantidad <= parseFloat(Venta.productos[d].existencia)) {
         if (Venta.productos[d].cantidad > 0) {
             Venta.productos[d].importe = Math.ceil10(Venta.productos[d].cantidad * Venta.productos[d].precioV, -2);
             Venta.productos[d].igvp = Math.ceil10((Venta.productos[d].cantidad * Venta.productos[d].precioV) * 0.18, -2);

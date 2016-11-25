@@ -1,17 +1,12 @@
-{% extends "main/dashboard.html" %} {% load i18n app_security%}{% load i18n crispy_forms_tags %} {% load l10n humanize %} 
-
-{% block breadcrumbs %}
+{% extends "main/dashboard.html" %} {% load staticfiles i18n app_security%}{% load i18n crispy_forms_tags %} {% load l10n humanize %} {% block style %}
+<link href="{% static 'clivet/compras.css' %}" rel="stylesheet"> {% endblock style %} {% block breadcrumbs %}
 <ol class="breadcrumb">
-  <li><a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %}</a></li>
-  <li><a href="{% url 'compras:compra_list' %}">{{ opts.verbose_name_plural|capfirst }}</a></li>
-  <li class="active">{{ title }}</li>
+    <li><a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %}</a></li>
+    <li><a href="{% url 'compras:compra_list' %}">{{ opts.verbose_name_plural|capfirst }}</a></li>
+    <li class="active">{{ title }}</li>
 </ol>
-{% endblock breadcrumbs %}
-
-{% block content_title %}
-<i class="fa fa-shopping-cart"></i> {{ title }}
-{% endblock content_title %}
-{% block content %}
+{% endblock breadcrumbs %} {% block content_title %}
+<i class="fa fa-shopping-cart"></i> {{ title }} {% endblock content_title %} {% block content %}
 <script>
 $(function() {
     $('.chosen-select').chosen();
@@ -19,39 +14,27 @@ $(function() {
 </script>
 <div class="row container-fluid panel panel-default">
     <form rule="" action="" method="post">{% csrf_token %}
-        <div class="panel row panel-heading ">
+        <div class="panel row panel-heading panel-titulo-detalle">
             <div class="col-md-1 ">
-                <p class="titulo-busqueda"><span class="glyphicon glyphicon-shopping-cart"></span>Proveedor</p>
+                <p class="titulo-busqueda"><span class="glyphicon glyphicon-user"></span>Proveedor</p>
             </div>
-            <div class="col-md-5">
-                {{ form.proveedor}} {{ form.proveedor.errors}} {{ form.data_compra}}
+            <div class="col-md-4 proveedor-buscar">
+                {{ form.proveedor}} {{ form.proveedor.errors}}
             </div>
-            <div class="col-md-5 panel-titulo-detalle " id="proveedor-info">
+            <div class="col-md-6 panel-titulo-detalle " id="proveedor-info">
             </div>
-            <div class="col-md-1" id='addProveedor'>
+            <div class="col-md-1 addProveedor" id='addProveedor'>
                 <a type="search" class="btn nuevo-cliente btn-lg ">Nuevo</a>
             </div>
         </div>
-        <div class="row panel panel-info ">
+        <div class="row panel">
             <div class="col-md-8 ">
-                <div class="panel-heading row panel-titulo">
-                    <p><span class="glyphicon glyphicon-shopping-cart btn-lg" aria-hidden="true"></span>Añadir productos</p>
-                    <div class="form-group col-lg-8">
-                        <label class="sr-only" for="producto"></label>
-                        <div class="input-group">
-                            <div class="input-group-addon">
-                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                            </div>
-                            {{ form.producto}}
-                        </div>
+                <div class="panel-heading row panel-titulo-detalle">
+                    <div class="alert col-md-7 col-md-push-7 alerta-ventas" id="success-alert">
                     </div>
+                    <span class="glyphicon glyphicon-shopping-cart icon-producto titulo-busqueda label-add-producto col-md-1" aria-hidden="true"></span> {{ form.producto}}
                     <div class="col-md-2">
-                        <div class="">
-                            <input type="number" name="cantidad" class="form-control" id="cantidad_producto" min="0" max="1000">
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <button id="enviar_producto" class="btn btn-primary">Enviar</button>
+                        <button id="addProducto" class="btn btn-lg nuevo-cliente ">Nuevo</button>
                     </div>
                 </div>
                 <div class="panel-body ">
@@ -72,39 +55,28 @@ $(function() {
                     </table>
                 </div>
             </div>
-            <div class="col-md-4 panel panel-warning">
-                <div class="panel-body  text-center">
-                    <p><span class="glyphicon glyphicon-shopping-cart btn-lg" aria-hidden="true"></span>Resumen de Compra Realizada</p>
-                    <div class="row center-block">
-                        <div class="col-md-8">
-                            <p>Cantidad de Producto</p>
-                        </div>
-                        <div class="col-md-4">
-                            <p><span id="r_cantidad_total">0</span></p>
-                        </div>
+            <div class="col-md-4 panel panel-body  container-resumen">
+                <p class="text-center"><span class="glyphicon glyphicon-shopping-cart btn-lg" aria-hidden="true"></span>Resumen de Compra Realizada</p>
+                <div class="row center-block">
+                    <div class="col-md-4">
+                        <p class="label-resumen-compras">Total</p>
                     </div>
-                    <div class="row center-block">
-                        <div class="col-md-8">
-                            <p>Total</p>
-                        </div>
-                        <div class="col-md-4">
-                            <p>S/.<span id="r_total">00.00</span></p>
-                        </div>
+                    <div class="col-md-8">
+                        <p class="text-right label-resumen-compras">S/.<span id="r_total">00.00</span></p>
                     </div>
-                    <div class="row center-block">
-                        <!-- <div class="col-md-6">
-                            <p>Comprobante</p>
-                        </div> -->
-                        <div class="col-md-6">
-                            {{ form.comprobante|as_crispy_field }}
-                        </div>
+                </div>
+                <div class="row center-block">
+                    <div class="col-md-6">
+                        {{ form.comprobante}}
                     </div>
-                    <div class="input-group-btn">
-                        <button id="btn_pagar" type="submit" name='form' class="col-md-12 col-md-offset-4  btn btn-success "> Realizar Compra</button>
-                    </div>
+                </div>
+                <div class="center-block">
+                    <button id="btn_pagar" type="submit" name='form' class="col-md-12 pagar-button btn-lg"> Comprar</button>
                 </div>
             </div>
         </div>
+        {{ form.data_compra}}
+        {{form.errors}}
     </form>
 </div>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -224,13 +196,119 @@ $(function() {
     </div>
 </div>
 <script type="text/javascript">
+$("#success-alert").hide();
 $(document).ready(function() {
-    //"use strict";
-    $("#enviar_producto").click(function(e) {
-        e.preventDefault();
+    var stocks = new Bloodhound({
+        limit: 10,
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('nombre'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        prefetch: {
+            ttl: 1,
+            url: '/producto/search/',
+        },
+    });
+    stocks.initialize();
+    $('.typeahead ').typeahead(
+        null, {
+            minLength: 1,
+            hint: true,
+            highlight: true,
+            templates: {
+                notFound: '<div class="tt-suggestion tt-none">Producto o Servicio no encontrado en Inventario</div>',
+            },
+            displayKey: 'nombre',
+            source: stocks,
+        }).on('typeahead:selected', function(event, data) {
+        $('.typeahead').val(data.id);
+
+        Compra.temp = data.id;
+    });
+});
+$('#btn_pagar').attr('disabled', true);
+(function() {
+    function decimalAdjust(type, value, exp) {
+        if (typeof exp === 'undefined' || +exp === 0) {
+            return Math[type](value);
+        }
+        value = +value;
+        exp = +exp;
+        // Si el valor no es un número o el exp no es un entero...
+        if (isNaN(value) || !(typeof exp === 'number' && exp % 1 === 0)) {
+            return NaN;
+        }
+        // Shift
+        value = value.toString().split('e');
+        value = Math[type](+(value[0] + 'e' + (value[1] ? (+value[1] - exp) : -exp)));
+        // Shift back
+        value = value.toString().split('e');
+        return +(value[0] + 'e' + (value[1] ? (+value[1] + exp) : exp));
+    }
+    // Decimal round
+    if (!Math.round10) {
+        Math.round10 = function(value, exp) {
+            return decimalAdjust('round', value, exp);
+        };
+    }
+    // Decimal floor
+    if (!Math.floor10) {
+        Math.floor10 = function(value, exp) {
+            return decimalAdjust('floor', value, exp);
+        };
+    }
+    // Decimal ceil
+    if (!Math.ceil10) {
+        Math.ceil10 = function(value, exp) {
+            return decimalAdjust('ceil', value, exp);
+        };
+    }
+})();
+var Compra = {
+    productos: [],
+    total: 0.00,
+    cantidad_total: 0,
+    temp: -1,
+};
+var i;
+$(document).ready(function() {
+    $(".typeahead").keypress(function(event) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if (keycode == '13') {
+
+            not_exist();
+            if (not_exist(Compra.temp)) {
+                $.ajax({
+                        url: "{% url 'ventas:carro' %}",
+                        type: 'get',
+                        data: {
+                            p: Compra.temp
+                        },
+                    })
+                    .done(function(data) {
+                        data[0].fields.cantidad = 1;
+                        data[0].fields.importe = data[0].fields.precioC * data[0].fields.cantidad;
+                        data[0].fields.id = data[0].pk;
+                        Compra.productos.push(data[0].fields);
+                        Compra.total = Compra.total + data[0].fields.importe;
+                        Compra.cantidad_total = Compra.cantidad_total + parseInt(data[0].fields.cantidad);
+                        draw();
+
+                        $('#id' + i).focus();
+                        $('.typeahead').val('');
+                    })
+                    .fail(function() {
+                        console.log("error");
+                        $('.typeahead').focus();
+                        $('.typeahead ').val('');
+                    })
+                    .always(function() {
+                        console.log("complete");
+                    });
+            }
+            return false;
+        }
 
         function not_exist(dd) {
-            for (var i in Compra.productos) {
+            for (i in Compra.productos) {
                 if (Compra.productos[i].id == dd) {
                     return false;
                     //mensaje error
@@ -238,75 +316,112 @@ $(document).ready(function() {
             }
             return true;
         }
-        if (not_exist($('#id_producto').val())) {
-            $.ajax({
-                    url: "{% url 'ventas:carro' %}",
-                    type: 'get',
-                    data: {
-                        p: $('#id_producto').val()
-                    },
-                })
-                .done(function(data) {
-                    data[0].fields.cantidad = $('#cantidad_producto').val();
-                    data[0].fields.importe = data[0].fields.precioC * data[0].fields.cantidad;
-                    data[0].fields.id = data[0].pk;
-                    Compra.productos.push(data[0].fields);
-                    $('#cantidad_producto').val("1");
-                    Compra.total = Compra.total + data[0].fields.importe;
-                    Compra.cantidad_total = Compra.cantidad_total + parseInt(data[0].fields.cantidad);
-                    draw();
-                })
-                .fail(function() {
-                    console.log("error");
-                })
-                .always(function() {
-                    console.log("complete");
-                });
-        }
 
     });
+
+
 });
-var Compra = {
-    productos: [],
-    total: 0.00,
-    cantidad_total: 0,
-};
+
 
 function draw() {
-    $("#r_cantidad_total").text(Compra.cantidad_total);
     $("#r_total").text(Compra.total);
     var h = "";
-    for (var i in Compra.productos) {
+    for (i in Compra.productos) {
         h = h + "<tr>" +
             "<td contenteditable='true' class='text-center' id='id" + i + "' onblur='change_p(" + i + ")'>" + Compra.productos[i].cantidad +
-            "</td><td>" + Compra.productos[i].nombre +
-            "</td><td>" + Compra.productos[i].precioC +
-            "</td><td>" + Compra.productos[i].importe +
-            "</td><td><button type='button' onclick='delete_p(" + i + ")'class='btn btn-default btn-md'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span>Quitar</button></td></tr>";
+            "</td><td class='text-center'>" + Compra.productos[i].nombre +
+            "</td><td class='text-center'>" + Compra.productos[i].precioC +
+            "</td><td class='text-center'>" + Compra.productos[i].importe +
+            "</td><td class='text-center'><button type='button' onclick='delete_p(" + i + ")'class='btn btn-danger btn-md'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span></button></td></tr>";
 
     }
     $("#tabla_producto").html(h);
 
     $("#id_data_compra").val(JSON.stringify(Compra));
+    console.log(Compra);
+
 }
 
 function delete_p(d) {
     var deleted_product = Compra.productos.splice(d, 1);
-    Compra.total = Compra.total - deleted_product[0].importe;
-    Compra.cantidad_total = Compra.cantidad_total - deleted_product[0].cantidad;
+    Compra.total =Math.ceil10( Compra.total - deleted_product[0].importe,-2);
     draw();
+    $('.typeahead').val('');
+    if ($("#id0").val() === '') {
+        $('#btn_pagar').attr('disabled', false);
+    } else {
+
+        $('#btn_pagar').attr('disabled', true);
+    }
 }
 
+$('#addProducto,#addProveedor').click(function(event) {
+    event.preventDefault();
+    $('#add-new-cliente').modal({
+        backdrop: 'static',
+        keyboard: false
+    });
+});
 function change_p(d) {
     Compra.productos[d].cantidad = $("#id" + d).text();
-    Compra.productos[d].importe = Compra.productos[d].cantidad * Compra.productos[d].precioC;
-    Compra.total = 0.00;
-    Compra.cantidad_total = 0;
-    for (var i in Compra.productos) {
-        Compra.total = Compra.total + Compra.productos[i].importe;
-        Compra.cantidad_total = Compra.cantidad_total + Compra.productos[i].cantidad;
+    if (Compra.productos[d].cantidad < 0) {
+        Compra.productos[d].cantidad = Math.ceil10(Compra.productos[d].cantidad * (-1),-2);
+        Compra.productos[d].importe = Math.ceil10(Compra.productos[d].cantidad * Compra.productos[d].precioC,-2);
+        Compra.total = 0.00;
+        for (i in Compra.productos) {
+            Compra.total = Math.ceil10(Compra.total + Compra.productos[i].importe,-2);
+        }
+        draw();
+        $('.typeahead').val('');
+        $('.typeahead').focus();
+
+    } else if (Compra.productos[d].cantidad === 0) {
+        Compra.productos[d].cantidad = '';
+        Compra.productos[d].importe = Compra.productos[d].cantidad * Compra.productos[d].precioC;
+        Compra.total = 0.00;
+        for (i in Compra.productos) {
+            Compra.total = Compra.total + Compra.productos[i].importe;
+        }
+        draw();
+        $('.typeahead').val('');
+        console.log('positive');
+    } else if (Compra.productos[d].cantidad > 0) {
+        Compra.productos[d].cantidad = Compra.productos[d].cantidad;
+        Compra.productos[d].importe = Compra.productos[d].cantidad * Compra.productos[d].precioC;
+        Compra.total = 0.00;
+        for (i in Compra.productos) {
+            Compra.total = Compra.total + Compra.productos[i].importe;
+        }
+        draw();
+        $('.typeahead').val('');
+        $('.typeahead').focus();
+    } else {
+        sms = '';
+        sms = sms + "<strong>Cantidad  " + Compra.productos[d].nombre + " Incorrecta</strong>";
+        $('.alerta-ventas').html(sms);
+        $("#success-alert").show();
+        $("#success-alert").delay(3000).slideUp(300, function() {
+            $("#success-alert").hide();
+        });
+        Compra.productos[d].cantidad = '';
+        Compra.productos[d].importe = Compra.productos[d].cantidad * Compra.productos[d].precioC;
+        Compra.total = 0.00;
+        for (i in Compra.productos) {
+            Compra.total = Compra.total + Compra.productos[i].importe;
+        }
+        draw();
+        $('#id' + i).val('');
+        $('#id' + i).focus();
+
     }
-    draw();
+    if ($("#id0").val() === '') {
+        $('#btn_pagar').attr('disabled', false);
+    } else {
+
+        $('#btn_pagar').attr('disabled', true);
+    }
+
+
 }
 $('#addProveedor').click(function() {
     $('#myModal').modal('show');
@@ -327,7 +442,7 @@ function getProveedor() {
 
     .done(function(data) {
             console.log(data);
-            $('#proveedor-info').html('<div class="col-md-4"><p>Razón Social:<span>' + data.razon_social + '</pan></p></div ><div class="col-md-4"><p>N° de ' + data.tipodoc + ':<span>' + data.numdoc + '</span></div><div class="col-md-4"><p>Representante legal:<span>' + data.representante_legal + '</span></p></div>');
+            $('#proveedor-info').html('<div class="col-md-4  contenedor-proveedor"><p class="label-proveedor">Razón Social:<span class="span-proveedor">' + data.razon_social + '</pan></p></div ><div class="col-md-4 contenedor-proveedor"><p class="label-proveedor">N° de ' + data.tipodoc + ':<span class="span-proveedor">' + data.numdoc + '</span></div><div class="col-md-4 contenedor-proveedor"><p class="label-proveedor">Representante legal:<span class="span-proveedor">' + data.representante_legal + '</span></p></div>');
         })
         .fail(function() {
             console.log("error");
@@ -378,7 +493,6 @@ $('#save-proveedor').click(function() {
         $('#success_message_proveedor').attr('class', 'alert alert-danger').text("Revise los datos ingresados nuevamente.");
     }
 });
-
 function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie !== '') {
