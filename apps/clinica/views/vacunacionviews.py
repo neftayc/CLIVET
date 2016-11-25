@@ -15,6 +15,7 @@ from django.views.generic.list import ListView
 from django.views.generic import TemplateView
 
 from apps.clivet.models.cliente import Cliente
+
 from ..models.consulta import Diagnostico
 from ..models.historia import Historial
 from ..models.colamedica import ColaMedica
@@ -22,14 +23,6 @@ from ..forms.colamedicaform import ColaMedicaForm
 
 import logging
 log = logging.getLogger(__name__)
-
-
-
-class BusquedaClientView(ListView):
-
-    model = Cliente
-    template_name = 'clinica/busqueda.html'
-    context_object_name = 'clientes'
 
 from django.core import serializers
 

@@ -11,7 +11,7 @@ from apps.utils.forms import smtSave, btnCancel, btnReset
 from django.utils.timezone import get_current_timezone
 from datetime import datetime
 
-from ..models.atencion import Atencion, ATENCIONES
+from ..models.atencion import Atencion
 from ..models.colamedica import ColaMedica
 
 class AtencionForm(forms.ModelForm):
@@ -66,8 +66,8 @@ class AtencionForm(forms.ModelForm):
             help_text=u'<small class="help-error"></small> %s' % _(
                 u' '),
         )
-        self.fields['observacion'] = forms.CharField(
-            label=capfirst(_(u'observacion:')), required=True,
+        self.fields['vobservacion'] = forms.CharField(
+            label=capfirst(_(u'observacion:')), required=False,
             help_text=u'<small class="help-error"></small> %s' % _(
                 u' '),
         )
@@ -241,7 +241,7 @@ class AtencionForm(forms.ModelForm):
                                                 Div(
                                                     Div(
                                                         PrependedText('fecha_programada', 'F. Aplicada'),
-                                                        PrependedText('observacion', 'Comentario', placeholder="Ingrese un comentario si hubiera"),
+                                                        PrependedText('vobservacion', 'Comentario', placeholder="Ingrese un comentario si hubiera"),
                                                     css_class="list-group listado"),
                                                 css_class="col-md-8"),
                                                 Div(
