@@ -1,5 +1,9 @@
 {% extends "main/dashboard.html" %} {% load staticfiles i18n app_security%}{% load i18n crispy_forms_tags %} {% load l10n humanize %} {% block style %}
-<link href="{% static 'clivet/compras.css' %}" rel="stylesheet"> {% endblock style %} {% block breadcrumbs %}
+<link href="{% static 'clivet/compras.css' %}" rel="stylesheet">
+<style media="screen">
+
+</style>
+{% endblock style %} {% block breadcrumbs %}
 <ol class="breadcrumb">
     <li><a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %}</a></li>
     <li><a href="{% url 'compras:compra_list' %}">{{ opts.verbose_name_plural|capfirst }}</a></li>
@@ -13,43 +17,55 @@ $(function() {
 });
 </script>
 <div>
-    <form rule="" action="" method="post">{% csrf_token %}
-        <div class="panel">
-            <div class="panel-heading panel-titulo-detalle">
+    <form rule="" action="" method="post">
+        {% csrf_token %}
+        <div class="panel panel-compras-cliente">
+            <div class="panel-body">
                 <div class="row">
-                    <div class="col-md-1 ">
-                        <span class="titulo-busqueda"><i class="fa fa-user"></i>Proveedor</span>
+                    <div class="col-md-12">
+                        <label class="label-proveedor-buscar"><i class="fa fa-user"></i> {{ form.proveedor.label}}</label>
                     </div>
-                    <div class="col-md-4 proveedor-buscar">
-                        {{ form.proveedor}}
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    {{ form.proveedor}}
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="btn btn-success btn-block" id='addProveedor' type="button"><i class="fa fa-plus"></i> Nuevo</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- /.col-lg-6 -->
+                    <div class="col-md-6 panel-titulo-detalle ">
+                        <div class="row" id="proveedor-info">
+
+                        </div>
+                    </div>
+                    <div class="col-md-12">
                         <span class="text-danger"> {{ form.proveedor.errors}}</span>
                     </div>
-                    <div class="col-md-6 panel-titulo-detalle " id="proveedor-info">
-                    </div>
-                    <div class="col-md-1 addProveedor" id='addProveedor'>
-                        <a type="search" class="btn nuevo-cliente btn-lg ">Nuevo</a>
-                    </div>       
                 </div>
-                
             </div>
         </div>
         <div class="">
             <div class="row">
                 <div class="col-md-8">
-                    <div class="panel">
+                    <div class="panel panel-card-compra">
                         <div class="panel-heading">
-                             <div class="panel-heading row panel-titulo-detalle">
-                                <div class="alert col-md-7 col-md-push-7 alerta-ventas" id="success-alert">
+                             <div class="row panel-titulo-detalle">
+                                <div class="alert col-md-6 col-md-push-5 alerta-ventas" id="success-alert">
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-10">
-                                        <span class="glyphicon glyphicon-shopping-cart icon-producto titulo-busqueda label-add-producto col-md-1" aria-hidden="true"></span> <span class="col-md-11">{{ form.producto}}</span>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <button id="addProducto" class="btn btn-lg nuevo-cliente "><i class="fa fa-plus"></i> Nuevo P.</button>
-                                    </div>
+                                <div class="col-md-1 div-icon">
+                                    <label class="control-label"><span class="glyphicon glyphicon-shopping-cart icon-producto" aria-hidden="true"></span></label>
                                 </div>
-                            </div>                           
+                                <div class="col-md-8">
+                                    {{ form.producto}}
+                                </div>
+                                <div class="col-md-3">
+                                    <button id="addProducto" class="btn btn-block btn-lg nuevo-cliente "><i class="fa fa-plus"></i> Producto</button>
+                                </div>
+                            </div>
                         </div>
                         <div class="panel-body">
                             <table class="table table-condensed">
@@ -61,34 +77,38 @@ $(function() {
                                         <th class="text-center th-carrito">Precio total</th>
                                         <th class="text-center th-carrito">Opciones</th>
                                     </tr>
-                                </thead>
-                                <tfoot>
                                 </tfoot>
                                 <tbody id="tabla_producto">
                                 </tbody>
+                                </thead>
+                                <tfoot>
                             </table>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="panel">
-                        <div class="panel-body  container-resumen">
-                            <p class="text-center"><span class="glyphicon glyphicon-shopping-cart btn-lg" aria-hidden="true"></span>Resumen de Compra Realizada</p>
-                            <div class="row center-block">
-                                <div class="col-md-4">
-                                    <p class="label-resumen-compras">Total</p>
+                        <div class="panel-body  compras-resumen">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="text-center resumen-title"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>Resumen de Compra Realizada</p>
                                 </div>
-                                <div class="col-md-8">
-                                    <p class="text-right label-resumen-compras">S/.<span id="r_total">00.00</span></p>
-                                </div>
-                            </div>
-                            <div class="row center-block">
-                                <div class="col-md-6">
+                                <!--<div class="col-md-6">
                                     {{ form.comprobante}}
+                                </div>-->
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="label-resumen-compras">Total</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="text-right label-resumen-compras">S/.<span id="r_total">00.00</span></p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="center-block">
-                                <button id="btn_pagar" type="submit" name='form' class="col-md-12 pagar-button btn-lg"> Comprar</button>
+                                <div class="col-md-12">
+                                    <button id="btn_pagar" type="submit" name='form' class="col-md-12 pagar-button btn btn-block"> Guardar Compra</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -462,7 +482,7 @@ function getProveedor() {
 
     .done(function(data) {
             console.log(data);
-            $('#proveedor-info').html('<div class="col-md-4  contenedor-proveedor"><p class="label-proveedor">Razón Social:<span class="span-proveedor">' + data.razon_social + '</pan></p></div ><div class="col-md-4 contenedor-proveedor"><p class="label-proveedor">N° de ' + data.tipodoc + ':<span class="span-proveedor">' + data.numdoc + '</span></div><div class="col-md-4 contenedor-proveedor"><p class="label-proveedor">Representante legal:<span class="span-proveedor">' + data.representante_legal + '</span></p></div>');
+            $('#proveedor-info').html('<div class="col-md-8 contenedor-proveedor"><p class="label-proveedor">Representante legal:<span class="span-proveedor">' + data.representante_legal + '</span></p></div><div class="col-md-4 contenedor-proveedor"><p class="label-proveedor">' + data.tipodoc + ':<span class="span-proveedor">' + data.numdoc + '</span></p></div>');
         })
         .fail(function() {
             console.log("error");

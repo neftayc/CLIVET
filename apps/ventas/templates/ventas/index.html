@@ -67,7 +67,7 @@
                             </div>
                         </div>
                         <div class="row ">
-                            <div class="col-md-6 text-left">    
+                            <div class="col-md-6 text-left">
                                 <p>Monto a pagar</p>
                             </div>
                             <div class="col-md-6 text-right">
@@ -107,7 +107,7 @@
                         <div class="col-md-8">
                             <div id="div_id_apellidos" class="form-group">
                                 <label for="id_apellidos" class="control-label requiredField">
-                                    Apellidos <span class="asteriskField">*</span> 
+                                    Apellidos <span class="asteriskField">*</span>
                                 </label>
                                 <div class="controls ">
                                     <input class="textinput textInput form-control" id="id_apellidos" maxlength="100" name="apellidos" placeholder="Ingrese sus apellidos" type="text"> </div>
@@ -402,7 +402,7 @@ function delete_p(d) {
 }
 
 function change_p(d) {
-    
+
     var sms = '';
     Venta.productos[d].cantidad = $("#id" + d).text();
     if (Venta.productos[d].existencia <= 0) {

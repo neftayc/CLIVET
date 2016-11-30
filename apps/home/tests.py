@@ -1,5 +1,5 @@
 from django.test import TestCase
-from django.core.urlresolvers import reverse_lazy  # reverse
+from django.core.urlresolvers import reverse_lazy, reverse
 #import uuid
 # from testing_demo import DemoTestCase error
 

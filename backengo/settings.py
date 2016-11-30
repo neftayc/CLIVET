@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     # 'south', en la 1.7 ya no, ahora es django_migrations
     'crispy_forms',
 
+    #Jenkins
+    'django_jenkins',
 
     # mis tools
     'apps.utils',
@@ -88,6 +90,14 @@ MIDDLEWARE_CLASSES = [
 ]
 
 ROOT_URLCONF = 'backengo.urls'
+
+JENKINS_TASKS = (
+    #'django_jenkins.tasks.run_pep8',
+    #'django_jenkins.tasks.run_pyflakes',
+    #'django_jenkins.tasks.run_jslint',
+    #'django_jenkins.tasks.run_csslint',
+    #'django_jenkins.tasks.run_sloccount'
+)
 
 TEMPLATES = [
     {

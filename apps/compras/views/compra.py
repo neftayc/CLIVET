@@ -76,7 +76,6 @@ class CompraListView(ListView):
 
 class CompraCreateView(CreateView):
     u"""Tipo Documento Identidad."""
-
     model = Compra
     form_class = CompraForm
     template_name = "compras/compra/form.html"
@@ -98,7 +97,7 @@ class CompraCreateView(CreateView):
                         self).get_context_data(**kwargs)
         context['opts'] = self.model._meta
         # context['cmi'] = 'tipodoc'
-        context['title'] = ('Nueva %s') % ('Compra')
+        context['title'] = ('Ingreso %s') % ('Almacen')
         return context
 
     def form_valid(self, form):

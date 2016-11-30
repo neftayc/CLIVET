@@ -1,3 +1,24 @@
+
+.panel-compras-cliente{
+    background: #009688;
+}
+.panel-compras-cliente .panel-body{
+    padding: 10px;
+}
+.panel-compras-cliente .form-group{
+    margin-bottom: 0px;
+}
+.div-icon{
+    padding-right: 0px;
+}
+.panel-card-compra{
+    border: 1px solid #009688;
+}
+.panel-card-compra .panel-body{
+    padding: 0px;
+}
+/*ddddddddddddddd*/
+
 .typeahead,
 .tt-query,
 .tt-hint {
@@ -137,6 +158,11 @@ img {
     width: 100%;
 }
 
+.label-proveedor-buscar {
+    letter-spacing: .1em;
+    font-weight: 700;
+    color: #fff;
+}
 .label-proveedor {
     font-weight: 700;
     margin: .5em;
@@ -149,8 +175,7 @@ img {
 }
 
 .icon-producto {
-    padding: 0;
-    font-size: 2.5em;
+    font-size: 3em;
 }
 
 .label-add-producto {
@@ -347,7 +372,8 @@ img {
     border: 0;
     color: white;
     font-weight: bold;
-    font-size: 2.3em;
+    font-size: 1.5em;
+    margin-bottom: 0.2em;
 }
 
 .pagar-button:hover {
@@ -355,18 +381,17 @@ img {
     background: rgb(139, 165, 74);
 }
 
-.panel-body {
-    padding: 0;
-    padding-bottom: 1em;
-}
 
-.container-resumen {
+.compras-resumen {
     box-shadow: 2px 2px 5px 2px rgba(74, 82, 74, 0.5);
     padding: 0em 1em 0em 1em;
     margin: 0 0 0 0 ;
     letter-spacing: .2em;
 }
-
+.compras-resumen .resumen-title{
+    padding: 10px 16px;
+        font-size: 18px;
+}
 .inputModificado {
     margin: 10px 0px 10px 50px;
     clear: both;
