@@ -1,4 +1,4 @@
-from django.test import TestCase
+"""from django.test import TestCase
 from django.core.urlresolvers import reverse_lazy, reverse
 #import uuid
 # from testing_demo import DemoTestCase error
@@ -6,7 +6,6 @@ from django.core.urlresolvers import reverse_lazy, reverse
 
 class HomeTests(TestCase):
 
-    """docstring for HomeTests"""
 
     def setUp(self):
         pass
@@ -45,4 +44,4 @@ class HomeTests(TestCase):
         self.assertTrue('nombre' in response.context)
         nombre_r = response.context['nombre']
         self.assertEqual(nombre_r, 'Juan')
-        self.assertContains(response, 'Hola Juan')
+        self.assertContains(response, 'Hola Juan')"""
