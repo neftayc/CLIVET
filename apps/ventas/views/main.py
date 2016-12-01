@@ -266,7 +266,7 @@ def BuscarProducto(request):
         search = request.GET.get('term', '')
 
         productos = Producto.objects.filter(
-            existencia__icontains=search)[:100]
+            existencia__icontains=search)
 
         results = []
         for producto in productos:
