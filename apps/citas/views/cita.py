@@ -79,9 +79,9 @@ class CitaCreateView(CreateView):
             'name': capfirst(force_text(self.model._meta.verbose_name)),
             'obj': force_text(self.object)
         }
-
-        messages.success(self.request, msg)
-        log.warning(msg, extra=log_params(self.request))
+        if self.object.id:
+            messages.success(self.request, msg)
+            log.warning(msg, extra=log_params(self.request))
         return super(CitaCreateView, self).form_valid(form)
 
 
