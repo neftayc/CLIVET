@@ -1,37 +1,38 @@
-<testsuite errors="2" failures="0" name="Django Project Tests" skips="0" tests="2" time="0.780"><testcase classname="apps.home.tests.HomeTests" name="test_saludo_hola_template_view" time="0.721192"><error message="Reverse for 'saludo-hola-template' with arguments '('Juan',)' and keyword arguments '{}' not found. 0 pattern(s) tried: []" type="django.core.urlresolvers.NoReverseMatch">Traceback (most recent call last):
-  File "/home/rusbel/Proyectos/CLIVET/apps/home/tests.py", line 41, in test_saludo_hola_template_view
-    reverse_lazy('saludo-hola-template', args=(nombre,)))
-  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/test/client.py", line 503, in get
-    **extra)
-  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/test/client.py", line 304, in get
-    return self.generic('GET', path, secure=secure, **r)
-  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/test/client.py", line 358, in generic
-    parsed = urlparse(force_str(path))
-  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/utils/encoding.py", line 76, in force_text
-    s = six.text_type(s)
-  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/utils/functional.py", line 114, in __text_cast
-    return func(*self.__args, **self.__kw)
-  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 600, in reverse
-    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
-  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 508, in _reverse_with_prefix
-    (lookup_view_s, args, kwargs, len(patterns), patterns))
-django.core.urlresolvers.NoReverseMatch: Reverse for 'saludo-hola-template' with arguments '('Juan',)' and keyword arguments '{}' not found. 0 pattern(s) tried: []
-</error></testcase><testcase classname="apps.home.tests.HomeTests" name="test_saludo_hola_view" time="0.000289"><error message="Reverse for 'saludo-hola' with arguments '('Juan',)' and keyword arguments '{}' not found. 0 pattern(s) tried: []" type="django.core.urlresolvers.NoReverseMatch">Traceback (most recent call last):
-  File "/home/rusbel/Proyectos/CLIVET/apps/home/tests.py", line 21, in test_saludo_hola_view
-    response = self.client.get(reverse_lazy('saludo-hola', args=(nombre,)))
-  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/test/client.py", line 503, in get
-    **extra)
-  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/test/client.py", line 304, in get
-    return self.generic('GET', path, secure=secure, **r)
-  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/test/client.py", line 358, in generic
-    parsed = urlparse(force_str(path))
-  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/utils/encoding.py", line 76, in force_text
-    s = six.text_type(s)
-  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/utils/functional.py", line 114, in __text_cast
-    return func(*self.__args, **self.__kw)
-  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 600, in reverse
-    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
-  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 508, in _reverse_with_prefix
-    (lookup_view_s, args, kwargs, len(patterns), patterns))
-django.core.urlresolvers.NoReverseMatch: Reverse for 'saludo-hola' with arguments '('Juan',)' and keyword arguments '{}' not found. 0 pattern(s) tried: []
+<testsuite errors="5" failures="0" name="Django Project Tests" skips="0" tests="5" time="0.142"><testcase classname="apps.clinica.tests.PollViewTests" name="test_index_view_with_a_future_poll" time="0.000100"><error message="name 'date' is not defined" type="builtins.NameError">Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/CLIVET/apps/clinica/tests.py", line 46, in test_index_view_with_a_future_poll
+    create_poll(question="Future poll.", days=30)
+  File "/home/rusbel/Proyectos/CLIVET/apps/clinica/tests.py", line 18, in create_poll
+    pub_date=timezone.now() + date.datetime.timedelta(days=days))
+NameError: name 'date' is not defined
+</error></testcase><testcase classname="apps.clinica.tests.PollViewTests" name="test_index_view_with_a_past_poll" time="0.000062"><error message="name 'date' is not defined" type="builtins.NameError">Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/CLIVET/apps/clinica/tests.py", line 34, in test_index_view_with_a_past_poll
+    create_poll(question="Past poll.", days=-30)
+  File "/home/rusbel/Proyectos/CLIVET/apps/clinica/tests.py", line 18, in create_poll
+    pub_date=timezone.now() + date.datetime.timedelta(days=days))
+NameError: name 'date' is not defined
+</error></testcase><testcase classname="apps.clinica.tests.PollViewTests" name="test_index_view_with_future_poll_and_past_poll" time="0.000056"><error message="name 'date' is not defined" type="builtins.NameError">Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/CLIVET/apps/clinica/tests.py", line 56, in test_index_view_with_future_poll_and_past_poll
+    create_poll(question="Past poll.", days=-30)
+  File "/home/rusbel/Proyectos/CLIVET/apps/clinica/tests.py", line 18, in create_poll
+    pub_date=timezone.now() + date.datetime.timedelta(days=days))
+NameError: name 'date' is not defined
+</error></testcase><testcase classname="apps.clinica.tests.PollViewTests" name="test_index_view_with_no_polls" time="0.137767"><error message="'polls' is not a registered namespace" type="django.core.urlresolvers.NoReverseMatch">Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 586, in reverse
+    extra, resolver = resolver.namespace_dict[ns]
+KeyError: 'polls'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/CLIVET/apps/clinica/tests.py", line 25, in test_index_view_with_no_polls
+    response = self.client.get(reverse('polls:index'))
+  File "/home/rusbel/Proyectos/myvenv/lib/python3.5/site-packages/django/core/urlresolvers.py", line 596, in reverse
+    key)
+django.core.urlresolvers.NoReverseMatch: 'polls' is not a registered namespace
+</error></testcase><testcase classname="apps.clinica.tests.PollViewTests" name="test_index_view_with_two_past_polls" time="0.000076"><error message="name 'date' is not defined" type="builtins.NameError">Traceback (most recent call last):
+  File "/home/rusbel/Proyectos/CLIVET/apps/clinica/tests.py", line 68, in test_index_view_with_two_past_polls
+    create_poll(question="Past poll 1.", days=-30)
+  File "/home/rusbel/Proyectos/CLIVET/apps/clinica/tests.py", line 18, in create_poll
+    pub_date=timezone.now() + date.datetime.timedelta(days=days))
+NameError: name 'date' is not defined
 </error></testcase></testsuite>
