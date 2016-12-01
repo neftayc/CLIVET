@@ -1,38 +1,38 @@
-{% extends "main/dashboard.html" %}
-{% load l10n i18n%}
-{% load crispy_forms_tags %}
-{% block breadcrumbs %}
+{% extends "main/dashboard.html" %} {% load l10n i18n%} {% load crispy_forms_tags %} {% block breadcrumbs %}
 <ol class="breadcrumb">
-  <li><a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %}</a></li>
-  <li><a href="{% url 'clivet:cliente_list' %}">{{ opts.verbose_name_plural|capfirst }}</a></li>
-  <li class="active">{{ title }}</li>
+    <li><a href="{% url 'clivet:clivet' %}"><i class="fa fa-home"></i> {% trans 'Home' %}</a></li>
+    <li class="active">{{ title }}</li>
 </ol>
-{% endblock breadcrumbs %}
-
-{% block content_title %}
-<i class="fa fa-user"></i> {{ title }}
-{% endblock content_title %}
-{% block content %}
-
- <form action="" method="post">
-    {% csrf_token %}
-    {% crispy form %}
-    </form>
-
-{% endblock %}
-
-{% block extrajs %}
-{{ block.super }}
+{% endblock breadcrumbs %} {% block content_title %}
+<i class="fa fa-user"></i> {{ title }} {% endblock content_title %} {% block content %}
+<form action="" method="post" role="form">
+    {% csrf_token %} {% crispy form %}
+</form>
+{% endblock %} {% block extrajs %} {{ block.super }}
 <script type="text/javascript">
 $('#id_fecha_de_nacimiento').datetimepicker({
-	format: 'YYYY-MM-DD',
-		//format: 'YYYY-MM-DD hh:mm:ss', //pata datatimes
-		language: 'es',
-		pickTime: false,
-		//showMeridian: true,
-		autoclose: true,
-		todayHighlight: true,
-	});
-
+    format: 'YYYY-MM-DD',
+    //format: 'YYYY-MM-DD hh:mm:ss', //pata datatimes
+    language: 'es',
+    pickTime: false,
+    //showMeridian: true,
+    autoclose: true,
+    todayHighlight: true,
+});
+$(function() {
+    $("#id_photo").fileinput({
+    	showUpload: false,
+        showRemove: false,
+        initialCaption: '{{ form.photo.value }}',
+        initialPreview: ['<img src="{{ MEDIA_URL }}{{ form.photo.value }}">', ],
+        maxFileSize: 1500,
+        showClose: false,
+        showCaption: false,
+        browseLabel: '<span class="hidden-xs"> Seleccione una imagen</span>',
+        browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
+        msgErrorClass: 'alert alert-block alert-danger',
+        allowedFileExtensions: ["jpg", "png", "gif"]
+    });
+});
 </script>
 {% endblock extrajs %}
