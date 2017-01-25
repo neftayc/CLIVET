@@ -1,84 +1,135 @@
 {% extends "home/base_home.html" %}
 {% load i18n %}
+
 {% block title %} {{ page_title }} {% endblock %}
 {% block rootcontainer %}
-    
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      <div class="container">
-        <h1>Backengo</h1>
-        <p>
-            Módulo de administración y configuración de un SaaS, modernas y seguras escritas en Django y con la elegancia de Bootstrap. 
- 
-        </p>
-        <p>
-            Por medio del <b>Backengo</b> podrás gestionar las diferentes partes del sistema: usuarios, perfiles, recursos, permisos, módulos, planes, menús, asociaciones, empresas, sedes, logs, seguridad, internacionalización y mucho más!.
 
-        </p>
-        
-
-
-        <p class='text-right'>
-            <a href="http://backenddj-model.appspot.com/" class="btn btn-default btn-xs" title="Diseño UML" role="button"><i class="fa fa-check-circle fa-xs"></i> <span class="hidden-xs">Diseño UML</span></a>
-            
-            <a href="/admin/doc/" class="btn btn-danger" title="Doc. en Django" ><span class="glyphicon glyphicon-ok"></span> <span class="hidden-xs">Doc. en Django</span></a>
-
-            <a class="btn btn-primary btn-lg" href="http://github.com/submitconsulting/backenddj/" target="_blank"><i class="fa fa-github fa fa-lg"></i> Ver proyecto en GitHub &raquo;</a>
-     
-            
-        </p>
-
- <div class="btn-actions">
-
-        
-
-
+    <div class="main-banner">
+      <div class="my-slider">
+        <div class="my-slider__container">
+          <ul>
+            <li class="my-slider__item slider-1"><img src="../../../../static/clivet/img/main_slider_1.jpg" alt="alt">
+              <div class="ed-container">
+                <div class="ed-item banner-container">
+                  <div class="main-banner__copy">
+                    <h1 class="main-banner__title">
+                      <Join>The Dating Pet Club Today</Join>
+                    </h1>
+                  </div>
+                  <div class="main-banner__content">Cras bibendum mi nec mollis auctor. Proin posuere, erat et vestibulum</div>
+                  <div class="main-banner__button"><a class="register" href="#">Mas Informacion</a></div>
+                </div>
+              </div>
+            </li>
+            <li class="my-slider__item slider-2"><img src="../../../../static/clivet/img/main_slider_2.jpg" alt="alt">
+              <div class="ed-container">
+                <div class="ed-item banner-container">
+                  <div class="main-banner__copy">
+                    <h1 class="main-banner__title">
+                      <Open>Your Heart and Your Home</Open>
+                    </h1>
+                  </div>
+                  <div class="main-banner__content">Cras bibendum mi nec mollis auctor. Proin posuere, erat et vestibulum</div>
+                  <div class="main-banner__button"><a class="register" href="#">Mas Informacion</a></div>
+                </div>
+              </div>
+            </li>
+            <li class="my-slider__item slider-3"><img src="../../../../static/clivet/img/main_slider_4.jpg" alt="alt">
+              <div class="ed-container">
+                <div class="ed-item banner-container">
+                  <div class="main-banner__copy">
+                    <h1 class="main-banner__title">
+                      <Visit>Our Pet Boutique</Visit>
+                    </h1>
+                  </div>
+                  <div class="main-banner__content">Cras bibendum mi nec mollis auctor. Proin posuere, erat et vestibulum</div>
+                  <div class="main-banner__button"><a class="register" href="#">Start Hopping</a></div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
-
+    <div id="servicios">
+      <div class="ed-container">
+        <div class="ed-item">
+          <h2 class="title-servicios">Ofrecemos los Mejores Servicios</h2>
+          <p class="content-servicios">Cuidar de los animales mascota no es Küst lo que hacemos. ESO ES LO QUE AMAMOS Y tan apasionado. USTED PET está segura con nosotros!</p>
+        </div>
+        <div class="ed-item">
+          <div class="servicios">
+            <div class="servicios__item"><span>1</span>
+              <div class="servicios__item__icon"></div>
+              <h3 class="servicios__item__title">Registros Gratis</h3>
+              <p class="servicios__item__text">Crear perfiles para usted y sus mascotas. Utiliza nuestro buscador para encontrar las mascotas en su área.</p><a class="servicios__item__buton">Mas...</a>
+            </div>
+            <div class="servicios__item"><span>2</span>
+              <div class="servicios__item__icon"></div>
+              <h3 class="servicios__item__title">Registros Gratis</h3>
+              <p class="servicios__item__text">Crear perfiles para usted y sus mascotas. Utiliza nuestro buscador para encontrar las mascotas en su área.</p><a class="servicios__item__buton">Mas...</a>
+            </div>
+            <div class="servicios__item"><span>3</span>
+              <div class="servicios__item__icon"></div>
+              <h3 class="servicios__item__title">Registros Gratis</h3>
+              <p class="servicios__item__text">Crear perfiles para usted y sus mascotas. Utiliza nuestro buscador para encontrar las mascotas en su área.</p><a class="servicios__item__buton">Mas...</a>
+            </div>
+            <div class="servicios__item"><span>4</span>
+              <div class="servicios__item__icon"></div>
+              <h3 class="servicios__item__title">Registros Gratis</h3>
+              <p class="servicios__item__text">Crear perfiles para usted y sus mascotas. Utiliza nuestro buscador para encontrar las mascotas en su área.</p><a class="servicios__item__buton">Mas...</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="adopcion">
+      <div class="ed-container">
+        <div class="ed-item m-50"><img src="../../../../static/clivet/img/pets.jpg" alt=""></div>
+        <div class="ed-item m-50">
+          <div class="adopcion">
+            <h2 class="adopcion__title">Adopta una mascota, Sea Parte de algo Hermoso!</h2>
+            <p class="adopcion__content"> Tenemos una gran seleccion de gatos y perros. Nuestro animales son esterelizados y en buen estado.</p>
+            <ul class="adopcion__list">
+              <li class="adopcion__list__item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed hacer EMOD tempor INCT labore et dolore magna aliqua.</li>
+              <li class="adopcion__list__item">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquipex ea commodo consequat.</li>
+            </ul><a class="adopcion__alt" href="#">Ver Mas...</a>
+          </div>
+        </div>
+      </div>
+      <div class="adopcion-testi">
+        <div class="ed-container">
+          <div class="ed-item">
+            <h2 class="title-testi">Unete al club de adopcion de Mascotas Hoy</h2>
+            <p class="content-testi">Sabemos lo importante que sus mascotas son para usted. Hemos creado el Club de Mascotas para ofrecerle todo lo que necesita para cuidar de sus amigos peludos.</p><a class="alt-testi" href="#">Inscribete Ya!!</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ed-container">
+      <div class="ed-item">
+        <div class="blog">
+          <div class="blog__title">Nuestro Blog</div>
+          <div class="blog__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</div>
+          <div class="blog__content">
+            <div class="blog__content__item">
+              <div class="blog__content__img"><img src="../../../../static/clivet/img/pets19-blog-1.jpg" alt=""></div>
+              <h3 class="blog__content__title">Teniendo a su perro en la primera fecha</h3><span class="blog__content__span">11 de septiembre de, el año 2015</span>
+              <p class="blog__content__txt">Phasellus sit amet elit sem. Mecenas eleifend ex Identificación magna pretium tincidunt. vel Nam venenatis odio. Sed en metus eu dúos gesta ...</p><a class="blog__content__alt" href="#">Leer Más..</a>
+            </div>
+            <div class="blog__content__item">
+              <div class="blog__content__img"><img src="../../../../static/clivet/img/pets-blog-2.jpg" alt=""></div>
+              <h3 class="blog__content__title">Teniendo a su perro en la primera fecha</h3><span class="blog__content__span">11 de septiembre de, el año 2015</span>
+              <p class="blog__content__txt">Phasellus sit amet elit sem. Mecenas eleifend ex Identificación magna pretium tincidunt. vel Nam venenatis odio. Sed en metus eu dúos gesta ...</p><a class="blog__content__alt" href="#">Leer Más..</a>
+            </div>
+            <div class="blog__content__item">
+              <div class="blog__content__img"><img src="../../../../static/clivet/img/pets32-blog-3.jpg" alt=""></div>
+              <h3 class="blog__content__title">Teniendo a su perro en la primera fecha</h3><span class="blog__content__span">11 de septiembre de, el año 2015</span>
+              <p class="blog__content__txt">Phasellus sit amet elit sem. Mecenas eleifend ex Identificación magna pretium tincidunt. vel Nam venenatis odio. Sed en metus eu dúos gesta ...</p><a class="blog__content__alt" href="#">Leer Más..</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-
- <div class="container">
-
-
-    
-    <div class="row">
-        <div class="col-md-4">
-            <h4><i class="fa fa-fullscreen fa fa-2x"></i> 100% Responsivo</h4>
-            Basado en Bootstrap de Twitter, provee un diseño adaptado a todo tipo de pantalla.
-        </div>
-        <div class="col-md-4">
-            <h4><i class="fa fa-cloud fa fa-2x"></i> 100% Cuztomizable</h4>
-            Puedes personalizar el backend con temas, apariencias y variables de configuración
-        </div>
-        <div class="col-md-4">
-            <h4><i class="fa fa-group fa fa-2x"></i> 100% OpenSource</h4>
-            El Backengo está licenciado bajo la New BSD, lo cual te provee de toda una libertad a nivel de programación
-        </div>
-    </div>
-    
-    <div class="row">
-        <div class="col-md-4">
-            <h4><i class="fa fa-cogs fa fa-2x"></i> Arquitectura MTV (MVC)</h4>
-            Realizado bajo el patrón de diseño Model-Template-View y construido con la solidez de Django
-        </div>
-        
-        <div class="col-md-4">
-            <h4><i class="fa fa-asterisk fa fa-2x"></i> Características</h4>
-            <ul>
-                <li>SaaS</li>
-                <li>Diseño orientado al usuario final</li>
-                <li>Rápido, seguro, sencillo y estable gracias al poder de Django</li>
-                <li>Control de autidorías y sucesos del sistema</li>
-            </ul>
-        </div>
-        <div class="col-md-4">
-            <h4><i class="fa fa-magic fa fa-2x"></i> RICH App </h4>
-            El Frontend de Backengo está construido sobre Bootstrap 3 y por ende sobre JQuery 1.9 o superior
-        </div>
-    </div>             
-    
-</div>
- 
 {% endblock rootcontainer %}

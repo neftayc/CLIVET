@@ -1,53 +1,44 @@
 {% load i18n %}
 <!-- Fixed navbar -->
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">
-        <span class="glyphicon glyphicon-tint"></span>Backengo</a>
+<header>
+    <div class="ed-container s-logo">
+      <div class="ed-item s-80">
+        <div class="logo"><a href="#"><img src="../../../../static/clivet/img/logo.png" alt="Logo"></a></div>
       </div>
-      <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-          <li {% ifequal request.path '/home/' %} class="active" {% endifequal %}><a href="/home/">Home</a></li>
-          <!--
-          <li><a href="#about">About</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li class="divider"></li>
-              <li class="dropdown-header">Nav header</li>
-              <li><a href="#">Separated link</a></li>
-              <li><a href="#">One more separated link</a></li>
-            </ul>
-          </li>
-        -->
-        </ul>
-        <form  class="navbar-form navbar-right form-controlx" action="/i18n/setlang/" method="post">{% csrf_token %}
-          <input name="next" type="hidden" value="{{ redirect_to }}" />
-          <select  class="form-control" name="language" onchange="this.form.submit();">
-            {% for lang in LANGUAGES %}
-            <option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %} selected="selected"{% endif %}>{% trans lang.1 %} ({{ lang.0 }})</option>
-            {% endfor %}
-          </select>
-        </form>
-        
-        <ul class="nav navbar-nav navbar-right">
-          {% if not userx.is_authenticated %}
-          <li {% ifequal request.path '/accounts/register/' %} class="active" {% endifequal %}><a href="/accounts/register/">{% trans 'Sign up' %}</a></li>
-          <li {% ifequal request.path '/accounts/login/' %} class="active" {% endifequal %}><a href="/accounts/login/">{% trans 'Log in' %}</a></li>
-          {% endif %}
-        </ul>
-
-      </div><!--/.nav-collapse -->
+      <div class="ed-item s-20 cross-center main-end">
+        <div class="icons-menu">
+          <div class="nav-toggle" id="main-nav-toggle"></div>
+        </div>
+      </div>
     </div>
-  </div>
+    <div class="nav-container" id="nav-container">
+      <div class="ed-container">
+        <div class="ed-item l-20 lg-logo">
+          <div class="logo"><a href="#"><img src="../../../../static/clivet/img/logo.png" alt="Logo"></a></div>
+        </div>
+        <div class="ed-item l-80">
+          <nav class="main-nav" id="main-nav">
+            <ul class="main-menu" id="main-menu">
+              <li class="main-menu__item"><a {% ifequal request.path '/home/' %} class="active main-menu__link" {% endifequal %} class="active main-menu__link" href="/home/">{% trans 'Home' %}</a></li>
+              <li class="main-menu__item"><a {% ifequal request.path '/features/' %} class="active main-menu__link" {% endifequal %} class="main-menu__link" href="/home/">{% trans 'Features' %}</a></li>
+              <li class="main-menu__item"><a {% ifequal request.path '/gallery/' %} class="active main-menu__link" {% endifequal %} class="main-menu__link"  href="/home/">{% trans 'Gallery' %}</a></li>
+              <li class="main-menu__item"><a {% ifequal request.path '/blog/' %} class="active main-menu__link" {% endifequal %} class="main-menu__link" href="/home/">{% trans 'Blog' %}</a></li>
+              <li class="main-menu__item"><a {% ifequal request.path '/shop/' %} class="active main-menu__link" {% endifequal %} class="main-menu__link" href="/home/">{% trans 'Shop' %}</a></li>
+                <form  class="navbar-form navbar-right form-controlx" action="/i18n/setlang/" method="post">{% csrf_token %}
+                  <input name="next" type="hidden" value="{{ redirect_to }}" />
+                  <select  class="form-control" name="language" onchange="this.form.submit();">
+                    {% for lang in LANGUAGES %}
+                    <option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %} selected="selected"{% endif %}>{% trans lang.1 %} ({{ lang.0 }})</option>
+                    {% endfor %}
+                  </select>
+                </form>
+                  {% if not userx.is_authenticated %}
+                  <li class="main-menu__item" {% ifequal request.path '/accounts/register/' %} class="active" {% endifequal %}><a class="main-menu__link" href="/accounts/register/">{% trans 'Sign up' %}</a></li>
+                  <li class="main-menu__item" {% ifequal request.path '/accounts/login/' %} class="active" {% endifequal %}><a class="main-menu__link" href="/accounts/login/">{% trans 'Log in' %}</a></li>
+                  {% endif %}
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
